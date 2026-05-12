@@ -1,0 +1,443 @@
+sku,analyte,display_name,category,sort_order,value_per_100g,unit_per_100g,value_per_serving,value_per_package,unit_scaled,pct_daily_value_per_serving,daily_value_reference,below_loq
+SF-YRV-SLC-BLK-001,epa,EPA (C20:5),omega_3,10,513.8,mg,29.13,145.66,mg,,,False
+SF-YRV-SLC-BLK-001,dha,DHA (C22:6),omega_3,20,2292.4,mg,129.98,649.88,mg,,,False
+SF-YRV-SLC-BLK-001,ala,ALA (C18:3),omega_3,30,142.4,mg,8.07,40.37,mg,,,False
+SF-YRV-SLC-BLK-001,epa_dha,EPA + DHA,omega_3,40,2806.2,mg,159.11,795.54,mg,,,False
+SF-YRV-SLC-BLK-001,total_omega3,Total Omega-3,omega_3,50,2948.6,mg,167.18,835.91,mg,,,False
+SF-YRV-SLC-BLK-001,omega6,Total Omega-6,omega_6,60,2850,mg,161.59,807.96,mg,,,False
+SF-YRV-SLC-BLK-001,ara,ARA (C20:4),omega_6,70,182.2,mg,10.33,51.65,mg,,,False
+SF-YRV-SLC-BLK-001,omega6_3_ratio,Omega 6:3 Ratio,omega_6,80,0.833,ratio,0.833,0.833,ratio,,,False
+SF-YRV-SLC-BLK-001,protein,Protein,macros,90,26.1,g,1.48,7.4,g,3,50,False
+SF-YRV-SLC-BLK-001,selenium,Selenium,minerals,110,99.1,mcg,5.62,28.09,mcg,10,55,False
+SF-YRV-SLC-BLK-001,zinc,Zinc,minerals,120,2570.4,mcg,145.74,728.7,mcg,1,11000,False
+SF-YRV-SLC-BLK-001,copper,Copper,minerals,130,150.4,mcg,8.53,42.64,mcg,1,900,False
+SF-YRV-SLC-BLK-001,magnesium,Magnesium,minerals,140,48.04,mg,2.72,13.62,mg,1,420,False
+SF-YRV-SLC-BLK-001,phosphorus,Phosphorus,minerals,150,476.4,mg,27.01,135.06,mg,2,1250,False
+SF-YRV-SLC-BLK-001,manganese,Manganese,minerals,160,385.3,mcg,21.85,109.23,mcg,1,2300,False
+SF-YRV-SLC-BLK-001,vitamin_d,Vitamin D,vitamins,190,2.0,mcg,0.11,0.57,mcg,1,20,False
+SF-YRV-SLC-BLK-001,mercury,Mercury,safety,220,0,ppb,0,0,mcg,,,True
+SF-MAR-OST-BLK-001,epa,EPA (C20:5),omega_3,10,497.8,mg,28.22,141.12,mg,,,False
+SF-MAR-OST-BLK-001,dha,DHA (C22:6),omega_3,20,1250.7,mg,70.91,354.57,mg,,,False
+SF-MAR-OST-BLK-001,ala,ALA (C18:3),omega_3,30,161.7,mg,9.17,45.84,mg,,,False
+SF-MAR-OST-BLK-001,epa_dha,EPA + DHA,omega_3,40,1748.5,mg,99.14,495.69,mg,,,False
+SF-MAR-OST-BLK-001,total_omega3,Total Omega-3,omega_3,50,1910.2,mg,108.31,541.53,mg,,,False
+SF-MAR-OST-BLK-001,omega6,Total Omega-6,omega_6,60,2790,mg,158.19,790.95,mg,,,False
+SF-MAR-OST-BLK-001,ara,ARA (C20:4),omega_6,70,366.8,mg,20.8,103.99,mg,,,False
+SF-MAR-OST-BLK-001,omega6_3_ratio,Omega 6:3 Ratio,omega_6,80,1.446,ratio,1.446,1.446,ratio,,,False
+SF-MAR-OST-BLK-001,protein,Protein,macros,90,26.1,g,1.48,7.4,g,3,50,False
+SF-MAR-OST-BLK-001,selenium,Selenium,minerals,110,63.3,mcg,3.59,17.95,mcg,7,55,False
+SF-MAR-OST-BLK-001,zinc,Zinc,minerals,120,2075.7,mcg,117.69,588.45,mcg,1,11000,False
+SF-MAR-OST-BLK-001,copper,Copper,minerals,130,126.6,mcg,7.18,35.89,mcg,1,900,False
+SF-MAR-OST-BLK-001,magnesium,Magnesium,minerals,140,26.97,mg,1.53,7.65,mg,,420,False
+SF-MAR-OST-BLK-001,phosphorus,Phosphorus,minerals,150,445.1,mg,25.24,126.18,mg,2,1250,False
+SF-MAR-OST-BLK-001,manganese,Manganese,minerals,160,137.4,mcg,7.79,38.95,mcg,,2300,False
+SF-MAR-OST-BLK-001,chromium,Chromium,minerals,180,0.9,mcg,0.05,0.26,mcg,,35,False
+SF-MAR-OST-BLK-001,vitamin_d,Vitamin D,vitamins,190,0,mcg,0.0,0.0,mcg,,20,False
+SF-MAR-OST-BLK-001,mercury,Mercury,safety,220,4.94,ppb,0.03,0.14,mcg,,,False
+SF-MAR-OST-BLK-001,arsenic,Arsenic (total),safety,230,18.09,mcg,1.03,5.13,mcg,,,False
+SF-MAR-OST-BLK-001,cadmium,Cadmium,safety,240,0.07,mcg,0.0,0.02,mcg,,,False
+SF-MAR-OST-BLK-001,lead,Lead,safety,250,0.09,mcg,0.01,0.03,mcg,,,False
+SF-OKS-KGS-SHP-001,epa,EPA (C20:5),omega_3,10,536,mg,1139.65,1139.65,mg,,,False
+SF-OKS-KGS-SHP-001,dha,DHA (C22:6),omega_3,20,1070,mg,2275.05,2275.05,mg,,,False
+SF-OKS-KGS-SHP-001,ala,ALA (C18:3),omega_3,30,1210,mg,2572.72,2572.72,mg,,,False
+SF-OKS-KGS-SHP-001,epa_dha,EPA + DHA,omega_3,40,1606,mg,3414.7,3414.7,mg,,,False
+SF-OKS-KGS-SHP-001,total_omega3,Total Omega-3,omega_3,50,2816,mg,5987.41,5987.41,mg,,,False
+SF-OKS-KGS-SHP-001,omega6,Total Omega-6,omega_6,60,2760,mg,5868.35,5868.35,mg,,,False
+SF-OKS-KGS-SHP-001,ara,ARA (C20:4),omega_6,70,80,mg,170.1,170.1,mg,,,False
+SF-OKS-KGS-SHP-001,omega6_3_ratio,Omega 6:3 Ratio,omega_6,80,0.854,ratio,0.854,0.854,ratio,,,False
+SF-OKS-KGS-SHP-001,protein,Protein,macros,90,18.6,g,39.55,39.55,g,79,50,False
+SF-OKS-KGS-SHP-001,selenium,Selenium,minerals,110,29.8,mcg,63.36,63.36,mcg,115,55,False
+SF-OKS-KGS-SHP-001,zinc,Zinc,minerals,120,284.0,mcg,603.84,603.84,mcg,5,11000,False
+SF-OKS-KGS-SHP-001,copper,Copper,minerals,130,15.82,mcg,33.64,33.64,mcg,4,900,False
+SF-OKS-KGS-SHP-001,magnesium,Magnesium,minerals,140,24.84,mg,52.82,52.82,mg,13,420,False
+SF-OKS-KGS-SHP-001,phosphorus,Phosphorus,minerals,150,236.1,mg,502.0,502.0,mg,40,1250,False
+SF-OKS-KGS-SHP-001,manganese,Manganese,minerals,160,4.56,mcg,9.7,9.7,mcg,,2300,False
+SF-OKS-KGS-SHP-001,vitamin_d,Vitamin D,vitamins,190,20.0,mcg,42.52,42.52,mcg,213,20,False
+SF-OKS-KGS-SHP-001,mercury,Mercury,safety,220,17.33,ppb,3.68,3.68,mcg,,,False
+SF-OKS-KGS-SHP-001,arsenic,Arsenic (total),safety,230,9.43,mcg,20.05,20.05,mcg,,,False
+SF-BGB-KGS-SHP-001,epa,EPA (C20:5),omega_3,10,546,mg,1238.31,1238.31,mg,,,False
+SF-BGB-KGS-SHP-001,dha,DHA (C22:6),omega_3,20,885,mg,2007.14,2007.14,mg,,,False
+SF-BGB-KGS-SHP-001,ala,ALA (C18:3),omega_3,30,1050,mg,2381.36,2381.36,mg,,,False
+SF-BGB-KGS-SHP-001,epa_dha,EPA + DHA,omega_3,40,1431,mg,3245.45,3245.45,mg,,,False
+SF-BGB-KGS-SHP-001,total_omega3,Total Omega-3,omega_3,50,2481,mg,5626.81,5626.81,mg,,,False
+SF-BGB-KGS-SHP-001,omega6,Total Omega-6,omega_6,60,2480,mg,5624.54,5624.54,mg,,,False
+SF-BGB-KGS-SHP-001,ara,ARA (C20:4),omega_6,70,90,mg,204.12,204.12,mg,,,False
+SF-BGB-KGS-SHP-001,omega6_3_ratio,Omega 6:3 Ratio,omega_6,80,0.869,ratio,0.869,0.869,ratio,,,False
+SF-BGB-KGS-SHP-001,protein,Protein,macros,90,18.9,g,42.86,42.86,g,86,50,False
+SF-BGB-KGS-SHP-001,selenium,Selenium,minerals,110,31.4,mcg,71.21,71.21,mcg,129,55,False
+SF-BGB-KGS-SHP-001,zinc,Zinc,minerals,120,268.6,mcg,609.17,609.17,mcg,6,11000,False
+SF-BGB-KGS-SHP-001,copper,Copper,minerals,130,15.41,mcg,34.95,34.95,mcg,4,900,False
+SF-BGB-KGS-SHP-001,magnesium,Magnesium,minerals,140,25.74,mg,58.38,58.38,mg,14,420,False
+SF-BGB-KGS-SHP-001,phosphorus,Phosphorus,minerals,150,221.4,mg,502.13,502.13,mg,40,1250,False
+SF-BGB-KGS-SHP-001,manganese,Manganese,minerals,160,4.22,mcg,9.57,9.57,mcg,,2300,False
+SF-BGB-KGS-SHP-001,vitamin_d,Vitamin D,vitamins,190,21.6,mcg,48.99,48.99,mcg,245,20,False
+SF-BGB-KGS-SHP-001,mercury,Mercury,safety,220,18.74,ppb,4.25,4.25,mcg,,,False
+SF-BGB-KGS-SHP-001,arsenic,Arsenic (total),safety,230,18.79,mcg,42.61,42.61,mcg,,,False
+SF-MCA-KGS-SHP-001,epa,EPA (C20:5),omega_3,10,457,mg,906.9,906.9,mg,,,False
+SF-MCA-KGS-SHP-001,dha,DHA (C22:6),omega_3,20,862,mg,1710.61,1710.61,mg,,,False
+SF-MCA-KGS-SHP-001,ala,ALA (C18:3),omega_3,30,1140,mg,2262.29,2262.29,mg,,,False
+SF-MCA-KGS-SHP-001,epa_dha,EPA + DHA,omega_3,40,1319,mg,2617.51,2617.51,mg,,,False
+SF-MCA-KGS-SHP-001,total_omega3,Total Omega-3,omega_3,50,2459,mg,4879.8,4879.8,mg,,,False
+SF-MCA-KGS-SHP-001,omega6,Total Omega-6,omega_6,60,2380,mg,4723.03,4723.03,mg,,,False
+SF-MCA-KGS-SHP-001,ara,ARA (C20:4),omega_6,70,37,mg,73.43,73.43,mg,,,False
+SF-MCA-KGS-SHP-001,omega6_3_ratio,Omega 6:3 Ratio,omega_6,80,0.853,ratio,0.853,0.853,ratio,,,False
+SF-MCA-KGS-SHP-001,protein,Protein,macros,90,18.9,g,37.51,37.51,g,75,50,False
+SF-MCA-KGS-SHP-001,selenium,Selenium,minerals,110,39.3,mcg,77.99,77.99,mcg,142,55,False
+SF-MCA-KGS-SHP-001,zinc,Zinc,minerals,120,291.4,mcg,578.27,578.27,mcg,5,11000,False
+SF-MCA-KGS-SHP-001,copper,Copper,minerals,130,18.69,mcg,37.09,37.09,mcg,4,900,False
+SF-MCA-KGS-SHP-001,magnesium,Magnesium,minerals,140,23.26,mg,46.16,46.16,mg,11,420,False
+SF-MCA-KGS-SHP-001,phosphorus,Phosphorus,minerals,150,214.8,mg,426.26,426.26,mg,34,1250,False
+SF-MCA-KGS-SHP-001,manganese,Manganese,minerals,160,4.98,mcg,9.88,9.88,mcg,,2300,False
+SF-MCA-KGS-SHP-001,chromium,Chromium,minerals,180,2.16,mcg,4.29,4.29,mcg,12,35,False
+SF-MCA-KGS-SHP-001,vitamin_d,Vitamin D,vitamins,190,23.8,mcg,47.23,47.23,mcg,236,20,False
+SF-MCA-KGS-SHP-001,mercury,Mercury,safety,220,33.26,ppb,6.6,6.6,mcg,,,False
+SF-MCA-KGS-SHP-001,arsenic,Arsenic (total),safety,230,8.28,mcg,16.43,16.43,mcg,,,False
+SF-BAK-ATS-SHP-002,epa,EPA (C20:5),omega_3,10,471,mg,801.16,801.16,mg,,,False
+SF-BAK-ATS-SHP-002,dha,DHA (C22:6),omega_3,20,833,mg,1416.91,1416.91,mg,,,False
+SF-BAK-ATS-SHP-002,ala,ALA (C18:3),omega_3,30,950,mg,1615.92,1615.92,mg,,,False
+SF-BAK-ATS-SHP-002,epa_dha,EPA + DHA,omega_3,40,1304,mg,2218.06,2218.06,mg,,,False
+SF-BAK-ATS-SHP-002,total_omega3,Total Omega-3,omega_3,50,2254,mg,3833.99,3833.99,mg,,,False
+SF-BAK-ATS-SHP-002,omega6,Total Omega-6,omega_6,60,1450,mg,2466.41,2466.41,mg,,,False
+SF-BAK-ATS-SHP-002,ara,ARA (C20:4),omega_6,70,80,mg,136.08,136.08,mg,,,False
+SF-BAK-ATS-SHP-002,omega6_3_ratio,Omega 6:3 Ratio,omega_6,80,0.645,ratio,0.645,0.645,ratio,,,False
+SF-BAK-ATS-SHP-002,protein,Protein,macros,90,21.3,g,36.23,36.23,g,72,50,False
+SF-BAK-ATS-SHP-002,selenium,Selenium,minerals,110,18.6,mcg,31.64,31.64,mcg,58,55,False
+SF-BAK-ATS-SHP-002,zinc,Zinc,minerals,120,304.4,mcg,517.78,517.78,mcg,5,11000,False
+SF-BAK-ATS-SHP-002,copper,Copper,minerals,130,17.16,mcg,29.19,29.19,mcg,3,900,False
+SF-BAK-ATS-SHP-002,magnesium,Magnesium,minerals,140,27.12,mg,46.13,46.13,mg,11,420,False
+SF-BAK-ATS-SHP-002,phosphorus,Phosphorus,minerals,150,265.8,mg,452.12,452.12,mg,36,1250,False
+SF-BAK-ATS-SHP-002,manganese,Manganese,minerals,160,8.89,mcg,15.12,15.12,mcg,1,2300,False
+SF-BAK-ATS-SHP-002,vitamin_d,Vitamin D,vitamins,190,8.76,mcg,14.9,14.9,mcg,74,20,False
+SF-BAK-ATS-SHP-002,mercury,Mercury,safety,220,37.46,ppb,6.37,6.37,mcg,,,False
+SF-BAK-ATS-SHP-002,arsenic,Arsenic (total),safety,230,92.24,mcg,156.9,156.9,mcg,,,False
+SF-HVF-STT-SHP-001,epa,EPA (C20:5),omega_3,10,376,mg,639.56,639.56,mg,,,False
+SF-HVF-STT-SHP-001,dha,DHA (C22:6),omega_3,20,1040,mg,1769.01,1769.01,mg,,,False
+SF-HVF-STT-SHP-001,ala,ALA (C18:3),omega_3,30,1620,mg,2755.57,2755.57,mg,,,False
+SF-HVF-STT-SHP-001,epa_dha,EPA + DHA,omega_3,40,1416,mg,2408.57,2408.57,mg,,,False
+SF-HVF-STT-SHP-001,total_omega3,Total Omega-3,omega_3,50,3036,mg,5164.14,5164.14,mg,,,False
+SF-HVF-STT-SHP-001,omega6,Total Omega-6,omega_6,60,852,mg,1449.23,1449.23,mg,,,False
+SF-HVF-STT-SHP-001,ara,ARA (C20:4),omega_6,70,0,mg,0.0,0.0,mg,,,False
+SF-HVF-STT-SHP-001,omega6_3_ratio,Omega 6:3 Ratio,omega_6,80,0.416,ratio,0.416,0.416,ratio,,,False
+SF-HVF-STT-SHP-001,protein,Protein,macros,90,19.5,g,33.17,33.17,g,66,50,False
+SF-HVF-STT-SHP-001,selenium,Selenium,minerals,110,17.7,mcg,30.11,30.11,mcg,55,55,False
+SF-HVF-STT-SHP-001,zinc,Zinc,minerals,120,318.4,mcg,541.59,541.59,mcg,5,11000,False
+SF-HVF-STT-SHP-001,copper,Copper,minerals,130,15.89,mcg,27.03,27.03,mcg,3,900,False
+SF-HVF-STT-SHP-001,magnesium,Magnesium,minerals,140,24.39,mg,41.49,41.49,mg,10,420,False
+SF-HVF-STT-SHP-001,phosphorus,Phosphorus,minerals,150,193.9,mg,329.82,329.82,mg,26,1250,False
+SF-HVF-STT-SHP-001,manganese,Manganese,minerals,160,15.96,mcg,27.15,27.15,mcg,1,2300,False
+SF-HVF-STT-SHP-001,chromium,Chromium,minerals,180,1.7,mcg,2.89,2.89,mcg,8,35,False
+SF-HVF-STT-SHP-001,vitamin_d,Vitamin D,vitamins,190,3.98,mcg,6.77,6.77,mcg,34,20,False
+SF-HVF-STT-SHP-001,mercury,Mercury,safety,220,10.57,ppb,1.8,1.8,mcg,,,False
+SF-HVF-STT-SHP-001,arsenic,Arsenic (total),safety,230,31.79,mcg,54.07,54.07,mcg,,,False
+SF-HVF-STT-SHP-001,cadmium,Cadmium,safety,240,0.04,mcg,0.07,0.07,mcg,,,False
+SF-HVF-STT-SHP-001,lead,Lead,safety,250,0.47,mcg,0.8,0.8,mcg,,,False
+SF-CLB-STT-SHP-009,epa,EPA (C20:5),omega_3,10,262,mg,445.65,445.65,mg,,,False
+SF-CLB-STT-SHP-009,dha,DHA (C22:6),omega_3,20,589,mg,1001.87,1001.87,mg,,,False
+SF-CLB-STT-SHP-009,ala,ALA (C18:3),omega_3,30,1330,mg,2262.29,2262.29,mg,,,False
+SF-CLB-STT-SHP-009,epa_dha,EPA + DHA,omega_3,40,851,mg,1447.53,1447.53,mg,,,False
+SF-CLB-STT-SHP-009,total_omega3,Total Omega-3,omega_3,50,2181,mg,3709.82,3709.82,mg,,,False
+SF-CLB-STT-SHP-009,omega6,Total Omega-6,omega_6,60,2460,mg,4184.39,4184.39,mg,,,False
+SF-CLB-STT-SHP-009,ara,ARA (C20:4),omega_6,70,96.1,mg,163.46,163.46,mg,,,False
+SF-CLB-STT-SHP-009,omega6_3_ratio,Omega 6:3 Ratio,omega_6,80,1.03,ratio,1.03,1.03,ratio,,,False
+SF-CLB-STT-SHP-009,protein,Protein,macros,90,20.8,g,35.38,35.38,g,71,50,False
+SF-CLB-STT-SHP-009,cholesterol,Cholesterol,macros,100,41,mg,69.74,69.74,mg,23,300,False
+SF-CLB-STT-SHP-009,selenium,Selenium,minerals,110,22.1,mcg,37.59,37.59,mcg,68,55,False
+SF-CLB-STT-SHP-009,zinc,Zinc,minerals,120,154.7,mcg,263.14,263.14,mcg,2,11000,False
+SF-CLB-STT-SHP-009,copper,Copper,minerals,130,20.86,mcg,35.48,35.48,mcg,4,900,False
+SF-CLB-STT-SHP-009,magnesium,Magnesium,minerals,140,14.41,mg,24.51,24.51,mg,6,420,False
+SF-CLB-STT-SHP-009,phosphorus,Phosphorus,minerals,150,270.9,mg,460.79,460.79,mg,37,1250,False
+SF-CLB-STT-SHP-009,manganese,Manganese,minerals,160,5.96,mcg,10.14,10.14,mcg,,2300,False
+SF-CLB-STT-SHP-009,iodine,Iodine,minerals,170,10.7,mcg,18.2,18.2,mcg,12,150,False
+SF-CLB-STT-SHP-009,vitamin_d,Vitamin D,vitamins,190,9.01,mcg,15.33,15.33,mcg,77,20,False
+SF-CLB-STT-SHP-009,vitamin_b12,Vitamin B12,vitamins,200,2.18,mcg,3.71,3.71,mcg,155,2.4,False
+SF-CLB-STT-SHP-009,vitamin_e,Vitamin E,vitamins,210,3700,mcg,6293.59,6293.59,mcg,42,15000,False
+SF-CLB-STT-SHP-009,mercury,Mercury,safety,220,0,ppb,0,0,mcg,,,True
+SF-CLB-STT-SHP-009,arsenic,Arsenic (total),safety,230,13.0,mcg,22.11,22.11,mcg,,,False
+SF-CLB-STT-SHP-002,epa,EPA (C20:5),omega_3,10,262,mg,445.65,891.31,mg,,,False
+SF-CLB-STT-SHP-002,dha,DHA (C22:6),omega_3,20,589,mg,1001.87,2003.74,mg,,,False
+SF-CLB-STT-SHP-002,ala,ALA (C18:3),omega_3,30,1330,mg,2262.29,4524.58,mg,,,False
+SF-CLB-STT-SHP-002,epa_dha,EPA + DHA,omega_3,40,851,mg,1447.53,2895.05,mg,,,False
+SF-CLB-STT-SHP-002,total_omega3,Total Omega-3,omega_3,50,2181,mg,3709.82,7419.63,mg,,,False
+SF-CLB-STT-SHP-002,omega6,Total Omega-6,omega_6,60,2460,mg,4184.39,8368.77,mg,,,False
+SF-CLB-STT-SHP-002,ara,ARA (C20:4),omega_6,70,96.1,mg,163.46,326.93,mg,,,False
+SF-CLB-STT-SHP-002,omega6_3_ratio,Omega 6:3 Ratio,omega_6,80,1.03,ratio,1.03,1.03,ratio,,,False
+SF-CLB-STT-SHP-002,protein,Protein,macros,90,20.8,g,35.38,70.76,g,71,50,False
+SF-CLB-STT-SHP-002,cholesterol,Cholesterol,macros,100,41,mg,69.74,139.48,mg,23,300,False
+SF-CLB-STT-SHP-002,selenium,Selenium,minerals,110,22.1,mcg,37.59,75.18,mcg,68,55,False
+SF-CLB-STT-SHP-002,zinc,Zinc,minerals,120,154.7,mcg,263.14,526.28,mcg,2,11000,False
+SF-CLB-STT-SHP-002,copper,Copper,minerals,130,20.86,mcg,35.48,70.96,mcg,4,900,False
+SF-CLB-STT-SHP-002,magnesium,Magnesium,minerals,140,14.41,mg,24.51,49.02,mg,6,420,False
+SF-CLB-STT-SHP-002,phosphorus,Phosphorus,minerals,150,270.9,mg,460.79,921.59,mg,37,1250,False
+SF-CLB-STT-SHP-002,manganese,Manganese,minerals,160,5.96,mcg,10.14,20.28,mcg,,2300,False
+SF-CLB-STT-SHP-002,iodine,Iodine,minerals,170,10.7,mcg,18.2,36.4,mcg,12,150,False
+SF-CLB-STT-SHP-002,vitamin_d,Vitamin D,vitamins,190,9.01,mcg,15.33,30.65,mcg,77,20,False
+SF-CLB-STT-SHP-002,vitamin_b12,Vitamin B12,vitamins,200,2.18,mcg,3.71,7.42,mcg,155,2.4,False
+SF-CLB-STT-SHP-002,vitamin_e,Vitamin E,vitamins,210,3700,mcg,6293.59,12587.18,mcg,42,15000,False
+SF-CLB-STT-SHP-002,mercury,Mercury,safety,220,0,ppb,0,0,mcg,,,True
+SF-CLB-STT-SHP-002,arsenic,Arsenic (total),safety,230,13.0,mcg,22.11,44.23,mcg,,,False
+SF-CLB-STT-SHP-001,epa,EPA (C20:5),omega_3,10,262,mg,297.1,297.1,mg,,,False
+SF-CLB-STT-SHP-001,dha,DHA (C22:6),omega_3,20,589,mg,667.91,667.91,mg,,,False
+SF-CLB-STT-SHP-001,ala,ALA (C18:3),omega_3,30,1330,mg,1508.19,1508.19,mg,,,False
+SF-CLB-STT-SHP-001,epa_dha,EPA + DHA,omega_3,40,851,mg,965.02,965.02,mg,,,False
+SF-CLB-STT-SHP-001,total_omega3,Total Omega-3,omega_3,50,2181,mg,2473.21,2473.21,mg,,,False
+SF-CLB-STT-SHP-001,omega6,Total Omega-6,omega_6,60,2460,mg,2789.59,2789.59,mg,,,False
+SF-CLB-STT-SHP-001,ara,ARA (C20:4),omega_6,70,96.1,mg,108.98,108.98,mg,,,False
+SF-CLB-STT-SHP-001,omega6_3_ratio,Omega 6:3 Ratio,omega_6,80,1.03,ratio,1.03,1.03,ratio,,,False
+SF-CLB-STT-SHP-001,protein,Protein,macros,90,20.8,g,23.59,23.59,g,47,50,False
+SF-CLB-STT-SHP-001,cholesterol,Cholesterol,macros,100,41,mg,46.49,46.49,mg,15,300,False
+SF-CLB-STT-SHP-001,selenium,Selenium,minerals,110,22.1,mcg,25.06,25.06,mcg,46,55,False
+SF-CLB-STT-SHP-001,zinc,Zinc,minerals,120,154.7,mcg,175.43,175.43,mcg,2,11000,False
+SF-CLB-STT-SHP-001,copper,Copper,minerals,130,20.86,mcg,23.65,23.65,mcg,3,900,False
+SF-CLB-STT-SHP-001,magnesium,Magnesium,minerals,140,14.41,mg,16.34,16.34,mg,4,420,False
+SF-CLB-STT-SHP-001,phosphorus,Phosphorus,minerals,150,270.9,mg,307.2,307.2,mg,25,1250,False
+SF-CLB-STT-SHP-001,manganese,Manganese,minerals,160,5.96,mcg,6.76,6.76,mcg,,2300,False
+SF-CLB-STT-SHP-001,iodine,Iodine,minerals,170,10.7,mcg,12.13,12.13,mcg,8,150,False
+SF-CLB-STT-SHP-001,vitamin_d,Vitamin D,vitamins,190,9.01,mcg,10.22,10.22,mcg,51,20,False
+SF-CLB-STT-SHP-001,vitamin_b12,Vitamin B12,vitamins,200,2.18,mcg,2.47,2.47,mcg,103,2.4,False
+SF-CLB-STT-SHP-001,vitamin_e,Vitamin E,vitamins,210,3700,mcg,4195.73,4195.73,mcg,28,15000,False
+SF-CLB-STT-SHP-001,mercury,Mercury,safety,220,0,ppb,0,0,mcg,,,True
+SF-CLB-STT-SHP-001,arsenic,Arsenic (total),safety,230,13.0,mcg,14.74,14.74,mcg,,,False
+SF-MCF-RBT-BLK-001,epa,EPA (C20:5),omega_3,10,272,mg,246.75,987.02,mg,,,False
+SF-MCF-RBT-BLK-001,dha,DHA (C22:6),omega_3,20,668,mg,606.0,2424.0,mg,,,False
+SF-MCF-RBT-BLK-001,ala,ALA (C18:3),omega_3,30,1270,mg,1152.12,4608.49,mg,,,False
+SF-MCF-RBT-BLK-001,epa_dha,EPA + DHA,omega_3,40,940,mg,852.75,3411.01,mg,,,False
+SF-MCF-RBT-BLK-001,total_omega3,Total Omega-3,omega_3,50,2210,mg,2004.88,8019.51,mg,,,False
+SF-MCF-RBT-BLK-001,omega6,Total Omega-6,omega_6,60,1390,mg,1260.99,5043.94,mg,,,False
+SF-MCF-RBT-BLK-001,ara,ARA (C20:4),omega_6,70,36.5,mg,33.11,132.45,mg,,,False
+SF-MCF-RBT-BLK-001,omega6_3_ratio,Omega 6:3 Ratio,omega_6,80,0.582,ratio,0.582,0.582,ratio,,,False
+SF-MCF-RBT-BLK-001,protein,Protein,macros,90,22.0,g,19.96,79.83,g,40,50,False
+SF-MCF-RBT-BLK-001,selenium,Selenium,minerals,110,32.9,mcg,29.85,119.39,mcg,54,55,False
+SF-MCF-RBT-BLK-001,zinc,Zinc,minerals,120,502.6,mcg,455.95,1823.8,mcg,4,11000,False
+SF-MCF-RBT-BLK-001,copper,Copper,minerals,130,37.93,mcg,34.41,137.64,mcg,4,900,False
+SF-MCF-RBT-BLK-001,magnesium,Magnesium,minerals,140,23.14,mg,20.99,83.97,mg,5,420,False
+SF-MCF-RBT-BLK-001,phosphorus,Phosphorus,minerals,150,218.0,mg,197.77,791.06,mg,16,1250,False
+SF-MCF-RBT-BLK-001,manganese,Manganese,minerals,160,56.84,mcg,51.56,206.26,mcg,2,2300,False
+SF-MCF-RBT-BLK-001,chromium,Chromium,minerals,180,7.15,mcg,6.49,25.95,mcg,19,35,False
+SF-MCF-RBT-BLK-001,vitamin_d,Vitamin D,vitamins,190,18.2,mcg,16.51,66.04,mcg,83,20,False
+SF-MCF-RBT-BLK-001,mercury,Mercury,safety,220,9.41,ppb,0.85,3.41,mcg,,,False
+SF-MCF-RBT-BLK-001,arsenic,Arsenic (total),safety,230,8.54,mcg,7.75,30.99,mcg,,,False
+SF-MCF-RBT-BLK-001,cadmium,Cadmium,safety,240,0.09,mcg,0.08,0.33,mcg,,,False
+SF-MCF-RBT-BLK-001,lead,Lead,safety,250,0.45,mcg,0.41,1.63,mcg,,,False
+SF-SIC-RBT-BLK-001,epa,EPA (C20:5),omega_3,10,86,mg,146.28,292.57,mg,,,False
+SF-SIC-RBT-BLK-001,dha,DHA (C22:6),omega_3,20,404,mg,687.19,1374.38,mg,,,False
+SF-SIC-RBT-BLK-001,ala,ALA (C18:3),omega_3,30,33,mg,56.13,112.26,mg,,,False
+SF-SIC-RBT-BLK-001,epa_dha,EPA + DHA,omega_3,40,490,mg,833.48,1666.95,mg,,,False
+SF-SIC-RBT-BLK-001,total_omega3,Total Omega-3,omega_3,50,523,mg,889.61,1779.21,mg,,,False
+SF-SIC-RBT-BLK-001,omega6,Total Omega-6,omega_6,60,320,mg,544.31,1088.62,mg,,,False
+SF-SIC-RBT-BLK-001,ara,ARA (C20:4),omega_6,70,39,mg,66.34,132.68,mg,,,False
+SF-SIC-RBT-BLK-001,omega6_3_ratio,Omega 6:3 Ratio,omega_6,80,0.615,ratio,0.615,0.615,ratio,,,False
+SF-SIC-RBT-BLK-001,protein,Protein,macros,90,18.2,g,30.96,61.92,g,62,50,False
+SF-SIC-RBT-BLK-001,selenium,Selenium,minerals,110,17.15,mcg,29.17,58.34,mcg,53,55,False
+SF-SIC-RBT-BLK-001,zinc,Zinc,minerals,120,431.9,mcg,734.65,1469.3,mcg,7,11000,False
+SF-SIC-RBT-BLK-001,copper,Copper,minerals,130,20.7,mcg,35.21,70.42,mcg,4,900,False
+SF-SIC-RBT-BLK-001,magnesium,Magnesium,minerals,140,26.9,mg,45.76,91.51,mg,11,420,False
+SF-SIC-RBT-BLK-001,phosphorus,Phosphorus,minerals,150,255.7,mg,434.94,869.88,mg,35,1250,False
+SF-SIC-RBT-BLK-001,manganese,Manganese,minerals,160,29.36,mcg,49.94,99.88,mcg,2,2300,False
+SF-SIC-RBT-BLK-001,vitamin_d,Vitamin D,vitamins,190,16.0,mcg,27.22,54.43,mcg,136,20,False
+SF-SIC-RBT-BLK-001,mercury,Mercury,safety,220,9.74,ppb,1.66,3.31,mcg,,,False
+SF-SIC-RBT-BLK-001,arsenic,Arsenic (total),safety,230,11.12,mcg,18.91,37.83,mcg,,,False
+SF-SIC-RBT-BLK-006,epa,EPA (C20:5),omega_3,10,86,mg,134.09,134.09,mg,,,False
+SF-SIC-RBT-BLK-006,dha,DHA (C22:6),omega_3,20,404,mg,629.93,629.93,mg,,,False
+SF-SIC-RBT-BLK-006,ala,ALA (C18:3),omega_3,30,33,mg,51.45,51.45,mg,,,False
+SF-SIC-RBT-BLK-006,epa_dha,EPA + DHA,omega_3,40,490,mg,764.02,764.02,mg,,,False
+SF-SIC-RBT-BLK-006,total_omega3,Total Omega-3,omega_3,50,523,mg,815.47,815.47,mg,,,False
+SF-SIC-RBT-BLK-006,omega6,Total Omega-6,omega_6,60,320,mg,498.95,498.95,mg,,,False
+SF-SIC-RBT-BLK-006,ara,ARA (C20:4),omega_6,70,39,mg,60.81,60.81,mg,,,False
+SF-SIC-RBT-BLK-006,omega6_3_ratio,Omega 6:3 Ratio,omega_6,80,0.615,ratio,0.615,0.615,ratio,,,False
+SF-SIC-RBT-BLK-006,protein,Protein,macros,90,18.2,g,28.38,28.38,g,57,50,False
+SF-SIC-RBT-BLK-006,selenium,Selenium,minerals,110,17.15,mcg,26.74,26.74,mcg,49,55,False
+SF-SIC-RBT-BLK-006,zinc,Zinc,minerals,120,431.9,mcg,673.43,673.43,mcg,6,11000,False
+SF-SIC-RBT-BLK-006,copper,Copper,minerals,130,20.7,mcg,32.28,32.28,mcg,4,900,False
+SF-SIC-RBT-BLK-006,magnesium,Magnesium,minerals,140,26.9,mg,41.94,41.94,mg,10,420,False
+SF-SIC-RBT-BLK-006,phosphorus,Phosphorus,minerals,150,255.7,mg,398.69,398.69,mg,32,1250,False
+SF-SIC-RBT-BLK-006,manganese,Manganese,minerals,160,29.36,mcg,45.78,45.78,mcg,2,2300,False
+SF-SIC-RBT-BLK-006,vitamin_d,Vitamin D,vitamins,190,16.0,mcg,24.95,24.95,mcg,125,20,False
+SF-SIC-RBT-BLK-006,mercury,Mercury,safety,220,9.74,ppb,1.52,1.52,mcg,,,False
+SF-SIC-RBT-BLK-006,arsenic,Arsenic (total),safety,230,11.12,mcg,17.34,17.34,mcg,,,False
+SF-EST-BRZ-SHP-001,epa,EPA (C20:5),omega_3,10,304,mg,517.09,517.09,mg,,,False
+SF-EST-BRZ-SHP-001,dha,DHA (C22:6),omega_3,20,598,mg,1017.18,1017.18,mg,,,False
+SF-EST-BRZ-SHP-001,ala,ALA (C18:3),omega_3,30,880,mg,1496.85,1496.85,mg,,,False
+SF-EST-BRZ-SHP-001,epa_dha,EPA + DHA,omega_3,40,902,mg,1534.27,1534.27,mg,,,False
+SF-EST-BRZ-SHP-001,total_omega3,Total Omega-3,omega_3,50,1782,mg,3031.13,3031.13,mg,,,False
+SF-EST-BRZ-SHP-001,omega6,Total Omega-6,omega_6,60,1750,mg,2976.7,2976.7,mg,,,False
+SF-EST-BRZ-SHP-001,ara,ARA (C20:4),omega_6,70,59.9,mg,101.89,101.89,mg,,,False
+SF-EST-BRZ-SHP-001,omega6_3_ratio,Omega 6:3 Ratio,omega_6,80,0.921,ratio,0.921,0.921,ratio,,,False
+SF-EST-BRZ-SHP-001,protein,Protein,macros,90,21.1,g,35.89,35.89,g,72,50,False
+SF-EST-BRZ-SHP-001,cholesterol,Cholesterol,macros,100,60,mg,102.06,102.06,mg,34,300,False
+SF-EST-BRZ-SHP-001,selenium,Selenium,minerals,110,18.1,mcg,30.79,30.79,mcg,56,55,False
+SF-EST-BRZ-SHP-001,zinc,Zinc,minerals,120,403.3,mcg,686.0,686.0,mcg,6,11000,False
+SF-EST-BRZ-SHP-001,copper,Copper,minerals,130,21.36,mcg,36.33,36.33,mcg,4,900,False
+SF-EST-BRZ-SHP-001,magnesium,Magnesium,minerals,140,13.95,mg,23.73,23.73,mg,6,420,False
+SF-EST-BRZ-SHP-001,phosphorus,Phosphorus,minerals,150,219.6,mg,373.53,373.53,mg,30,1250,False
+SF-EST-BRZ-SHP-001,manganese,Manganese,minerals,160,19.83,mcg,33.73,33.73,mcg,1,2300,False
+SF-EST-BRZ-SHP-001,iodine,Iodine,minerals,170,12.4,mcg,21.09,21.09,mcg,14,150,False
+SF-EST-BRZ-SHP-001,vitamin_d,Vitamin D,vitamins,190,4.36,mcg,7.42,7.42,mcg,37,20,False
+SF-EST-BRZ-SHP-001,vitamin_b12,Vitamin B12,vitamins,200,0.51,mcg,0.87,0.87,mcg,36,2.4,False
+SF-EST-BRZ-SHP-001,vitamin_e,Vitamin E,vitamins,210,3738,mcg,6358.23,6358.23,mcg,42,15000,False
+SF-EST-BRZ-SHP-001,mercury,Mercury,safety,220,100,ppb,17.01,17.01,mcg,,,False
+SF-EST-BRZ-SHP-001,arsenic,Arsenic (total),safety,230,85.0,mcg,144.58,144.58,mcg,,,False
+SF-EST-BRE-SHP-001,epa,EPA (C20:5),omega_3,10,221,mg,375.91,375.91,mg,,,False
+SF-EST-BRE-SHP-001,dha,DHA (C22:6),omega_3,20,567,mg,964.45,964.45,mg,,,False
+SF-EST-BRE-SHP-001,ala,ALA (C18:3),omega_3,30,643,mg,1093.72,1093.72,mg,,,False
+SF-EST-BRE-SHP-001,epa_dha,EPA + DHA,omega_3,40,788,mg,1340.36,1340.36,mg,,,False
+SF-EST-BRE-SHP-001,total_omega3,Total Omega-3,omega_3,50,1431,mg,2434.09,2434.09,mg,,,False
+SF-EST-BRE-SHP-001,omega6,Total Omega-6,omega_6,60,1750,mg,2976.7,2976.7,mg,,,False
+SF-EST-BRE-SHP-001,ara,ARA (C20:4),omega_6,70,62.6,mg,106.48,106.48,mg,,,False
+SF-EST-BRE-SHP-001,omega6_3_ratio,Omega 6:3 Ratio,omega_6,80,1.09,ratio,1.09,1.09,ratio,,,False
+SF-EST-BRE-SHP-001,protein,Protein,macros,90,21.1,g,35.89,35.89,g,72,50,False
+SF-EST-BRE-SHP-001,cholesterol,Cholesterol,macros,100,67,mg,113.96,113.96,mg,38,300,False
+SF-EST-BRE-SHP-001,selenium,Selenium,minerals,110,18.9,mcg,32.15,32.15,mcg,58,55,False
+SF-EST-BRE-SHP-001,zinc,Zinc,minerals,120,413.3,mcg,703.01,703.01,mcg,6,11000,False
+SF-EST-BRE-SHP-001,copper,Copper,minerals,130,14.99,mcg,25.5,25.5,mcg,3,900,False
+SF-EST-BRE-SHP-001,magnesium,Magnesium,minerals,140,14.91,mg,25.36,25.36,mg,6,420,False
+SF-EST-BRE-SHP-001,phosphorus,Phosphorus,minerals,150,291.7,mg,496.17,496.17,mg,40,1250,False
+SF-EST-BRE-SHP-001,manganese,Manganese,minerals,160,3.6,mcg,6.12,6.12,mcg,,2300,False
+SF-EST-BRE-SHP-001,iodine,Iodine,minerals,170,15.9,mcg,27.05,27.05,mcg,18,150,False
+SF-EST-BRE-SHP-001,vitamin_d,Vitamin D,vitamins,190,15.0,mcg,25.51,25.51,mcg,128,20,False
+SF-EST-BRE-SHP-001,vitamin_b12,Vitamin B12,vitamins,200,0.91,mcg,1.55,1.55,mcg,65,2.4,False
+SF-EST-BRE-SHP-001,vitamin_e,Vitamin E,vitamins,210,2886,mcg,4909.0,4909.0,mcg,33,15000,False
+SF-EST-BRE-SHP-001,mercury,Mercury,safety,220,60,ppb,10.21,10.21,mcg,,,False
+SF-EST-BRE-SHP-001,arsenic,Arsenic (total),safety,230,128.0,mcg,217.72,217.72,mcg,,,False
+SF-KFC-YLT-SHP-001,epa,EPA (C20:5),omega_3,10,187,mg,424.11,424.11,mg,,,False
+SF-KFC-YLT-SHP-001,dha,DHA (C22:6),omega_3,20,546,mg,1238.31,1238.31,mg,,,False
+SF-KFC-YLT-SHP-001,ala,ALA (C18:3),omega_3,30,156,mg,353.8,353.8,mg,,,False
+SF-KFC-YLT-SHP-001,epa_dha,EPA + DHA,omega_3,40,733,mg,1662.41,1662.41,mg,,,False
+SF-KFC-YLT-SHP-001,total_omega3,Total Omega-3,omega_3,50,889,mg,2016.22,2016.22,mg,,,False
+SF-KFC-YLT-SHP-001,omega6,Total Omega-6,omega_6,60,557,mg,1263.25,1263.25,mg,,,False
+SF-KFC-YLT-SHP-001,ara,ARA (C20:4),omega_6,70,27,mg,61.23,61.23,mg,,,False
+SF-KFC-YLT-SHP-001,omega6_3_ratio,Omega 6:3 Ratio,omega_6,80,0.537,ratio,0.537,0.537,ratio,,,False
+SF-KFC-YLT-SHP-001,protein,Protein,macros,90,23.4,g,53.07,53.07,g,106,50,False
+SF-KFC-YLT-SHP-001,selenium,Selenium,minerals,110,21.5,mcg,48.76,48.76,mcg,89,55,False
+SF-KFC-YLT-SHP-001,zinc,Zinc,minerals,120,389.0,mcg,882.24,882.24,mcg,8,11000,False
+SF-KFC-YLT-SHP-001,copper,Copper,minerals,130,29.97,mcg,67.97,67.97,mcg,8,900,False
+SF-KFC-YLT-SHP-001,magnesium,Magnesium,minerals,140,27.4,mg,62.14,62.14,mg,15,420,False
+SF-KFC-YLT-SHP-001,phosphorus,Phosphorus,minerals,150,227.4,mg,515.73,515.73,mg,41,1250,False
+SF-KFC-YLT-SHP-001,manganese,Manganese,minerals,160,7.21,mcg,16.35,16.35,mcg,1,2300,False
+SF-KFC-YLT-SHP-001,vitamin_d,Vitamin D,vitamins,190,2.19,mcg,4.97,4.97,mcg,25,20,False
+SF-KFC-YLT-SHP-001,mercury,Mercury,safety,220,60.26,ppb,13.67,13.67,mcg,,,False
+SF-KFC-YLT-SHP-001,arsenic,Arsenic (total),safety,230,36.91,mcg,83.71,83.71,mcg,,,False
+SF-AUS-BRM-SHP-001,epa,EPA (C20:5),omega_3,10,31,mg,52.73,52.73,mg,,,False
+SF-AUS-BRM-SHP-001,dha,DHA (C22:6),omega_3,20,92,mg,156.49,156.49,mg,,,False
+SF-AUS-BRM-SHP-001,ala,ALA (C18:3),omega_3,30,33,mg,56.13,56.13,mg,,,False
+SF-AUS-BRM-SHP-001,epa_dha,EPA + DHA,omega_3,40,123,mg,209.22,209.22,mg,,,False
+SF-AUS-BRM-SHP-001,total_omega3,Total Omega-3,omega_3,50,156,mg,265.35,265.35,mg,,,False
+SF-AUS-BRM-SHP-001,omega6,Total Omega-6,omega_6,60,502,mg,853.89,853.89,mg,,,False
+SF-AUS-BRM-SHP-001,ara,ARA (C20:4),omega_6,70,26,mg,44.23,44.23,mg,,,False
+SF-AUS-BRM-SHP-001,omega6_3_ratio,Omega 6:3 Ratio,omega_6,80,2.68,ratio,2.68,2.68,ratio,,,False
+SF-AUS-BRM-SHP-001,protein,Protein,macros,90,21.0,g,35.72,35.72,g,71,50,False
+SF-AUS-BRM-SHP-001,selenium,Selenium,minerals,110,23.0,mcg,39.12,39.12,mcg,71,55,False
+SF-AUS-BRM-SHP-001,zinc,Zinc,minerals,120,376.4,mcg,640.25,640.25,mcg,6,11000,False
+SF-AUS-BRM-SHP-001,copper,Copper,minerals,130,7.31,mcg,12.43,12.43,mcg,1,900,False
+SF-AUS-BRM-SHP-001,magnesium,Magnesium,minerals,140,28.39,mg,48.29,48.29,mg,11,420,False
+SF-AUS-BRM-SHP-001,phosphorus,Phosphorus,minerals,150,179.7,mg,305.66,305.66,mg,24,1250,False
+SF-AUS-BRM-SHP-001,manganese,Manganese,minerals,160,10.55,mcg,17.95,17.95,mcg,1,2300,False
+SF-AUS-BRM-SHP-001,vitamin_d,Vitamin D,vitamins,190,0,mcg,0.0,0.0,mcg,,20,False
+SF-AUS-BRM-SHP-001,mercury,Mercury,safety,220,27.89,ppb,4.74,4.74,mcg,,,False
+SF-AUS-BRM-SHP-001,arsenic,Arsenic (total),safety,230,438.7,mcg,746.22,746.22,mcg,,,False
+SF-AUS-BRM-SHP-001,cadmium,Cadmium,safety,240,0.03,mcg,0.05,0.05,mcg,,,False
+SF-AUS-BRM-SHP-005,epa,EPA (C20:5),omega_3,10,31,mg,70.31,70.31,mg,,,False
+SF-AUS-BRM-SHP-005,dha,DHA (C22:6),omega_3,20,92,mg,208.65,208.65,mg,,,False
+SF-AUS-BRM-SHP-005,ala,ALA (C18:3),omega_3,30,33,mg,74.84,74.84,mg,,,False
+SF-AUS-BRM-SHP-005,epa_dha,EPA + DHA,omega_3,40,123,mg,278.96,278.96,mg,,,False
+SF-AUS-BRM-SHP-005,total_omega3,Total Omega-3,omega_3,50,156,mg,353.8,353.8,mg,,,False
+SF-AUS-BRM-SHP-005,omega6,Total Omega-6,omega_6,60,502,mg,1138.52,1138.52,mg,,,False
+SF-AUS-BRM-SHP-005,ara,ARA (C20:4),omega_6,70,26,mg,58.97,58.97,mg,,,False
+SF-AUS-BRM-SHP-005,omega6_3_ratio,Omega 6:3 Ratio,omega_6,80,2.68,ratio,2.68,2.68,ratio,,,False
+SF-AUS-BRM-SHP-005,protein,Protein,macros,90,21.0,g,47.63,47.63,g,95,50,False
+SF-AUS-BRM-SHP-005,selenium,Selenium,minerals,110,23.0,mcg,52.16,52.16,mcg,95,55,False
+SF-AUS-BRM-SHP-005,zinc,Zinc,minerals,120,376.4,mcg,853.66,853.66,mcg,8,11000,False
+SF-AUS-BRM-SHP-005,copper,Copper,minerals,130,7.31,mcg,16.58,16.58,mcg,2,900,False
+SF-AUS-BRM-SHP-005,magnesium,Magnesium,minerals,140,28.39,mg,64.39,64.39,mg,15,420,False
+SF-AUS-BRM-SHP-005,phosphorus,Phosphorus,minerals,150,179.7,mg,407.55,407.55,mg,33,1250,False
+SF-AUS-BRM-SHP-005,manganese,Manganese,minerals,160,10.55,mcg,23.93,23.93,mcg,1,2300,False
+SF-AUS-BRM-SHP-005,vitamin_d,Vitamin D,vitamins,190,0,mcg,0.0,0.0,mcg,,20,False
+SF-AUS-BRM-SHP-005,mercury,Mercury,safety,220,27.89,ppb,6.33,6.33,mcg,,,False
+SF-AUS-BRM-SHP-005,arsenic,Arsenic (total),safety,230,438.7,mcg,994.95,994.95,mcg,,,False
+SF-AUS-BRM-SHP-005,cadmium,Cadmium,safety,240,0.03,mcg,0.07,0.07,mcg,,,False
+SF-AUS-BRM-SHP-009,epa,EPA (C20:5),omega_3,10,31,mg,35.15,35.15,mg,,,False
+SF-AUS-BRM-SHP-009,dha,DHA (C22:6),omega_3,20,92,mg,104.33,104.33,mg,,,False
+SF-AUS-BRM-SHP-009,ala,ALA (C18:3),omega_3,30,33,mg,37.42,37.42,mg,,,False
+SF-AUS-BRM-SHP-009,epa_dha,EPA + DHA,omega_3,40,123,mg,139.48,139.48,mg,,,False
+SF-AUS-BRM-SHP-009,total_omega3,Total Omega-3,omega_3,50,156,mg,176.9,176.9,mg,,,False
+SF-AUS-BRM-SHP-009,omega6,Total Omega-6,omega_6,60,502,mg,569.26,569.26,mg,,,False
+SF-AUS-BRM-SHP-009,ara,ARA (C20:4),omega_6,70,26,mg,29.48,29.48,mg,,,False
+SF-AUS-BRM-SHP-009,omega6_3_ratio,Omega 6:3 Ratio,omega_6,80,2.68,ratio,2.68,2.68,ratio,,,False
+SF-AUS-BRM-SHP-009,protein,Protein,macros,90,21.0,g,23.81,23.81,g,48,50,False
+SF-AUS-BRM-SHP-009,selenium,Selenium,minerals,110,23.0,mcg,26.08,26.08,mcg,47,55,False
+SF-AUS-BRM-SHP-009,zinc,Zinc,minerals,120,376.4,mcg,426.83,426.83,mcg,4,11000,False
+SF-AUS-BRM-SHP-009,copper,Copper,minerals,130,7.31,mcg,8.29,8.29,mcg,1,900,False
+SF-AUS-BRM-SHP-009,magnesium,Magnesium,minerals,140,28.39,mg,32.19,32.19,mg,8,420,False
+SF-AUS-BRM-SHP-009,phosphorus,Phosphorus,minerals,150,179.7,mg,203.78,203.78,mg,16,1250,False
+SF-AUS-BRM-SHP-009,manganese,Manganese,minerals,160,10.55,mcg,11.96,11.96,mcg,1,2300,False
+SF-AUS-BRM-SHP-009,vitamin_d,Vitamin D,vitamins,190,0,mcg,0.0,0.0,mcg,,20,False
+SF-AUS-BRM-SHP-009,mercury,Mercury,safety,220,27.89,ppb,3.16,3.16,mcg,,,False
+SF-AUS-BRM-SHP-009,arsenic,Arsenic (total),safety,230,438.7,mcg,497.48,497.48,mcg,,,False
+SF-AUS-BRM-SHP-009,cadmium,Cadmium,safety,240,0.03,mcg,0.03,0.03,mcg,,,False
+SF-SEC-SCL-SHP-009,epa,EPA (C20:5),omega_3,10,51,mg,57.83,231.33,mg,,,False
+SF-SEC-SCL-SHP-009,dha,DHA (C22:6),omega_3,20,35,mg,39.69,158.76,mg,,,False
+SF-SEC-SCL-SHP-009,ala,ALA (C18:3),omega_3,30,3,mg,3.4,13.61,mg,,,False
+SF-SEC-SCL-SHP-009,epa_dha,EPA + DHA,omega_3,40,86,mg,97.52,390.09,mg,,,False
+SF-SEC-SCL-SHP-009,total_omega3,Total Omega-3,omega_3,50,89,mg,100.92,403.7,mg,,,False
+SF-SEC-SCL-SHP-009,omega6,Total Omega-6,omega_6,60,34,mg,38.56,154.22,mg,,,False
+SF-SEC-SCL-SHP-009,ara,ARA (C20:4),omega_6,70,5.3,mg,6.01,24.04,mg,,,False
+SF-SEC-SCL-SHP-009,omega6_3_ratio,Omega 6:3 Ratio,omega_6,80,0.337,ratio,0.337,0.337,ratio,,,False
+SF-SEC-SCL-SHP-009,protein,Protein,macros,90,24.1,g,27.33,109.32,g,55,50,False
+SF-SEC-SCL-SHP-009,cholesterol,Cholesterol,macros,100,23,mg,26.08,104.33,mg,9,300,False
+SF-SEC-SCL-SHP-009,selenium,Selenium,minerals,110,20.0,mcg,22.68,90.72,mcg,41,55,False
+SF-SEC-SCL-SHP-009,zinc,Zinc,minerals,120,4599.6,mcg,5215.85,20863.42,mcg,47,11000,False
+SF-SEC-SCL-SHP-009,copper,Copper,minerals,130,12.72,mcg,14.42,57.7,mcg,2,900,False
+SF-SEC-SCL-SHP-009,magnesium,Magnesium,minerals,140,204.2,mg,231.56,926.23,mg,55,420,False
+SF-SEC-SCL-SHP-009,phosphorus,Phosphorus,minerals,150,234.3,mg,265.69,1062.77,mg,21,1250,False
+SF-SEC-SCL-SHP-009,manganese,Manganese,minerals,160,8.32,mcg,9.43,37.74,mcg,,2300,False
+SF-SEC-SCL-SHP-009,iodine,Iodine,minerals,170,18.8,mcg,21.32,85.28,mcg,14,150,False
+SF-SEC-SCL-SHP-009,chromium,Chromium,minerals,180,2.89,mcg,3.28,13.11,mcg,9,35,False
+SF-SEC-SCL-SHP-009,vitamin_d,Vitamin D,vitamins,190,0,mcg,0.0,0.0,mcg,,20,False
+SF-SEC-SCL-SHP-009,vitamin_b12,Vitamin B12,vitamins,200,0.57,mcg,0.65,2.59,mcg,27,2.4,False
+SF-SEC-SCL-SHP-009,vitamin_e,Vitamin E,vitamins,210,547,mcg,620.29,2481.15,mcg,4,15000,False
+SF-SEC-SCL-SHP-009,mercury,Mercury,safety,220,10,ppb,1.13,4.54,mcg,,,False
+SF-SEC-SCL-SHP-009,arsenic,Arsenic (total),safety,230,47.0,mcg,53.3,213.19,mcg,,,False
+SF-SEC-SCL-SHP-009,cadmium,Cadmium,safety,240,10.0,mcg,11.34,45.36,mcg,,,False
+SF-SEC-SCL-SHP-001,epa,EPA (C20:5),omega_3,10,51,mg,50.6,101.21,mg,,,False
+SF-SEC-SCL-SHP-001,dha,DHA (C22:6),omega_3,20,35,mg,34.73,69.46,mg,,,False
+SF-SEC-SCL-SHP-001,ala,ALA (C18:3),omega_3,30,3,mg,2.98,5.95,mg,,,False
+SF-SEC-SCL-SHP-001,epa_dha,EPA + DHA,omega_3,40,86,mg,85.33,170.66,mg,,,False
+SF-SEC-SCL-SHP-001,total_omega3,Total Omega-3,omega_3,50,89,mg,88.31,176.62,mg,,,False
+SF-SEC-SCL-SHP-001,omega6,Total Omega-6,omega_6,60,34,mg,33.74,67.47,mg,,,False
+SF-SEC-SCL-SHP-001,ara,ARA (C20:4),omega_6,70,5.3,mg,5.26,10.52,mg,,,False
+SF-SEC-SCL-SHP-001,omega6_3_ratio,Omega 6:3 Ratio,omega_6,80,0.337,ratio,0.337,0.337,ratio,,,False
+SF-SEC-SCL-SHP-001,protein,Protein,macros,90,24.1,g,23.91,47.83,g,48,50,False
+SF-SEC-SCL-SHP-001,cholesterol,Cholesterol,macros,100,23,mg,22.82,45.64,mg,8,300,False
+SF-SEC-SCL-SHP-001,selenium,Selenium,minerals,110,20.0,mcg,19.84,39.69,mcg,36,55,False
+SF-SEC-SCL-SHP-001,zinc,Zinc,minerals,120,4599.6,mcg,4563.87,9127.75,mcg,41,11000,False
+SF-SEC-SCL-SHP-001,copper,Copper,minerals,130,12.72,mcg,12.62,25.24,mcg,1,900,False
+SF-SEC-SCL-SHP-001,magnesium,Magnesium,minerals,140,204.2,mg,202.61,405.23,mg,48,420,False
+SF-SEC-SCL-SHP-001,phosphorus,Phosphorus,minerals,150,234.3,mg,232.48,464.96,mg,19,1250,False
+SF-SEC-SCL-SHP-001,manganese,Manganese,minerals,160,8.32,mcg,8.26,16.51,mcg,,2300,False
+SF-SEC-SCL-SHP-001,iodine,Iodine,minerals,170,18.8,mcg,18.65,37.31,mcg,12,150,False
+SF-SEC-SCL-SHP-001,chromium,Chromium,minerals,180,2.89,mcg,2.87,5.74,mcg,8,35,False
+SF-SEC-SCL-SHP-001,vitamin_d,Vitamin D,vitamins,190,0,mcg,0.0,0.0,mcg,,20,False
+SF-SEC-SCL-SHP-001,vitamin_b12,Vitamin B12,vitamins,200,0.57,mcg,0.57,1.13,mcg,24,2.4,False
+SF-SEC-SCL-SHP-001,vitamin_e,Vitamin E,vitamins,210,547,mcg,542.75,1085.5,mcg,4,15000,False
+SF-SEC-SCL-SHP-001,mercury,Mercury,safety,220,10,ppb,0.99,1.98,mcg,,,False
+SF-SEC-SCL-SHP-001,arsenic,Arsenic (total),safety,230,47.0,mcg,46.63,93.27,mcg,,,False
+SF-SEC-SCL-SHP-001,cadmium,Cadmium,safety,240,10.0,mcg,9.92,19.84,mcg,,,False
+SF-TAR-BTS-SHP-001,epa,EPA (C20:5),omega_3,10,15,mg,17.01,68.04,mg,,,False
+SF-TAR-BTS-SHP-001,dha,DHA (C22:6),omega_3,20,17,mg,19.28,77.11,mg,,,False
+SF-TAR-BTS-SHP-001,ala,ALA (C18:3),omega_3,30,7,mg,7.94,31.75,mg,,,False
+SF-TAR-BTS-SHP-001,epa_dha,EPA + DHA,omega_3,40,32,mg,36.29,145.15,mg,,,False
+SF-TAR-BTS-SHP-001,total_omega3,Total Omega-3,omega_3,50,39,mg,44.23,176.9,mg,,,False
+SF-TAR-BTS-SHP-001,omega6,Total Omega-6,omega_6,60,51,mg,57.83,231.33,mg,,,False
+SF-TAR-BTS-SHP-001,ara,ARA (C20:4),omega_6,70,88.3,mg,100.13,400.52,mg,,,False
+SF-TAR-BTS-SHP-001,omega6_3_ratio,Omega 6:3 Ratio,omega_6,80,1.22,ratio,1.22,1.22,ratio,,,False
+SF-TAR-BTS-SHP-001,protein,Protein,macros,90,18.0,g,20.41,81.65,g,41,50,False
+SF-TAR-BTS-SHP-001,selenium,Selenium,minerals,110,13.5,mcg,15.31,61.23,mcg,28,55,False
+SF-TAR-BTS-SHP-001,zinc,Zinc,minerals,120,1118.7,mcg,1268.58,5074.33,mcg,12,11000,False
+SF-TAR-BTS-SHP-001,copper,Copper,minerals,130,149.8,mcg,169.87,679.48,mcg,19,900,False
+SF-TAR-BTS-SHP-001,magnesium,Magnesium,minerals,140,27.25,mg,30.9,123.6,mg,7,420,False
+SF-TAR-BTS-SHP-001,phosphorus,Phosphorus,minerals,150,149.8,mg,169.87,679.48,mg,14,1250,False
+SF-TAR-BTS-SHP-001,manganese,Manganese,minerals,160,33.28,mcg,37.74,150.96,mcg,2,2300,False
+SF-TAR-BTS-SHP-001,chromium,Chromium,minerals,180,1.95,mcg,2.21,8.85,mcg,6,35,False
+SF-TAR-BTS-SHP-001,vitamin_d,Vitamin D,vitamins,190,0,mcg,0.0,0.0,mcg,,20,False
+SF-TAR-BTS-SHP-001,mercury,Mercury,safety,220,17.93,ppb,2.03,8.13,mcg,,,False
+SF-TAR-BTS-SHP-001,arsenic,Arsenic (total),safety,230,57.1,mcg,64.75,259.0,mcg,,,False
+SF-TAR-BTS-SHP-001,lead,Lead,safety,250,0.32,mcg,0.36,1.45,mcg,,,False

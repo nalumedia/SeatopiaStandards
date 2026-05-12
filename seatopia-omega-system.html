@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seatopia — Omega Meter Packaging System</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Karla:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --deep-ocean: #0B2A3A;
+      --ocean-mid: #143d52;
+      --soft-sea: #4B7991;
+      --maya-blue: #7BC3F3;
+      --sky-light: #b8ddf5;
+      --gold-accent: #D4A76A;
+      --gold-light: #E8C88A;
+      --white: #FFFFFF;
+      --off-white: #F8FAFB;
+      --moss-green: #2e8b57;
+      --purity-green: #3BA676;
+      --mercury-safe: #4CAF50;
+      --linen: #F7EFE6;
+      --charcoal: #1a1a1a;
+      --meter-track: rgba(75, 121, 145, 0.12);
+      --meter-fill-blue: linear-gradient(90deg, #0B2A3A 0%, #4B7991 100%);
+      --meter-fill-gold: linear-gradient(90deg, #4B7991 0%, #7BC3F3 60%, #D4A76A 100%);
+    }
+
+    body {
+      font-family: 'Karla', sans-serif;
+      background: var(--off-white);
+      color: var(--charcoal);
+      line-height: 1.5;
+    }
+
+    /* ═══ HEADER ═══ */
+    .sys-header {
+      background: var(--deep-ocean);
+      padding: 32px 24px 28px;
+      text-align: center;
+    }
+    .sys-header h1 {
+      font-family: 'EB Garamond', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.5px;
+    }
+    .sys-header p {
+      font-size: 13px;
+      color: var(--maya-blue);
+      margin-top: 6px;
+      letter-spacing: 0.3px;
+    }
+
+    /* ═══ CONTROLS ═══ */
+    .controls {
+      max-width: 1200px;
+      margin: 20px auto 0;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .ctrl-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--soft-sea);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-right: 4px;
+    }
+    .ctrl-btn {
+      padding: 7px 16px;
+      border: 1.5px solid rgba(11,42,58,0.15);
+      background: var(--white);
+      font-family: 'Karla', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--deep-ocean);
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .ctrl-btn:hover { border-color: var(--soft-sea); }
+    .ctrl-btn.active {
+      background: var(--deep-ocean);
+      color: var(--white);
+      border-color: var(--deep-ocean);
+    }
+    .ctrl-spacer { flex: 1; }
+    .ctrl-group { display: flex; gap: 0; }
+    .ctrl-group .ctrl-btn { border-radius: 0; border-left-width: 0; }
+    .ctrl-group .ctrl-btn:first-child { border-radius: 6px 0 0 6px; border-left-width: 1.5px; }
+    .ctrl-group .ctrl-btn:last-child { border-radius: 0 6px 6px 0; }
+
+    /* ═══ GRID ═══ */
+    .grid {
+      max-width: 1200px;
+      margin: 24px auto 80px;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 28px;
+    }
+
+    /* ═══ PACKAGE CARD ═══ */
+    .pkg-card {
+      background: var(--white);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(11,42,58,0.06);
+      border: 1px solid rgba(11,42,58,0.06);
+      transition: box-shadow 0.3s, transform 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .pkg-card:hover {
+      box-shadow: 0 8px 32px rgba(11,42,58,0.1);
+      transform: translateY(-2px);
+    }
+
+    /* Tier accent stripe */
+    .pkg-card[data-tier="hero"] { border-top: 3px solid var(--gold-accent); }
+    .pkg-card[data-tier="core"] { border-top: 3px solid var(--maya-blue); }
+    .pkg-card[data-tier="supporting"] { border-top: 3px solid var(--soft-sea); }
+
+    /* ─── TOP: Emotion / Brand ─── */
+    .pkg-top {
+      padding: 28px 28px 0;
+    }
+    .pkg-tier-tag {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      padding: 3px 10px;
+      border-radius: 3px;
+      margin-bottom: 12px;
+    }
+    .pkg-card[data-tier="hero"] .pkg-tier-tag {
+      background: linear-gradient(135deg, rgba(212,167,106,0.15), rgba(212,167,106,0.08));
+      color: var(--gold-accent);
+    }
+    .pkg-card[data-tier="core"] .pkg-tier-tag {
+      background: rgba(123,195,243,0.12);
+      color: var(--soft-sea);
+    }
+    .pkg-card[data-tier="supporting"] .pkg-tier-tag {
+      background: rgba(75,121,145,0.08);
+      color: var(--soft-sea);
+    }
+    .pkg-species {
+      font-family: 'EB Garamond', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--deep-ocean);
+      line-height: 1.2;
+    }
+    .pkg-farm {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--soft-sea);
+      margin-top: 2px;
+    }
+    .pkg-poetic {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--soft-sea);
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    /* ─── CENTER: Omega Meters ─── */
+    .pkg-meters {
+      padding: 24px 28px;
+    }
+
+    /* Daily Meter */
+    .meter-section {
+      margin-bottom: 20px;
+    }
+    .meter-section:last-child { margin-bottom: 0; }
+
+    .meter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+    }
+    .meter-label {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--deep-ocean);
+    }
+    .meter-value {
+      font-family: 'Karla', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--deep-ocean);
+    }
+    .meter-value .pct {
+      font-size: 18px;
+      font-weight: 800;
+    }
+    .meter-value .pct.over100 {
+      color: var(--gold-accent);
+    }
+
+    .meter-track {
+      position: relative;
+      height: 28px;
+      background: var(--meter-track);
+      border-radius: 6px;
+      overflow: visible;
+    }
+    .meter-fill {
+      height: 100%;
+      border-radius: 6px;
+      position: relative;
+      transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      min-width: 2px;
+    }
+    .meter-fill.blue {
+      background: linear-gradient(90deg, #0B2A3A, #4B7991);
+    }
+    .meter-fill.gold {
+      background: linear-gradient(90deg, #0B2A3A 0%, #4B7991 55%, #D4A76A 100%);
+      box-shadow: 0 0 12px rgba(212, 167, 106, 0.3);
+    }
+    .meter-100-mark {
+      position: absolute;
+      top: -3px;
+      bottom: -3px;
+      width: 2px;
+      background: var(--deep-ocean);
+      opacity: 0.3;
+      z-index: 2;
+    }
+    .meter-100-label {
+      position: absolute;
+      top: -16px;
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--soft-sea);
+      transform: translateX(-50%);
+    }
+
+    .meter-mg {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 6px;
+    }
+    .meter-mg-total {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--deep-ocean);
+    }
+    .meter-mg-sub {
+      font-size: 11px;
+      color: var(--soft-sea);
+    }
+
+    /* Weekly meter — smaller */
+    .meter-weekly .meter-track {
+      height: 16px;
+    }
+    .meter-weekly .meter-label {
+      font-size: 9px;
+      color: var(--soft-sea);
+    }
+    .meter-weekly .meter-value .pct {
+      font-size: 14px;
+    }
+
+    /* ─── DOSE CARD ─── */
+    .dose-card {
+      margin: 0 28px;
+      padding: 20px;
+      background: var(--off-white);
+      border-radius: 10px;
+      border: 1px solid rgba(11,42,58,0.06);
+    }
+    .dose-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+    }
+    .dose-row + .dose-row {
+      border-top: 1px solid rgba(11,42,58,0.06);
+    }
+    .dose-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--soft-sea);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+    .dose-value {
+      font-family: 'Karla', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--deep-ocean);
+    }
+    .dose-row.total {
+      padding-top: 10px;
+      margin-top: 4px;
+      border-top: 2px solid var(--deep-ocean) !important;
+    }
+    .dose-row.total .dose-label {
+      color: var(--deep-ocean);
+      font-size: 13px;
+    }
+    .dose-row.total .dose-value {
+      font-size: 20px;
+    }
+
+    /* ─── PURITY BADGES ─── */
+    .purity-strip {
+      padding: 18px 28px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .purity-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+    .purity-badge.verified {
+      background: rgba(59,166,118,0.08);
+      color: var(--purity-green);
+      border: 1px solid rgba(59,166,118,0.2);
+    }
+    .purity-badge.mercury {
+      background: rgba(76,175,80,0.06);
+      color: var(--mercury-safe);
+      border: 1px solid rgba(76,175,80,0.15);
+    }
+    .purity-badge.purity {
+      background: rgba(75,121,145,0.06);
+      color: var(--soft-sea);
+      border: 1px solid rgba(75,121,145,0.15);
+    }
+
+    /* ─── SERVING INFO ─── */
+    .pkg-serving {
+      padding: 0 28px 20px;
+      font-size: 12px;
+      color: var(--soft-sea);
+    }
+
+    /* ─── SVG ICONS ─── */
+    .icon-sm { width: 14px; height: 14px; flex-shrink: 0; }
+
+    /* ═══ HERO CARD (Tier 1 expanded) ═══ */
+    .pkg-card[data-tier="hero"] .pkg-species { font-size: 30px; }
+    .pkg-card[data-tier="hero"] .meter-track { height: 32px; }
+    .pkg-card[data-tier="hero"] .meter-value .pct { font-size: 22px; }
+
+    /* ═══ SUPPORTING CARD (compact) ═══ */
+    .pkg-card[data-tier="supporting"] .pkg-meters { padding: 18px 28px; }
+    .pkg-card[data-tier="supporting"] .meter-track { height: 22px; }
+    .pkg-card[data-tier="supporting"] .meter-value .pct { font-size: 14px; }
+    .pkg-card[data-tier="supporting"] .meter-header .meter-label { font-size: 9px; }
+
+    /* ═══ BACK-OF-PACK (expandable) ═══ */
+    .pkg-back {
+      margin: 0 28px 24px;
+      padding: 20px;
+      background: rgba(11,42,58,0.03);
+      border-radius: 10px;
+      border: 1px solid rgba(11,42,58,0.06);
+      display: none;
+    }
+    .pkg-card.expanded .pkg-back { display: block; }
+    .back-toggle {
+      display: block;
+      width: 100%;
+      padding: 10px 28px;
+      background: none;
+      border: none;
+      border-top: 1px solid rgba(11,42,58,0.06);
+      font-family: 'Karla', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--soft-sea);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .back-toggle:hover { color: var(--deep-ocean); }
+
+    .weekly-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .weekly-day {
+      text-align: center;
+    }
+    .weekly-day-label {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--soft-sea);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .weekly-day-bar {
+      height: 36px;
+      border-radius: 4px;
+      background: var(--meter-track);
+      position: relative;
+      overflow: hidden;
+    }
+    .weekly-day-bar .fill {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(180deg, var(--maya-blue), var(--soft-sea));
+      border-radius: 4px;
+      transition: height 0.4s;
+    }
+    .weekly-day-bar.active .fill {
+      background: linear-gradient(180deg, var(--gold-accent), #0B2A3A);
+    }
+
+    .back-edu {
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--soft-sea);
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(11,42,58,0.08);
+    }
+
+    .back-data {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(11,42,58,0.08);
+    }
+    .back-data-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+      font-size: 12px;
+    }
+    .back-data-label { color: var(--soft-sea); font-weight: 600; }
+    .back-data-value { color: var(--deep-ocean); font-weight: 700; }
+
+    /* ═══ BG TOGGLE ═══ */
+    @media (max-width: 480px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<div class="sys-header">
+  <h1>SEATOPIA OMEGA METER</h1>
+  <p>Packaging UI System — Marine Omega Dose (EPA + DHA) · Verified Lab Data · Per Serving from Per-100g Truth</p>
+</div>
+
+<!-- ═══ CONTROLS ═══ -->
+<div class="controls" id="controls"></div>
+
+<!-- ═══ GRID ═══ -->
+<div class="grid" id="grid"></div>
+
+<script>
+// ══════════════════════════════════════════════════════════════
+// DATA (synced from seatopia-product-tiles.html)
+// ══════════════════════════════════════════════════════════════
+const OZ_TO_G = 28.3495;
+const DAILY_TARGET = 2000;   // mg EPA+DHA
+const WEEKLY_TARGET = 14000; // mg EPA+DHA
+
+const NUTRITION = {
+  "mt-cook-king-salmon": {
+    epa: 457.0, dha: 862.0, ala: 1140.0, protein_g: 18.9, se_mcg: 39.3,
+    hg_ppb: 0, vitd_mcg: 23.8, n_tests: 3, source: "Edacious", omega6_3: 0.853
+  },
+  "ora-king-king-salmon": {
+    epa: 536.0, dha: 1070.0, ala: 1210.0, protein_g: 18.6, se_mcg: 29.8,
+    hg_ppb: 0, vitd_mcg: 20.0, n_tests: 3, source: "Edacious", omega6_3: 0.854
+  },
+  "big-glory-bay-king-salmon": {
+    epa: 546.0, dha: 885.0, ala: 1050.0, protein_g: 18.9, se_mcg: 31.4,
+    hg_ppb: 0, vitd_mcg: 21.6, n_tests: 3, source: "Edacious", omega6_3: 0.869
+  },
+  "bakkafrost-atlantic-salmon": {
+    epa: 471.0, dha: 833.0, ala: 950.0, protein_g: 21.3, se_mcg: 18.6,
+    hg_ppb: 0, vitd_mcg: 8.76, n_tests: 6, source: "Edacious", omega6_3: 0.645
+  },
+  "superior-fresh-atlantic-salmon": {
+    epa: 530.0, dha: 1020.0, ala: 224.0, protein_g: 20.2, se_mcg: 21.2,
+    hg_ppb: 1.8, vitd_mcg: 3.98, n_tests: 1, source: "Edacious", omega6_3: 0.416
+  },
+  "caleta-bay-steelhead": {
+    epa: 262.0, dha: 589.0, ala: 1330.0, protein_g: 20.8, se_mcg: 22.1,
+    hg_ppb: 0, vitd_mcg: 9.01, n_tests: 4, source: "Edacious", omega6_3: 1.03
+  },
+  "tarakan-black-tiger-shrimp": {
+    epa: 15.0, dha: 17.0, ala: 7.0, protein_g: 18.0, se_mcg: 13.5,
+    hg_ppb: 0, vitd_mcg: 0, n_tests: 2, source: "Edacious", omega6_3: 1.22
+  },
+  "esteros-lubimar-branzino": {
+    epa: 304.0, dha: 598.0, ala: 880.0, protein_g: 21.1, se_mcg: 18.1,
+    hg_ppb: 3.0, vitd_mcg: 4.36, n_tests: 8, source: "Edacious", omega6_3: 0.921
+  },
+  "esteros-lubimar-sea-bream": {
+    epa: 221.0, dha: 567.0, ala: 643.0, protein_g: 21.1, se_mcg: 18.9,
+    hg_ppb: 0, vitd_mcg: 15.0, n_tests: 8, source: "Edacious", omega6_3: 1.09
+  },
+  "australis-barramundi": {
+    epa: 31.0, dha: 92.0, ala: 33.0, protein_g: 21.0, se_mcg: 23.0,
+    hg_ppb: 0, vitd_mcg: 0, n_tests: 2, source: "Edacious", omega6_3: 2.68
+  },
+  "hudson-valley-steelhead": {
+    epa: 376.0, dha: 1040.0, ala: 1620.0, protein_g: 19.5, se_mcg: 17.7,
+    hg_ppb: 0, vitd_mcg: 0, n_tests: 3, source: "Edacious", omega6_3: 0.833
+  },
+  "mcfarland-springs-rainbow-trout": {
+    epa: 272.0, dha: 668.0, ala: 1270.0, protein_g: 22.0, se_mcg: 32.9,
+    hg_ppb: 0, vitd_mcg: 18.2, n_tests: 2, source: "Edacious", omega6_3: 0.582
+  },
+  "seacorp-peruvian-scallops": {
+    epa: 51.0, dha: 35.0, ala: 3.0, protein_g: 14.4, se_mcg: 11.1,
+    hg_ppb: 0, vitd_mcg: 0, n_tests: 2, source: "Edacious", omega6_3: 0.337
+  },
+  "smoke-in-chimneys-rainbow-trout": {
+    epa: 86.0, dha: 404.0, ala: 33.0, protein_g: 18.2, se_mcg: 17.15,
+    hg_ppb: 9.7, vitd_mcg: 16.0, n_tests: 1, source: "Light Labs", omega6_3: 0.615
+  },
+  "kingfish-yellowtail": {
+    epa: 187.0, dha: 546.0, ala: 156.0, protein_g: 23.4, se_mcg: 21.5,
+    hg_ppb: 0, vitd_mcg: 2.19, n_tests: 2, source: "Edacious", omega6_3: 0.537
+  },
+  "regal-king-salmon": {
+    epa: 275.8, dha: 750.1, ala: 999.0, protein_g: 20.77, se_mcg: 36.68,
+    hg_ppb: 26.87, vitd_mcg: 25.9, n_tests: 1, source: "Light Labs", omega6_3: 1.332
+  },
+  "marshallberg-osetra": {
+    epa: 497.8, dha: 1250.7, ala: 161.7, protein_g: 26.11, se_mcg: 63.30,
+    hg_ppb: 4.94, vitd_mcg: 0, n_tests: 1, source: "Light Labs", omega6_3: 1.446
+  },
+  "yarra-valley-salmon-roe": {
+    epa: 513.8, dha: 2292.4, ala: 142.4, protein_g: 26.1, se_mcg: 99.1,
+    hg_ppb: 0, vitd_mcg: 2.0, n_tests: 1, source: "Light Labs", omega6_3: null
+  },
+  "desert-springs-barramundi": {
+    epa: 20.0, dha: 20.0, ala: 10.0, protein_g: 18.4, se_mcg: 20.81,
+    hg_ppb: 9.94, vitd_mcg: 3.0, n_tests: 1, source: "Light Labs", omega6_3: 2.4
+  },
+  "taprobane-shrimp": {
+    epa: 69.6, dha: 81.9, ala: 6.8, protein_g: 19.22, se_mcg: 30.43,
+    hg_ppb: 9.53, vitd_mcg: 0, n_tests: 1, source: "Light Labs", omega6_3: 0.875
+  },
+  "ecuador-shrimp": {
+    epa: 48.9, dha: 53.0, ala: 3.8, protein_g: 19.65, se_mcg: 17.76,
+    hg_ppb: 9.18, vitd_mcg: 0, n_tests: 1, source: "Light Labs", omega6_3: 0.9
+  },
+  "santa-priscila-shrimp": {
+    epa: 23.1, dha: 24.5, ala: 1.9, protein_g: 20.15, se_mcg: 16.73,
+    hg_ppb: 9.2, vitd_mcg: 0, n_tests: 1, source: "Light Labs", omega6_3: 1.25
+  }
+};
+
+const DESCRIPTIONS = {
+  "yarra-valley-salmon-roe": "Bright, briny pearls with a clean pop and omega-rich finish.",
+  "caleta-bay-steelhead": "Silky, bright, and refined — a sushi-grade cut for elevated raw preparations.",
+  "ora-king-king-salmon": "Rich, refined, and unforgettable — the gold standard of salmon.",
+  "mt-cook-king-salmon": "New Zealand alpine water gives this salmon its clean, buttery depth.",
+  "big-glory-bay-king-salmon": "Deep-water raised in Fiordland — bold omega, pristine finish.",
+  "bakkafrost-atlantic-salmon": "Faroe Islands precision. Raised with intention, measured with certainty.",
+  "superior-fresh-atlantic-salmon": "Wisconsin-raised Atlantic salmon — aquaponics-farmed with exceptional marine omega density.",
+  "hudson-valley-steelhead": "Cold-creek steelhead — lean, bright, and omega-dense.",
+  "esteros-lubimar-branzino": "Mediterranean-raised. Delicate, clean, and mineral-forward.",
+  "esteros-lubimar-sea-bream": "Estuary-raised bream with a gentle sweetness and firm texture.",
+  "kingfish-yellowtail": "Dutch-raised kingfish — firm, clean, and built for raw preparation.",
+  "tarakan-black-tiger-shrimp": "Mangrove-raised. Bold, sweet, and sustainably wild-style.",
+  "australis-barramundi": "Ocean-raised barramundi — mild, versatile, and selenium-rich.",
+  "mcfarland-springs-rainbow-trout": "Spring-fed rainbow trout — a high-omega reimagination of the American hot dog.",
+  "smoke-in-chimneys-rainbow-trout": "Heritage trout, wood-smoked over applewood. Rich and deeply satisfying.",
+  "marshallberg-osetra": "Classic osetra from North Carolina — nutty, briny, and omega-loaded.",
+  "seacorp-peruvian-scallops": "Peruvian bay scallops — sweet, tender, and delicately ocean-fresh.",
+  "regal-king-salmon": "New Zealand king salmon — rich, buttery, and packed with marine omega-3.",
+  "desert-springs-barramundi": "Desert-raised barramundi — clean, mild, and mineral-rich from pristine spring water.",
+  "taprobane-shrimp": "Sri Lankan whiteleg shrimp — sweet, firm, and responsibly farmed.",
+  "ecuador-shrimp": "Ecuadorian whiteleg shrimp — clean, sweet, and sustainably pond-raised.",
+  "santa-priscila-shrimp": "Santa Priscila whiteleg shrimp — responsibly farmed in Ecuador with a clean, mild sweetness."
+};
+
+const COA_MAP = {
+  '22491': true, '22489': true, '22490': true, '22493': true, '22492': true,
+  'E-OKS': true, '3950': true, '3951': true,
+  'E-CLB': true,
+  'E-HVF': true,
+  'E-BAK': true,
+  'E-MCS': true,
+  'E-BRZ': true,
+  'E-BRE': true,
+  'E-BGB': true,
+  'E-AUS': true,
+  'E-TBT': true,
+  'E-KFY': true,
+  'E-MFS': true,
+  'E-SPS': true,
+  '16691': true,
+  '9769': true,
+  '3954': true,
+  '10412': true,
+  '9776': true,
+  '7341': true,
+  '11343': true,
+  'E-SUP': true
+};
+
+const TEST_DATA = {
+  "yarra-valley-salmon-roe": [{ code: "22491" }],
+  "ora-king-king-salmon": [{ code: "E-OKS" }, { code: "3950" }],
+  "caleta-bay-steelhead": [{ code: "E-CLB" }, { code: "21156" }, { code: "21164" }],
+  "hudson-valley-steelhead": [{ code: "E-HVF" }],
+  "bakkafrost-atlantic-salmon": [{ code: "E-BAK" }],
+  "superior-fresh-atlantic-salmon": [{ code: "E-SUP" }],
+  "mt-cook-king-salmon": [{ code: "E-MCS" }],
+  "esteros-lubimar-branzino": [{ code: "E-BRZ" }],
+  "esteros-lubimar-sea-bream": [{ code: "E-BRE" }],
+  "big-glory-bay-king-salmon": [{ code: "E-BGB" }],
+  "australis-barramundi": [{ code: "E-AUS" }],
+  "tarakan-black-tiger-shrimp": [{ code: "E-TBT" }],
+  "kingfish-yellowtail": [{ code: "E-KFY" }],
+  "mcfarland-springs-rainbow-trout": [{ code: "E-MFS" }],
+  "seacorp-peruvian-scallops": [{ code: "E-SPS" }],
+  "regal-king-salmon": [{ code: "16691" }],
+  "marshallberg-osetra": [{ code: "9769" }],
+  "smoke-in-chimneys-rainbow-trout": [{ code: "3954" }],
+  "desert-springs-barramundi": [{ code: "10412" }],
+  "taprobane-shrimp": [{ code: "9776" }],
+  "ecuador-shrimp": [{ code: "7341" }],
+  "santa-priscila-shrimp": [{ code: "11343" }]
+};
+
+// One representative SKU per handle (the primary/flagship)
+const SKUS = [
+  { title: "Ora King, King Salmon", species: "King Salmon", farm: "Ora King", handle: "ora-king-king-salmon", serving_oz: 8.5, package_label: "1 × 8.5oz fillet" },
+  { title: "Big Glory Bay, King Salmon", species: "King Salmon", farm: "Big Glory Bay", handle: "big-glory-bay-king-salmon", serving_oz: 8, package_label: "1 × 8oz fillet" },
+  { title: "Hudson Valley, Steelhead", species: "Steelhead Trout", farm: "Hudson Valley", handle: "hudson-valley-steelhead", serving_oz: 6, package_label: "1 × 6oz fillet" },
+  { title: "Mt. Cook, Alpine Salmon", species: "King Salmon", farm: "Mt. Cook", handle: "mt-cook-king-salmon", serving_oz: 7, package_label: "1 × 7oz fillet" },
+  { title: "Bakkafrost, Atlantic Salmon", species: "Atlantic Salmon", farm: "Bakkafrost", handle: "bakkafrost-atlantic-salmon", serving_oz: 6, package_label: "1 × 6oz fillet" },
+  { title: "Superior Fresh, Atlantic Salmon", species: "Atlantic Salmon", farm: "Superior Fresh", handle: "superior-fresh-atlantic-salmon", serving_oz: 6, package_label: "1 × 6oz fillet" },
+  { title: "Caleta Bay, Steelhead Loin", species: "Steelhead Trout", farm: "Caleta Bay", handle: "caleta-bay-steelhead", serving_oz: 6, package_label: "1 × 12oz loin" },
+  { title: "Kingfish, Yellowtail", species: "Yellowtail", farm: "The Kingfish Co.", handle: "kingfish-yellowtail", serving_oz: 6, package_label: "Split loins (~12oz)" },
+  { title: "Esteros Lubimar, Branzino", species: "Branzino", farm: "Esteros Lubimar", handle: "esteros-lubimar-branzino", serving_oz: 6, package_label: "1 × 6oz fillet" },
+  { title: "Esteros Lubimar, Sea Bream", species: "Sea Bream", farm: "Esteros Lubimar", handle: "esteros-lubimar-sea-bream", serving_oz: 6, package_label: "1 × 6oz fillet" },
+  { title: "Yarra Valley, Salmon Caviar", species: "Salmon Roe", farm: "Yarra Valley", handle: "yarra-valley-salmon-roe", serving_oz: 0.2, package_label: "1 × 30g tin" },
+  { title: "Marshallberg, Osetra Caviar", species: "Osetra Caviar", farm: "Marshallberg", handle: "marshallberg-osetra", serving_oz: 0.5, package_label: "1 × 30g tin" },
+  { title: "McFarland Springs, Trout Dogs", species: "Rainbow Trout", farm: "McFarland Springs", handle: "mcfarland-springs-rainbow-trout", serving_oz: 3.2, package_label: "4-pack (12.8oz)" },
+  { title: "Smoke in Chimneys, Whole Trout", species: "Rainbow Trout", farm: "Smoke in Chimneys", handle: "smoke-in-chimneys-rainbow-trout", serving_oz: 6, package_label: "1 whole trout" },
+  { title: "Australis, Barramundi", species: "Barramundi", farm: "Australis", handle: "australis-barramundi", serving_oz: 6, package_label: "1 × 6oz fillet" },
+  { title: "Tarakan, Black Tiger Shrimp", species: "Black Tiger Shrimp", farm: "Tarakan", handle: "tarakan-black-tiger-shrimp", serving_oz: 4, package_label: "1 × 16oz bag" },
+  { title: "Seacorp, Peruvian Scallops", species: "Scallops", farm: "Seacorp", handle: "seacorp-peruvian-scallops", serving_oz: 4, package_label: "1 × 16oz bag" },
+  { title: "Regal, King Salmon", species: "King Salmon", farm: "Regal", handle: "regal-king-salmon", serving_oz: 6.7, package_label: "1 × 6.7oz fillet" },
+  { title: "Desert Springs, Barramundi", species: "Barramundi", farm: "Desert Springs", handle: "desert-springs-barramundi", serving_oz: 6, package_label: "1 × 6oz fillet" },
+  { title: "Taprobane, Whiteleg Shrimp", species: "Whiteleg Shrimp", farm: "Taprobane", handle: "taprobane-shrimp", serving_oz: 4, package_label: "1 × 16oz bag" },
+  { title: "Ecuador, Whiteleg Shrimp", species: "White Leg Shrimp", farm: "Ecuador", handle: "ecuador-shrimp", serving_oz: 4, package_label: "1 × 16oz bag" },
+  { title: "Santa Priscila, Whiteleg Shrimp", species: "White Leg Shrimp", farm: "Santa Priscila", handle: "santa-priscila-shrimp", serving_oz: 4, package_label: "1 × 16oz bag" }
+];
+
+// ══════════════════════════════════════════════════════════════
+// SVG ICONS (thin line, geometric, timeless)
+// ══════════════════════════════════════════════════════════════
+const ICONS = {
+  omega: `<svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c2-4 5-6 8-2s4 2 6 0 3-4 6-2"/><path d="M2 16c2-4 5-6 8-2s4 2 6 0 3-4 6-2" opacity="0.4"/></svg>`,
+  flask: `<svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v7.4L4.2 19.2A1.5 1.5 0 005.4 21h13.2a1.5 1.5 0 001.2-1.8L14 10.4V3"/><path d="M8.5 14h7"/></svg>`,
+  shield: `<svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v5c0 5.5-3.8 10.7-8 12-4.2-1.3-8-6.5-8-12V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>`
+};
+
+// ══════════════════════════════════════════════════════════════
+// COMPUTE
+// ══════════════════════════════════════════════════════════════
+function getServing(handle, oz) {
+  const b = NUTRITION[handle];
+  if (!b) return null;
+  const f = (oz * OZ_TO_G) / 100;
+  return {
+    epa: Math.round(b.epa * f),
+    dha: Math.round(b.dha * f),
+    ala: Math.round(b.ala * f),
+    get epa_dha() { return this.epa + this.dha; },
+    get total() { return this.epa + this.dha + this.ala; },
+    protein_g: b.protein_g,
+    hg_ppb: b.hg_ppb,
+    se_mcg: b.se_mcg,
+    source: b.source
+  };
+}
+
+function getTier(dailyPct) {
+  if (dailyPct >= 100) return 'hero';
+  if (dailyPct >= 40) return 'core';
+  return 'supporting';
+}
+
+function tierLabel(tier) {
+  if (tier === 'hero') return 'Optimal Zone';
+  if (tier === 'core') return 'Core';
+  return 'Building Block';
+}
+
+function isVerified(handle) {
+  const tests = TEST_DATA[handle];
+  return tests && tests.some(t => COA_MAP[t.code]);
+}
+
+function fmt(n) { return Math.round(n).toLocaleString(); }
+
+// ══════════════════════════════════════════════════════════════
+// RENDER
+// ══════════════════════════════════════════════════════════════
+let activeFilter = 'all';
+let bgWhite = false;
+
+function renderControls() {
+  const tiers = [
+    { key: 'all', label: 'All Products' },
+    { key: 'hero', label: 'Hero (100%+ DV)' },
+    { key: 'core', label: 'Core (40–99%)' },
+    { key: 'supporting', label: 'Supporting (<40%)' }
+  ];
+
+  let html = `<span class="ctrl-label">Tier</span>`;
+  html += `<div class="ctrl-group">`;
+  tiers.forEach(t => {
+    html += `<button class="ctrl-btn ${activeFilter === t.key ? 'active' : ''}" onclick="setFilter('${t.key}')">${t.label}</button>`;
+  });
+  html += `</div>`;
+  html += `<span class="ctrl-spacer"></span>`;
+  html += `<button class="ctrl-btn ${bgWhite ? 'active' : ''}" onclick="toggleBg()">${bgWhite ? '◼ Dark BG' : '◻ White BG'}</button>`;
+
+  document.getElementById('controls').innerHTML = html;
+}
+
+function setFilter(f) {
+  activeFilter = f;
+  renderControls();
+  renderGrid();
+}
+
+function toggleBg() {
+  bgWhite = !bgWhite;
+  document.body.style.background = bgWhite ? '#fff' : 'var(--off-white)';
+  renderControls();
+}
+
+function renderGrid() {
+  // Sort by EPA+DHA per serving descending
+  const enriched = SKUS.map(s => {
+    const d = getServing(s.handle, s.serving_oz);
+    const dailyPct = d ? Math.round((d.epa_dha / DAILY_TARGET) * 100) : 0;
+    const weeklyPct = d ? Math.round((d.epa_dha / WEEKLY_TARGET) * 100) : 0;
+    const tier = getTier(dailyPct);
+    return { ...s, d, dailyPct, weeklyPct, tier };
+  }).sort((a, b) => (b.d?.epa_dha || 0) - (a.d?.epa_dha || 0));
+
+  const filtered = activeFilter === 'all' ? enriched : enriched.filter(s => s.tier === activeFilter);
+
+  let html = '';
+  filtered.forEach(s => {
+    if (!s.d) return;
+    const desc = DESCRIPTIONS[s.handle] || '';
+    const verified = isVerified(s.handle);
+    const meterPct = Math.min(s.dailyPct, 200);
+    const meterClass = s.dailyPct >= 100 ? 'gold' : 'blue';
+    const mark100Left = Math.min(100 / 2, 100); // 100% mark at 50% of track when max is 200
+
+    const hgLabel = s.d.hg_ppb === 0 ? 'Non-Detect' : `${s.d.hg_ppb} ppb`;
+    const hgSafe = s.d.hg_ppb < 100;
+
+    // Weekly day visual (how many meals to hit weekly)
+    const mealsToTarget = Math.ceil(WEEKLY_TARGET / s.d.epa_dha);
+    const dayFillPct = Math.min(Math.round((s.d.epa_dha / (WEEKLY_TARGET / 7)) * 100), 100);
+
+    html += `
+      <div class="pkg-card" data-tier="${s.tier}">
+        <!-- TOP: Emotion -->
+        <div class="pkg-top">
+          <div class="pkg-tier-tag">${tierLabel(s.tier)}</div>
+          <div class="pkg-species">${s.species}</div>
+          <div class="pkg-farm">${s.farm}</div>
+          ${desc ? `<div class="pkg-poetic">"${desc}"</div>` : ''}
+        </div>
+
+        <!-- CENTER: Omega Meters -->
+        <div class="pkg-meters">
+          <!-- Daily Meter -->
+          <div class="meter-section">
+            <div class="meter-header">
+              <span class="meter-label">${ICONS.omega} Daily Omega Target</span>
+              <span class="meter-value"><span class="pct ${s.dailyPct >= 100 ? 'over100' : ''}">${s.dailyPct}%</span> DV</span>
+            </div>
+            <div class="meter-track">
+              <div class="meter-fill ${meterClass}" style="width: ${meterPct / 2}%;"></div>
+              <div class="meter-100-mark" style="left: 50%;"><span class="meter-100-label">100%</span></div>
+            </div>
+            <div class="meter-mg">
+              <span class="meter-mg-total">${fmt(s.d.epa_dha)} mg EPA + DHA</span>
+              <span class="meter-mg-sub">of ${fmt(DAILY_TARGET)} mg target</span>
+            </div>
+          </div>
+
+          <!-- Weekly Meter -->
+          <div class="meter-section meter-weekly">
+            <div class="meter-header">
+              <span class="meter-label">Weekly Contribution</span>
+              <span class="meter-value"><span class="pct">${s.weeklyPct}%</span></span>
+            </div>
+            <div class="meter-track">
+              <div class="meter-fill blue" style="width: ${Math.min(s.weeklyPct, 100)}%;"></div>
+            </div>
+            <div class="meter-mg">
+              <span class="meter-mg-sub">This serving contributes ${fmt(s.d.epa_dha)} mg toward ${fmt(WEEKLY_TARGET)} mg/week</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- DOSE CARD -->
+        <div class="dose-card">
+          <div class="dose-row">
+            <span class="dose-label">EPA</span>
+            <span class="dose-value">${fmt(s.d.epa)} mg</span>
+          </div>
+          <div class="dose-row">
+            <span class="dose-label">DHA</span>
+            <span class="dose-value">${fmt(s.d.dha)} mg</span>
+          </div>
+          <div class="dose-row total">
+            <span class="dose-label">Marine Omega (EPA + DHA)</span>
+            <span class="dose-value">${fmt(s.d.epa_dha)} mg</span>
+          </div>
+          <div class="dose-row" style="padding-top:10px">
+            <span class="dose-label" style="color:#999">ALA</span>
+            <span class="dose-value" style="color:#999;font-size:14px">${fmt(s.d.ala)} mg</span>
+          </div>
+          <div class="dose-row">
+            <span class="dose-label" style="color:#999">Total Omega-3</span>
+            <span class="dose-value" style="color:#999;font-size:14px">${fmt(s.d.total)} mg</span>
+          </div>
+        </div>
+
+        <!-- VARIABILITY NOTE -->
+        <div style="padding:0 28px;margin-top:4px;">
+          <div style="font-size:10px;color:#999;font-style:italic">~${fmt(s.d.epa_dha)} mg EPA+DHA per ${s.serving_oz}oz serving (based on third-party lab averages)</div>
+        </div>
+
+        <!-- PURITY BADGES -->
+        <div class="purity-strip">
+          ${verified ? `<span class="purity-badge verified">${ICONS.flask} 3rd Party Lab Verified</span>` : ''}
+          <span class="purity-badge mercury">${ICONS.shield} Mercury: ${hgLabel}</span>
+          ${s.d.protein_g ? `<span class="purity-badge purity">${s.d.protein_g}g Protein</span>` : ''}
+        </div>
+
+        <!-- SERVING INFO -->
+        <div class="pkg-serving">
+          ${s.serving_oz}oz serving · ${s.package_label} · ${s.d.source}
+        </div>
+
+        <!-- BACK-OF-PACK TOGGLE -->
+        <button class="back-toggle" onclick="this.closest('.pkg-card').classList.toggle('expanded')">
+          <span class="expand-label">▾ Weekly Framework + Full Data</span>
+        </button>
+
+        <!-- BACK-OF-PACK (expandable) -->
+        <div class="pkg-back">
+          <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--deep-ocean);margin-bottom:10px;">Your Weekly Omega Target</div>
+          <div class="weekly-grid">
+            ${['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map((day, i) => {
+              const isActive = i < Math.min(mealsToTarget, 7);
+              return `<div class="weekly-day">
+                <div class="weekly-day-label">${day}</div>
+                <div class="weekly-day-bar ${isActive ? 'active' : ''}">
+                  <div class="fill" style="height: ${isActive ? dayFillPct : 0}%;"></div>
+                </div>
+              </div>`;
+            }).join('')}
+          </div>
+          <div style="font-size:11px;color:var(--soft-sea);text-align:center;margin-bottom:4px;">
+            ${mealsToTarget <= 7 ? `${mealsToTarget} meal${mealsToTarget > 1 ? 's' : ''} per week reaches optimal levels` : 'Multiple servings daily recommended for weekly target'}
+          </div>
+
+          <div class="back-edu">
+            Omega-3 levels reflect what you eat over time — not just daily intake. Seatopia helps you build consistent levels with a few high-impact meals per week.
+          </div>
+
+          <div class="back-data">
+            <div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--deep-ocean);margin-bottom:6px">Truth Layer (per 100g from lab)</div>
+            <div class="back-data-row"><span class="back-data-label">EPA</span><span class="back-data-value">${NUTRITION[s.handle].epa} mg/100g</span></div>
+            <div class="back-data-row"><span class="back-data-label">DHA</span><span class="back-data-value">${NUTRITION[s.handle].dha} mg/100g</span></div>
+            <div class="back-data-row"><span class="back-data-label">Marine Omega (EPA+DHA)</span><span class="back-data-value" style="font-weight:800">${NUTRITION[s.handle].epa + NUTRITION[s.handle].dha} mg/100g</span></div>
+            <div class="back-data-row"><span class="back-data-label" style="color:#999">ALA</span><span class="back-data-value" style="color:#999">${NUTRITION[s.handle].ala} mg/100g</span></div>
+            <div class="back-data-row"><span class="back-data-label" style="color:#999">Total Omega-3</span><span class="back-data-value" style="color:#999">${NUTRITION[s.handle].epa + NUTRITION[s.handle].dha + NUTRITION[s.handle].ala} mg/100g</span></div>
+
+            <div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--deep-ocean);margin:10px 0 6px">Calculated Layer (per ${s.serving_oz}oz serving)</div>
+            <div class="back-data-row"><span class="back-data-label">Conversion</span><span class="back-data-value">${s.serving_oz}oz × 28.35 / 100 = ×${((s.serving_oz * 28.3495) / 100).toFixed(4)}</span></div>
+            <div class="back-data-row"><span class="back-data-label">Marine Omega (EPA+DHA)</span><span class="back-data-value" style="font-weight:800">${fmt(s.d.epa_dha)} mg</span></div>
+            <div class="back-data-row"><span class="back-data-label" style="color:#999">Total Omega-3</span><span class="back-data-value" style="color:#999">${fmt(s.d.total)} mg</span></div>
+
+            <div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--deep-ocean);margin:10px 0 6px">Additional</div>
+            ${NUTRITION[s.handle].omega6_3 ? `<div class="back-data-row"><span class="back-data-label">Omega 6:3 Ratio</span><span class="back-data-value">${NUTRITION[s.handle].omega6_3} : 1</span></div>` : ''}
+            <div class="back-data-row"><span class="back-data-label">Selenium</span><span class="back-data-value">${NUTRITION[s.handle].se_mcg} mcg/100g</span></div>
+            ${NUTRITION[s.handle].vitd_mcg ? `<div class="back-data-row"><span class="back-data-label">Vitamin D</span><span class="back-data-value">${NUTRITION[s.handle].vitd_mcg} mcg/100g</span></div>` : ''}
+            <div class="back-data-row"><span class="back-data-label">Mercury</span><span class="back-data-value">${s.d.hg_ppb === 0 ? 'Non-Detect (< LOQ)' : s.d.hg_ppb + ' ppb'}</span></div>
+            <div class="back-data-row"><span class="back-data-label">Tests</span><span class="back-data-value">${NUTRITION[s.handle].n_tests}</span></div>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  document.getElementById('grid').innerHTML = html;
+}
+
+// ── INIT ──
+renderControls();
+renderGrid();
+</script>
+</body>
+</html>

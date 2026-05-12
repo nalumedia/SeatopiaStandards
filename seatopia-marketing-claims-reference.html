@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seatopia — Marketing Claims Reference</title>
+<style>
+  :root {
+    --cerulean: #4b7991;
+    --linen: #faf5ef;
+    --ink: #1a2a32;
+    --green: #2e8b57;
+    --indigo: #6366f1;
+    --gold: #d4a843;
+    --coral: #e76f51;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--linen); color: var(--ink); }
+
+  .header { background: linear-gradient(135deg, #1a2a32 0%, #2d4a5a 100%); color: white; padding: 28px 40px; }
+  .header h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.5px; }
+  .header p { opacity: 0.8; margin-top: 4px; font-size: 0.9rem; }
+  .header .badge { display: inline-block; background: var(--gold); color: var(--ink); font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 3px; margin-left: 10px; vertical-align: 3px; letter-spacing: 0.5px; }
+
+  .toolbar { background: white; border-bottom: 1px solid #e0d8cf; padding: 12px 40px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; position: sticky; top: 0; z-index: 100; }
+  .toolbar label { font-size: 0.85rem; font-weight: 600; color: var(--cerulean); }
+  .toolbar select { padding: 6px 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 0.9rem; background: white; min-width: 260px; }
+  .tab-btns { display: flex; gap: 3px; }
+  .tab-btn { padding: 6px 14px; border: 1px solid #ccc; border-radius: 6px; font-size: 0.8rem; background: white; cursor: pointer; transition: all 0.15s; }
+  .tab-btn.active { background: var(--cerulean); color: white; border-color: var(--cerulean); }
+  .basis-btns { display: flex; gap: 3px; margin-left: auto; }
+  .basis-btn { padding: 5px 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 0.75rem; background: white; cursor: pointer; transition: all 0.15s; }
+  .basis-btn.active { background: var(--green); color: white; border-color: var(--green); }
+  .copy-all-btn { padding: 6px 14px; border: 1px solid var(--green); border-radius: 6px; font-size: 0.8rem; background: white; color: var(--green); cursor: pointer; font-weight: 600; }
+  .copy-all-btn:hover { background: var(--green); color: white; }
+
+  .main { max-width: 1440px; margin: 0 auto; padding: 20px 40px 60px; }
+
+  .hero { background: white; border-radius: 12px; padding: 24px 28px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .hero-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+  .hero h2 { font-size: 1.3rem; color: var(--ink); }
+  .hero .farm-label { color: var(--cerulean); font-size: 0.9rem; }
+  .hero .sku-label { font-family: monospace; font-size: 0.8rem; color: #888; margin-top: 3px; }
+  .hero .serving-info { text-align: right; }
+  .hero .serving-info div { font-size: 0.85rem; color: #666; }
+  .hero .serving-info strong { color: var(--ink); }
+  .category-badge { display: inline-block; padding: 3px 10px; border-radius: 4px; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .cat-roe { background: #fef3c7; color: #92400e; }
+  .cat-salmon { background: #fee2e2; color: #991b1b; }
+  .cat-white { background: #dbeafe; color: #1e40af; }
+  .cat-shellfish { background: #d1fae5; color: #065f46; }
+
+  .sku-switcher { display: flex; gap: 5px; margin-top: 6px; flex-wrap: wrap; }
+  .sku-btn { padding: 3px 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.72rem; font-family: monospace; cursor: pointer; background: white; }
+  .sku-btn.active { background: var(--cerulean); color: white; border-color: var(--cerulean); }
+
+  .coa-links { background: rgba(46,139,87,0.05); border: 1px solid rgba(46,139,87,0.2); border-radius: 8px; padding: 12px 16px; margin-bottom: 20px; }
+  .coa-links h4 { font-size: 0.85rem; color: var(--green); margin-bottom: 6px; }
+  .coa-links a { color: var(--cerulean); text-decoration: none; font-size: 0.82rem; margin-right: 16px; white-space: nowrap; }
+  .coa-links a:hover { text-decoration: underline; }
+  .coa-links .coa-badge { display: inline-block; background: var(--green); color: white; font-size: 0.65rem; padding: 1px 5px; border-radius: 3px; margin-right: 4px; font-weight: 600; }
+  .coa-links .coa-badge.edacious { background: var(--indigo); }
+  .coa-links .coa-badge.private { background: #888; }
+
+  .role-callout { background: rgba(75,121,145,0.06); border-left: 3px solid var(--cerulean); padding: 10px 14px; border-radius: 0 8px 8px 0; margin-bottom: 16px; }
+  .role-callout .role-title { font-weight: 700; font-size: 0.88rem; color: var(--cerulean); margin-bottom: 3px; }
+  .role-callout .role-desc { font-size: 0.83rem; color: #555; }
+
+  .nutrient-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(185px, 1fr)); gap: 10px; }
+  .nutrient-card { background: #fafafa; border: 1px solid #e8e2d8; border-radius: 8px; padding: 12px 14px; transition: all 0.15s; cursor: pointer; position: relative; }
+  .nutrient-card:hover { border-color: var(--cerulean); box-shadow: 0 2px 8px rgba(75,121,145,0.15); }
+  .nutrient-card.highlight { border-color: var(--gold); background: #fffdf7; }
+  .nutrient-card .n-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.4px; color: #888; font-weight: 600; }
+  .nutrient-card .n-value { font-size: 1.35rem; font-weight: 700; color: var(--ink); margin: 3px 0; }
+  .nutrient-card .n-unit { font-size: 0.78rem; color: #999; font-weight: 400; }
+  .nutrient-card .n-dv { font-size: 0.72rem; color: var(--green); font-weight: 600; margin-top: 2px; }
+  .nutrient-card .n-basis { font-size: 0.68rem; color: #aaa; margin-top: 3px; }
+  .nutrient-card .copy-btn { position: absolute; top: 6px; right: 6px; background: none; border: none; cursor: pointer; opacity: 0; font-size: 13px; transition: opacity 0.15s; }
+  .nutrient-card:hover .copy-btn { opacity: 0.5; }
+  .nutrient-card .copy-btn:hover { opacity: 1; }
+  .copied-toast { position: fixed; top: 20px; right: 20px; background: var(--green); color: white; padding: 10px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; opacity: 0; transition: opacity 0.3s; z-index: 999; pointer-events: none; }
+  .copied-toast.show { opacity: 1; }
+
+  .section-title { font-size: 1rem; font-weight: 700; color: var(--ink); margin: 24px 0 10px; padding-bottom: 6px; border-bottom: 2px solid var(--cerulean); }
+  .section-subtitle { font-size: 0.82rem; color: #888; margin: -6px 0 10px; }
+
+  .comparison-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .comparison-table th { background: rgba(75,121,145,0.08); padding: 8px 10px; text-align: left; font-weight: 600; color: var(--cerulean); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.3px; }
+  .comparison-table td { padding: 8px 10px; border-top: 1px solid #f0ebe4; }
+  .comparison-table tr:hover td { background: rgba(75,121,145,0.03); }
+  .comparison-table .col-100g { background: rgba(75,121,145,0.03); }
+  .comparison-table .col-serv { background: rgba(46,139,87,0.03); }
+  .comparison-table .col-pkg { background: rgba(99,102,241,0.03); }
+  .comparison-table .group-header td { background: rgba(75,121,145,0.06); font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.3px; color: var(--cerulean); border-top: 2px solid rgba(75,121,145,0.15); }
+
+  .claims-section { background: white; border-radius: 12px; padding: 20px 24px; margin-top: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .claim-item { display: flex; align-items: flex-start; gap: 8px; padding: 8px 0; border-bottom: 1px solid #f0ebe4; }
+  .claim-item:last-child { border-bottom: none; }
+  .claim-icon { font-size: 1rem; margin-top: 1px; }
+  .claim-text { font-size: 0.85rem; line-height: 1.5; flex: 1; }
+  .claim-text strong { color: var(--cerulean); }
+  .claim-copy { background: none; border: 1px solid #ddd; border-radius: 4px; padding: 2px 8px; font-size: 0.68rem; color: #888; cursor: pointer; margin-left: auto; white-space: nowrap; flex-shrink: 0; }
+  .claim-copy:hover { border-color: var(--cerulean); color: var(--cerulean); }
+
+  /* All Analytes tab */
+  .analyte-group { margin-bottom: 20px; }
+  .analyte-group-title { font-size: 0.9rem; font-weight: 700; color: var(--cerulean); margin-bottom: 8px; padding: 6px 12px; background: rgba(75,121,145,0.06); border-radius: 6px; display: flex; align-items: center; gap: 8px; }
+  .analyte-group-title .icon { font-size: 1.1rem; }
+
+  @media print {
+    .toolbar, .copy-btn, .claim-copy, .copy-all-btn { display: none !important; }
+    .header { break-after: avoid; }
+    .hero { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Seatopia Marketing Claims Reference <span class="badge">LAB-VERIFIED</span></h1>
+  <p>Pick a product. See every analyte three ways. Copy claims for marketing. All values from Light Labs & Edacious testing.</p>
+</div>
+
+<div class="toolbar">
+  <label>Product:</label>
+  <select id="product-select" onchange="currentProduct=parseInt(this.value);currentSkuIdx=0;render()"></select>
+  <div class="tab-btns">
+    <button class="tab-btn active" onclick="setTab('overview',this)">Overview</button>
+    <button class="tab-btn" onclick="setTab('allanalytes',this)">All Analytes</button>
+    <button class="tab-btn" onclick="setTab('claims',this)">Claims</button>
+  </div>
+  <div class="basis-btns">
+    <button class="basis-btn active" onclick="setBasis('per100g',this)">Per 100g</button>
+    <button class="basis-btn" onclick="setBasis('serving',this)">Per Serving</button>
+    <button class="basis-btn" onclick="setBasis('package',this)">Per Package</button>
+  </div>
+  <button class="copy-all-btn" onclick="copyAllClaims()">Copy All Claims</button>
+  <button class="copy-all-btn" style="border-color:var(--indigo);color:var(--indigo)" onclick="exportProductCSV()">CSV (Wide)</button>
+  <button class="copy-all-btn" style="border-color:var(--cerulean);color:var(--cerulean)" onclick="exportAllNormalized()">CSV (Supabase)</button>
+</div>
+
+<div class="main" id="main-content"></div>
+<div class="copied-toast" id="toast">Copied!</div>
+
+<script>
+const OZ_TO_G = 28.3495;
+const scale = (v, oz) => v == null ? null : v * (oz * OZ_TO_G) / 100;
+const fmt = (v, d) => v == null ? '—' : d === 0 ? Math.round(v).toLocaleString() : Number(v).toFixed(d);
+
+const DV = {
+  protein_g: 50, se_mcg: 55, vitd_mcg: 20, vitb12_mcg: 2.4, vite_mcg: 15000,
+  zinc_mcg: 11000, copper_mcg: 900, magnesium_mg: 420, phosphorus_mg: 1250,
+  manganese_mcg: 2300, iodine_mcg: 150, cholesterol_mg: 300,
+  iron_mg: 18, chromium_mcg: 35
+};
+function dvPct(val, dv) { return val != null && dv ? Math.round((val / dv) * 100) : null; }
+
+// ══════════════════════════════════════════════════════════
+// PRODUCT DATA — All analytes per 100g edible portion
+// Sources: Light Labs COAs + Edacious Full Panels
+// ══════════════════════════════════════════════════════════
+const PRODUCTS = [
+  // ── ROE / CAVIAR ──
+  { name:"Salmon Roe Caviar", farm:"Yarra Valley", cat:"roe",
+    skus:[{sku:"SF-YRV-SLC-BLK-001", label:"Salmon Roe Caviar (1oz jar)", pkg_oz:1.0, serv_oz:0.2}],
+    // Omega-3 & Fatty Acids
+    epa:513.8, dha:2292.4, ala:142.4, omega6:2850, o63:0.833, ara:182.2,
+    // Protein & Macros
+    pro:26.1, cholesterol:null,
+    // Minerals
+    se:99.1, zinc:2570.4, copper:150.4, magnesium:48.04, phosphorus:476.4, manganese:385.3, iodine:null, chromium:null,
+    // Heavy Metals & Safety
+    hg:0, hg_loq:true, arsenic:null, cadmium:null, lead:null,
+    // Vitamins
+    vitd:2.0, vitb12:null, vite:null,
+    // Context
+    role:"Nutrient Apex — DHA Powerhouse", functional:["Brain/Cognitive","Hormone/Fertility"],
+    why:"Highest DHA density in the lineup. Phospholipid-bound omega-3 for 2-3× bioavailability. Zinc + B12 + cholesterol trifecta.",
+    claims_special:["Zero Detected Microplastics (Light Labs Test #21522)"],
+    mp_tested:true,
+    coas:{edacious:'https://eat.edacious.com/brand/seatopia/salmon-roe-caviar', edacious_status:'verified',
+          lightlabs:['22491','22489','22490','22492','22493']}
+  },
+  { name:"Osetra Caviar", farm:"Marshallberg", cat:"roe",
+    skus:[{sku:"SF-MAR-OST-BLK-001", label:"Osetra Caviar (1oz tin)", pkg_oz:1.0, serv_oz:0.2}],
+    epa:497.8, dha:1250.7, ala:161.7, omega6:2790, o63:1.446, ara:366.8,
+    pro:26.1, cholesterol:null,
+    se:63.3, zinc:2075.7, copper:126.6, magnesium:26.97, phosphorus:445.1, manganese:137.4, iodine:null, chromium:0.9,
+    hg:4.94, arsenic:18.09, cadmium:0.07, lead:0.09,
+    vitd:0, vitb12:null, vite:null,
+    role:"Luxury Functional — Ultra-Concentrated DHA + Zinc", functional:["Brain/Cognitive"],
+    why:"Dense minerals across the board. Ultra-concentrated DHA + zinc for cognition. Highest ARA in lineup.",
+    coas:{lightlabs:['9767','9768','9769','9770','9771','9772']}
+  },
+  // ── KING SALMON ──
+  { name:"King Salmon", farm:"Ora King", cat:"salmon",
+    skus:[{sku:"SF-OKS-KGS-SHP-001", label:"Ora King King Salmon", pkg_oz:8.5, serv_oz:8.5}],
+    epa:536, dha:1070, ala:1210, omega6:2760, o63:0.854, ara:80,
+    pro:18.6, cholesterol:null,
+    se:29.8, zinc:284.0, copper:15.82, magnesium:24.84, phosphorus:236.1, manganese:4.56, iodine:null, chromium:null,
+    hg:17.33, arsenic:9.43, cadmium:null, lead:null,
+    vitd:20.0, vitb12:null, vite:null,
+    role:"Omega Flagship — Highest DHA Fillet", functional:["Brain/Cognitive","Heart"],
+    why:"Highest DHA fillet + vitamin D synergy. A single serving delivers ~3,400mg total omega-3.",
+    coas:{edacious:'https://edacious.com', edacious_status:'pending', lightlabs:['3950','3951']}
+  },
+  { name:"King Salmon", farm:"Big Glory Bay", cat:"salmon",
+    skus:[{sku:"SF-BGB-KGS-SHP-001", label:"Big Glory Bay King Salmon", pkg_oz:8.0, serv_oz:8.0}],
+    epa:546, dha:885, ala:1050, omega6:2480, o63:0.869, ara:90,
+    pro:18.9, cholesterol:null,
+    se:31.4, zinc:268.6, copper:15.41, magnesium:25.74, phosphorus:221.4, manganese:4.22, iodine:null, chromium:null,
+    hg:18.74, arsenic:18.79, cadmium:null, lead:null,
+    vitd:21.6, vitb12:null, vite:null,
+    role:"Omega Flagship", functional:["Brain/Cognitive","Heart"],
+    why:"Excellent EPA:DHA balance. Rich vitamin D.",
+    coas:{edacious:'https://eat.edacious.com/brand/seatopia/big-glory-bay-king-salmon', edacious_status:'verified'}
+  },
+  { name:"King Salmon", farm:"Mt Cook", cat:"salmon",
+    skus:[{sku:"SF-MCA-KGS-SHP-001", label:"Mt Cook King Salmon", pkg_oz:7.0, serv_oz:7.0}],
+    epa:457, dha:862, ala:1140, omega6:2380, o63:0.853, ara:37,
+    pro:18.9, cholesterol:null,
+    se:39.3, zinc:291.4, copper:18.69, magnesium:23.26, phosphorus:214.8, manganese:4.98, iodine:null, chromium:2.16,
+    hg:33.26, arsenic:8.28, cadmium:null, lead:null,
+    vitd:23.8, vitb12:null, vite:null,
+    role:"Omega Flagship — Highest Selenium Salmon", functional:["Brain/Cognitive","Heart"],
+    why:"Highest selenium among King Salmon. Excellent vitamin D at 23.8 mcg/100g.",
+    coas:{edacious:'https://eat.edacious.com/brand/seatopia/mt-cook-king-salmon', edacious_status:'verified'}
+  },
+  // ── ATLANTIC SALMON ──
+  { name:"Atlantic Salmon", farm:"Bakkafrost", cat:"salmon",
+    skus:[{sku:"SF-BAK-ATS-SHP-002", label:"Bakkafrost Atlantic Salmon", pkg_oz:6.0, serv_oz:6.0}],
+    epa:471, dha:833, ala:950, omega6:1450, o63:0.645, ara:80,
+    pro:21.3, cholesterol:null,
+    se:18.6, zinc:304.4, copper:17.16, magnesium:27.12, phosphorus:265.8, manganese:8.89, iodine:null, chromium:null,
+    hg:37.46, arsenic:92.24, cadmium:null, lead:null,
+    vitd:8.76, vitb12:null, vite:null,
+    role:"Daily Foundation", functional:["Heart","Brain/Cognitive"],
+    why:"Best omega-6:3 ratio among salmon (0.65). Strong daily driver.",
+    coas:{edacious:'https://eat.edacious.com/brand/seatopia/bakkafrost-atlantic-salmon-fillet', edacious_status:'verified'}
+  },
+  // ── STEELHEAD / TROUT ──
+  { name:"Steelhead Trout", farm:"Hudson Valley", cat:"salmon",
+    skus:[{sku:"SF-HVF-STT-SHP-001", label:"Hudson Valley Steelhead Trout", pkg_oz:6.0, serv_oz:6.0}],
+    epa:376, dha:1040, ala:1620, omega6:852, o63:0.416, ara:0,
+    pro:19.5, cholesterol:null,
+    se:17.7, zinc:318.4, copper:15.89, magnesium:24.39, phosphorus:193.9, manganese:15.96, iodine:null, chromium:1.70,
+    hg:10.57, arsenic:31.79, cadmium:0.04, lead:0.47,
+    vitd:3.98, vitb12:null, vite:null,
+    role:"Underrated Omega — Highest ALA", functional:["Brain/Cognitive","Heart"],
+    why:"Underrated — high DHA + highest ALA in lineup. Excellent ω6:3 ratio of 0.42.",
+    coas:{edacious:'https://eat.edacious.com/brand/seatopia/hudson-valley-steelhead-trout-fillet', edacious_status:'verified'}
+  },
+  { name:"Steelhead Trout", farm:"Caleta Bay", cat:"salmon",
+    skus:[
+      {sku:"SF-CLB-STT-SHP-009", label:"Caleta Bay Steelhead Portion", pkg_oz:6.0, serv_oz:6.0},
+      {sku:"SF-CLB-STT-SHP-002", label:"A&I Steelhead Loin", pkg_oz:12.0, serv_oz:6.0},
+      {sku:"SF-CLB-STT-SHP-001", label:"Cold Smoked Steelhead", pkg_oz:4.0, serv_oz:4.0}
+    ],
+    epa:262, dha:589, ala:1330, omega6:2460, o63:1.03, ara:96.1,
+    pro:20.8, cholesterol:41,
+    se:22.1, zinc:154.7, copper:20.86, magnesium:14.41, phosphorus:270.9, manganese:5.96, iodine:10.7, chromium:null,
+    hg:0, hg_loq:true, arsenic:13.0, cadmium:null, lead:null,
+    vitd:9.01, vitb12:2.18, vite:3700,
+    role:"Underrated Omega — Zero Mercury", functional:["Brain/Cognitive"],
+    why:"Mercury below LOQ. Only product with confirmed B12 data (2.18 mcg/100g = 91% DV per serving). Vitamin E: 3,700 mcg/100g.",
+    claims_special:["Mercury below limit of quantitation (<10 ppb)"],
+    coas:{edacious:'https://eat.edacious.com/brand/seatopia/caleta-bay-steelhead-trout-loin', edacious_status:'verified'}
+  },
+  { name:"Rainbow Trout", farm:"McFarland Springs", cat:"salmon",
+    skus:[{sku:"SF-MCF-RBT-BLK-001", label:"McFarland Springs Trout Dogs", pkg_oz:12.8, serv_oz:3.2}],
+    epa:272, dha:668, ala:1270, omega6:1390, o63:0.582, ara:36.5,
+    pro:22.0, cholesterol:null,
+    se:32.9, zinc:502.6, copper:37.93, magnesium:23.14, phosphorus:218.0, manganese:56.84, iodine:null, chromium:7.15,
+    hg:9.41, arsenic:8.54, cadmium:0.09, lead:0.45,
+    vitd:18.2, vitb12:null, vite:null,
+    role:"Trout Dogs — Family-Friendly Omega", functional:["Brain/Cognitive","Performance"],
+    why:"Kid-friendly format. 4 servings per package. Great ω6:3 ratio at 0.58.",
+    coas:{edacious:'https://eat.edacious.com/brand/seatopia/mcfarland-springs-rainbow-trout', edacious_status:'verified'}
+  },
+  { name:"Rainbow Trout", farm:"Smoke in Chimneys", cat:"salmon",
+    skus:[
+      {sku:"SF-SIC-RBT-BLK-001", label:"Smoked Trout Pâté (12oz)", pkg_oz:12.0, serv_oz:6.0},
+      {sku:"SF-SIC-RBT-BLK-006", label:"Smoked Trout Fillet (5.5oz)", pkg_oz:5.5, serv_oz:5.5}
+    ],
+    epa:86, dha:404, ala:33, omega6:320, o63:0.615, ara:39,
+    pro:18.2, cholesterol:null,
+    se:17.15, zinc:431.9, copper:20.70, magnesium:26.90, phosphorus:255.7, manganese:29.36, iodine:null, chromium:null,
+    hg:9.74, arsenic:11.12, cadmium:null, lead:null,
+    vitd:16.0, vitb12:null, vite:null,
+    role:"Smoked Specialty — Vitamin D Rich", functional:["Metabolic/Thyroid"],
+    why:"Strong vitamin D at 16 mcg/100g. Lowest omega-6 among trout. Smoked format for convenience.",
+    coas:{lightlabs:['3954','3955','3956','3957']}
+  },
+  // ── WHITE FISH ──
+  { name:"Branzino", farm:"Esteros Lubimar", cat:"white",
+    skus:[{sku:"SF-EST-BRZ-SHP-001", label:"Branzino", pkg_oz:6.0, serv_oz:6.0}],
+    epa:304, dha:598, ala:880, omega6:1750, o63:0.921, ara:59.9,
+    pro:21.1, cholesterol:60,
+    se:18.1, zinc:403.3, copper:21.36, magnesium:13.95, phosphorus:219.6, manganese:19.83, iodine:12.4, chromium:null,
+    hg:100, arsenic:85.0, cadmium:null, lead:null,
+    vitd:4.36, vitb12:0.51, vite:3738,
+    role:"Metabolic — Highest Iodine + Solid Omega-3", functional:["Metabolic/Thyroid"],
+    why:"Highest iodine content + solid omega-3. Mediterranean species. Vitamin E: 3,738 mcg/100g.",
+    coas:{edacious:'https://eat.edacious.com/brand/seatopia/esteros-lubimar-branzino-fillet', edacious_status:'verified'}
+  },
+  { name:"Sea Bream", farm:"Esteros Lubimar", cat:"white",
+    skus:[{sku:"SF-EST-BRE-SHP-001", label:"Sea Bream", pkg_oz:6.0, serv_oz:6.0}],
+    epa:221, dha:567, ala:643, omega6:1750, o63:1.09, ara:62.6,
+    pro:21.1, cholesterol:67,
+    se:18.9, zinc:413.3, copper:14.99, magnesium:14.91, phosphorus:291.7, manganese:3.60, iodine:15.9, chromium:null,
+    hg:60, arsenic:128.0, cadmium:null, lead:null,
+    vitd:15.0, vitb12:0.91, vite:2886,
+    role:"Metabolic — Iodine + Vitamin D Combo", functional:["Metabolic/Thyroid"],
+    why:"Iodine + vitamin D combo for thyroid support. Highest iodine at 15.9 mcg/100g. B12: 0.91 mcg/100g.",
+    coas:{edacious:'https://eat.edacious.com/brand/seatopia/esteros-lubimar-sea-bream-fillet', edacious_status:'verified'}
+  },
+  { name:"Yellowtail", farm:"Kingfish Company", cat:"white",
+    skus:[{sku:"SF-KFC-YLT-SHP-001", label:"Yellowtail Sashimi Loin", pkg_oz:8.0, serv_oz:8.0}],
+    epa:187, dha:546, ala:156, omega6:557, o63:0.537, ara:27,
+    pro:23.4, cholesterol:null,
+    se:21.5, zinc:389.0, copper:29.97, magnesium:27.40, phosphorus:227.4, manganese:7.21, iodine:null, chromium:null,
+    hg:60.26, arsenic:36.91, cadmium:null, lead:null,
+    vitd:2.19, vitb12:null, vite:null,
+    role:"Lean + Selenium — Performance Protein", functional:["Performance/Body Comp"],
+    why:"Highest protein among white fish at 23.4g/100g. Excellent ω6:3 ratio. Lean profile.",
+    coas:{edacious:'https://eat.edacious.com/brand/seatopia/yellowtail-sashimi-loin', edacious_status:'verified'}
+  },
+  { name:"Barramundi", farm:"Australis", cat:"white",
+    skus:[
+      {sku:"SF-AUS-BRM-SHP-001", label:"Barramundi 5-7oz Filet", pkg_oz:6.0, serv_oz:6.0},
+      {sku:"SF-AUS-BRM-SHP-005", label:"Barramundi 7-9oz Filet", pkg_oz:8.0, serv_oz:8.0},
+      {sku:"SF-AUS-BRM-SHP-009", label:"Barramundi 3-5oz Filet", pkg_oz:4.0, serv_oz:4.0}
+    ],
+    epa:31, dha:92, ala:33, omega6:502, o63:2.68, ara:26,
+    pro:21.0, cholesterol:null,
+    se:23.0, zinc:376.4, copper:7.31, magnesium:28.39, phosphorus:179.7, manganese:10.55, iodine:null, chromium:null,
+    hg:27.89, arsenic:438.7, cadmium:0.03, lead:null,
+    vitd:0, vitb12:null, vite:null,
+    role:"Balanced White Fish — Clean Protein", functional:["Performance/Body Comp"],
+    why:"Mild white fish. Balanced minerals. Good selenium. Low fat profile.",
+    coas:{edacious:'https://eat.edacious.com/brand/seatopia/barramundi', edacious_status:'verified'}
+  },
+  // ── SHELLFISH ──
+  { name:"Peruvian Scallops", farm:"Seacorp", cat:"shellfish",
+    skus:[
+      {sku:"SF-SEC-SCL-SHP-009", label:"Peruvian Scallops IQF (16oz)", pkg_oz:16.0, serv_oz:4.0},
+      {sku:"SF-SEC-SCL-SHP-001", label:"Half Shell Scallops (7oz)", pkg_oz:7.0, serv_oz:3.5}
+    ],
+    epa:51, dha:35, ala:3, omega6:34, o63:0.337, ara:5.3,
+    pro:24.1, cholesterol:23,
+    se:20.0, zinc:4599.6, copper:12.72, magnesium:204.2, phosphorus:234.3, manganese:8.32, iodine:18.8, chromium:2.89,
+    hg:10, arsenic:47.0, cadmium:10.0, lead:null,
+    vitd:0, vitb12:0.57, vite:547,
+    role:"Clean Protein — Leanest in Lineup", functional:["Performance/Body Comp"],
+    why:"Highest protein (24.1g). Lowest fat. Best ω6:3 (0.34). HUGE zinc (4,600 mcg/100g = 42% DV/serving). Highest magnesium (204 mg). Highest iodine (18.8 mcg).",
+    claims_special:["Zero Detected Microplastics (Light Labs Test #21523)"],
+    mp_tested:true,
+    coas:{edacious:'https://eat.edacious.com/brand/seatopia/half-shell-scallops', edacious_status:'verified'}
+  },
+  { name:"Black Tiger Shrimp", farm:"Tarakan", cat:"shellfish",
+    skus:[{sku:"SF-TAR-BTS-SHP-001", label:"Black Tiger Shrimp (1lb bag)", pkg_oz:16.0, serv_oz:4.0}],
+    epa:15, dha:17, ala:7, omega6:51, o63:1.22, ara:88.3,
+    pro:18.0, cholesterol:null,
+    se:13.5, zinc:1118.7, copper:149.8, magnesium:27.25, phosphorus:149.8, manganese:33.28, iodine:null, chromium:1.95,
+    hg:17.93, arsenic:57.1, cadmium:null, lead:0.32,
+    vitd:0, vitb12:null, vite:null,
+    role:"Protein + Minerals — Zinc Rich", functional:["Performance/Body Comp","Hormone/Fertility"],
+    why:"High protein + zinc (1,119 mcg/100g) for muscle. Clean protein + mineral support for hormonal health.",
+    coas:{edacious:'https://eat.edacious.com/brand/seatopia/mangrove-black-tiger-shrimp', edacious_status:'verified'}
+  },
+];
+
+let currentBasis = 'per100g';
+let currentTab = 'overview';
+let currentProduct = 0;
+let currentSkuIdx = 0;
+
+function setTab(t, el) {
+  currentTab = t;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  render();
+}
+function setBasis(b, el) {
+  currentBasis = b;
+  document.querySelectorAll('.basis-btn').forEach(btn => btn.classList.remove('active'));
+  el.classList.add('active');
+  render();
+}
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg || 'Copied!';
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1500);
+}
+function copyText(text) {
+  navigator.clipboard.writeText(text).then(() => toast());
+}
+
+// Compute values for any basis
+function getScaled(p, skuIdx) {
+  const sku = p.skus[skuIdx || 0];
+  const sOz = sku.serv_oz, pOz = sku.pkg_oz;
+  const epaDha = p.epa + p.dha;
+  const totalO3 = p.epa + p.dha + p.ala;
+
+  function makeSet(oz, label, suffix) {
+    return {
+      label, suffix, oz,
+      epa: scale(p.epa, oz), dha: scale(p.dha, oz), ala: scale(p.ala, oz),
+      epaDha: scale(epaDha, oz), totalO3: scale(totalO3, oz),
+      omega6: scale(p.omega6, oz), ara: scale(p.ara, oz),
+      protein: p.pro != null ? (p.pro * (oz * OZ_TO_G) / 100) : null,
+      se: scale(p.se, oz), zinc: scale(p.zinc, oz), copper: scale(p.copper, oz),
+      magnesium: p.magnesium != null ? (p.magnesium * (oz * OZ_TO_G) / 100) : null,
+      phosphorus: p.phosphorus != null ? (p.phosphorus * (oz * OZ_TO_G) / 100) : null,
+      manganese: scale(p.manganese, oz), iodine: scale(p.iodine, oz),
+      chromium: scale(p.chromium, oz), cholesterol: p.cholesterol != null ? (p.cholesterol * (oz * OZ_TO_G) / 100) : null,
+      vitd: scale(p.vitd, oz), vitb12: scale(p.vitb12, oz), vite: scale(p.vite, oz),
+      hg: p.hg != null ? (p.hg / 10) * (oz * OZ_TO_G) / 100 : null,
+      arsenic: p.arsenic != null ? (p.arsenic * (oz * OZ_TO_G) / 100) : null,
+      cadmium: p.cadmium != null ? (p.cadmium * (oz * OZ_TO_G) / 100) : null,
+      lead: p.lead != null ? (p.lead * (oz * OZ_TO_G) / 100) : null,
+      o63: p.o63, hg_loq: p.hg_loq
+    };
+  }
+
+  return {
+    per100g: {
+      label:'per 100g', suffix:'/100g', oz:null,
+      epa:p.epa, dha:p.dha, ala:p.ala, epaDha, totalO3,
+      omega6:p.omega6, ara:p.ara, protein:p.pro, se:p.se,
+      zinc:p.zinc, copper:p.copper, magnesium:p.magnesium, phosphorus:p.phosphorus,
+      manganese:p.manganese, iodine:p.iodine, chromium:p.chromium,
+      cholesterol:p.cholesterol, vitd:p.vitd, vitb12:p.vitb12, vite:p.vite,
+      hg:p.hg, arsenic:p.arsenic, cadmium:p.cadmium, lead:p.lead,
+      o63:p.o63, hg_loq:p.hg_loq
+    },
+    serving: makeSet(sOz, `per ${sOz}oz serving`, '/serving'),
+    package: makeSet(pOz, `per ${pOz}oz package`, '/package')
+  };
+}
+
+function nutrientCard(label, value, unit, dec, basisLabel, dv, highlight, isLoq) {
+  const display = isLoq ? '< LOQ' : (value == null ? '—' : fmt(value, dec));
+  const unitD = isLoq ? '' : unit;
+  const dvHtml = dv != null && dv > 0 ? `<div class="n-dv">${dv}% Daily Value</div>` : '';
+  const copyVal = isLoq ? `${label}: Below LOQ (${basisLabel})` : `${label}: ${display} ${unitD} (${basisLabel})`;
+  return `<div class="nutrient-card ${highlight ? 'highlight' : ''}">
+    <button class="copy-btn" onclick="event.stopPropagation();copyText('${copyVal.replace(/'/g,"\\'")}')">📋</button>
+    <div class="n-label">${label}</div>
+    <div class="n-value">${display} <span class="n-unit">${unitD}</span></div>
+    ${dvHtml}
+    <div class="n-basis">${basisLabel}</div>
+  </div>`;
+}
+
+function compRow(label, vals, key, unit, dec, group) {
+  const f = (v) => v == null ? '—' : fmt(v, dec);
+  return `<tr>
+    <td><strong>${label}</strong></td>
+    <td class="col-100g">${f(vals.per100g[key])}</td>
+    <td class="col-serv">${f(vals.serving[key])}</td>
+    <td class="col-pkg">${f(vals.package[key])}</td>
+    <td style="color:#888;font-size:0.78rem">${unit}</td>
+  </tr>`;
+}
+
+function groupHeader(label) {
+  return `<tr class="group-header"><td colspan="5">${label}</td></tr>`;
+}
+
+// ── COA LINKS ──
+function renderCoaLinks(p) {
+  let links = [];
+  if (p.coas?.edacious) {
+    const status = p.coas.edacious_status || 'pending';
+    const badgeClass = status === 'verified' ? 'edacious' : (status === 'private' ? 'private' : 'edacious');
+    const badgeLabel = status.charAt(0).toUpperCase() + status.slice(1);
+    links.push(`<a href="${p.coas.edacious}" target="_blank" rel="noopener"><span class="coa-badge ${badgeClass}">${badgeLabel}</span>Edacious Full Panel</a>`);
+  }
+  if (p.coas?.lightlabs) {
+    links.push(`<span style="font-size:0.8rem;color:#666">Light Labs COAs: ${p.coas.lightlabs.map(id => `#${id}`).join(', ')}</span>`);
+  }
+  if (p.mp_tested) {
+    links.push(`<span style="font-size:0.8rem;color:var(--green)">🔬 Microplastics tested — ND across all 6 polymers</span>`);
+  }
+  if (!links.length) return '';
+  return `<div class="coa-links">
+    <h4>Certificates of Analysis</h4>
+    <div>${links.join('<br>')}</div>
+  </div>`;
+}
+
+// ── OVERVIEW TAB ──
+function renderOverview(p, vals, v, sku) {
+  return `
+    ${renderCoaLinks(p)}
+    <div class="role-callout">
+      <div class="role-title">${p.role}</div>
+      <div class="role-desc">${p.why}</div>
+      ${p.functional ? `<div style="margin-top:4px;font-size:0.78rem;color:var(--cerulean)">Functional stacks: ${p.functional.join(' · ')}</div>` : ''}
+    </div>
+    <div class="nutrient-grid">
+      ${nutrientCard('EPA + DHA', v.epaDha, 'mg', 0, v.label, dvPct(v.epaDha, 1600), true)}
+      ${nutrientCard('Total Omega-3', v.totalO3, 'mg', 0, v.label)}
+      ${nutrientCard('EPA', v.epa, 'mg', 0, v.label)}
+      ${nutrientCard('DHA', v.dha, 'mg', 0, v.label)}
+      ${nutrientCard('ALA', v.ala, 'mg', 0, v.label)}
+      ${nutrientCard('Protein', v.protein, 'g', 1, v.label, dvPct(v.protein, DV.protein_g))}
+      ${nutrientCard('Selenium', v.se, 'mcg', 1, v.label, dvPct(v.se, DV.se_mcg))}
+      ${nutrientCard('Zinc', v.zinc, 'mcg', 0, v.label, dvPct(v.zinc, DV.zinc_mcg), v.zinc > 500)}
+      ${nutrientCard('Mercury', v.hg_loq ? null : v.hg, v.hg_loq ? '< LOQ' : (currentBasis==='per100g'?'ppb':'mcg'), 1, v.label, null, false, v.hg_loq)}
+      ${nutrientCard('ω6:3 Ratio', v.o63, ':1', 2, v.label, null, v.o63 != null && v.o63 < 1)}
+      ${nutrientCard('Vitamin D', v.vitd, 'mcg', 1, v.label, dvPct(v.vitd, DV.vitd_mcg), v.vitd > 10)}
+      ${nutrientCard('Vitamin B12', v.vitb12, 'mcg', 2, v.label, dvPct(v.vitb12, DV.vitb12_mcg), v.vitb12 > 1)}
+      ${nutrientCard('Magnesium', v.magnesium, 'mg', 1, v.label, dvPct(v.magnesium, DV.magnesium_mg), v.magnesium > 30)}
+      ${nutrientCard('Phosphorus', v.phosphorus, 'mg', 1, v.label, dvPct(v.phosphorus, DV.phosphorus_mg))}
+      ${nutrientCard('Iodine', v.iodine, 'mcg', 1, v.label, dvPct(v.iodine, DV.iodine_mcg), v.iodine > 10)}
+      ${nutrientCard('Omega-6', v.omega6, 'mg', 0, v.label)}
+    </div>
+  `;
+}
+
+// ── ALL ANALYTES TAB ──
+function renderAllAnalytes(p, vals, sku) {
+  return `
+    ${renderCoaLinks(p)}
+    <div class="section-title">Complete Analyte Profile</div>
+    <div class="section-subtitle">All lab-verified values shown per 100g, per ${sku.serv_oz}oz serving, and per ${sku.pkg_oz}oz package</div>
+    <table class="comparison-table">
+      <thead><tr>
+        <th style="width:22%">Analyte</th>
+        <th class="col-100g" style="width:18%">Per 100g</th>
+        <th class="col-serv" style="width:18%">Per ${sku.serv_oz}oz Serving</th>
+        <th class="col-pkg" style="width:18%">Per ${sku.pkg_oz}oz Pkg</th>
+        <th style="width:10%">Unit</th>
+        <th style="width:14%">% DV/serv</th>
+      </tr></thead>
+      <tbody>
+        ${groupHeader('🐟 Omega-3 Fatty Acids')}
+        ${anaRow('EPA (C20:5)', vals, 'epa', 'mg', 0)}
+        ${anaRow('DHA (C22:6)', vals, 'dha', 'mg', 0)}
+        ${anaRow('ALA (C18:3)', vals, 'ala', 'mg', 0)}
+        ${anaRow('EPA + DHA', vals, 'epaDha', 'mg', 0, 1600)}
+        ${anaRow('Total Omega-3', vals, 'totalO3', 'mg', 0)}
+        ${groupHeader('⚖️ Omega-6 & Inflammation Balance')}
+        ${anaRow('Total Omega-6', vals, 'omega6', 'mg', 0)}
+        ${anaRow('ARA (C20:4)', vals, 'ara', 'mg', 1)}
+        ${anaRow('ω6:3 Ratio', vals, 'o63', ':1', 2, null, true)}
+        ${groupHeader('💪 Protein & Macros')}
+        ${anaRow('Protein', vals, 'protein', 'g', 1, DV.protein_g)}
+        ${anaRow('Cholesterol', vals, 'cholesterol', 'mg', 0, DV.cholesterol_mg)}
+        ${groupHeader('🛡️ Minerals')}
+        ${anaRow('Selenium', vals, 'se', 'mcg', 1, DV.se_mcg)}
+        ${anaRow('Zinc', vals, 'zinc', 'mcg', 0, DV.zinc_mcg)}
+        ${anaRow('Magnesium', vals, 'magnesium', 'mg', 1, DV.magnesium_mg)}
+        ${anaRow('Phosphorus', vals, 'phosphorus', 'mg', 1, DV.phosphorus_mg)}
+        ${anaRow('Copper', vals, 'copper', 'mcg', 1, DV.copper_mcg)}
+        ${anaRow('Manganese', vals, 'manganese', 'mcg', 1, DV.manganese_mcg)}
+        ${anaRow('Iodine', vals, 'iodine', 'mcg', 1, DV.iodine_mcg)}
+        ${anaRow('Chromium', vals, 'chromium', 'mcg', 1, DV.chromium_mcg)}
+        ${groupHeader('☀️ Vitamins')}
+        ${anaRow('Vitamin D', vals, 'vitd', 'mcg', 1, DV.vitd_mcg)}
+        ${anaRow('Vitamin B12', vals, 'vitb12', 'mcg', 2, DV.vitb12_mcg)}
+        ${anaRow('Vitamin E', vals, 'vite', 'mcg', 0, DV.vite_mcg)}
+        ${groupHeader('🔬 Heavy Metals & Safety')}
+        ${anaRow('Mercury', vals, 'hg', currentBasis==='per100g'?'ppb':'mcg', 1, null, false, p.hg_loq)}
+        ${anaRow('Arsenic (total)', vals, 'arsenic', 'mcg', 1)}
+        ${anaRow('Cadmium', vals, 'cadmium', 'mcg', 2)}
+        ${anaRow('Lead', vals, 'lead', 'mcg', 2)}
+      </tbody>
+    </table>
+    <div style="margin-top:12px;font-size:0.78rem;color:#888">
+      Note: "—" means not yet tested or below detection limit for this product. Arsenic values are total arsenic (organic + inorganic); organic arsenic in seafood is considered non-toxic. FDA mercury action level: 1,000 ppb.
+    </div>
+  `;
+}
+
+function anaRow(label, vals, key, unit, dec, dvRef, isRatio, isLoq) {
+  const f = (v) => {
+    if (isLoq) return '< LOQ';
+    return v == null ? '—' : fmt(v, dec);
+  };
+  const v100 = vals.per100g[key];
+  const vServ = vals.serving[key];
+  const vPkg = vals.package[key];
+  let dvStr = '';
+  if (dvRef && vServ != null && !isRatio) {
+    const pct = Math.round((vServ / dvRef) * 100);
+    dvStr = `<span style="color:${pct >= 20 ? 'var(--green)' : '#888'};font-weight:${pct >= 20 ? '600' : '400'}">${pct}%</span>`;
+  }
+  if (isRatio) {
+    // Same across all bases
+    return `<tr>
+      <td>${label}</td>
+      <td class="col-100g">${f(v100)}</td>
+      <td class="col-serv">${f(v100)}</td>
+      <td class="col-pkg">${f(v100)}</td>
+      <td style="color:#888;font-size:0.78rem">${unit}</td>
+      <td>${v100 != null && v100 < 1 ? '<span style="color:var(--green);font-weight:600">Anti-inflammatory</span>' : (v100 != null ? '<span style="color:#888">Pro-inflammatory</span>' : '')}</td>
+    </tr>`;
+  }
+  return `<tr>
+    <td>${label}</td>
+    <td class="col-100g">${f(v100)}</td>
+    <td class="col-serv">${f(vServ)}</td>
+    <td class="col-pkg">${f(vPkg)}</td>
+    <td style="color:#888;font-size:0.78rem">${unit}</td>
+    <td>${dvStr}</td>
+  </tr>`;
+}
+
+// ── CLAIMS TAB ──
+function generateClaims(p, vals, skuIdx) {
+  const sku = p.skus[skuIdx || 0];
+  const s = vals.serving;
+  const claims = [];
+
+  if (s.epaDha > 1000) {
+    claims.push({ icon:'🐟', text:`<strong>${fmt(s.epaDha,0)} mg EPA+DHA</strong> per ${sku.serv_oz}oz Seatopia Recommended Serving — that's ${Math.round(s.epaDha/300)} standard fish oil capsules worth, in a more bioavailable whole-food form.`,
+      plain:`${fmt(s.epaDha,0)} mg EPA+DHA per ${sku.serv_oz}oz serving — equivalent to ${Math.round(s.epaDha/300)} standard fish oil capsules in a more bioavailable whole-food form.` });
+  } else if (s.epaDha > 100) {
+    claims.push({ icon:'🐟', text:`<strong>${fmt(s.epaDha,0)} mg EPA+DHA</strong> per ${sku.serv_oz}oz Seatopia Recommended Serving.`,
+      plain:`${fmt(s.epaDha,0)} mg EPA+DHA per ${sku.serv_oz}oz serving.` });
+  }
+
+  if (s.totalO3 > 500) {
+    claims.push({ icon:'🌊', text:`<strong>${fmt(s.totalO3,0)} mg total omega-3</strong> per serving (EPA + DHA + ALA).`,
+      plain:`${fmt(s.totalO3,0)} mg total omega-3 per serving (EPA + DHA + ALA).` });
+  }
+
+  if (s.protein > 20) {
+    const dv = dvPct(s.protein, DV.protein_g);
+    claims.push({ icon:'💪', text:`<strong>${fmt(s.protein,0)}g protein</strong> per serving (${dv}% DV).`,
+      plain:`${fmt(s.protein,0)}g protein per serving (${dv}% DV).` });
+  }
+
+  if (s.se > 15) {
+    const dv = dvPct(s.se, DV.se_mcg);
+    claims.push({ icon:'🛡️', text:`<strong>${fmt(s.se,1)} mcg selenium</strong> per serving (${dv}% DV) — supports antioxidant defense and thyroid function.`,
+      plain:`${fmt(s.se,1)} mcg selenium per serving (${dv}% DV).` });
+  }
+
+  if (s.zinc > 300) {
+    const dv = dvPct(s.zinc, DV.zinc_mcg);
+    claims.push({ icon:'⚡', text:`<strong>${fmt(s.zinc,0)} mcg zinc</strong> per serving (${dv}% DV) — essential for immune function, hormone synthesis, and muscle repair.`,
+      plain:`${fmt(s.zinc,0)} mcg zinc per serving (${dv}% DV).` });
+  }
+
+  if (s.magnesium > 20) {
+    const dv = dvPct(s.magnesium, DV.magnesium_mg);
+    claims.push({ icon:'🧲', text:`<strong>${fmt(s.magnesium,1)} mg magnesium</strong> per serving (${dv}% DV).`,
+      plain:`${fmt(s.magnesium,1)} mg magnesium per serving (${dv}% DV).` });
+  }
+
+  if (s.phosphorus > 100) {
+    const dv = dvPct(s.phosphorus, DV.phosphorus_mg);
+    claims.push({ icon:'🦴', text:`<strong>${fmt(s.phosphorus,0)} mg phosphorus</strong> per serving (${dv}% DV) — bone and energy metabolism.`,
+      plain:`${fmt(s.phosphorus,0)} mg phosphorus per serving (${dv}% DV).` });
+  }
+
+  if (s.iodine > 5) {
+    const dv = dvPct(s.iodine, DV.iodine_mcg);
+    claims.push({ icon:'🦋', text:`<strong>${fmt(s.iodine,1)} mcg iodine</strong> per serving (${dv}% DV) — thyroid hormone precursor.`,
+      plain:`${fmt(s.iodine,1)} mcg iodine per serving (${dv}% DV).` });
+  }
+
+  if (s.vitd > 2) {
+    const iu = Math.round(s.vitd * 40);
+    const dv = dvPct(s.vitd, DV.vitd_mcg);
+    claims.push({ icon:'☀️', text:`<strong>${iu} IU vitamin D</strong> per serving (${dv}% DV).`,
+      plain:`${iu} IU vitamin D per serving (${dv}% DV).` });
+  }
+
+  if (s.vitb12 > 0.3) {
+    const dv = dvPct(s.vitb12, DV.vitb12_mcg);
+    claims.push({ icon:'⚡', text:`<strong>${fmt(s.vitb12,2)} mcg vitamin B12</strong> per serving (${dv}% DV).`,
+      plain:`${fmt(s.vitb12,2)} mcg vitamin B12 per serving (${dv}% DV).` });
+  }
+
+  if (s.vite > 500) {
+    const dv = dvPct(s.vite, DV.vite_mcg);
+    claims.push({ icon:'🌿', text:`<strong>${fmt(s.vite,0)} mcg vitamin E</strong> per serving (${dv}% DV) — antioxidant protection.`,
+      plain:`${fmt(s.vite,0)} mcg vitamin E per serving (${dv}% DV).` });
+  }
+
+  if (p.o63 != null && p.o63 < 1) {
+    claims.push({ icon:'⚖️', text:`Omega-6:3 ratio of <strong>${p.o63.toFixed(2)}</strong> — anti-inflammatory profile (below 1:1).`,
+      plain:`Omega-6:3 ratio of ${p.o63.toFixed(2)} — anti-inflammatory profile (below 1:1).` });
+  }
+
+  if (p.hg_loq) {
+    claims.push({ icon:'✅', text:`Mercury <strong>below limit of quantitation</strong> (&lt;10 ppb). Lab-verified.`,
+      plain:`Mercury below limit of quantitation (<10 ppb). Lab-verified.` });
+  } else if (p.hg < 20) {
+    claims.push({ icon:'✅', text:`Ultra-low mercury at <strong>${fmt(p.hg,1)} ppb</strong> (FDA action level: 1,000 ppb).`,
+      plain:`Ultra-low mercury at ${fmt(p.hg,1)} ppb (FDA action level: 1,000 ppb).` });
+  }
+
+  if (p.claims_special) {
+    p.claims_special.forEach(c => {
+      claims.push({ icon:'🔬', text:`<strong>${c}</strong>`, plain: c });
+    });
+  }
+
+  const servPerPkg = sku.pkg_oz / sku.serv_oz;
+  if (servPerPkg > 1.5) {
+    const pkgEpaDha = scale(p.epa + p.dha, sku.pkg_oz);
+    claims.push({ icon:'📦', text:`<strong>${fmt(pkgEpaDha,0)} mg EPA+DHA per package</strong> (${sku.pkg_oz}oz, ${fmt(servPerPkg,1)} servings).`,
+      plain:`${fmt(pkgEpaDha,0)} mg EPA+DHA per package (${sku.pkg_oz}oz, ${fmt(servPerPkg,1)} servings).` });
+  }
+
+  claims.push({ icon:'🧬', text:`Omega-3 in whole fish is in <strong>phospholipid and triglyceride form</strong> — 2-3× more bioavailable than ethyl ester fish oil capsules.`,
+    plain:`Omega-3 in whole fish is in phospholipid and triglyceride form — 2-3× more bioavailable than ethyl ester fish oil capsules.` });
+
+  return claims;
+}
+
+function renderClaims(p, vals, skuIdx) {
+  const claims = generateClaims(p, vals, skuIdx);
+  return `
+    ${renderCoaLinks(p)}
+    <div class="claims-section" style="margin-top:0">
+      <div class="section-title" style="margin-top:0">Ready-to-Use Marketing Claims</div>
+      <div class="section-subtitle">Auto-generated from lab data. Click "Copy" on any claim.</div>
+      ${claims.map(c => `
+        <div class="claim-item">
+          <span class="claim-icon">${c.icon}</span>
+          <span class="claim-text">${c.text}</span>
+          <button class="claim-copy" onclick="copyText(\`${c.plain.replace(/`/g,"'").replace(/\\/g,'\\\\')}\`)">Copy</button>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function copyAllClaims() {
+  const p = PRODUCTS[currentProduct];
+  const vals = getScaled(p, currentSkuIdx);
+  const sku = p.skus[currentSkuIdx];
+  const claims = generateClaims(p, vals, currentSkuIdx);
+
+  let text = `${p.name} (${p.farm}) — ${sku.sku}\n`;
+  text += `Serving: ${sku.serv_oz}oz | Package: ${sku.pkg_oz}oz\n`;
+  text += `Role: ${p.role}\n`;
+  if (p.coas?.edacious) text += `Edacious: ${p.coas.edacious}\n`;
+  text += `\nMARKETING CLAIMS:\n`;
+  claims.forEach((c, i) => { text += `${i+1}. ${c.plain}\n`; });
+  navigator.clipboard.writeText(text).then(() => toast('All claims copied!'));
+}
+
+// ── MAIN RENDER ──
+function render() {
+  const p = PRODUCTS[currentProduct];
+  const sku = p.skus[currentSkuIdx] || p.skus[0];
+  const vals = getScaled(p, currentSkuIdx);
+  const v = vals[currentBasis];
+  const catClass = `cat-${p.cat}`;
+
+  let skuHtml = '';
+  if (p.skus.length > 1) {
+    skuHtml = `<div class="sku-switcher">${p.skus.map((s, i) =>
+      `<button class="sku-btn ${i === currentSkuIdx ? 'active' : ''}" onclick="currentSkuIdx=${i};render()">${s.sku}<br><small>${s.label}</small></button>`
+    ).join('')}</div>`;
+  }
+
+  let tabContent = '';
+  if (currentTab === 'overview') tabContent = renderOverview(p, vals, v, sku);
+  else if (currentTab === 'allanalytes') tabContent = renderAllAnalytes(p, vals, sku);
+  else if (currentTab === 'claims') tabContent = renderClaims(p, vals, currentSkuIdx);
+
+  document.getElementById('main-content').innerHTML = `
+    <div class="hero">
+      <div class="hero-top">
+        <div>
+          <span class="category-badge ${catClass}">${p.cat.charAt(0).toUpperCase()+p.cat.slice(1)}</span>
+          <h2>${p.name}</h2>
+          <div class="farm-label">${p.farm}</div>
+          <div class="sku-label">${sku.sku}</div>
+          ${skuHtml}
+        </div>
+        <div class="serving-info">
+          <div>Serving: <strong>${sku.serv_oz} oz</strong> (${(sku.serv_oz*OZ_TO_G).toFixed(0)}g)</div>
+          <div>Package: <strong>${sku.pkg_oz} oz</strong> (${(sku.pkg_oz*OZ_TO_G).toFixed(0)}g)</div>
+          <div>Servings/pkg: <strong>${(sku.pkg_oz/sku.serv_oz).toFixed(1)}</strong></div>
+        </div>
+      </div>
+    </div>
+    ${tabContent}
+  `;
+}
+
+// ── INIT ──
+const sel = document.getElementById('product-select');
+PRODUCTS.forEach((p, i) => {
+  const opt = document.createElement('option');
+  opt.value = i;
+  opt.textContent = `${p.name} (${p.farm})`;
+  sel.appendChild(opt);
+});
+render();
+
+// ══════════════════════════════════════════════════════════
+// CSV EXPORT — Supabase-ready flat table
+// ══════════════════════════════════════════════════════════
+const CSV_COLUMNS = [
+  // Identity
+  'product_name','farm','category','sku','sku_label','serving_oz','package_oz','servings_per_package',
+  // Omega-3 per 100g
+  'epa_mg_per100g','dha_mg_per100g','ala_mg_per100g','epa_dha_mg_per100g','total_omega3_mg_per100g',
+  // Omega-6 per 100g
+  'omega6_mg_per100g','ara_mg_per100g','omega6_3_ratio',
+  // Protein & Macros per 100g
+  'protein_g_per100g','cholesterol_mg_per100g',
+  // Minerals per 100g
+  'selenium_mcg_per100g','zinc_mcg_per100g','copper_mcg_per100g','magnesium_mg_per100g',
+  'phosphorus_mg_per100g','manganese_mcg_per100g','iodine_mcg_per100g','chromium_mcg_per100g',
+  // Vitamins per 100g
+  'vitamin_d_mcg_per100g','vitamin_b12_mcg_per100g','vitamin_e_mcg_per100g',
+  // Heavy Metals
+  'mercury_ppb','arsenic_mcg_per100g','cadmium_mcg_per100g','lead_mcg_per100g',
+  'mercury_below_loq',
+  // Per Serving (computed)
+  'epa_dha_mg_per_serving','total_omega3_mg_per_serving','protein_g_per_serving',
+  'selenium_mcg_per_serving','zinc_mcg_per_serving','magnesium_mg_per_serving',
+  'phosphorus_mg_per_serving','iodine_mcg_per_serving',
+  'vitamin_d_mcg_per_serving','vitamin_b12_mcg_per_serving','vitamin_e_mcg_per_serving',
+  // Per Package (computed)
+  'epa_dha_mg_per_package','total_omega3_mg_per_package','protein_g_per_package',
+  // %DV per serving
+  'protein_pct_dv','selenium_pct_dv','zinc_pct_dv','magnesium_pct_dv','phosphorus_pct_dv',
+  'iodine_pct_dv','vitamin_d_pct_dv','vitamin_b12_pct_dv','vitamin_e_pct_dv',
+  // Context
+  'functional_role','functional_stacks','edacious_url','edacious_status','microplastics_tested',
+  'data_source'
+];
+
+function productToRows(p) {
+  const rows = [];
+  p.skus.forEach(sku => {
+    const sOz = sku.serv_oz, pOz = sku.pkg_oz;
+    const epaDha = p.epa + p.dha;
+    const totalO3 = p.epa + p.dha + p.ala;
+    const s = (v, oz) => v != null ? +(v * (oz * OZ_TO_G) / 100).toFixed(2) : '';
+    const sm = (v, oz) => v != null ? +(v * (oz * OZ_TO_G) / 100 / 10).toFixed(2) : ''; // for g->g scale (protein uses *10 trick)
+    const dv = (v, ref) => v != null && ref ? Math.round((v / ref) * 100) : '';
+
+    const proServ = p.pro != null ? +(p.pro * (sOz * OZ_TO_G) / 100).toFixed(1) : '';
+    const proPkg = p.pro != null ? +(p.pro * (pOz * OZ_TO_G) / 100).toFixed(1) : '';
+    const seServ = s(p.se, sOz);
+    const znServ = s(p.zinc, sOz);
+    const mgServ = p.magnesium != null ? +(p.magnesium * (sOz * OZ_TO_G) / 100).toFixed(1) : '';
+    const phServ = p.phosphorus != null ? +(p.phosphorus * (sOz * OZ_TO_G) / 100).toFixed(1) : '';
+    const ioServ = s(p.iodine, sOz);
+    const vdServ = s(p.vitd, sOz);
+    const vb12Serv = s(p.vitb12, sOz);
+    const veServ = s(p.vite, sOz);
+
+    rows.push({
+      product_name: p.name, farm: p.farm, category: p.cat,
+      sku: sku.sku, sku_label: sku.label,
+      serving_oz: sOz, package_oz: pOz,
+      servings_per_package: +(pOz / sOz).toFixed(1),
+      // Per 100g
+      epa_mg_per100g: p.epa, dha_mg_per100g: p.dha, ala_mg_per100g: p.ala,
+      epa_dha_mg_per100g: epaDha, total_omega3_mg_per100g: totalO3,
+      omega6_mg_per100g: p.omega6 ?? '', ara_mg_per100g: p.ara ?? '',
+      omega6_3_ratio: p.o63 ?? '',
+      protein_g_per100g: p.pro ?? '', cholesterol_mg_per100g: p.cholesterol ?? '',
+      selenium_mcg_per100g: p.se ?? '', zinc_mcg_per100g: p.zinc ?? '',
+      copper_mcg_per100g: p.copper ?? '', magnesium_mg_per100g: p.magnesium ?? '',
+      phosphorus_mg_per100g: p.phosphorus ?? '', manganese_mcg_per100g: p.manganese ?? '',
+      iodine_mcg_per100g: p.iodine ?? '', chromium_mcg_per100g: p.chromium ?? '',
+      vitamin_d_mcg_per100g: p.vitd ?? '', vitamin_b12_mcg_per100g: p.vitb12 ?? '',
+      vitamin_e_mcg_per100g: p.vite ?? '',
+      mercury_ppb: p.hg ?? '', arsenic_mcg_per100g: p.arsenic ?? '',
+      cadmium_mcg_per100g: p.cadmium ?? '', lead_mcg_per100g: p.lead ?? '',
+      mercury_below_loq: p.hg_loq ? 'TRUE' : 'FALSE',
+      // Per Serving
+      epa_dha_mg_per_serving: s(epaDha, sOz), total_omega3_mg_per_serving: s(totalO3, sOz),
+      protein_g_per_serving: proServ,
+      selenium_mcg_per_serving: seServ, zinc_mcg_per_serving: znServ,
+      magnesium_mg_per_serving: mgServ, phosphorus_mg_per_serving: phServ,
+      iodine_mcg_per_serving: ioServ,
+      vitamin_d_mcg_per_serving: vdServ, vitamin_b12_mcg_per_serving: vb12Serv,
+      vitamin_e_mcg_per_serving: veServ,
+      // Per Package
+      epa_dha_mg_per_package: s(epaDha, pOz), total_omega3_mg_per_package: s(totalO3, pOz),
+      protein_g_per_package: proPkg,
+      // %DV
+      protein_pct_dv: dv(proServ, DV.protein_g), selenium_pct_dv: dv(seServ, DV.se_mcg),
+      zinc_pct_dv: dv(znServ, DV.zinc_mcg), magnesium_pct_dv: dv(mgServ, DV.magnesium_mg),
+      phosphorus_pct_dv: dv(phServ, DV.phosphorus_mg), iodine_pct_dv: dv(ioServ, DV.iodine_mcg),
+      vitamin_d_pct_dv: dv(vdServ, DV.vitd_mcg), vitamin_b12_pct_dv: dv(vb12Serv, DV.vitb12_mcg),
+      vitamin_e_pct_dv: dv(veServ, DV.vite_mcg),
+      // Context
+      functional_role: p.role || '',
+      functional_stacks: (p.functional || []).join('; '),
+      edacious_url: p.coas?.edacious || '',
+      edacious_status: p.coas?.edacious_status || '',
+      microplastics_tested: p.mp_tested ? 'TRUE' : 'FALSE',
+      data_source: 'Light Labs + Edacious'
+    });
+  });
+  return rows;
+}
+
+function rowToCSV(row) {
+  return CSV_COLUMNS.map(col => {
+    let v = row[col] ?? '';
+    v = String(v);
+    if (v.includes(',') || v.includes('"') || v.includes('\n')) v = '"' + v.replace(/"/g, '""') + '"';
+    return v;
+  }).join(',');
+}
+
+function downloadCSV(filename, csvContent) {
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename; a.style.display = 'none';
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a); URL.revokeObjectURL(url);
+  toast('CSV downloaded!');
+}
+
+function exportProductCSV() {
+  const p = PRODUCTS[currentProduct];
+  const rows = productToRows(p);
+  const csv = CSV_COLUMNS.join(',') + '\n' + rows.map(rowToCSV).join('\n');
+  const safeName = p.name.replace(/\s+/g, '_') + '_' + p.farm.replace(/\s+/g, '_');
+  downloadCSV(`seatopia_${safeName}_nutrition.csv`, csv);
+}
+
+function exportAllProductsCSV() {
+  const allRows = PRODUCTS.flatMap(productToRows);
+  const csv = CSV_COLUMNS.join(',') + '\n' + allRows.map(rowToCSV).join('\n');
+  downloadCSV('seatopia_all_products_wide.csv', csv);
+}
+
+// ── NORMALIZED (LONG) FORMAT FOR SUPABASE ──
+const ANALYTE_DEFS = [
+  {key:'epa',slug:'epa',name:'EPA (C20:5)',unit:'mg',cat:'omega_3',sort:10},
+  {key:'dha',slug:'dha',name:'DHA (C22:6)',unit:'mg',cat:'omega_3',sort:20},
+  {key:'ala',slug:'ala',name:'ALA (C18:3)',unit:'mg',cat:'omega_3',sort:30},
+  {key:'_epaDha',slug:'epa_dha',name:'EPA + DHA',unit:'mg',cat:'omega_3',sort:40},
+  {key:'_totalO3',slug:'total_omega3',name:'Total Omega-3',unit:'mg',cat:'omega_3',sort:50},
+  {key:'omega6',slug:'omega6',name:'Total Omega-6',unit:'mg',cat:'omega_6',sort:60},
+  {key:'ara',slug:'ara',name:'ARA (C20:4)',unit:'mg',cat:'omega_6',sort:70},
+  {key:'o63',slug:'omega6_3_ratio',name:'Omega 6:3 Ratio',unit:'ratio',cat:'omega_6',sort:80},
+  {key:'pro',slug:'protein',name:'Protein',unit:'g',cat:'macros',sort:90,dvRef:50},
+  {key:'cholesterol',slug:'cholesterol',name:'Cholesterol',unit:'mg',cat:'macros',sort:100,dvRef:300},
+  {key:'se',slug:'selenium',name:'Selenium',unit:'mcg',cat:'minerals',sort:110,dvRef:55},
+  {key:'zinc',slug:'zinc',name:'Zinc',unit:'mcg',cat:'minerals',sort:120,dvRef:11000},
+  {key:'copper',slug:'copper',name:'Copper',unit:'mcg',cat:'minerals',sort:130,dvRef:900},
+  {key:'magnesium',slug:'magnesium',name:'Magnesium',unit:'mg',cat:'minerals',sort:140,dvRef:420},
+  {key:'phosphorus',slug:'phosphorus',name:'Phosphorus',unit:'mg',cat:'minerals',sort:150,dvRef:1250},
+  {key:'manganese',slug:'manganese',name:'Manganese',unit:'mcg',cat:'minerals',sort:160,dvRef:2300},
+  {key:'iodine',slug:'iodine',name:'Iodine',unit:'mcg',cat:'minerals',sort:170,dvRef:150},
+  {key:'chromium',slug:'chromium',name:'Chromium',unit:'mcg',cat:'minerals',sort:180,dvRef:35},
+  {key:'vitd',slug:'vitamin_d',name:'Vitamin D',unit:'mcg',cat:'vitamins',sort:190,dvRef:20},
+  {key:'vitb12',slug:'vitamin_b12',name:'Vitamin B12',unit:'mcg',cat:'vitamins',sort:200,dvRef:2.4},
+  {key:'vite',slug:'vitamin_e',name:'Vitamin E',unit:'mcg',cat:'vitamins',sort:210,dvRef:15000},
+  {key:'hg',slug:'mercury',name:'Mercury',unit:'ppb',cat:'safety',sort:220},
+  {key:'arsenic',slug:'arsenic',name:'Arsenic (total)',unit:'mcg',cat:'safety',sort:230},
+  {key:'cadmium',slug:'cadmium',name:'Cadmium',unit:'mcg',cat:'safety',sort:240},
+  {key:'lead',slug:'lead',name:'Lead',unit:'mcg',cat:'safety',sort:250},
+];
+
+function exportAllNormalized() {
+  // Products table
+  const prodHeaders = ['sku','product_name','farm','category','sku_label','serving_oz','package_oz','servings_per_package','functional_role','functional_stacks','edacious_url','edacious_status','microplastics_tested','mercury_below_loq','data_source'];
+  let prodCSV = prodHeaders.join(',') + '\n';
+
+  // Nutrition table
+  const nutrHeaders = ['sku','analyte','display_name','category','sort_order','value_per_100g','unit_per_100g','value_per_serving','value_per_package','unit_scaled','pct_daily_value_per_serving','daily_value_reference','below_loq'];
+  let nutrCSV = nutrHeaders.join(',') + '\n';
+
+  PRODUCTS.forEach(p => {
+    p.skus.forEach(sku => {
+      const sOz = sku.serv_oz, pOz = sku.pkg_oz;
+      // Products row
+      const esc = v => { let s=String(v??''); return s.includes(',')||s.includes('"') ? '"'+s.replace(/"/g,'""')+'"' : s; };
+      prodCSV += [sku.sku,p.name,p.farm,p.cat,sku.label,sOz,pOz,(pOz/sOz).toFixed(1),
+        p.role||'',(p.functional||[]).join('; '),p.coas?.edacious||'',p.coas?.edacious_status||'',
+        p.mp_tested?'TRUE':'FALSE',p.hg_loq?'TRUE':'FALSE','Light Labs + Edacious'
+      ].map(esc).join(',') + '\n';
+
+      // Nutrition rows
+      ANALYTE_DEFS.forEach(a => {
+        let v100;
+        if (a.key === '_epaDha') v100 = p.epa + p.dha;
+        else if (a.key === '_totalO3') v100 = p.epa + p.dha + p.ala;
+        else v100 = p[a.key];
+
+        if (v100 == null) return;
+
+        const isRatio = a.unit === 'ratio';
+        const isMerc = a.slug === 'mercury';
+        let vServ, vPkg, unitScaled;
+
+        if (isRatio) { vServ = v100; vPkg = v100; unitScaled = 'ratio'; }
+        else if (isMerc) {
+          vServ = +((v100/10)*(sOz*OZ_TO_G)/100).toFixed(2);
+          vPkg = +((v100/10)*(pOz*OZ_TO_G)/100).toFixed(2);
+          unitScaled = 'mcg';
+        } else {
+          vServ = +(v100*(sOz*OZ_TO_G)/100).toFixed(2);
+          vPkg = +(v100*(pOz*OZ_TO_G)/100).toFixed(2);
+          unitScaled = a.unit;
+        }
+
+        let pctDV = '';
+        if (a.dvRef && vServ) pctDV = Math.round((vServ / a.dvRef) * 100);
+
+        nutrCSV += [sku.sku,a.slug,a.name,a.cat,a.sort,v100,isMerc?'ppb':a.unit,
+          vServ,vPkg,unitScaled,pctDV,a.dvRef||'',
+          (a.slug==='mercury'&&p.hg_loq)?'TRUE':'FALSE'
+        ].map(esc).join(',') + '\n';
+      });
+    });
+  });
+
+  // Download both as a zip-like pair
+  downloadCSV('supabase_seatopia_products.csv', prodCSV);
+  setTimeout(() => downloadCSV('supabase_seatopia_product_nutrition.csv', nutrCSV), 500);
+  setTimeout(() => toast('Both Supabase CSVs downloaded!'), 1000);
+}
+</script>
+</body>
+</html>

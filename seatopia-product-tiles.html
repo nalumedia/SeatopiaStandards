@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seatopia Product Tiles — Lab-Tested Nutrition</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600;700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --charcoal-blue: #335566;
+      --cerulean: #4B7991;
+      --maya-blue: #7BC3F3;
+      --linen: #F7EFE6;
+      --almond-silk: #FDD4CD;
+      --moss-green: #2e8b57;
+      --deep-ocean: #1a3344;
+      --white: #FFFFFF;
+    }
+
+    body {
+      font-family: 'Karla', sans-serif;
+      background: var(--linen);
+      color: #1a1a1a;
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--white);
+      border-bottom: 2px solid var(--maya-blue);
+      padding: 28px 0;
+      text-align: center;
+    }
+
+    .header-logo {
+      font-family: 'EB Garamond', serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--charcoal-blue);
+      letter-spacing: -0.5px;
+    }
+
+    .header-sub {
+      font-size: 12px;
+      color: var(--cerulean);
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .header-desc {
+      font-size: 15px;
+      color: #666;
+      margin-top: 10px;
+      max-width: 620px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* FILTER BAR */
+    .filter-bar {
+      max-width: 1400px;
+      margin: 24px auto 0;
+      padding: 0 24px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .filter-btn {
+      padding: 8px 18px;
+      border-radius: 20px;
+      border: 1.5px solid rgba(51,85,102,0.15);
+      background: var(--white);
+      font-family: 'Karla', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--charcoal-blue);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--charcoal-blue);
+      color: var(--white);
+      border-color: var(--charcoal-blue);
+    }
+
+    .filter-btn.verified-btn {
+      border-color: rgba(46,139,87,0.25);
+      color: var(--moss-green);
+    }
+
+    .filter-btn.verified-btn .count-badge {
+      background: var(--moss-green);
+    }
+
+    .filter-btn.verified-btn:hover, .filter-btn.verified-btn.active {
+      background: var(--moss-green);
+      color: var(--white);
+      border-color: var(--moss-green);
+    }
+
+    .filter-btn.verified-btn.active svg {
+      stroke: var(--white);
+    }
+
+    .sort-select {
+      margin-left: auto;
+      padding: 8px 14px;
+      border-radius: 12px;
+      border: 1.5px solid rgba(51,85,102,0.15);
+      background: var(--white);
+      font-family: 'Karla', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--charcoal-blue);
+      cursor: pointer;
+    }
+
+    /* VIEW TOGGLE */
+    .view-toggle-bar {
+      max-width: 1400px;
+      margin: 16px auto 0;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .view-toggle-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #888;
+      margin-right: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .view-toggle-btn {
+      padding: 7px 16px;
+      border: 1.5px solid rgba(51,85,102,0.15);
+      background: var(--white);
+      font-family: 'Karla', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--charcoal-blue);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .view-toggle-btn:first-of-type {
+      border-radius: 10px 0 0 10px;
+    }
+
+    .view-toggle-btn:last-of-type {
+      border-radius: 0 10px 10px 0;
+      border-left: none;
+    }
+
+    .view-toggle-btn.active {
+      background: var(--charcoal-blue);
+      color: var(--white);
+      border-color: var(--charcoal-blue);
+    }
+
+    /* GRID */
+    .grid {
+      max-width: 1400px;
+      margin: 24px auto 60px;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    /* TILE */
+    .tile {
+      background: var(--white);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(51,85,102,0.07);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tile:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(51,85,102,0.12);
+    }
+
+    .tile-img {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      background: #f5f5f3;
+    }
+
+    .tile-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .tile-img-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'EB Garamond', serif;
+      font-size: 42px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .tile-sku {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(0,0,0,0.55);
+      color: white;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 4px 10px;
+      border-radius: 8px;
+      backdrop-filter: blur(4px);
+    }
+
+    .tile-body {
+      padding: 22px 22px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tile-name {
+      font-family: 'EB Garamond', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 2px;
+      text-decoration: underline;
+      text-decoration-color: rgba(51,85,102,0.15);
+      text-underline-offset: 4px;
+    }
+
+    .tile-size {
+      font-size: 13px;
+      color: #777;
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+
+    .tile-verified {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--moss-green);
+      letter-spacing: 0.3px;
+      margin-bottom: 10px;
+    }
+
+    .tile-verified svg {
+      width: 13px;
+      height: 13px;
+      flex-shrink: 0;
+    }
+
+    /* OMEGA-3 BIG NUMBER */
+    .tile-omega {
+      font-family: 'EB Garamond', serif;
+      font-size: 30px;
+      font-weight: 700;
+      color: #1a1a1a;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .tile-omega-label {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 12px;
+    }
+
+    .dv-green {
+      color: var(--moss-green);
+      font-weight: 700;
+    }
+
+    .dv-normal {
+      font-weight: 700;
+      color: #555;
+    }
+
+    /* PILLS */
+    .pill-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: auto;
+    }
+
+    .pill {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    .pill-epa {
+      background: rgba(51,85,102,0.08);
+      color: var(--charcoal-blue);
+    }
+
+    .pill-dha {
+      background: rgba(75,121,145,0.08);
+      color: var(--cerulean);
+    }
+
+    .pill-ala {
+      background: rgba(123,195,243,0.1);
+      color: #2a7ab5;
+    }
+
+    /* NUTRITION MINI-BARS */
+    .mini-stats {
+      display: flex;
+      gap: 12px;
+      margin: 12px 0;
+      flex-wrap: wrap;
+    }
+
+    .mini-stat {
+      font-size: 11px;
+      color: #555;
+    }
+
+    .mini-stat strong {
+      color: #1a1a1a;
+    }
+
+    /* PRODUCT DESCRIPTION */
+    .tile-desc {
+      font-size: 13px;
+      color: #666;
+      font-style: italic;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    /* TILE WRAPPER — contains public tile + lab panel underneath */
+    .tile-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    /* LAB TRACEABILITY PANEL — sits below the tile */
+    .tile-lab-panel {
+      background: #f4f2ef;
+      border-radius: 14px;
+      margin-top: 16px;
+      padding: 14px 18px 16px;
+      border: 1px dashed rgba(51,85,102,0.15);
+    }
+
+    .lab-panel-header {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--cerulean);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .lab-detail-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #555;
+      padding: 3px 0;
+      border-bottom: 1px solid rgba(51,85,102,0.05);
+    }
+
+    .lab-detail-row:last-child {
+      border-bottom: none;
+    }
+
+    .lab-detail-label {
+      font-weight: 600;
+      color: var(--charcoal-blue);
+      min-width: 80px;
+    }
+
+    .lab-detail-value {
+      text-align: right;
+      word-break: break-word;
+      max-width: 180px;
+    }
+
+    .lab-test-item {
+      font-size: 10.5px;
+      color: #555;
+      padding: 5px 0;
+      border-bottom: 1px solid rgba(51,85,102,0.05);
+    }
+
+    .lab-test-item:last-child {
+      border-bottom: none;
+    }
+
+    .lab-test-code {
+      font-weight: 700;
+      color: var(--charcoal-blue);
+      font-family: monospace;
+      font-size: 11px;
+    }
+
+    .lab-test-coa {
+      font-size: 10px;
+      color: var(--cerulean);
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* FOOTER */
+    .page-footer {
+      text-align: center;
+      padding: 32px 24px 48px;
+      font-size: 13px;
+      color: #999;
+    }
+
+    .page-footer a {
+      color: var(--cerulean);
+      text-decoration: none;
+    }
+
+    .count-badge {
+      display: inline-block;
+      background: var(--charcoal-blue);
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 14px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    @media (max-width: 680px) {
+      .grid { grid-template-columns: 1fr; }
+      .tile-omega { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-logo">Seatopia</div>
+  <div class="header-sub">Lab-Tested Nutrition · Product Catalog</div>
+  <div class="header-desc">Every product, every SKU — with third-party verified omega-3, protein, selenium, and safety data per serving.</div>
+</header>
+
+<div class="filter-bar" id="filterBar"></div>
+<div class="view-toggle-bar" id="viewToggleBar"></div>
+<div class="grid" id="tileGrid"></div>
+
+<div class="page-footer">
+  <strong>Seatopia Omega Standard</strong><br>
+  All values per serving, computed from per-100g lab-verified data.<br>
+  Total Omega-3 = EPA + DHA + ALA · Normalized: mg_per_100g × (serving_oz × 28.3495 / 100)<br>
+  Source: Edacious & Light Labs third-party testing · seatopia.fish
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// SEATOPIA OMEGA STANDARD — Canonical Data (per 100g, mg)
+// Conversion rule: mg_per_100g × (serving_oz × 28.3495 / 100)
+// Total Omega-3 = EPA + DHA + ALA
+// ═══════════════════════════════════════════════════════════
+
+const OMEGA_DV = 2000;
+const PROTEIN_DV = 50;
+const SELENIUM_RDI = 55;
+const OZ_TO_G = 28.3495;
+
+// Canonical per-100g values (mg/100g) — source of truth
+// Priority: Edacious (primary) → Light Labs (secondary)
+// When Edacious data is available, use their published values as reference
+const NUTRITION = {
+  "mt-cook-king-salmon": {
+    epa: 457.0, dha: 862.0, ala: 1140.0, protein_g: 18.9, se_mcg: 39.3,
+    hg_ppb: 0, vitd_mcg: 23.8, n_tests: 3, source: "Edacious", omega6_3: 0.853
+  },
+  "ora-king-king-salmon": {
+    epa: 536.0, dha: 1070.0, ala: 1210.0, protein_g: 18.6, se_mcg: 29.8,
+    hg_ppb: 0, vitd_mcg: 20.0, n_tests: 3, source: "Edacious", omega6_3: 0.854
+  },
+  "big-glory-bay-king-salmon": {
+    epa: 546.0, dha: 885.0, ala: 1050.0, protein_g: 18.9, se_mcg: 31.4,
+    hg_ppb: 0, vitd_mcg: 21.6, n_tests: 3, source: "Edacious", omega6_3: 0.869
+  },
+  "bakkafrost-atlantic-salmon": {
+    epa: 471.0, dha: 833.0, ala: 950.0, protein_g: 21.3, se_mcg: 18.6,
+    hg_ppb: 0, vitd_mcg: 8.76, n_tests: 6, source: "Edacious", omega6_3: 0.645
+  },
+  "superior-fresh-atlantic-salmon": {
+    epa: 530.0, dha: 1020.0, ala: 224.0, protein_g: 20.2, se_mcg: 21.2,
+    hg_ppb: 1.8, vitd_mcg: 3.98, n_tests: 1, source: "Edacious", omega6_3: 0.416
+  },
+  "caleta-bay-steelhead": {
+    epa: 262.0, dha: 589.0, ala: 1330.0, protein_g: 20.8, se_mcg: 22.1,
+    hg_ppb: 0, vitd_mcg: 9.01, n_tests: 4, source: "Edacious", omega6_3: 1.03
+  },
+  "tarakan-black-tiger-shrimp": {
+    epa: 15.0, dha: 17.0, ala: 7.0, protein_g: 18.0, se_mcg: 13.5,
+    hg_ppb: 0, vitd_mcg: 0, n_tests: 2, source: "Edacious", omega6_3: 1.22
+  },
+  "esteros-lubimar-branzino": {
+    epa: 304.0, dha: 598.0, ala: 880.0, protein_g: 21.1, se_mcg: 18.1,
+    hg_ppb: 3.0, vitd_mcg: 4.36, n_tests: 8, source: "Edacious", omega6_3: 0.921
+  },
+  "esteros-lubimar-sea-bream": {
+    epa: 221.0, dha: 567.0, ala: 643.0, protein_g: 21.1, se_mcg: 18.9,
+    hg_ppb: 0, vitd_mcg: 15.0, n_tests: 8, source: "Edacious", omega6_3: 1.09
+  },
+  "australis-barramundi": {
+    epa: 31.0, dha: 92.0, ala: 33.0, protein_g: 21.0, se_mcg: 23.0,
+    hg_ppb: 0, vitd_mcg: 0, n_tests: 2, source: "Edacious", omega6_3: 2.68
+  },
+  "hudson-valley-steelhead": {
+    epa: 376.0, dha: 1040.0, ala: 1620.0, protein_g: 19.5, se_mcg: 17.7,
+    hg_ppb: 0, vitd_mcg: 0, n_tests: 3, source: "Edacious", omega6_3: 0.833
+  },
+  "mcfarland-springs-rainbow-trout": {
+    epa: 272.0, dha: 668.0, ala: 1270.0, protein_g: 22.0, se_mcg: 32.9,
+    hg_ppb: 0, vitd_mcg: 18.2, n_tests: 2, source: "Edacious", omega6_3: 0.582
+  },
+  "seacorp-peruvian-scallops": {
+    epa: 51.0, dha: 35.0, ala: 3.0, protein_g: 14.4, se_mcg: 11.1,
+    hg_ppb: 0, vitd_mcg: 0, n_tests: 2, source: "Edacious", omega6_3: 0.337
+  },
+  "smoke-in-chimneys-rainbow-trout": {
+    epa: 86.0, dha: 404.0, ala: 33.0, protein_g: 18.2, se_mcg: 17.15,
+    hg_ppb: 9.7, vitd_mcg: 16.0, n_tests: 1, source: "Light Labs", omega6_3: 0.615
+  },
+  "kingfish-yellowtail": {
+    epa: 187.0, dha: 546.0, ala: 156.0, protein_g: 23.4, se_mcg: 21.5,
+    hg_ppb: 0, vitd_mcg: 2.19, n_tests: 2, source: "Edacious", omega6_3: 0.537
+  },
+  "regal-king-salmon": {
+    epa: 275.8, dha: 750.1, ala: 999.0, protein_g: 20.77, se_mcg: 36.68,
+    hg_ppb: 26.87, vitd_mcg: 25.9, n_tests: 1, source: "Light Labs", omega6_3: 1.332
+  },
+  "marshallberg-osetra": {
+    epa: 497.8, dha: 1250.7, ala: 161.7, protein_g: 26.11, se_mcg: 63.30,
+    hg_ppb: 4.94, vitd_mcg: 0, n_tests: 1, source: "Light Labs", omega6_3: 1.446
+  },
+  "desert-springs-barramundi": {
+    epa: 20.0, dha: 20.0, ala: 10.0, protein_g: 18.4, se_mcg: 20.81,
+    hg_ppb: 9.94, vitd_mcg: 3.0, n_tests: 1, source: "Light Labs", omega6_3: 2.4
+  },
+  "taprobane-shrimp": {
+    epa: 69.6, dha: 81.9, ala: 6.8, protein_g: 19.22, se_mcg: 30.43,
+    hg_ppb: 9.53, vitd_mcg: 0, n_tests: 1, source: "Light Labs", omega6_3: 0.875
+  },
+  "ecuador-shrimp": {
+    epa: 48.9, dha: 53.0, ala: 3.8, protein_g: 19.65, se_mcg: 17.76,
+    hg_ppb: 9.18, vitd_mcg: 0, n_tests: 1, source: "Light Labs", omega6_3: 0.9
+  },
+  "santa-priscila-shrimp": {
+    epa: 23.1, dha: 24.5, ala: 1.9, protein_g: 20.15, se_mcg: 16.73,
+    hg_ppb: 9.2, vitd_mcg: 0, n_tests: 1, source: "Light Labs", omega6_3: 1.25
+  },
+  "yarra-valley-salmon-roe": {
+    epa: 513.8, dha: 2292.4, ala: 142.4, protein_g: 26.1, se_mcg: 99.1,
+    hg_ppb: 0, vitd_mcg: 2.0, n_tests: 1, source: "Light Labs", omega6_3: null
+  }
+};
+
+// Seatopia Omega Standard: compute per-serving from per-100g canonical values
+function getServingData(baseData, portionOz) {
+  const factor = (portionOz * OZ_TO_G) / 100;
+  const epa = Math.round(baseData.epa * factor);
+  const dha = Math.round(baseData.dha * factor);
+  const ala = Math.round(baseData.ala * factor);
+  return {
+    epa, dha, ala,
+    epa_dha: epa + dha,
+    total: epa + dha + ala,
+    protein_g: baseData.protein_g,
+    hg_ppb: baseData.hg_ppb,
+    se_mcg: baseData.se_mcg,
+    n_tests: baseData.n_tests,
+    source: baseData.source,
+    omega6_3: baseData.omega6_3
+  };
+}
+
+// ── Product Descriptions ──
+const DESCRIPTIONS = {
+  "yarra-valley-salmon-roe": "Bright, briny pearls with a clean pop and omega-rich finish.",
+  "caleta-bay-steelhead": "Silky, bright, and refined — a sushi-grade cut for elevated raw preparations.",
+  "ora-king-king-salmon": "Rich, refined, and unforgettable — the gold standard of salmon."
+};
+
+// ── COA Map: test code → COA filename, lot, assay ──
+// COA_MAP supports two types:
+//   type: "pdf"  → coa field = filename, lot = lot number
+//   type: "url"  → url field = public link, source = lab name
+const COA_MAP = {
+  // ── Yarra Valley Salmon Roe (Light Labs PDFs) ──
+  '22491': { type: 'pdf', coa: 'Yarra Valley Salmon Roe - Lot PO-00512 - Fatty Acids COA.pdf', lot: 'PO-00512', assay: 'Fatty Acids' },
+  '22489': { type: 'pdf', coa: 'Yarra Valley Salmon Roe - Lot PO-00512 - Protein COA.pdf', lot: 'PO-00512', assay: 'Protein %' },
+  '22490': { type: 'pdf', coa: 'Yarra Valley Salmon Roe - Lot PO-00512 - Selenium COA.pdf', lot: 'PO-00512', assay: 'Selenium' },
+  '22493': { type: 'pdf', coa: 'Yarra Valley Salmon Roe - Lot PO-00512 - Vitamin D3 COA.pdf', lot: 'PO-00512', assay: 'Vitamin D3' },
+  '22492': { type: 'pdf', coa: 'Yarra Valley Salmon Roe - Lot PO-00512 - Mercury COA.pdf', lot: 'PO-00512', assay: 'Mercury' },
+  // ── Ora King Salmon ──
+  'E-OKS': { type: 'url', url: 'https://edacious.com', source: 'Edacious Certified Lab Analysis', assay: 'Full Panel (Fatty Acids, Protein, Vitamins, Minerals, Contaminants)' },
+  '3950':  { type: 'pdf', coa: 'Ora King - Lot PO-00391 - Fatty Acids COA.pdf', lot: 'PO-00391', assay: 'Fatty Acids' },
+  '3951':  { type: 'pdf', coa: 'Ora King - Lot PO-00391 - Vitamin D COA.pdf', lot: 'PO-00391', assay: 'Vitamin D (D2+D3)' },
+  // ── Caleta Bay Steelhead ──
+  'E-CLB': { type: 'url', url: 'https://eat.edacious.com/brand/seatopia/caleta-bay-steelhead-trout-loin', source: 'Edacious Certified Lab Analysis', assay: 'Full Panel (Fatty Acids, Protein, Vitamins, Minerals, Contaminants)' },
+  // ── Hudson Valley Steelhead ──
+  'E-HVF': { type: 'url', url: 'https://eat.edacious.com/brand/seatopia/hudson-valley-steelhead-trout-fillet', source: 'Edacious Certified Lab Analysis', assay: 'Full Panel (Fatty Acids, Protein, Vitamins, Minerals, Contaminants)' },
+  // ── Bakkafrost Atlantic Salmon ──
+  'E-BAK': { type: 'url', url: 'https://eat.edacious.com/brand/seatopia/bakkafrost-atlantic-salmon-fillet', source: 'Edacious Certified Lab Analysis', assay: 'Full Panel (Fatty Acids, Protein, Vitamins, Minerals, Contaminants)' },
+  // ── Superior Fresh Atlantic Salmon ──
+  'E-SUP': { type: 'url', url: 'https://app.edacious.com/app/products/9d41bbbc-00be-4016-b1ae-84905cda9028/preview', source: 'Edacious (Private — not sold by Seatopia)', assay: 'Full Panel (Fatty Acids, Protein, Vitamins, Minerals, Contaminants)' },
+  // ── Mt Cook King Salmon ──
+  'E-MCS': { type: 'url', url: 'https://eat.edacious.com/brand/seatopia/mt-cook-king-salmon', source: 'Edacious Certified Lab Analysis', assay: 'Full Panel (Fatty Acids, Protein, Vitamins, Minerals, Contaminants)' },
+  // ── Esteros Lubimar Branzino ──
+  'E-BRZ': { type: 'url', url: 'https://eat.edacious.com/brand/seatopia/esteros-lubimar-branzino-fillet', source: 'Edacious Certified Lab Analysis', assay: 'Full Panel (Fatty Acids, Protein, Vitamins, Minerals, Contaminants)' },
+  // ── Esteros Lubimar Sea Bream ──
+  'E-BRE': { type: 'url', url: 'https://eat.edacious.com/brand/seatopia/esteros-lubimar-sea-bream-fillet', source: 'Edacious Certified Lab Analysis', assay: 'Full Panel (Fatty Acids, Protein, Vitamins, Minerals, Contaminants)' },
+  // ── Big Glory Bay King Salmon ──
+  'E-BGB': { type: 'url', url: 'https://eat.edacious.com/brand/seatopia/big-glory-bay-king-salmon-fillet', source: 'Edacious Certified Lab Analysis', assay: 'Full Panel (Fatty Acids, Protein, Vitamins, Minerals, Contaminants)' },
+  // ── Australis Barramundi ──
+  'E-AUS': { type: 'url', url: 'https://eat.edacious.com/brand/seatopia/barramundi', source: 'Edacious Certified Lab Analysis', assay: 'Full Panel (Fatty Acids, Protein, Vitamins, Minerals, Contaminants)' },
+  // ── Tarakan Black Tiger Shrimp ──
+  'E-TBT': { type: 'url', url: 'https://eat.edacious.com/brand/seatopia/mangrove-black-tiger-shrimp', source: 'Edacious Certified Lab Analysis', assay: 'Full Panel (Fatty Acids, Protein, Vitamins, Minerals, Contaminants)' },
+  // ── Kingfish Yellowtail ──
+  'E-KFY': { type: 'url', url: 'https://eat.edacious.com/brand/seatopia/yellowtail-sashimi-loin', source: 'Edacious Certified Lab Analysis', assay: 'Full Panel (Fatty Acids, Protein, Vitamins, Minerals, Contaminants)' },
+  // ── McFarland Springs Rainbow Trout ──
+  'E-MFS': { type: 'url', url: 'https://eat.edacious.com/brand/seatopia/mcfarland-springs-rainbow-trout', source: 'Edacious Certified Lab Analysis', assay: 'Full Panel (Fatty Acids, Protein, Vitamins, Minerals, Contaminants)' },
+  // ── Seacorp Peruvian Scallops ──
+  'E-SPS': { type: 'url', url: 'https://eat.edacious.com/brand/seatopia/half-shell-scallops', source: 'Edacious Certified Lab Analysis', assay: 'Full Panel (Fatty Acids, Protein, Vitamins, Minerals, Contaminants)' },
+  // ── Regal King Salmon — Lot PO-00580 ──
+  '16691': { type: 'pdf', coa: 'Regal King Salmon - Lot PO-00580 - Fatty Acids COA.pdf', lot: 'PO-00580', assay: 'Fatty Acids' },
+  // ── Marshallberg Osetra — Lot PO-00509 ──
+  '9769': { type: 'pdf', coa: 'Marshallberg Osetra - Lot PO-00509 - Fatty Acids COA.pdf', lot: 'PO-00509', assay: 'Fatty Acids' },
+  // ── Smoke in Chimneys — Lot PO-00261 ──
+  '3954': { type: 'pdf', coa: 'Smoke in Chimneys - Lot PO-00261 - Fatty Acids COA.pdf', lot: 'PO-00261', assay: 'Fatty Acids' },
+  // ── Desert Springs Barramundi — Lot PO-00514 ──
+  '10412': { type: 'pdf', coa: 'Desert Springs Barramundi - Lot PO-00514 - Fatty Acids COA.pdf', lot: 'PO-00514', assay: 'Fatty Acids' },
+  // ── Taprobane Whiteleg Shrimp — Lot PO-00082 ──
+  '9776': { type: 'pdf', coa: 'Taprobane Whiteleg Shrimp - Lot PO-00082 - Fatty Acids COA.pdf', lot: 'PO-00082', assay: 'Fatty Acids' },
+  // ── Ecuador Whiteleg Shrimp — Lot 088204-25 ──
+  '7341': { type: 'pdf', coa: 'Ecuador Shrimp - Lot 088204-25 - Fatty Acids COA.pdf', lot: '088204-25', assay: 'Fatty Acids' },
+  // ── Santa Priscila Whiteleg Shrimp — Lot 04825-H6C1 ──
+  '11343': { type: 'pdf', coa: 'Santa Priscila Shrimp - Lot 04825-H6C1 - Fatty Acids COA.pdf', lot: '04825-H6C1', assay: 'Fatty Acids' }
+};
+
+// ── Lab Test Data per product handle ──
+// Each entry: { code, lab, assay (optional), epa, dha, ala in mg/100g }
+const TEST_DATA = {
+  "yarra-valley-salmon-roe": [
+    { code: "22491", lab: "Light Labs", assay: "Fatty Acids", epa: 513.8, dha: 2292.4, ala: 142.4 }
+  ],
+  "mt-cook-king-salmon": [
+    { code: "E-MCS", lab: "Edacious", assay: "Full Panel", epa: 457.0, dha: 862.0, ala: 1140.0, note: "Published avg · samples: B1SX1, VM87T" }
+  ],
+  "ora-king-king-salmon": [
+    { code: "E-OKS", lab: "Edacious", assay: "Full Panel", epa: 536.0, dha: 1070.0, ala: 1210.0, note: "Published avg (2 samples)" },
+    { code: "3950", lab: "Light Labs", assay: "Fatty Acids", epa: 320.0, dha: 840.0, ala: 920.0 }
+  ],
+  "big-glory-bay-king-salmon": [
+    { code: "E-BGB", lab: "Edacious", assay: "Full Panel", epa: 388.9, dha: 844.3, ala: 1005.0, note: "Published avg · samples: 2A8Z9, DXRZB" },
+    { code: "3938", lab: "Light Labs", assay: "Fatty Acids", epa: 200.0, dha: 966.0, ala: 1159.0 }
+  ],
+  "bakkafrost-atlantic-salmon": [
+    { code: "E-BAK", lab: "Edacious", assay: "Full Panel", epa: 471.0, dha: 833.0, ala: 950.0, note: "Published avg · samples: WBQZS, FI7JG, G3RNX, NPQ21, QCDSN, UE6K3" }
+  ],
+  "superior-fresh-atlantic-salmon": [
+    { code: "E-SUP", lab: "Edacious", assay: "Full Panel", epa: 530.0, dha: 1020.0, ala: 224.0, note: "Published avg (private)" }
+  ],
+  "caleta-bay-steelhead": [
+    { code: "E-CLB", lab: "Edacious", assay: "Full Panel", epa: 262.0, dha: 589.0, ala: 1330.0, note: "Published avg" },
+    { code: "21156", lab: "Light Labs", assay: "Fatty Acids", epa: 295.0, dha: 660.0, ala: 1230.0 },
+    { code: "21164", lab: "Light Labs", assay: "Fatty Acids", epa: 289.0, dha: 659.0, ala: 1219.5 }
+  ],
+  "tarakan-black-tiger-shrimp": [
+    { code: "E-TBT", lab: "Edacious", assay: "Full Panel", epa: 15.0, dha: 17.0, ala: 7.0, note: "Published avg (verified)" },
+    { code: "9762", lab: "Light Labs", assay: "Fatty Acids", epa: 48.4, dha: 47.1, ala: 8.5 }
+  ],
+  "esteros-lubimar-branzino": [
+    { code: "E-BRZ", lab: "Edacious", assay: "Full Panel", epa: 304.0, dha: 598.0, ala: 880.0, note: "Published avg · samples: X7JKU, XLQVW, US8EG, 6MNW9, 7JB6N, N3R8P" },
+    { code: "21172", lab: "Light Labs", assay: "Fatty Acids", epa: 278.0, dha: 561.0, ala: 651.0 },
+    { code: "21180", lab: "Light Labs", assay: "Fatty Acids", epa: 274.0, dha: 572.0, ala: 653.0 }
+  ],
+  "esteros-lubimar-sea-bream": [
+    { code: "E-BRE", lab: "Edacious", assay: "Full Panel", epa: 221.0, dha: 567.0, ala: 643.0, note: "Published avg · samples: T5ZA9, VBTTQ, QY119, CAZIS, E1JBA, LLZKQ" },
+    { code: "21140", lab: "Light Labs", assay: "Fatty Acids", epa: 210.0, dha: 560.0, ala: 0 },
+    { code: "24239", lab: "Light Labs", assay: "Fatty Acids", epa: 214.9, dha: 655.1, ala: 556.8 }
+  ],
+  "australis-barramundi": [
+    { code: "E-AUS", lab: "Edacious", assay: "Full Panel", epa: 31.0, dha: 92.0, ala: 33.0, note: "Published avg" },
+    { code: "3934", lab: "Light Labs", assay: "Fatty Acids", epa: 42.0, dha: 178.0, ala: 27.0 }
+  ],
+  "hudson-valley-steelhead": [
+    { code: "E-HVF", lab: "Edacious", assay: "Full Panel", epa: 376.0, dha: 1040.0, ala: 1620.0, note: "Published avg · samples: F8NYY, WH58L, BX2MD" }
+  ],
+  "mcfarland-springs-rainbow-trout": [
+    { code: "E-MFS", lab: "Edacious", assay: "Full Panel", epa: 272.0, dha: 668.0, ala: 1270.0, note: "Published avg (verified)" },
+    { code: "10851", lab: "Light Labs", epa: 144.5, dha: 497.7, ala: 576.9 }
+  ],
+  "seacorp-peruvian-scallops": [
+    { code: "E-SPS", lab: "Edacious", assay: "Full Panel", epa: 51.0, dha: 35.0, ala: 3.0, note: "Published avg (verified)" },
+    { code: "11337", lab: "Light Labs", epa: 20.5, dha: 18.0, ala: 0 }
+  ],
+  "smoke-in-chimneys-rainbow-trout": [
+    { code: "3954", lab: "Light Labs", epa: 86.0, dha: 404.0, ala: 33.0 }
+  ],
+  "kingfish-yellowtail": [
+    { code: "E-KFY", lab: "Edacious", assay: "Full Panel", epa: 187.0, dha: 546.0, ala: 156.0, note: "Published avg (verified)" },
+    { code: "3970", lab: "Light Labs", epa: 251.0, dha: 735.0, ala: 105.0 }
+  ],
+  "regal-king-salmon": [
+    { code: "16691", lab: "Light Labs", assay: "Fatty Acids", epa: 275.8, dha: 750.1, ala: 999.0 }
+  ],
+  "marshallberg-osetra": [
+    { code: "9769", lab: "Light Labs", assay: "Fatty Acids", epa: 497.8, dha: 1250.7, ala: 161.7 }
+  ],
+  "desert-springs-barramundi": [
+    { code: "10412", lab: "Light Labs", assay: "Fatty Acids", epa: 20.0, dha: 20.0, ala: 10.0 }
+  ],
+  "taprobane-shrimp": [
+    { code: "9776", lab: "Light Labs", assay: "Fatty Acids", epa: 69.6, dha: 81.9, ala: 6.8 }
+  ],
+  "ecuador-shrimp": [
+    { code: "7341", lab: "Light Labs", assay: "Fatty Acids", epa: 48.9, dha: 53.0, ala: 3.8 }
+  ],
+  "santa-priscila-shrimp": [
+    { code: "11343", lab: "Light Labs", assay: "Fatty Acids", epa: 23.1, dha: 24.5, ala: 1.9 }
+  ]
+};
+
+// Known images
+const IMAGES = {
+  "yarra-valley-salmon-roe": "https://seatopia.fish/cdn/shop/files/yarra-valley-first-harvest-salmon-caviar-30g-330834.png?v=1762445405&width=1000",
+  "ora-king-king-salmon": "https://seatopia.fish/cdn/shop/files/king-salmon-skin-on-sushi-grade-85oz-portions-9943955.jpg?v=1761679982&width=1200",
+  "esteros-lubimar-branzino": "https://seatopia.fish/cdn/shop/files/fish-shell-variety-box-482096.jpg?v=1772138103&width=1000",
+  "australis-barramundi": "https://seatopia.fish/cdn/shop/files/fish-shell-variety-box-752110.jpg?v=1772138103&width=1000",
+  "caleta-bay-steelhead": "https://seatopia.fish/cdn/shop/files/steelhead-sashimi-loin-836382.jpg?v=1768318805&width=1000",
+  "kingfish-yellowtail": "https://seatopia.fish/cdn/shop/files/white-fish-box-281733.jpg?v=1768318805&width=1000",
+  "tarakan-black-tiger-shrimp": "https://seatopia.fish/cdn/shop/files/mangrove-black-tiger-shrimp-1558411.png?v=1774454696&width=1200",
+  "mcfarland-springs-rainbow-trout": "https://f000.backblazeb2.com/file/recipekit-bucket/20250920211756-seatopia-20trout-20dogs-20-4-20of-205.jpg?width=750",
+  "regal-king-salmon": "https://seatopia.fish/cdn/shop/files/fish-shell-variety-box-482096.jpg?v=1772138103&width=1000"
+};
+
+// Gradient palettes for placeholder images, by category
+const GRADIENTS = {
+  salmon:    "linear-gradient(135deg, #335566 0%, #4B7991 50%, #7BC3F3 100%)",
+  trout:     "linear-gradient(135deg, #2a5c4f 0%, #4B7991 50%, #7BC3F3 100%)",
+  shrimp:    "linear-gradient(135deg, #8B5E3C 0%, #D4956B 50%, #F7EFE6 100%)",
+  whitefish: "linear-gradient(135deg, #4B7991 0%, #7BC3F3 50%, #c5e4f7 100%)",
+  caviar:    "linear-gradient(135deg, #1a3344 0%, #335566 50%, #4B7991 100%)",
+  scallop:   "linear-gradient(135deg, #6B8E8E 0%, #9BBCBC 50%, #D4E8E8 100%)",
+  other:     "linear-gradient(135deg, #335566 0%, #4B7991 60%, #7BC3F3 100%)"
+};
+
+// ══════════════════════════════════════════════════════════════
+// ALL 24 SKUs — Serving / Portion / Package Model
+// ──────────────────────────────────────────────────────────────
+//  serving_oz      = one eating occasion (what omega-3 is shown per on tile)
+//  portion_oz      = individual piece/cut (fillet, tin, filet — recipe unit)
+//  package_oz      = total weight the customer buys (retail unit)
+//  package_label   = human-readable package description
+//  portions_per_pkg = how many portions in the package
+//
+// Tile headline  = omega-3 per SERVING
+// Lab panel      = full breakdown of all three dimensions
+// Recipes        = think in servings or portions
+// Boxes / POs    = think in packages
+// ══════════════════════════════════════════════════════════════
+const SKUS = [
+  // ── SALMON  (individual fillets — 1 portion per pkg, portion = serving) ──
+  { sku: "SF-MCA-KGS-SHP-001", title: "Mt. Cook, Alpine Salmon", category: "salmon", handle: "mt-cook-king-salmon",
+    serving_oz: 7, portion_oz: 7, package_oz: 7, package_label: "1 × 7oz fillet", portions_per_pkg: 1 },
+  { sku: "SF-OKS-KGS-SHP-001", title: "Ora King, King Salmon", category: "salmon", handle: "ora-king-king-salmon",
+    serving_oz: 8.5, portion_oz: 8.5, package_oz: 8.5, package_label: "1 × 8.5oz fillet", portions_per_pkg: 1 },
+  { sku: "SF-BGB-KGS-SHP-001", title: "Big Glory Bay, King Salmon", category: "salmon", handle: "big-glory-bay-king-salmon",
+    serving_oz: 8, portion_oz: 8, package_oz: 8, package_label: "1 × 8oz fillet", portions_per_pkg: 1 },
+  { sku: "SF-BAK-ATS-SHP-002", title: "Bakkafrost, Atlantic Salmon", category: "salmon", handle: "bakkafrost-atlantic-salmon",
+    serving_oz: 6, portion_oz: 6, package_oz: 6, package_label: "1 × 6oz fillet", portions_per_pkg: 1 },
+  { sku: "SF-SPF-ATS-SHP-001", title: "Superior Fresh, Atlantic Salmon", category: "salmon", handle: "superior-fresh-atlantic-salmon",
+    serving_oz: 6, portion_oz: 6, package_oz: 6, package_label: "1 × 6oz fillet", portions_per_pkg: 1 },
+
+  // ── TROUT & STEELHEAD ──
+  { sku: "SF-CLB-STT-SHP-002", title: "Caleta Bay, A&I Steelhead Loin", category: "trout", handle: "caleta-bay-steelhead",
+    serving_oz: 6, portion_oz: 12, package_oz: 12, package_label: "1 × 12oz loin", portions_per_pkg: 1 },
+  { sku: "SF-CLB-STT-SHP-001", title: "Caleta Bay, Cold Smoked A&I Steelhead", category: "trout", handle: "caleta-bay-steelhead",
+    serving_oz: 2, portion_oz: 4, package_oz: 4, package_label: "1 × 4oz pack", portions_per_pkg: 1 },
+  { sku: "SF-CLB-STT-SHP-009", title: "Caleta Bay, Steelhead", category: "trout", handle: "caleta-bay-steelhead",
+    serving_oz: 6, portion_oz: 6, package_oz: 6, package_label: "1 × 6oz fillet", portions_per_pkg: 1 },
+  { sku: "SF-HVF-STT-BLK-003", title: "Hudson Valley, Pastrami Smoked", category: "trout", handle: "hudson-valley-steelhead",
+    serving_oz: 2, portion_oz: 4, package_oz: 4, package_label: "1 × 4oz pack", portions_per_pkg: 1 },
+  { sku: "SF-HVF-STT-SHP-001", title: "Hudson Valley, Steelhead", category: "trout", handle: "hudson-valley-steelhead",
+    serving_oz: 6, portion_oz: 6, package_oz: 6, package_label: "1 × 6oz fillet", portions_per_pkg: 1 },
+  { sku: "SF-MCF-RBT-BLK-001", title: "McFarland Springs, Trout Dogs", category: "trout", handle: "mcfarland-springs-rainbow-trout",
+    serving_oz: 3.2, portion_oz: 3.2, package_oz: 12.8, package_label: "4-pack (12.8oz)", portions_per_pkg: 4 },
+  { sku: "SF-SIC-RBT-BLK-001", title: "Smoke in Chimneys, Whole Trout", category: "trout", handle: "smoke-in-chimneys-rainbow-trout",
+    serving_oz: 6, portion_oz: 6, package_oz: 12, package_label: "1 whole trout (~12oz)", portions_per_pkg: 2 },
+  { sku: "SF-SIC-RBT-BLK-006", title: "Smoke in Chimneys, Smoked Trout Filet", category: "trout", handle: "smoke-in-chimneys-rainbow-trout",
+    serving_oz: 3, portion_oz: 6, package_oz: 6, package_label: "1 filet (6oz)", portions_per_pkg: 1 },
+  { sku: "SF-SIC-RBT-BLK-005", title: "Smoke in Chimneys, Smoked Trout Fillet", category: "trout", handle: "smoke-in-chimneys-rainbow-trout",
+    serving_oz: 3, portion_oz: 5.5, package_oz: 5.5, package_label: "1 × 5.5oz fillet", portions_per_pkg: 1 },
+
+  // ── WHITEFISH ──
+  { sku: "SF-EST-BRZ-SHP-001", title: "Esteros Lubimar, Branzino", category: "whitefish", handle: "esteros-lubimar-branzino",
+    serving_oz: 6, portion_oz: 6, package_oz: 6, package_label: "1 × 6oz fillet", portions_per_pkg: 1 },
+  { sku: "SF-EST-BRE-SHP-001", title: "Esteros Lubimar, Bream", category: "whitefish", handle: "esteros-lubimar-sea-bream",
+    serving_oz: 6, portion_oz: 6, package_oz: 6, package_label: "1 × 6oz fillet", portions_per_pkg: 1 },
+  { sku: "SF-AUS-BRM-SHP-001", title: "Australis, Barramundi", category: "whitefish", handle: "australis-barramundi",
+    serving_oz: 6, portion_oz: 6, package_oz: 6, package_label: "1 × 6oz fillet", portions_per_pkg: 1 },
+  { sku: "SF-AUS-BRM-SHP-005", title: "Australis, Barramundi", category: "whitefish", handle: "australis-barramundi",
+    serving_oz: 6, portion_oz: 8, package_oz: 8, package_label: "1 × 7–9oz filet", portions_per_pkg: 1 },
+  { sku: "SF-AUS-BRM-SHP-009", title: "Australis, Barramundi", category: "whitefish", handle: "australis-barramundi",
+    serving_oz: 6, portion_oz: 6, package_oz: 24, package_label: "3–5 filet bulk (~24oz)", portions_per_pkg: 4 },
+  { sku: "SF-KFC-YLT-SHP-001", title: "The Kingfish Company, Yellowtail", category: "whitefish", handle: "kingfish-yellowtail",
+    serving_oz: 6, portion_oz: 6, package_oz: 12, package_label: "Split loins (~12oz)", portions_per_pkg: 2 },
+
+  // ── BARRAMUNDI ──
+  { sku: "SF-DSP-BRM-SHP-001", title: "Desert Springs, Barramundi", category: "whitefish", handle: "desert-springs-barramundi",
+    serving_oz: 6, portion_oz: 6, package_oz: 6, package_label: "1 × 6oz fillet", portions_per_pkg: 1 },
+
+  // ── SHRIMP ──
+  { sku: "SF-TAR-BTS-SHP-001", title: "Tarakan, Black Tiger Shrimp", category: "shrimp", handle: "tarakan-black-tiger-shrimp",
+    serving_oz: 4, portion_oz: 4, package_oz: 16, package_label: "1 × 16oz bag", portions_per_pkg: 4 },
+  { sku: "SF-TPB-WLS-SHP-001", title: "Taprobane, Whiteleg Shrimp", category: "shrimp", handle: "taprobane-shrimp",
+    serving_oz: 4, portion_oz: 4, package_oz: 16, package_label: "1 × 16oz bag", portions_per_pkg: 4 },
+  { sku: "SF-ECU-WLS-SHP-001", title: "Ecuador, Whiteleg Shrimp", category: "shrimp", handle: "ecuador-shrimp",
+    serving_oz: 4, portion_oz: 4, package_oz: 16, package_label: "1 × 16oz bag", portions_per_pkg: 4 },
+  { sku: "SF-STP-WLS-SHP-001", title: "Santa Priscila, Whiteleg Shrimp", category: "shrimp", handle: "santa-priscila-shrimp",
+    serving_oz: 4, portion_oz: 4, package_oz: 16, package_label: "1 × 16oz bag", portions_per_pkg: 4 },
+
+  // ── REGAL KING SALMON ──
+  { sku: "SF-REG-KGS-SHP-001", title: "Regal, King Salmon", category: "salmon", handle: "regal-king-salmon",
+    serving_oz: 6.7, portion_oz: 6.7, package_oz: 6.7, package_label: "1 × 6.7oz fillet", portions_per_pkg: 1 },
+
+  // ── CAVIAR  (serving = one spoonful, portion = tin) ──
+  { sku: "SF-MAR-OST-BLK-001", title: "Marshallberg, Classic Osetra Caviar", category: "caviar", handle: "marshallberg-osetra",
+    serving_oz: 0.2, portion_oz: 1, package_oz: 1, package_label: "1 tin (1oz)", portions_per_pkg: 1 },
+  { sku: "SF-YRV-SLC-BLK-001", title: "Yarra Valley, Salmon Caviar", category: "caviar", handle: "yarra-valley-salmon-roe",
+    serving_oz: 0.2, portion_oz: 1, package_oz: 1, package_label: "1 × 30g tin", portions_per_pkg: 1 },
+
+  // ── SCALLOPS ──
+  { sku: "SF-SEC-SCL-SHP-001", title: "Seacorp, Peruvian Half Shell Scallops", category: "scallop", handle: "seacorp-peruvian-scallops",
+    serving_oz: 4, portion_oz: 4, package_oz: 16, package_label: "1 × 16oz bag", portions_per_pkg: 4 },
+  { sku: "SF-SEC-SCL-SHP-009", title: "Seacorp, Peruvian Scallop Meat", category: "scallop", handle: "seacorp-peruvian-scallops",
+    serving_oz: 4, portion_oz: 4, package_oz: 16, package_label: "1 × 16oz bag", portions_per_pkg: 4 }
+];
+
+// ── HELPERS ──
+function formatNum(n) { return n >= 1000 ? n.toLocaleString() : n; }
+function calcDV(val, dv) { return Math.round((val / dv) * 100); }
+
+function isVerified(handle) {
+  const tests = TEST_DATA[handle];
+  return tests && tests.some(t => COA_MAP[t.code]);
+}
+
+function getInitials(title) {
+  return title.split(',').pop().trim().split(/\s+/).map(w => w[0]).join('').substring(0, 2).toUpperCase();
+}
+
+// ── RENDER ──
+let currentFilter = "all";
+let currentSort = "omega3-desc";
+let currentView = "serving"; // default to per-serving (honest serving-level numbers)
+
+function renderViewToggle() {
+  document.getElementById('viewToggleBar').innerHTML = `
+    <span class="view-toggle-label">Show</span>
+    <button class="view-toggle-btn ${currentView === 'serving' ? 'active' : ''}" onclick="setView('serving')">Per Serving</button>
+    <button class="view-toggle-btn ${currentView === 'package' ? 'active' : ''}" onclick="setView('package')">Per Package</button>
+    <span style="flex:1;"></span>
+    <button class="view-toggle-btn" style="border-radius:10px;border:1.5px solid rgba(51,85,102,0.15);font-size:12px;padding:7px 14px;" onclick="toggleBg()" id="bgToggleBtn">⬜ White BG</button>
+  `;
+}
+
+let whiteBg = false;
+function toggleBg() {
+  whiteBg = !whiteBg;
+  document.body.style.background = whiteBg ? '#ffffff' : 'var(--linen)';
+  const btn = document.getElementById('bgToggleBtn');
+  if (btn) {
+    btn.textContent = whiteBg ? '🟫 Linen BG' : '⬜ White BG';
+    btn.classList.toggle('active', whiteBg);
+  }
+}
+
+function setView(v) {
+  currentView = v;
+  renderViewToggle();
+  renderTiles();
+}
+
+function renderFilterBar() {
+  const categories = [
+    { key: "all", label: "All Products" },
+    { key: "salmon", label: "Salmon" },
+    { key: "trout", label: "Trout & Steelhead" },
+    { key: "whitefish", label: "Whitefish" },
+    { key: "shrimp", label: "Shrimp" },
+    { key: "caviar", label: "Caviar" },
+    { key: "scallop", label: "Scallops" }
+  ];
+
+  const verifiedCount = SKUS.filter(s => isVerified(s.handle)).length;
+
+  let html = '';
+  categories.forEach(c => {
+    const count = c.key === "all" ? SKUS.length : SKUS.filter(s => s.category === c.key).length;
+    html += `<button class="filter-btn ${currentFilter === c.key ? 'active' : ''}" onclick="setFilter('${c.key}')">${c.label} <span class="count-badge">${count}</span></button>`;
+  });
+
+  html += `<button class="filter-btn verified-btn ${currentFilter === 'verified' ? 'active' : ''}" onclick="setFilter('verified')"><svg style="width:12px;height:12px;vertical-align:-1px;margin-right:3px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Verified <span class="count-badge">${verifiedCount}</span></button>`;
+
+  html += `<select class="sort-select" onchange="setSort(this.value)">
+    <option value="omega3-desc" ${currentSort === 'omega3-desc' ? 'selected' : ''}>EPA + DHA ↓ High to Low</option>
+    <option value="omega3-asc" ${currentSort === 'omega3-asc' ? 'selected' : ''}>EPA + DHA ↑ Low to High</option>
+    <option value="dv-desc" ${currentSort === 'dv-desc' ? 'selected' : ''}>Marine Omega ↓</option>
+    <option value="protein-desc" ${currentSort === 'protein-desc' ? 'selected' : ''}>Protein ↓</option>
+    <option value="name-asc" ${currentSort === 'name-asc' ? 'selected' : ''}>Name A–Z</option>
+  </select>`;
+
+  document.getElementById('filterBar').innerHTML = html;
+}
+
+function renderTiles() {
+  let filtered;
+  if (currentFilter === "all") filtered = [...SKUS];
+  else if (currentFilter === "verified") filtered = SKUS.filter(s => isVerified(s.handle));
+  else filtered = SKUS.filter(s => s.category === currentFilter);
+
+  // Compute nutrition for current view (serving or package)
+  filtered.forEach(s => {
+    const base = NUTRITION[s.handle];
+    const viewOz = currentView === 'package' ? s.package_oz : s.serving_oz;
+    s._nutr = base ? getServingData(base, viewOz) : null;
+    s._viewOz = viewOz;
+  });
+
+  // Sort
+  filtered.sort((a, b) => {
+    const na = a._nutr, nb = b._nutr;
+    if (!na && !nb) return 0;
+    if (!na) return 1;
+    if (!nb) return -1;
+    switch (currentSort) {
+      case "omega3-desc": return nb.epa_dha - na.epa_dha;
+      case "omega3-asc": return na.epa_dha - nb.epa_dha;
+      case "dv-desc": return nb.epa_dha - na.epa_dha;
+      case "protein-desc": return nb.protein_g - na.protein_g;
+      case "name-asc": return a.title.localeCompare(b.title);
+      default: return 0;
+    }
+  });
+
+  let html = '';
+
+  filtered.forEach(sku => {
+    const n = sku._nutr;
+    const img = IMAGES[sku.handle];
+    const grad = GRADIENTS[sku.category] || GRADIENTS.other;
+    const initials = getInitials(sku.title);
+
+    // Image area
+    let imgHtml;
+    if (img) {
+      imgHtml = `<div class="tile-img">
+        <img src="${img}" alt="${sku.title}" onerror="this.parentElement.innerHTML='<div class=tile-img-placeholder style=background:${encodeURIComponent(grad)}>${initials}</div>'">
+      </div>`;
+    } else {
+      imgHtml = `<div class="tile-img">
+        <div class="tile-img-placeholder" style="background:${grad}">${initials}</div>
+      </div>`;
+    }
+
+    // Body — PUBLIC TILE (clean, screenshot-ready)
+    let bodyHtml = '';
+    bodyHtml += `<div class="tile-name">${sku.title}</div>`;
+
+    // Subtitle changes based on view
+    const servingsPerPkg = Math.round(sku.package_oz / sku.serving_oz);
+    const servingLabel = sku.serving_oz < 1
+      ? `${(sku.serving_oz * OZ_TO_G).toFixed(0)}g (${sku.serving_oz} oz)`
+      : `${sku.serving_oz} oz (${(sku.serving_oz * OZ_TO_G).toFixed(0)}g)`;
+    const packageLabel = sku.package_oz < 1
+      ? `${(sku.package_oz * OZ_TO_G).toFixed(0)}g (${sku.package_oz} oz)`
+      : `${sku.package_oz} oz (${(sku.package_oz * OZ_TO_G).toFixed(0)}g)`;
+
+    if (currentView === 'package') {
+      let sub = `${sku.package_label}`;
+      if (servingsPerPkg > 1) sub += ` · ${servingsPerPkg} servings`;
+      bodyHtml += `<div class="tile-size">${sub}</div>`;
+    } else {
+      let sub = `${servingLabel} serving`;
+      if (servingsPerPkg > 1) sub += ` · ${servingsPerPkg} per package`;
+      bodyHtml += `<div class="tile-size">${sub}</div>`;
+    }
+
+    // Lab verified badge — shows only when COAs are on file
+    const tests = TEST_DATA[sku.handle];
+    const hasCOA = tests && tests.some(t => COA_MAP[t.code]);
+    if (hasCOA) {
+      bodyHtml += `<div class="tile-verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>3rd Party Lab Verified</div>`;
+    }
+
+    // Product description
+    const desc = DESCRIPTIONS[sku.handle];
+    if (desc) {
+      bodyHtml += `<div class="tile-desc">${desc}</div>`;
+    }
+
+    if (n) {
+      const perLabel = currentView === 'package' ? 'per package' : 'per serving';
+      const viewOzLabel = currentView === 'package'
+        ? `${sku.package_oz}oz ${currentView}`
+        : `${sku.serving_oz}oz ${currentView}`;
+
+      // Tier 1: Marine Omega — EPA + DHA (PRIMARY headline)
+      bodyHtml += `<div class="tile-omega">${formatNum(n.epa_dha)} mg EPA + DHA</div>`;
+      bodyHtml += `<div class="tile-omega-label">${perLabel} · marine omega dose</div>`;
+
+      // Tier 2: Total Omega-3 (supporting)
+      bodyHtml += `<div style="font-size:13px;color:#335566;font-weight:600;margin:6px 0 10px">${formatNum(n.total)} mg total omega-3 ${perLabel}</div>`;
+
+      // Tier 3: Full breakdown (pills)
+      bodyHtml += `<div class="pill-row">`;
+      bodyHtml += `<span class="pill pill-epa">EPA ${formatNum(n.epa)}</span>`;
+      bodyHtml += `<span class="pill pill-dha">DHA ${formatNum(n.dha)}</span>`;
+      if (n.ala > 0) {
+        bodyHtml += `<span class="pill pill-ala">ALA ${formatNum(n.ala)}</span>`;
+      }
+      bodyHtml += `</div>`;
+
+      // Variability note
+      bodyHtml += `<div style="font-size:10px;color:#999;margin-top:6px;font-style:italic;">Based on third-party lab averages</div>`;
+    } else {
+      bodyHtml += `<div class="tile-omega" style="color:#aaa">Testing Pending</div>`;
+      bodyHtml += `<div class="tile-omega-label">Nutrition data not yet available</div>`;
+    }
+
+    // Build lab traceability (separate div below the tile)
+    let labHtml = '';
+    if (tests && tests.length > 0) {
+      const base = NUTRITION[sku.handle];
+      const factor = (sku.serving_oz * OZ_TO_G) / 100;
+
+      const servingsPerPkgLab = Math.round(sku.package_oz / sku.serving_oz);
+      const perPortion = base ? getServingData(base, sku.portion_oz) : null;
+      const perPackage = base ? getServingData(base, sku.package_oz) : null;
+
+      labHtml += `<div class="tile-lab-panel">`;
+      labHtml += `<div class="lab-panel-header">Lab Data & COA Traceability</div>`;
+      labHtml += `<div class="lab-detail-row"><span class="lab-detail-label">SKU</span><span class="lab-detail-value" style="font-family:monospace;font-size:10px">${sku.sku}</span></div>`;
+      labHtml += `<div class="lab-detail-row"><span class="lab-detail-label">Serving</span><span class="lab-detail-value">${sku.serving_oz} oz (${(sku.serving_oz * OZ_TO_G).toFixed(1)}g)</span></div>`;
+      labHtml += `<div class="lab-detail-row"><span class="lab-detail-label">Portion</span><span class="lab-detail-value">${sku.portion_oz} oz (${(sku.portion_oz * OZ_TO_G).toFixed(1)}g)</span></div>`;
+      labHtml += `<div class="lab-detail-row"><span class="lab-detail-label">Package</span><span class="lab-detail-value">${sku.package_label} (${sku.package_oz} oz)</span></div>`;
+      labHtml += `<div class="lab-detail-row"><span class="lab-detail-label">Servings / pkg</span><span class="lab-detail-value">${servingsPerPkgLab}</span></div>`;
+      labHtml += `<div class="lab-detail-row"><span class="lab-detail-label">Portions / pkg</span><span class="lab-detail-value">${sku.portions_per_pkg}</span></div>`;
+
+      // Omega at each level — STRICT LADDER: per 100g → per serving → per package
+      const perServing = base ? getServingData(base, sku.serving_oz) : null;
+      labHtml += `<div style="margin:8px 0 4px;font-size:10px;font-weight:700;color:var(--charcoal-blue);text-transform:uppercase;letter-spacing:0.5px">Marine Omega (EPA + DHA) — Strict Ladder</div>`;
+      labHtml += `<div class="lab-detail-row"><span class="lab-detail-label">Per 100g (truth)</span><span class="lab-detail-value">${base ? formatNum(base.epa + base.dha) : '—'} mg</span></div>`;
+      if (perServing) {
+        labHtml += `<div class="lab-detail-row"><span class="lab-detail-label">Per serving (${sku.serving_oz} oz)</span><span class="lab-detail-value">${formatNum(perServing.epa_dha)} mg</span></div>`;
+      }
+      if (perPortion && sku.portion_oz !== sku.serving_oz) {
+        labHtml += `<div class="lab-detail-row"><span class="lab-detail-label">Per portion (${sku.portion_oz} oz)</span><span class="lab-detail-value">${formatNum(perPortion.epa_dha)} mg</span></div>`;
+      }
+      if (perPackage && sku.package_oz !== sku.serving_oz) {
+        labHtml += `<div class="lab-detail-row"><span class="lab-detail-label">Per package (${sku.package_oz} oz)</span><span class="lab-detail-value">${formatNum(perPackage.epa_dha)} mg</span></div>`;
+      }
+
+      labHtml += `<div style="margin:8px 0 4px;font-size:10px;font-weight:700;color:var(--charcoal-blue);text-transform:uppercase;letter-spacing:0.5px">Total Omega-3 (EPA + DHA + ALA)</div>`;
+      labHtml += `<div class="lab-detail-row"><span class="lab-detail-label">Per 100g (truth)</span><span class="lab-detail-value">${base ? formatNum(base.epa + base.dha + base.ala) : '—'} mg</span></div>`;
+      if (perServing) {
+        labHtml += `<div class="lab-detail-row"><span class="lab-detail-label">Per serving (${sku.serving_oz} oz)</span><span class="lab-detail-value">${formatNum(perServing.total)} mg</span></div>`;
+      }
+      if (perPortion && sku.portion_oz !== sku.serving_oz) {
+        labHtml += `<div class="lab-detail-row"><span class="lab-detail-label">Per portion (${sku.portion_oz} oz)</span><span class="lab-detail-value">${formatNum(perPortion.total)} mg</span></div>`;
+      }
+      if (perPackage && sku.package_oz !== sku.serving_oz) {
+        labHtml += `<div class="lab-detail-row"><span class="lab-detail-label">Per package (${sku.package_oz} oz)</span><span class="lab-detail-value">${formatNum(perPackage.total)} mg</span></div>`;
+      }
+
+      labHtml += `<div style="margin:8px 0 4px;font-size:10px;font-weight:700;color:var(--charcoal-blue);text-transform:uppercase;letter-spacing:0.5px">Lab source</div>`;
+      labHtml += `<div class="lab-detail-row"><span class="lab-detail-label">Conversion</span><span class="lab-detail-value">serving_oz × ${OZ_TO_G} / 100 = ×${factor.toFixed(4)}</span></div>`;
+      labHtml += `<div class="lab-detail-row"><span class="lab-detail-label">Reference</span><span class="lab-detail-value">${base ? base.source : '—'}</span></div>`;
+      labHtml += `<div class="lab-detail-row"><span class="lab-detail-label">Tests</span><span class="lab-detail-value">${tests.length}</span></div>`;
+
+      // Determine which test is the reference for the product tile
+      // Priority: Edacious first, then first available
+      const edaciousTest = tests.find(t => t.lab === 'Edacious');
+      const referenceCode = edaciousTest ? edaciousTest.code : tests[0].code;
+
+      tests.forEach(t => {
+        const coaInfo = COA_MAP[t.code];
+        const verified = !!coaInfo;
+        const isReference = t.code === referenceCode;
+        const verifiedBadge = verified
+          ? `<span style="color:#2e8b57;font-size:10px;font-weight:600;margin-left:6px"><svg style="width:11px;height:11px;vertical-align:-1px;margin-right:2px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Verified</span>`
+          : '';
+        labHtml += `<div class="lab-test-item" ${isReference ? 'style="background:rgba(46,139,87,0.04);border-radius:8px;padding:6px 8px;margin:0 -8px"' : ''}>`;
+        if (isReference) {
+          labHtml += `<div style="font-size:9px;font-weight:700;color:var(--moss-green);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px">&#9654; Referenced in product tile</div>`;
+        }
+        labHtml += `<span class="lab-test-code">#${t.code}</span> · ${t.lab}${verifiedBadge}`;
+        if (t.assay) labHtml += ` · ${t.assay}`;
+        if (t.note) labHtml += `<span style="font-size:9px;color:#999;margin-left:4px">(${t.note})</span>`;
+        labHtml += `<br><span style="font-size:10px;color:#777">EPA ${t.epa} · DHA ${t.dha} · ALA ${t.ala} mg/100g</span>`;
+        if (coaInfo) {
+          if (coaInfo.type === 'url') {
+            labHtml += `<span class="lab-test-coa">${coaInfo.source}<br>${coaInfo.assay}</span>`;
+          } else {
+            labHtml += `<span class="lab-test-coa">COA: ${coaInfo.coa}<br>Lot: ${coaInfo.lot}</span>`;
+          }
+        }
+        labHtml += `</div>`;
+      });
+      labHtml += `</div>`;
+    }
+
+    html += `<div class="tile-wrapper"><div class="tile">${imgHtml}<div class="tile-body">${bodyHtml}</div></div>${labHtml}</div>`;
+  });
+
+  document.getElementById('tileGrid').innerHTML = html;
+}
+
+function setFilter(f) {
+  currentFilter = f;
+  renderFilterBar();
+  renderTiles();
+}
+
+function setSort(s) {
+  currentSort = s;
+  renderTiles();
+}
+
+// ── INIT ──
+renderFilterBar();
+renderViewToggle();
+renderTiles();
+</script>
+
+</body>
+</html>

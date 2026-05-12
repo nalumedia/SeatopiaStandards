@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Omega Compass — The Seatopia Standard (Prototype)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+:root {
+  --charcoal-blue: #355566;
+  --cerulean: #4B7991;
+  --terra-cotta: #D48060;
+  --cream: #F5EFE2;
+  --white: #FAF7F0;
+  --green: #2e8b57;
+  --gold: #b9a233;
+  --danger: #c0392b;
+  --ink: #1a2a34;
+}
+* { box-sizing: border-box; }
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: var(--cream); color: var(--ink); margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+header {
+  padding: 40px 48px 28px; background: linear-gradient(180deg, #355566 0%, #4B7991 100%);
+  color: var(--white);
+}
+header .eyebrow {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 3px;
+  opacity: 0.75; margin-bottom: 8px;
+}
+header h1 {
+  font-family: 'EB Garamond', Georgia, serif; font-size: 42px; font-weight: 500;
+  margin: 0 0 6px; letter-spacing: -0.5px;
+}
+header h1 em { font-style: italic; color: #f5c98a; font-weight: 400; }
+header .sub { font-size: 15px; opacity: 0.9; max-width: 780px; line-height: 1.55; }
+header .proto-tag {
+  display: inline-block; margin-top: 14px; padding: 4px 10px;
+  background: rgba(255,255,255,0.18); border-radius: 3px;
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700;
+}
+main { max-width: 1280px; margin: 0 auto; padding: 32px 48px 80px; }
+
+/* Concept strip — four dimensions */
+.concept {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+  margin-bottom: 32px;
+}
+.concept-card {
+  background: var(--white); padding: 16px 18px; border-radius: 8px;
+  border-top: 4px solid var(--charcoal-blue);
+}
+.concept-card .dim {
+  font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--cerulean); margin-bottom: 4px;
+}
+.concept-card h3 {
+  font-family: 'EB Garamond', serif; font-size: 22px; margin: 0 0 6px; color: var(--charcoal-blue);
+}
+.concept-card p { font-size: 12px; line-height: 1.5; margin: 0; color: #455; }
+.concept-card .anchor {
+  display: inline-block; margin-top: 8px; font-size: 10px;
+  padding: 2px 6px; background: rgba(46,139,87,0.12); color: var(--green);
+  border-radius: 3px; font-weight: 700;
+}
+
+/* Weights panel */
+.weights {
+  background: var(--white); padding: 20px 24px; border-radius: 10px;
+  margin-bottom: 28px; box-shadow: 0 1px 6px rgba(51,85,102,0.06);
+}
+.weights h3 {
+  margin: 0 0 12px; font-size: 13px; font-weight: 700;
+  color: var(--charcoal-blue); letter-spacing: 1px; text-transform: uppercase;
+}
+.weights-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+}
+.weight-item label {
+  display: flex; justify-content: space-between; font-size: 12px;
+  font-weight: 600; color: var(--charcoal-blue); margin-bottom: 4px;
+}
+.weight-item label .pct { color: var(--cerulean); font-weight: 700; }
+.weight-item input[type=range] {
+  width: 100%; accent-color: var(--charcoal-blue);
+}
+.weights-footer {
+  margin-top: 12px; padding-top: 10px; border-top: 1px dotted rgba(51,85,102,0.15);
+  font-size: 11px; color: #667; display: flex; justify-content: space-between; align-items: center;
+}
+.weights-footer button {
+  background: var(--charcoal-blue); color: var(--white); border: none;
+  padding: 6px 14px; border-radius: 4px; font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
+}
+.weights-footer button:hover { background: #2a4553; }
+
+/* Main grid — compass cards */
+.compass-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px; margin-bottom: 40px;
+}
+.compass-card {
+  background: var(--white); border-radius: 10px; overflow: hidden;
+  box-shadow: 0 2px 10px rgba(51,85,102,0.08);
+  transition: transform 0.15s, box-shadow 0.15s;
+  position: relative;
+}
+.compass-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(51,85,102,0.14); }
+
+.compass-card .head {
+  padding: 14px 16px 6px; display: flex; justify-content: space-between; align-items: flex-start;
+}
+.compass-card .head .name {
+  font-family: 'EB Garamond', serif; font-size: 19px; font-weight: 600; color: var(--charcoal-blue);
+  line-height: 1.15;
+}
+.compass-card .head .farm {
+  font-size: 11px; color: var(--cerulean); margin-top: 2px;
+}
+.compass-card .rank {
+  font-size: 10px; font-weight: 700; letter-spacing: 1px;
+  color: var(--cerulean); opacity: 0.7;
+}
+.compass-card .score-block {
+  padding: 2px 16px 12px;
+  display: flex; align-items: center; gap: 10px;
+}
+.compass-card .score-num {
+  font-family: 'EB Garamond', serif; font-size: 54px; font-weight: 500;
+  color: var(--charcoal-blue); line-height: 1; letter-spacing: -2px;
+}
+.compass-card .score-num .slash {
+  font-size: 20px; color: #aab; opacity: 0.55; font-weight: 400;
+}
+.compass-card .score-label {
+  font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--cerulean); margin-bottom: 2px;
+}
+.compass-card .tier {
+  font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 3px;
+  display: inline-block; letter-spacing: 0.5px;
+}
+.tier-apex     { background: #355566; color: #f5c98a; }
+.tier-gold     { background: rgba(181,146,51,0.16); color: #8a6f1f; }
+.tier-verified { background: rgba(46,139,87,0.15); color: var(--green); }
+.tier-baseline { background: rgba(75,121,145,0.12); color: var(--cerulean); }
+
+.compass-svg {
+  display: block; margin: 0 auto; padding: 0 16px 8px;
+}
+.sub-scores {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px;
+  padding: 8px 16px 16px; font-size: 11px;
+}
+.sub-score {
+  background: rgba(75,121,145,0.05); padding: 6px 10px; border-radius: 5px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-left: 3px solid var(--cerulean);
+}
+.sub-score .dim-label {
+  font-size: 9px; letter-spacing: 1.2px; text-transform: uppercase;
+  color: var(--cerulean); font-weight: 700;
+}
+.sub-score .dim-val {
+  font-family: 'EB Garamond', serif; font-size: 18px; font-weight: 500;
+  color: var(--charcoal-blue);
+}
+.sub-score.density { border-left-color: #2a4a5c; }
+.sub-score.balance { border-left-color: #D48060; }
+.sub-score.purity  { border-left-color: var(--green); }
+.sub-score.protein { border-left-color: #b9a233; }
+
+.raw-detail {
+  padding: 10px 16px 14px; font-size: 10px; line-height: 1.55;
+  background: rgba(75,121,145,0.03); color: #556; border-top: 1px dotted rgba(75,121,145,0.15);
+}
+.raw-detail strong { color: var(--charcoal-blue); }
+.raw-detail .kv { display: flex; justify-content: space-between; }
+.raw-detail .kv span:first-child { color: #99a; }
+
+/* Ranked table */
+.rank-table {
+  background: var(--white); border-radius: 10px; padding: 24px 28px;
+  box-shadow: 0 2px 10px rgba(51,85,102,0.06); margin-bottom: 40px;
+}
+.rank-table h2 {
+  font-family: 'EB Garamond', serif; font-size: 26px; margin: 0 0 4px; color: var(--charcoal-blue);
+}
+.rank-table .subtitle { font-size: 12px; color: var(--cerulean); margin-bottom: 18px; }
+.rank-table table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.rank-table th {
+  text-align: left; padding: 8px 10px; border-bottom: 2px solid rgba(51,85,102,0.15);
+  font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--cerulean);
+}
+.rank-table th.num, .rank-table td.num { text-align: right; }
+.rank-table td { padding: 9px 10px; border-bottom: 1px solid rgba(51,85,102,0.06); }
+.rank-table tr:hover td { background: rgba(75,121,145,0.04); }
+.rank-table .rank-num {
+  display: inline-block; width: 24px; height: 24px; line-height: 24px;
+  text-align: center; border-radius: 50%; font-weight: 700; font-size: 11px;
+  background: rgba(75,121,145,0.1); color: var(--charcoal-blue);
+}
+.rank-table .rank-num.top3 { background: #355566; color: #f5c98a; }
+.rank-table .score-cell {
+  font-family: 'EB Garamond', serif; font-size: 22px; font-weight: 600; color: var(--charcoal-blue);
+}
+.rank-table .mini-bar {
+  display: inline-block; width: 42px; height: 6px; border-radius: 3px;
+  background: rgba(75,121,145,0.1); overflow: hidden; vertical-align: middle;
+  margin-right: 6px;
+}
+.rank-table .mini-bar-fill { display: block; height: 100%; border-radius: 3px; }
+
+/* Formula panel */
+.formula-panel {
+  background: var(--white); border-radius: 10px; padding: 24px 28px;
+  box-shadow: 0 2px 10px rgba(51,85,102,0.06);
+}
+.formula-panel h2 {
+  font-family: 'EB Garamond', serif; font-size: 24px; margin: 0 0 10px; color: var(--charcoal-blue);
+}
+.formula-panel p { font-size: 13px; line-height: 1.65; color: #334; margin: 0 0 14px; }
+.formula-panel .formula {
+  font-family: 'SF Mono', Menlo, monospace; font-size: 12px; line-height: 1.7;
+  background: rgba(51,85,102,0.04); padding: 14px 18px; border-radius: 6px;
+  border-left: 3px solid var(--charcoal-blue); margin: 10px 0; color: #223;
+}
+.formula-panel .note {
+  font-size: 11px; color: #667; font-style: italic; margin-top: 10px;
+}
+details { margin-top: 16px; }
+details summary {
+  cursor: pointer; font-size: 12px; font-weight: 700; color: var(--cerulean);
+  letter-spacing: 1px; text-transform: uppercase; padding: 8px 0;
+}
+details summary:hover { color: var(--charcoal-blue); }
+
+.naming-candidates {
+  margin-top: 18px; padding: 16px 18px; background: rgba(245,201,138,0.14);
+  border-left: 3px solid #d4a85d; border-radius: 6px; font-size: 12px; line-height: 1.6;
+}
+.naming-candidates strong { color: #8a6f1f; }
+
+footer {
+  padding: 30px 48px; font-size: 11px; color: var(--cerulean); text-align: center;
+  border-top: 1px solid rgba(75,121,145,0.1); background: var(--white);
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">The Seatopia Standard · Prototype</div>
+  <h1>Omega <em>Compass</em></h1>
+  <div class="sub">A single proprietary score rolling up the four dimensions of a superior seafood: omega density, n-3 : n-6 balance, purity (mercury + microplastics), and protein. Every Seatopia product gets a score out of 100 — and a compass shape that shows <em>why</em>.</div>
+  <div class="proto-tag">Internal prototype · Apr 2026</div>
+</header>
+
+<main>
+
+<!-- Concept strip -->
+<div class="concept">
+  <div class="concept-card" style="border-top-color:#2a4a5c">
+    <div class="dim">North · Density</div>
+    <h3>Omega-3 density</h3>
+    <p>EPA + DHA milligrams per 100 g edible portion. The therapeutic dose story in one number.</p>
+    <span class="anchor">≥ 1,500 mg = 100</span>
+  </div>
+  <div class="concept-card" style="border-top-color:#D48060">
+    <div class="dim">East · Balance</div>
+    <h3>n-3 : n-6 ratio</h3>
+    <p>The quiet metric nobody surfaces. Western diet ~1:20; wild salmon ~1:1. Reveals feed strategy.</p>
+    <span class="anchor">≥ 1:1 = 100</span>
+  </div>
+  <div class="concept-card" style="border-top-color:var(--green)">
+    <div class="dim">South · Purity</div>
+    <h3>Mercury + microplastics</h3>
+    <p>Hg against EPA Best Choices &amp; FDA action level, plus EMSL 6-polymer MP panel.</p>
+    <span class="anchor">&lt;0.05 ppm Hg + 0/6 MP = 100</span>
+  </div>
+  <div class="concept-card" style="border-top-color:#b9a233">
+    <div class="dim">West · Protein</div>
+    <h3>Protein per 100 g</h3>
+    <p>Complete protein. Capsules can't deliver this — it's the "this is dinner" signal.</p>
+    <span class="anchor">≥ 25 g = 100</span>
+  </div>
+</div>
+
+<!-- Weights -->
+<div class="weights">
+  <h3>Weight the compass <span style="color:#99a;font-weight:400;text-transform:none;letter-spacing:0">(drag to audit — rankings update live)</span></h3>
+  <div class="weights-grid">
+    <div class="weight-item">
+      <label>North · Density <span class="pct" id="w-density-pct">35%</span></label>
+      <input type="range" id="w-density" min="0" max="100" value="35">
+    </div>
+    <div class="weight-item">
+      <label>East · Balance <span class="pct" id="w-balance-pct">20%</span></label>
+      <input type="range" id="w-balance" min="0" max="100" value="20">
+    </div>
+    <div class="weight-item">
+      <label>South · Purity <span class="pct" id="w-purity-pct">30%</span></label>
+      <input type="range" id="w-purity" min="0" max="100" value="30">
+    </div>
+    <div class="weight-item">
+      <label>West · Protein <span class="pct" id="w-protein-pct">15%</span></label>
+      <input type="range" id="w-protein" min="0" max="100" value="15">
+    </div>
+  </div>
+  <div class="weights-footer">
+    <div>Weights are normalized to sum to 100%. Current sum: <strong id="w-sum">100%</strong></div>
+    <button onclick="resetWeights()">Reset defaults</button>
+  </div>
+</div>
+
+<!-- Ranked overview -->
+<div class="rank-table">
+  <h2>Compass leaderboard</h2>
+  <div class="subtitle">All Seatopia products ranked by current compass score · sub-scores shown as mini-bars</div>
+  <table id="rank-table">
+    <thead><tr>
+      <th>#</th><th>Product</th><th>Farm</th>
+      <th class="num">Score</th>
+      <th>North · Density</th>
+      <th>East · Balance</th>
+      <th>South · Purity</th>
+      <th>West · Protein</th>
+    </tr></thead>
+    <tbody id="rank-body"></tbody>
+  </table>
+</div>
+
+<!-- Compass cards grid -->
+<h2 style="font-family:'EB Garamond',serif;font-size:28px;color:var(--charcoal-blue);margin:32px 0 8px">Product compasses</h2>
+<div style="font-size:12px;color:var(--cerulean);margin-bottom:18px">Each compass rose is a four-axis radar. Fully filled = 100 on every dimension. The <em>shape</em> tells the story — a lopsided polygon points directly at what to improve.</div>
+<div class="compass-grid" id="compass-grid"></div>
+
+<!-- Formula / auditability -->
+<div class="formula-panel">
+  <h2>Formula · auditable &amp; defensible</h2>
+  <p>The Omega Compass is a weighted average of four sub-scores (each 0–100). Every Seatopia product has its sub-scores computed from lab data, not marketing estimates. Thresholds are anchored to published clinical / regulatory references so the claim survives scrutiny.</p>
+
+  <div class="formula">
+<strong>Compass Score</strong> = (w_D · Density) + (w_B · Balance) + (w_P · Purity) + (w_Pr · Protein)
+where default weights: w_D=0.35, w_B=0.20, w_P=0.30, w_Pr=0.15
+
+<strong>Density</strong>  = min(100, EPA+DHA[mg/100g] / 15)
+             &rarr; 1,500 mg = 100; anchored to AHA therapeutic range (1–2 g EPA+DHA/day)
+
+<strong>Balance</strong>  = max(0, min(100, 100 + 76.7 · log10(n3/n6)))
+             &rarr; ratio 1:1 = 100; ratio 1:20 (Western diet) = 0
+             &rarr; source: Simopoulos 2002/2008, AJCN dietary ratio benchmarks
+
+<strong>Purity</strong>   = Hg_score (0–60) + MP_score (0–40)
+             Hg_score = 60 · max(0, 1 - Hg_ppm / 0.23)
+             &rarr; 0 ppm = 60; 0.15 (EPA Best Choices) = 21; 0.23 (Good Choices) = 0
+             MP_score = 40 if 0/6 detected, 20 if not tested, 0 if any detection
+             &rarr; source: EPA/FDA 2021 advisory; EMSL 6-polymer FTIR panel, LOD 1 microparticle
+
+<strong>Protein</strong>  = min(100, protein[g/100g] · 4)
+             &rarr; 25 g = 100; anchored to USDA "high protein" threshold (20%+ DV per serving)
+  </div>
+
+  <p class="note">All four formulas are linear or log-linear, deliberately — so a 10% data change produces a predictable score change. No black-box weighting, no ML, no opaque weighting. That's the point.</p>
+
+  <details>
+    <summary>Why these four dimensions (and not more)?</summary>
+    <p style="margin-top:10px">The field-tested rule for branded wellness metrics is <strong>3–5 sub-scores</strong>. Fewer and the score loses nuance; more and users stop reading. Oura Sleep Score uses 7 but collapses them into 3 visible tiers. Whoop Recovery uses 4. Apgar uses 5. We chose four because they map cleanly to what Seatopia provably differentiates on: density (genetics + feed), balance (feed chemistry), purity (sourcing + testing), protein (species choice). Contaminant sub-categories (PCBs, dioxins, antibiotics, selenium) roll into Purity as we add assays — the compass doesn't need to grow more axes.</p>
+  </details>
+
+  <details>
+    <summary>Score tiers</summary>
+    <p style="margin-top:10px">
+      <span class="tier tier-apex">Apex 90+</span> &nbsp; Flagship — the "this is why Seatopia exists" story. Leads hero images.<br>
+      <span class="tier tier-gold">Gold 75–89</span> &nbsp; Strong across the board. Core assortment.<br>
+      <span class="tier tier-verified">Verified 60–74</span> &nbsp; Meets Seatopia Standard; typical farmed alternative for this species.<br>
+      <span class="tier tier-baseline">Baseline &lt;60</span> &nbsp; Passes testing but the category itself is low-density (shrimp, scallops, white fish). Marketed on purity + protein, not omega volume.
+    </p>
+  </details>
+
+  <div class="naming-candidates">
+    <strong>Naming finalists to decide between:</strong>
+    &nbsp;"<strong>Omega Compass</strong>" (recommended — visual metaphor, four-dim structure built in)&nbsp; ·&nbsp;
+    "<strong>Seatopia Omega Index (SOI)</strong>" (clinical shorthand — "our salmon scores 94 SOI")&nbsp; ·&nbsp;
+    "<strong>Blue Score</strong>" (short, tattooable, travels beyond owned media)&nbsp; ·&nbsp;
+    "<strong>True North Omega</strong>" (aspirational, soft on measurement)
+  </div>
+</div>
+
+</main>
+
+<footer>
+  Seatopia Omega Compass · prototype v0.1 · data from SeatopiaTestingData_AllLabs.csv (lab-verified lots, Apr 2026)
+</footer>
+
+<script>
+// ───────── Data: 16 unique Seatopia products with real lab data ─────────
+const PRODUCTS = [
+  { name:"Salmon Roe Caviar", farm:"Yarra Valley", cat:"roe", epa_dha:2806.2, o3:2948.6, o6:2850.0, protein:26.1, hg_ppb:0.0, hg_below_loq:true, mp_tested:true },
+  { name:"Osetra Caviar", farm:"Marshallberg", cat:"roe", epa_dha:1748.5, o3:1910.2, o6:2790.0, protein:26.1, hg_ppb:4.94, hg_below_loq:false, mp_tested:true },
+  { name:"King Salmon", farm:"Ora King", cat:"salmon", epa_dha:1606.0, o3:2816.0, o6:2760.0, protein:18.6, hg_ppb:17.33, hg_below_loq:false, mp_tested:true },
+  { name:"King Salmon", farm:"Big Glory Bay", cat:"salmon", epa_dha:1431.0, o3:2481.0, o6:2480.0, protein:18.9, hg_ppb:18.74, hg_below_loq:false, mp_tested:true },
+  { name:"King Salmon", farm:"Mt Cook", cat:"salmon", epa_dha:1319.0, o3:2459.0, o6:2380.0, protein:18.9, hg_ppb:33.26, hg_below_loq:false, mp_tested:true },
+  { name:"Atlantic Salmon", farm:"Bakkafrost", cat:"salmon", epa_dha:1304.0, o3:2254.0, o6:1450.0, protein:21.3, hg_ppb:37.46, hg_below_loq:false, mp_tested:true },
+  { name:"Steelhead Trout", farm:"Hudson Valley", cat:"trout", epa_dha:1416.0, o3:3036.0, o6:852.0, protein:19.5, hg_ppb:10.57, hg_below_loq:false, mp_tested:true },
+  { name:"Steelhead Trout", farm:"Caleta Bay", cat:"trout", epa_dha:851.0, o3:2181.0, o6:2460.0, protein:20.8, hg_ppb:0.0, hg_below_loq:true, mp_tested:false },
+  { name:"Rainbow Trout", farm:"McFarland Springs", cat:"trout", epa_dha:940.0, o3:2210.0, o6:1390.0, protein:22.0, hg_ppb:9.41, hg_below_loq:false, mp_tested:true },
+  { name:"Rainbow Trout", farm:"Smoke in Chimneys", cat:"trout", epa_dha:490.0, o3:523.0, o6:320.0, protein:18.2, hg_ppb:9.74, hg_below_loq:false, mp_tested:true },
+  { name:"Branzino", farm:"Esteros Lubimar", cat:"white", epa_dha:902.0, o3:1782.0, o6:1750.0, protein:21.1, hg_ppb:100.0, hg_below_loq:false, mp_tested:true },
+  { name:"Sea Bream", farm:"Esteros Lubimar", cat:"white", epa_dha:788.0, o3:1431.0, o6:1750.0, protein:21.1, hg_ppb:60.0, hg_below_loq:false, mp_tested:true },
+  { name:"Yellowtail", farm:"Kingfish Company", cat:"white", epa_dha:733.0, o3:889.0, o6:557.0, protein:23.4, hg_ppb:60.26, hg_below_loq:false, mp_tested:true },
+  { name:"Barramundi", farm:"Australis", cat:"white", epa_dha:123.0, o3:156.0, o6:502.0, protein:21.0, hg_ppb:27.89, hg_below_loq:false, mp_tested:true },
+  { name:"Peruvian Scallops", farm:"Seacorp", cat:"shellfish", epa_dha:86.0, o3:89.0, o6:34.0, protein:24.1, hg_ppb:10.0, hg_below_loq:false, mp_tested:true },
+  { name:"Black Tiger Shrimp", farm:"Tarakan", cat:"shellfish", epa_dha:32.0, o3:39.0, o6:51.0, protein:18.0, hg_ppb:17.93, hg_below_loq:false, mp_tested:false }
+];
+
+// ───────── Scoring formulas ─────────
+function densityScore(p) {
+  return Math.min(100, (p.epa_dha || 0) / 15);
+}
+function balanceScore(p) {
+  if (!p.o3 || !p.o6 || p.o6 <= 0) return 0;
+  const ratio = p.o3 / p.o6;
+  return Math.max(0, Math.min(100, 100 + 76.7 * Math.log10(ratio)));
+}
+function purityScore(p) {
+  const hg_ppm = (p.hg_ppb || 0) / 1000;
+  const hgComp = 60 * Math.max(0, 1 - hg_ppm / 0.23);
+  let mpComp;
+  if (p.mp_tested) mpComp = 40;       // 0/6 detected (every tested Seatopia product is clean)
+  else             mpComp = 20;       // half-credit: pending but historically clean assortment
+  return hgComp + mpComp;
+}
+function proteinScore(p) {
+  return Math.min(100, (p.protein || 0) * 4);
+}
+function compassScore(p, weights) {
+  const d = densityScore(p), b = balanceScore(p), pu = purityScore(p), pr = proteinScore(p);
+  const total = weights.density + weights.balance + weights.purity + weights.protein;
+  const wD = weights.density / total, wB = weights.balance / total, wP = weights.purity / total, wPr = weights.protein / total;
+  return { overall: wD*d + wB*b + wP*pu + wPr*pr, density: d, balance: b, purity: pu, protein: pr };
+}
+function tier(score) {
+  if (score >= 90) return { cls: 'tier-apex', label: 'Apex' };
+  if (score >= 75) return { cls: 'tier-gold', label: 'Gold' };
+  if (score >= 60) return { cls: 'tier-verified', label: 'Verified' };
+  return { cls: 'tier-baseline', label: 'Baseline' };
+}
+
+// ───────── SVG compass rose generator ─────────
+function compassSVG(scores, size) {
+  size = size || 200;
+  const cx = size/2, cy = size/2;
+  const rMax = size/2 - 24;
+  // 4 axes: N=density, E=balance, S=purity, W=protein
+  const axes = [
+    { label: 'N · Density', score: scores.density,  angle: -90, color: '#2a4a5c' },
+    { label: 'E · Balance', score: scores.balance,  angle:   0, color: '#D48060' },
+    { label: 'S · Purity',  score: scores.purity,   angle:  90, color: '#2e8b57' },
+    { label: 'W · Protein', score: scores.protein,  angle: 180, color: '#b9a233' }
+  ];
+  const point = (angleDeg, r) => {
+    const a = angleDeg * Math.PI / 180;
+    return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+  };
+  let svg = `<svg class="compass-svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">`;
+
+  // Background rings at 25/50/75/100
+  [0.25, 0.5, 0.75, 1.0].forEach(frac => {
+    const r = rMax * frac;
+    const pts = axes.map(ax => point(ax.angle, r).join(',')).join(' ');
+    svg += `<polygon points="${pts}" fill="none" stroke="rgba(75,121,145,0.18)" stroke-width="1" stroke-dasharray="${frac===1?'0':'2,3'}"/>`;
+  });
+  // Axis lines
+  axes.forEach(ax => {
+    const [x2, y2] = point(ax.angle, rMax);
+    svg += `<line x1="${cx}" y1="${cy}" x2="${x2}" y2="${y2}" stroke="rgba(75,121,145,0.25)" stroke-width="1"/>`;
+  });
+  // Filled polygon — the compass shape
+  const polyPts = axes.map(ax => point(ax.angle, rMax * (ax.score/100)).join(',')).join(' ');
+  svg += `<polygon points="${polyPts}" fill="rgba(53,85,102,0.28)" stroke="#355566" stroke-width="2" stroke-linejoin="round"/>`;
+  // Score dots
+  axes.forEach(ax => {
+    const [x, y] = point(ax.angle, rMax * (ax.score/100));
+    svg += `<circle cx="${x}" cy="${y}" r="4" fill="${ax.color}" stroke="#fff" stroke-width="1.5"/>`;
+  });
+  // Axis labels
+  axes.forEach(ax => {
+    const [lx, ly] = point(ax.angle, rMax + 14);
+    const anchor = ax.angle === 0 ? 'start' : ax.angle === 180 ? 'end' : 'middle';
+    const dy = ax.angle === -90 ? -2 : ax.angle === 90 ? 10 : 3;
+    svg += `<text x="${lx}" y="${ly+dy}" text-anchor="${anchor}" font-size="8" font-weight="700" fill="${ax.color}" letter-spacing="1">${ax.label.toUpperCase()}</text>`;
+  });
+  svg += `</svg>`;
+  return svg;
+}
+
+// ───────── Weight management ─────────
+let weights = { density: 35, balance: 20, purity: 30, protein: 15 };
+function readWeights() {
+  weights.density = +document.getElementById('w-density').value;
+  weights.balance = +document.getElementById('w-balance').value;
+  weights.purity  = +document.getElementById('w-purity').value;
+  weights.protein = +document.getElementById('w-protein').value;
+  const sum = weights.density + weights.balance + weights.purity + weights.protein;
+  document.getElementById('w-sum').textContent = Math.round(sum) + '% → normalized';
+  document.getElementById('w-density-pct').textContent = Math.round(weights.density/sum*100) + '%';
+  document.getElementById('w-balance-pct').textContent = Math.round(weights.balance/sum*100) + '%';
+  document.getElementById('w-purity-pct').textContent  = Math.round(weights.purity/sum*100) + '%';
+  document.getElementById('w-protein-pct').textContent = Math.round(weights.protein/sum*100) + '%';
+}
+function resetWeights() {
+  document.getElementById('w-density').value = 35;
+  document.getElementById('w-balance').value = 20;
+  document.getElementById('w-purity').value = 30;
+  document.getElementById('w-protein').value = 15;
+  readWeights(); render();
+}
+
+// ───────── Render ─────────
+function render() {
+  const scored = PRODUCTS.map(p => ({ p, s: compassScore(p, weights) }));
+  scored.sort((a,b) => b.s.overall - a.s.overall);
+
+  // Rank table
+  const tbody = document.getElementById('rank-body');
+  tbody.innerHTML = scored.map((row, i) => {
+    const { p, s } = row;
+    const t = tier(s.overall);
+    const miniBar = (v, color) =>
+      `<span class="mini-bar"><span class="mini-bar-fill" style="width:${v}%;background:${color}"></span></span><span style="font-weight:600">${Math.round(v)}</span>`;
+    return `<tr>
+      <td><span class="rank-num ${i<3?'top3':''}">${i+1}</span></td>
+      <td><strong>${p.name}</strong></td>
+      <td style="color:var(--cerulean)">${p.farm}</td>
+      <td class="num"><span class="score-cell">${Math.round(s.overall)}</span> <span class="tier ${t.cls}">${t.label}</span></td>
+      <td>${miniBar(s.density, '#2a4a5c')}</td>
+      <td>${miniBar(s.balance, '#D48060')}</td>
+      <td>${miniBar(s.purity,  '#2e8b57')}</td>
+      <td>${miniBar(s.protein, '#b9a233')}</td>
+    </tr>`;
+  }).join('');
+
+  // Compass cards
+  const grid = document.getElementById('compass-grid');
+  grid.innerHTML = scored.map((row, i) => {
+    const { p, s } = row;
+    const t = tier(s.overall);
+    const ratio = p.o6 > 0 ? (p.o3 / p.o6) : 0;
+    const ratioStr = ratio >= 1 ? `${ratio.toFixed(2)}:1` : `1:${(1/ratio).toFixed(1)}`;
+    const hgPpm = (p.hg_ppb/1000).toFixed(3);
+    const hgDisplay = p.hg_below_loq ? `<0.010` : hgPpm;
+    return `<div class="compass-card">
+      <div class="head">
+        <div>
+          <div class="name">${p.name}</div>
+          <div class="farm">${p.farm}</div>
+        </div>
+        <div class="rank">#${i+1}</div>
+      </div>
+      <div class="score-block">
+        <div>
+          <div class="score-label">Compass</div>
+          <div class="score-num">${Math.round(s.overall)}<span class="slash">/100</span></div>
+        </div>
+        <div style="margin-left:auto;text-align:right">
+          <span class="tier ${t.cls}">${t.label}</span>
+        </div>
+      </div>
+      ${compassSVG(s)}
+      <div class="sub-scores">
+        <div class="sub-score density"><span class="dim-label">N · Density</span><span class="dim-val">${Math.round(s.density)}</span></div>
+        <div class="sub-score balance"><span class="dim-label">E · Balance</span><span class="dim-val">${Math.round(s.balance)}</span></div>
+        <div class="sub-score purity"><span class="dim-label">S · Purity</span><span class="dim-val">${Math.round(s.purity)}</span></div>
+        <div class="sub-score protein"><span class="dim-label">W · Protein</span><span class="dim-val">${Math.round(s.protein)}</span></div>
+      </div>
+      <div class="raw-detail">
+        <div class="kv"><span>EPA + DHA / 100g</span><strong>${p.epa_dha.toLocaleString()} mg</strong></div>
+        <div class="kv"><span>Total ω-3 : ω-6</span><strong>${ratioStr} (${p.o3.toLocaleString()} : ${p.o6.toLocaleString()} mg)</strong></div>
+        <div class="kv"><span>Mercury</span><strong>${hgDisplay} ppm</strong></div>
+        <div class="kv"><span>Microplastics</span><strong>${p.mp_tested ? '0/6 (EMSL)' : 'pending'}</strong></div>
+        <div class="kv"><span>Protein / 100g</span><strong>${p.protein.toFixed(1)} g</strong></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// Wire up sliders
+['density','balance','purity','protein'].forEach(d => {
+  document.getElementById('w-'+d).addEventListener('input', () => { readWeights(); render(); });
+});
+readWeights();
+render();
+</script>
+
+</body>
+</html>

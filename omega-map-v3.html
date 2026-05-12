@@ -1,0 +1,3354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seatopia Nutrition Intelligence Platform v3</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --charcoal-blue: #335566;
+      --cerulean: #4B7991;
+      --maya-blue: #7BC3F3;
+      --linen: #F7EFE6;
+      --almond-silk: #FDD4CD;
+      --fiery-terracotta: #D45A3C;
+      --moss-green: #7BC950;
+      --racing-red: #EE1C25;
+      --pumpkin-spice: #EE7B30;
+      --white: #FFFFFF;
+      --deep-ocean: #1a3344;
+    }
+
+    body {
+      font-family: 'Karla', sans-serif;
+      background: var(--linen);
+      color: var(--charcoal-blue);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4, h5 {
+      font-family: 'EB Garamond', serif;
+    }
+
+    /* HEADER */
+    header {
+      background: var(--white);
+      border-bottom: 2px solid var(--maya-blue);
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .logo-text {
+      font-family: 'EB Garamond', serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--charcoal-blue);
+      letter-spacing: -0.5px;
+    }
+
+    .logo-subtitle {
+      font-size: 11px;
+      color: var(--cerulean);
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .header-notice {
+      font-size: 11px;
+      color: var(--fiery-terracotta);
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-align: right;
+    }
+
+    /* NAV */
+    nav {
+      background: var(--white);
+      border-bottom: 1px solid rgba(51,85,102,0.1);
+      position: sticky;
+      top: 80px;
+      z-index: 99;
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .nav-tab {
+      flex-shrink: 0;
+      padding: 14px 16px;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      font-family: 'Karla', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--cerulean);
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .nav-tab:hover {
+      color: var(--charcoal-blue);
+      border-bottom-color: var(--maya-blue);
+    }
+
+    .nav-tab.active {
+      color: var(--charcoal-blue);
+      border-bottom-color: var(--fiery-terracotta);
+    }
+
+    /* MAIN CONTENT */
+    main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* TYPOGRAPHY */
+    h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+      color: var(--charcoal-blue);
+    }
+
+    h2 {
+      font-size: 32px;
+      margin: 30px 0 20px 0;
+      color: var(--charcoal-blue);
+    }
+
+    h3 {
+      font-size: 24px;
+      margin: 20px 0 15px 0;
+      color: var(--charcoal-blue);
+    }
+
+    h4 {
+      font-size: 16px;
+      margin: 12px 0 8px 0;
+      color: var(--charcoal-blue);
+      font-weight: 600;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: var(--cerulean);
+      margin-bottom: 30px;
+    }
+
+    /* CONTROLS */
+    .controls {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .toggle-group {
+      display: flex;
+      gap: 8px;
+      background: rgba(51,85,102,0.05);
+      padding: 4px;
+      border-radius: 6px;
+    }
+
+    .toggle-btn {
+      padding: 8px 16px;
+      border: none;
+      background: transparent;
+      color: var(--cerulean);
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 13px;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .toggle-btn.active {
+      background: var(--white);
+      color: var(--charcoal-blue);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .radio-btn {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .radio-btn input {
+      display: none;
+    }
+
+    .radio-label {
+      display: block;
+      padding: 10px 18px;
+      background: rgba(51,85,102,0.08);
+      border: 2px solid transparent;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 13px;
+      transition: all 0.2s ease;
+    }
+
+    .radio-btn input:checked + .radio-label {
+      background: var(--charcoal-blue);
+      color: var(--white);
+      border-color: var(--maya-blue);
+    }
+
+    /* BARS & CHARTS */
+    .bar-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding: 16px;
+      background: var(--white);
+      border-radius: 8px;
+      border-left: 4px solid var(--maya-blue);
+    }
+
+    .bar-label {
+      flex-shrink: 0;
+      width: 200px;
+      font-weight: 500;
+      color: var(--charcoal-blue);
+      font-size: 14px;
+    }
+
+    .bar-label-small {
+      width: 150px;
+      font-size: 12px;
+    }
+
+    .bar-container {
+      flex: 1;
+      display: flex;
+      height: 28px;
+      background: rgba(51,85,102,0.05);
+      border-radius: 4px;
+      overflow: hidden;
+      gap: 1px;
+    }
+
+    .bar-segment {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 600;
+      transition: opacity 0.2s ease;
+    }
+
+    .bar-segment:hover {
+      opacity: 0.85;
+    }
+
+    .epa { background: var(--charcoal-blue); }
+    .dha { background: var(--cerulean); }
+    .ala { background: var(--maya-blue); }
+
+    .bar-value {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      color: var(--charcoal-blue);
+      font-size: 14px;
+    }
+
+    .dv-ring {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+    }
+
+    .dv-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      background: var(--moss-green);
+      color: var(--white);
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+
+    .dv-badge.medium {
+      background: var(--cerulean);
+    }
+
+    .dv-badge.low {
+      background: var(--maya-blue);
+    }
+
+    /* GRID LAYOUTS */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+      margin-top: 30px;
+    }
+
+    .product-card {
+      background: var(--white);
+      border-radius: 8px;
+      padding: 24px;
+      border: 2px solid var(--maya-blue);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 8px 24px rgba(51,85,102,0.15);
+      border-color: var(--charcoal-blue);
+      transform: translateY(-2px);
+    }
+
+    .product-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+      gap: 12px;
+    }
+
+    .product-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--charcoal-blue);
+    }
+
+    .product-farm {
+      font-size: 13px;
+      color: var(--cerulean);
+      margin-top: 4px;
+    }
+
+    .product-portion {
+      font-size: 12px;
+      background: rgba(75,121,145,0.1);
+      padding: 4px 10px;
+      border-radius: 4px;
+      color: var(--cerulean);
+      font-weight: 500;
+    }
+
+    .product-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: 'EB Garamond', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--charcoal-blue);
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--cerulean);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .capsule-equiv {
+      background: rgba(123,201,243,0.1);
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      text-align: center;
+      margin: 16px 0;
+      border-left: 3px solid var(--maya-blue);
+    }
+
+    .capsule-equiv strong {
+      color: var(--charcoal-blue);
+      font-weight: 600;
+    }
+
+    /* TABLES */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--white);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+
+    .data-table thead {
+      background: var(--charcoal-blue);
+      color: var(--white);
+    }
+
+    .data-table th {
+      padding: 10px 10px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .data-table th:hover {
+      background: var(--deep-ocean);
+    }
+
+    .data-table td {
+      padding: 8px 10px;
+      font-size: 12px;
+      border-bottom: 1px solid rgba(51,85,102,0.08);
+    }
+
+    .data-table tbody tr:hover {
+      background: rgba(51,85,102,0.02);
+    }
+
+    /* MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 40px;
+      max-width: 600px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 32px;
+      height: 32px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 24px;
+      color: var(--charcoal-blue);
+    }
+
+    .nutrition-facts {
+      background: var(--linen);
+      border: 2px solid var(--charcoal-blue);
+      border-radius: 6px;
+      padding: 20px;
+      margin: 20px 0;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .nutrition-facts-title {
+      font-weight: 700;
+      font-size: 14px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    /* MEAL PLANNER */
+    .meal-planner-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .day-column {
+      background: var(--white);
+      border-radius: 8px;
+      padding: 16px;
+      min-height: 400px;
+      border: 2px solid var(--maya-blue);
+    }
+
+    .day-header {
+      font-weight: 600;
+      color: var(--charcoal-blue);
+      margin-bottom: 12px;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .meal-item {
+      background: rgba(123,201,243,0.1);
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 8px;
+      border-left: 3px solid var(--maya-blue);
+    }
+
+    .meal-item-text {
+      flex: 1;
+    }
+
+    .meal-item-species {
+      font-weight: 600;
+      color: var(--charcoal-blue);
+    }
+
+    .meal-item-farm {
+      font-size: 11px;
+      color: var(--cerulean);
+    }
+
+    .meal-remove {
+      background: none;
+      border: none;
+      color: var(--fiery-terracotta);
+      cursor: pointer;
+      font-size: 16px;
+      padding: 0;
+      font-weight: 600;
+    }
+
+    .add-btn {
+      width: 100%;
+      padding: 12px;
+      background: var(--maya-blue);
+      color: var(--white);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+
+    .add-btn:hover {
+      background: var(--cerulean);
+    }
+
+    .nutrition-dashboard {
+      background: var(--white);
+      border-radius: 8px;
+      padding: 30px;
+      margin-top: 30px;
+      border-left: 4px solid var(--fiery-terracotta);
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      margin-top: 20px;
+    }
+
+    .dashboard-item {
+      text-align: center;
+    }
+
+    .dashboard-big-number {
+      font-family: 'EB Garamond', serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--charcoal-blue);
+    }
+
+    .dashboard-label {
+      font-size: 12px;
+      color: var(--cerulean);
+      margin-top: 8px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Search input focus */
+    #data-search:focus {
+      border-color: var(--cerulean);
+      box-shadow: 0 0 0 2px rgba(75,121,145,0.15);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1200px) {
+      main {
+        padding: 30px 16px;
+      }
+
+      .bar-label {
+        width: 150px;
+        font-size: 13px;
+      }
+
+      .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      }
+    }
+
+    @media (max-width: 900px) {
+      h1 {
+        font-size: 32px;
+      }
+
+      h2 {
+        font-size: 24px;
+      }
+
+      .header-content {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+
+      .header-notice {
+        text-align: center;
+      }
+
+      .logo-text {
+        font-size: 28px;
+      }
+
+      .meal-planner-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      }
+
+      .data-table {
+        font-size: 12px;
+      }
+
+      .data-table th,
+      .data-table td {
+        padding: 10px;
+      }
+    }
+
+    @media (max-width: 540px) {
+      main {
+        padding: 20px 12px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      .logo-text {
+        font-size: 24px;
+      }
+
+      .bar-label {
+        width: 100px;
+        font-size: 12px;
+      }
+
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .controls {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .modal-content {
+        padding: 24px;
+      }
+
+      .meal-planner-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .data-table {
+        font-size: 11px;
+      }
+    }
+
+    /* UTILITY */
+    .flex-row {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .flex-col {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .note {
+      background: rgba(212,90,60,0.08);
+      border-left: 3px solid var(--fiery-terracotta);
+      padding: 12px 16px;
+      border-radius: 4px;
+      font-size: 13px;
+      color: var(--charcoal-blue);
+      margin: 16px 0;
+    }
+
+    .highlight {
+      background: rgba(123,201,243,0.15);
+      padding: 20px;
+      border-radius: 8px;
+      border-left: 4px solid var(--maya-blue);
+      margin: 20px 0;
+    }
+
+    .ratio-bar {
+      display: flex;
+      align-items: center;
+      height: 24px;
+      background: rgba(51,85,102,0.05);
+      border-radius: 4px;
+      margin: 8px 0;
+      overflow: hidden;
+    }
+
+    .ratio-omega6 {
+      background: var(--pumpkin-spice);
+      height: 100%;
+    }
+
+    .ratio-omega3 {
+      background: var(--moss-green);
+      height: 100%;
+    }
+
+    .ratio-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding: 0 8px;
+      white-space: nowrap;
+    }
+
+    /* ── VISUAL EXPORT CARDS ── */
+    .vis-card {
+      background: var(--linen);
+      border-radius: 16px;
+      padding: 48px;
+      margin-bottom: 40px;
+      max-width: 680px;
+      font-family: 'Karla', sans-serif;
+      color: var(--charcoal-blue);
+      position: relative;
+    }
+    .vis-card.dark {
+      background: var(--charcoal-blue);
+      color: var(--white);
+    }
+    .vis-card .vis-logo {
+      font-family: 'EB Garamond', serif;
+      font-size: 14px; font-weight: 600; letter-spacing: 3px;
+      text-transform: uppercase; margin-bottom: 32px; opacity: 0.5;
+    }
+    .vis-card .vis-h1 {
+      font-family: 'EB Garamond', serif;
+      font-size: 32px; font-weight: 600; line-height: 1.25; margin-bottom: 12px;
+    }
+    .vis-card .vis-sub {
+      font-size: 15px; line-height: 1.65; opacity: 0.75; margin-bottom: 28px;
+    }
+    .vis-card .vis-stat-row {
+      display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 24px;
+    }
+    .vis-card .vis-stat {
+      flex: 1; min-width: 120px; padding: 20px; border-radius: 12px;
+      text-align: center;
+    }
+    .vis-card .vis-stat-num {
+      font-family: 'EB Garamond', serif;
+      font-size: 36px; font-weight: 700; line-height: 1;
+    }
+    .vis-card .vis-stat-label {
+      font-size: 12px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1px; margin-top: 6px; opacity: 0.7;
+    }
+    .vis-card .vis-stat-sub {
+      font-size: 11px; margin-top: 4px; opacity: 0.5;
+    }
+    .vis-card .vis-product-row {
+      display: flex; align-items: center; gap: 16px; padding: 14px 0;
+      border-bottom: 1px solid rgba(51,85,102,0.08);
+    }
+    .vis-card .vis-product-row:last-child { border-bottom: none; }
+    .vis-card .vis-rank {
+      width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 13px; flex-shrink: 0;
+    }
+    .vis-card .vis-bar-mini {
+      flex: 1; height: 8px; border-radius: 4px; display: flex; overflow: hidden;
+      background: rgba(51,85,102,0.06);
+    }
+    .vis-card .vis-cta {
+      display: inline-block; margin-top: 24px; padding: 12px 28px;
+      border-radius: 8px; font-weight: 600; font-size: 14px;
+      letter-spacing: 0.5px; text-decoration: none;
+    }
+    .vis-card .vis-divider {
+      height: 1px; background: rgba(51,85,102,0.1); margin: 24px 0;
+    }
+    .vis-card .vis-pill {
+      display: inline-block; padding: 5px 14px; border-radius: 20px;
+      font-size: 12px; font-weight: 600; margin-right: 8px; margin-bottom: 8px;
+    }
+    .vis-card .vis-footer {
+      font-size: 11px; opacity: 0.4; margin-top: 28px; text-align: center;
+      letter-spacing: 0.5px;
+    }
+    @media (max-width: 700px) {
+      .vis-card { padding: 28px; }
+      .vis-card .vis-h1 { font-size: 24px; }
+      .vis-card .vis-stat-num { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="logo">
+      <div class="logo-text">Seatopia</div>
+      <div class="logo-subtitle">Nutrition Intelligence</div>
+    </div>
+    <div class="header-notice">
+      <strong>v1.0 · Apr 3, 2026</strong><br>
+      Lab-verified data
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-container">
+    <button class="nav-tab active" data-tab="omega-map">Omega-3 Map</button>
+    <button class="nav-tab" data-tab="products">Product Pages</button>
+    <button class="nav-tab" data-tab="meal-planner">Weekly Meal Planner</button>
+    <button class="nav-tab" data-tab="box-builder">Box Builder</button>
+    <button class="nav-tab" data-tab="data">Raw Data</button>
+    <button class="nav-tab" data-tab="mercury">Mercury & Selenium</button>
+    <button class="nav-tab" data-tab="protein">Protein & Vitamins</button>
+    <button class="nav-tab" data-tab="microplastics">Microplastics</button>
+    <button class="nav-tab" data-tab="benchmarks">Why Seatopia</button>
+    <button class="nav-tab" data-tab="visuals">Visualizations</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- TAB 1: OMEGA-3 MAP -->
+<div class="tab-content active" id="omega-map">
+  <h1>Omega-3 Nutritional Map</h1>
+  <p class="subtitle">Marine omega profile per serving, lab-verified</p>
+  <p class="subtitle" style="font-size: 12px; color: #666; margin-top: 10px;"><strong>Seatopia Omega Standard:</strong> All values computed from independently lab-verified data (per 100g). EPA + DHA = marine omega-3 (most bioavailable). ALA shown separately where available.</p>
+
+  <div style="margin: 16px 0 4px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+    <span style="font-size: 12px; font-weight: 600; color: var(--charcoal-blue); letter-spacing: 0.5px;">SORT BY:</span>
+    <button id="sort-epa-dha" class="toggle-btn" style="font-size: 11px; padding: 4px 12px; border-radius: 4px; cursor: pointer;" onclick="setOmegaMapSort('epa_dha')">EPA + DHA</button>
+    <button id="sort-total" class="toggle-btn" style="font-size: 11px; padding: 4px 12px; border-radius: 4px; cursor: pointer;" onclick="setOmegaMapSort('total')">Total Omega-3</button>
+    <button id="sort-epa" class="toggle-btn" style="font-size: 11px; padding: 4px 12px; border-radius: 4px; cursor: pointer;" onclick="setOmegaMapSort('epa')">EPA</button>
+    <button id="sort-dha" class="toggle-btn" style="font-size: 11px; padding: 4px 12px; border-radius: 4px; cursor: pointer;" onclick="setOmegaMapSort('dha')">DHA</button>
+    <span style="margin-left:12px;font-size:12px;font-weight:600;color:var(--charcoal-blue);letter-spacing:0.5px">BASIS:</span>
+    <button id="basis-standard" class="toggle-btn" style="font-size:11px;padding:4px 12px;border-radius:4px;cursor:pointer" onclick="setServingBasis('standard')">Per Seatopia Recommended Serving</button>
+    <button id="basis-actual" class="toggle-btn" style="font-size:11px;padding:4px 12px;border-radius:4px;cursor:pointer" onclick="setServingBasis('100g')">Per 100g</button>
+  </div>
+
+  <div id="omega-map-chart"></div>
+
+  <h3 style="margin-top: 40px;">Seafood vs. Supplements</h3>
+  <p class="subtitle">Top 5 products compared to standard fish oil capsules</p>
+  <div id="seafood-vs-supplements"></div>
+
+  <div class="highlight">
+    <strong>Formula:</strong> Each product's omega-3 = (EPA + DHA + ALA in mg) per serving
+    <br><strong>Standard fish oil capsule:</strong> 300 mg EPA+DHA (ethyl ester form, ~33% bioavailable)
+  </div>
+</div>
+
+<!-- TAB 2: PRODUCT PAGES -->
+<div class="tab-content" id="products">
+  <h1>Product Pages</h1>
+  <p class="subtitle">Click any product for complete nutrition profile</p>
+  <div class="product-grid" id="product-grid"></div>
+</div>
+
+<!-- TAB 3: MEAL PLANNER -->
+<div class="tab-content" id="meal-planner">
+  <h1>Weekly Meal Planner</h1>
+  <p class="subtitle">Build a week of meals and track nutrition</p>
+
+  <div class="controls">
+    <label style="font-weight: 600; color: var(--charcoal-blue);">Target:</label>
+    <div class="radio-group" id="target-selector">
+      <label class="radio-btn">
+        <input type="radio" name="target" value="general" checked>
+        <span class="radio-label">General Wellness</span>
+      </label>
+      <label class="radio-btn">
+        <input type="radio" name="target" value="heart">
+        <span class="radio-label">Heart Health</span>
+      </label>
+      <label class="radio-btn">
+        <input type="radio" name="target" value="prenatal">
+        <span class="radio-label">Prenatal</span>
+      </label>
+      <label class="radio-btn">
+        <input type="radio" name="target" value="antiinflammatory">
+        <span class="radio-label">Anti-Inflammatory</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="meal-planner-grid" id="meal-planner-grid"></div>
+  <div class="nutrition-dashboard" id="meal-nutrition-dashboard"></div>
+</div>
+
+<!-- TAB 4: BOX BUILDER -->
+<div class="tab-content" id="box-builder">
+  <h1>Box Builder</h1>
+  <p class="subtitle">Customize your seafood selection</p>
+
+  <div style="display: grid; grid-template-columns: 1fr 350px; gap: 30px; margin-top: 30px;">
+    <div id="box-catalog"></div>
+    <div id="box-sidebar"></div>
+  </div>
+</div>
+
+<!-- TAB 5: DATA QUALITY -->
+<!-- TAB 5: RAW DATA -->
+<div class="tab-content" id="data">
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px">
+    <div>
+      <h1 style="margin-bottom:4px">Raw Test Data</h1>
+      <p class="subtitle" style="margin-bottom:0">All test records from Edacious, Light Labs, and EMSL (microplastics) — every assay, every lot, traceable to source COAs</p>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+      <input id="data-search" type="text" placeholder="Search species, farm, SKU…" oninput="filterDataTable()" style="padding:6px 12px;border:1px solid #ccd8e0;border-radius:6px;font-size:12px;width:220px;outline:none;font-family:inherit" />
+      <button onclick="exportCSV()" style="padding:6px 14px;background:var(--charcoal-blue);color:#fff;border:none;border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit;font-weight:600;white-space:nowrap">Export CSV</button>
+    </div>
+  </div>
+
+  <p style="font-size:11px;color:#888;margin:8px 0 16px">
+    Values per 100g (canonical) and per serving. Click any column header to sort. <strong>★ PUBLIC</strong> = primary source used for product pages.
+  </p>
+
+  <div style="overflow-x:auto;border-radius:8px;border:1px solid #dde3e8">
+  <table class="data-table" id="data-table" style="font-size:11px;margin:0;border-radius:8px">
+    <thead>
+      <tr>
+        <th rowspan="2" style="position:sticky;left:0;background:var(--linen);z-index:2;cursor:pointer" onclick="sortTable(0)">Test Code</th>
+        <th rowspan="2" style="cursor:pointer" onclick="sortTable(1)">SKU(s)</th>
+        <th rowspan="2" style="cursor:pointer" onclick="sortTable(2)">Species</th>
+        <th rowspan="2" style="cursor:pointer" onclick="sortTable(3)">Farm</th>
+        <th rowspan="2" style="cursor:pointer" onclick="sortTable(4)">Lab</th>
+        <th rowspan="2">COA</th>
+        <th colspan="11" style="background:rgba(75,121,145,0.08);border-bottom:2px solid var(--cerulean);text-align:center">Per 100g (Truth Layer)</th>
+        <th colspan="8" style="background:rgba(46,139,87,0.08);border-bottom:2px solid #2e8b57;text-align:center">Per Seatopia Recommended Serving</th>
+        <th colspan="8" style="background:rgba(99,102,241,0.08);border-bottom:2px solid #6366f1;text-align:center">Per Package</th>
+      </tr>
+      <tr>
+        <!-- Per 100g -->
+        <th style="background:rgba(75,121,145,0.05);cursor:pointer" onclick="sortTable(6)">EPA</th>
+        <th style="background:rgba(75,121,145,0.05);cursor:pointer" onclick="sortTable(7)">DHA</th>
+        <th style="background:rgba(75,121,145,0.05);cursor:pointer" onclick="sortTable(8)">ALA</th>
+        <th style="background:rgba(75,121,145,0.05);cursor:pointer" onclick="sortTable(9)">Total ω3</th>
+        <th style="background:rgba(75,121,145,0.05);cursor:pointer" onclick="sortTable(10)">Hg<br><small>ppb</small></th>
+        <th style="background:rgba(75,121,145,0.05);cursor:pointer" onclick="sortTable(11)">Se<br><small>mcg</small></th>
+        <th style="background:rgba(75,121,145,0.05);cursor:pointer" onclick="sortTable(12)">Protein<br><small>g</small></th>
+        <th style="background:rgba(75,121,145,0.05);cursor:pointer" onclick="sortTable(13)">ω6<br><small>mg</small></th>
+        <th style="background:rgba(75,121,145,0.05);cursor:pointer" onclick="sortTable(14)">ω6:3<br><small>ratio</small></th>
+        <th style="background:rgba(75,121,145,0.05);cursor:pointer" onclick="sortTable(15)">Vit D<br><small>mcg</small></th>
+        <th style="background:rgba(75,121,145,0.05);cursor:pointer" onclick="sortTable(16)">B12<br><small>mcg</small></th>
+        <!-- Per Seatopia Recommended Serving -->
+        <th style="background:rgba(46,139,87,0.05)">Serv<br><small>oz</small></th>
+        <th style="background:rgba(46,139,87,0.05);cursor:pointer" onclick="sortTable(18)">EPA+DHA</th>
+        <th style="background:rgba(46,139,87,0.05);cursor:pointer" onclick="sortTable(19)">Total ω3</th>
+        <th style="background:rgba(46,139,87,0.05);cursor:pointer" onclick="sortTable(20)">Se<br><small>mcg</small></th>
+        <th style="background:rgba(46,139,87,0.05);cursor:pointer" onclick="sortTable(21)">Protein<br><small>g</small></th>
+        <th style="background:rgba(46,139,87,0.05);cursor:pointer" onclick="sortTable(22)">ω6<br><small>mg</small></th>
+        <th style="background:rgba(46,139,87,0.05);cursor:pointer" onclick="sortTable(23)">Vit D<br><small>mcg</small></th>
+        <th style="background:rgba(46,139,87,0.05);cursor:pointer" onclick="sortTable(24)">B12<br><small>mcg</small></th>
+        <!-- Per Package -->
+        <th style="background:rgba(99,102,241,0.05)">Pkg<br><small>oz</small></th>
+        <th style="background:rgba(99,102,241,0.05);cursor:pointer" onclick="sortTable(26)">EPA+DHA</th>
+        <th style="background:rgba(99,102,241,0.05);cursor:pointer" onclick="sortTable(27)">Total ω3</th>
+        <th style="background:rgba(99,102,241,0.05);cursor:pointer" onclick="sortTable(28)">Se<br><small>mcg</small></th>
+        <th style="background:rgba(99,102,241,0.05);cursor:pointer" onclick="sortTable(29)">Protein<br><small>g</small></th>
+        <th style="background:rgba(99,102,241,0.05);cursor:pointer" onclick="sortTable(30)">ω6<br><small>mg</small></th>
+        <th style="background:rgba(99,102,241,0.05);cursor:pointer" onclick="sortTable(31)">Vit D<br><small>mcg</small></th>
+        <th style="background:rgba(99,102,241,0.05);cursor:pointer" onclick="sortTable(32)">B12<br><small>mcg</small></th>
+      </tr>
+    </thead>
+    <tbody id="data-tbody"></tbody>
+  </table>
+  </div>
+</div>
+
+<!-- TAB 7: MERCURY & SELENIUM -->
+<div class="tab-content" id="mercury">
+  <h1>Mercury & Selenium Safety Profile</h1>
+  <p class="subtitle">Heavy metals monitoring and micronutrient content</p>
+
+  <h2 style="margin-top: 40px;">Mercury (ppb)</h2>
+  <p class="subtitle">FDA action level: 1,000 ppb</p>
+  <div id="mercury-chart"></div>
+
+  <h2 style="margin-top: 40px;">Selenium (mcg per 100g)</h2>
+  <p class="subtitle">RDI: 55 mcg/day</p>
+  <div id="selenium-chart"></div>
+
+  <h2 style="margin-top: 40px;">Selenium:Mercury Ratio</h2>
+  <div id="se-hg-ratio-chart"></div>
+</div>
+
+<!-- TAB 8: PROTEIN & VITAMINS -->
+<div class="tab-content" id="protein">
+  <h1>Protein & Vitamins</h1>
+  <p class="subtitle">Complete micronutrient and macronutrient profile</p>
+
+  <h2 style="margin-top: 40px;">Protein (per 100g)</h2>
+  <p class="subtitle">Daily Value: 50g</p>
+  <div id="protein-chart"></div>
+
+  <h2 style="margin-top: 40px;">Vitamin D (per 6oz serving)</h2>
+  <p class="subtitle">Daily Value: 600 IU (15 mcg)</p>
+  <div id="vitamin-d-chart"></div>
+
+  <h2 style="margin-top: 40px;">Vitamin B12 (per 6oz serving)</h2>
+  <p class="subtitle">Daily Value: 2.4 mcg</p>
+  <div id="vitamin-b12-chart"></div>
+</div>
+
+<!-- TAB: MICROPLASTICS -->
+<div class="tab-content" id="microplastics">
+  <h1>Microplastics Testing</h1>
+  <p class="subtitle">6 polymer types screened per product via EMSL Analytical (contracted through Light Labs)</p>
+  <p style="font-size:12px;color:#666;margin-top:8px">
+    <strong>Polymers tested:</strong> HDPE, LDPE, PET, Polypropylene, Polystyrene, PVC. Results reported as Microparticles per sample.
+  </p>
+
+  <div id="microplastics-chart" style="margin-top:24px"></div>
+
+  <div class="highlight" style="margin-top:24px">
+    <strong>About this testing:</strong> Microplastics (EMSL) analysis screens for the 6 most common polymer contaminants found in seafood.
+    Testing is performed by EMSL Analytical, Inc., an ISO 17025 accredited lab, contracted through Light Labs.
+    "ND" = Not Detected at or above the analytical detection limit.
+  </div>
+</div>
+
+<!-- TAB 9: BENCHMARKS -->
+<div class="tab-content" id="benchmarks">
+  <h1>Why Seatopia: The Science</h1>
+  <p class="subtitle">Bioavailability, ratios, and competitive advantage</p>
+
+  <div class="highlight">
+    <h3>Why Whole Fish > Supplements</h3>
+    <p style="margin-top: 12px;">Omega-3 in whole fish exists in phospholipid and triglyceride forms, which are 2–3× more bioavailable than the ethyl ester form used in standard fish oil capsules. A single serving of Ora King King Salmon (1,606 mg EPA+DHA) is equivalent to 16–24 high-quality capsules by bioavailable absorption, not just by mg content.</p>
+    <p style="margin-top: 12px; font-size: 12px; color: var(--cerulean);"><em>Citation: Dyerberg et al. (2010). Prostaglandins, Leukotrienes and Essential Fatty Acids.</em></p>
+  </div>
+
+  <div class="highlight">
+    <h3>Omega-6:Omega-3 Ratio</h3>
+    <p style="margin-top: 12px;">Western diets average 15:1 to 20:1 omega-6 to omega-3 — promoting inflammation. The ideal ratio is 1:1 to 4:1. <strong>All Seatopia products tested show ratios under 1.1:1</strong> — meaning more omega-3 than omega-6 on a per-gram basis.</p>
+    <div id="ratio-chart" style="margin-top: 20px;"></div>
+  </div>
+
+  <div class="highlight">
+    <h3>EPA vs DHA: Different Jobs</h3>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px;">
+      <div>
+        <h4 style="color: var(--charcoal-blue);">EPA</h4>
+        <ul style="list-style: none; padding-left: 0;">
+          <li style="margin-bottom: 8px;">✓ Anti-inflammatory</li>
+          <li style="margin-bottom: 8px;">✓ Cardiovascular health</li>
+          <li>✓ Mood & depression support</li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="color: var(--cerulean);">DHA</h4>
+        <ul style="list-style: none; padding-left: 0;">
+          <li style="margin-bottom: 8px;">✓ Brain structure</li>
+          <li style="margin-bottom: 8px;">✓ Retinal development</li>
+          <li>✓ Cognitive function</li>
+        </ul>
+      </div>
+    </div>
+    <div style="margin-top: 24px; padding: 16px; background: rgba(123,201,243,0.1); border-radius: 6px;">
+      <strong>Top 3 EPA-rich:</strong> <span id="top-epa"></span><br>
+      <strong>Top 3 DHA-rich:</strong> <span id="top-dha"></span>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <h3>Seatopia vs. USDA Benchmarks</h3>
+    <p style="margin-top: 12px; margin-bottom: 20px;">How our premium products compare to generic USDA references</p>
+    <div id="benchmark-chart"></div>
+  </div>
+
+  <div class="highlight" style="background: var(--white); border: 2px solid var(--charcoal-blue);">
+    <h3 style="color: var(--charcoal-blue);">Complete Nutrition in One Serving</h3>
+    <p style="margin-top: 12px;">A single 8.5oz serving of Ora King King Salmon delivers:</p>
+    <ul style="list-style: none; padding-left: 0; margin-top: 16px;">
+      <li style="margin-bottom: 10px;"><strong>1,606 mg omega-3</strong> (80% of daily value)</li>
+      <li style="margin-bottom: 10px;"><strong>39g protein</strong> (78% of daily value)</li>
+      <li style="margin-bottom: 10px;"><strong>800 IU vitamin D</strong> (133% of daily value)</li>
+      <li style="margin-bottom: 10px;"><strong>Mercury: 17.3 ppb</strong> (1.7% of FDA action level)</li>
+      <li style="margin-bottom: 0;"><strong>No supplement can deliver this combination.</strong></li>
+    </ul>
+  </div>
+</div>
+
+<!-- TAB 10: VISUALIZATIONS -->
+<div class="tab-content" id="visuals">
+  <h1>Visualizations for Export</h1>
+  <p class="subtitle">Pre-designed cards for email, social, and presentations. Screenshot or right-click to save.</p>
+
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:32px">
+    <button class="toggle-btn active" onclick="setVisualBg(this,'#F7EFE6')" style="background:#F7EFE6;color:#335566;border:2px solid #335566">Linen</button>
+    <button class="toggle-btn" onclick="setVisualBg(this,'#ffffff')" style="background:#fff;color:#335566;border:2px solid #ddd">White</button>
+    <button class="toggle-btn" onclick="setVisualBg(this,'#335566')" style="background:#335566;color:#fff;border:2px solid #335566">Dark</button>
+  </div>
+
+  <div id="visual-cards-container"></div>
+</div>
+
+</main>
+
+<!-- MODAL -->
+<div class="modal" id="product-modal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+// ==================== DATA ====================
+const PRODUCTS = [
+  {
+    species: "Steelhead Trout", farm: "Hudson Valley", portion_oz: 6, source: "Edacious", n_tests: 1,
+    handle: "hudson-valley-steelhead",
+    per100g: { epa: 376.0, dha: 1040.0, ala: 1620.0 },
+    tests: [
+      { code: "E-HVF", lab: "Edacious", assay: "Full Panel", epa: 376.0, dha: 1040.0, ala: 1620.0, note: "Published avg · samples: F8NYY, WH58L, BX2MD" }
+    ],
+    hg_ppb: 10.57, hg_loq: false, hg_source: 'Light Labs', hg_test: '4072', se_mcg_per100g: 17.7, protein_g_per100g: 19.5,
+    mp_tested: true, mp_test: '21516', mp_result: 'ND',
+    omega6_g_per100g: 2.85, omega_6_3_ratio: 0.833, vitd_mcg_per100g: 0, vitb12_mcg_per100g: null
+  },
+  {
+    species: "King Salmon", farm: "Ora King", portion_oz: 8.5, source: "Edacious", n_tests: 3,
+    handle: "ora-king-king-salmon",
+    per100g: { epa: 536.0, dha: 1070.0, ala: 1210.0 },
+    tests: [
+      { code: "E-OKS", lab: "Edacious", epa: 536.0, dha: 1070.0, ala: 1210.0 },
+      { code: "3950",  lab: "Light Labs", epa: 320.0, dha: 840.0, ala: 920.0 }
+    ],
+    hg_ppb: 17.33, hg_loq: false, hg_source: 'Light Labs', hg_test: '4074', se_mcg_per100g: 29.8, protein_g_per100g: 18.6,
+    mp_tested: true, mp_test: '21518', mp_result: 'ND',
+    omega6_g_per100g: 2.76, omega_6_3_ratio: 0.854, vitd_mcg_per100g: 20.0, vitb12_mcg_per100g: null
+  },
+  {
+    species: "King Salmon", farm: "Mt Cook", portion_oz: 7, source: "Edacious", n_tests: 3,
+    handle: "mt-cook-king-salmon",
+    per100g: { epa: 457.0, dha: 862.0, ala: 1140.0 },
+    tests: [
+      { code: "E-MCS", lab: "Edacious", assay: "Full Panel", epa: 457.0, dha: 862.0, ala: 1140.0, note: "Published avg · samples: B1SX1, VM87T" },
+      { code: "3946", lab: "Light Labs", epa: 105.0, dha: 492.0, ala: 246.0 }
+    ],
+    hg_ppb: 33.26, hg_loq: false, hg_source: 'Light Labs', hg_test: '4073', se_mcg_per100g: 39.3, protein_g_per100g: 18.9,
+    mp_tested: true, mp_test: '21517', mp_result: 'ND',
+    omega6_g_per100g: 2.38, omega_6_3_ratio: 0.853, vitd_mcg_per100g: 23.8, vitb12_mcg_per100g: null
+  },
+  {
+    species: "King Salmon", farm: "Big Glory Bay", portion_oz: 8, source: "Edacious", n_tests: 3,
+    handle: "big-glory-bay-king-salmon",
+    per100g: { epa: 546.0, dha: 885.0, ala: 1050.0 },
+    tests: [
+      { code: "E-BGB", lab: "Edacious", assay: "Full Panel", epa: 546.0, dha: 885.0, ala: 1050.0, note: "Published avg · samples: 2A8Z9, DXRZB" },
+      { code: "3938",  lab: "Light Labs", epa: 200.0, dha: 966.0, ala: 1159.0 }
+    ],
+    hg_ppb: 18.74, hg_loq: false, hg_source: 'Light Labs', hg_test: '4071', se_mcg_per100g: 31.4, protein_g_per100g: 18.9,
+    mp_tested: true, mp_test: '21515', mp_result: 'ND',
+    omega6_g_per100g: 2.48, omega_6_3_ratio: 0.869, vitd_mcg_per100g: 21.6, vitb12_mcg_per100g: null
+  },
+  {
+    species: "Atlantic Salmon", farm: "Bakkafrost", portion_oz: 6, source: "Edacious", n_tests: 6,
+    handle: "bakkafrost-atlantic-salmon",
+    per100g: { epa: 471.0, dha: 833.0, ala: 950.0 },
+    tests: [
+      { code: "E-BAK", lab: "Edacious", assay: "Full Panel", epa: 471.0, dha: 833.0, ala: 950.0, note: "Published avg · samples: WBQZS, FI7JG, G3RNX, NPQ21, QCDSN, UE6K3" }
+    ],
+    hg_ppb: 37.46, hg_loq: false, hg_source: 'Light Labs', hg_test: '4077', se_mcg_per100g: 18.6, protein_g_per100g: 21.3,
+    mp_tested: true, mp_test: '21521', mp_result: 'ND',
+    omega6_g_per100g: 1.45, omega_6_3_ratio: 0.645, vitd_mcg_per100g: 8.76, vitb12_mcg_per100g: null
+  },
+  {
+    species: "Atlantic Salmon", farm: "Superior Fresh", portion_oz: 6, source: "Edacious", n_tests: 1,
+    handle: "superior-fresh-atlantic-salmon",
+    per100g: { epa: 530.0, dha: 1020.0, ala: 224.0 },
+    tests: [
+      { code: "E-SUP", lab: "Edacious", assay: "Full Panel", epa: 530.0, dha: 1020.0, ala: 224.0, note: "Published avg (private)" }
+    ],
+    hg_ppb: 1.8, hg_loq: false, hg_source: 'Edacious', se_mcg_per100g: 21.2, protein_g_per100g: 20.2,
+    mp_tested: false,
+    omega6_g_per100g: 0.852, omega_6_3_ratio: 0.416, vitd_mcg_per100g: 3.98, vitb12_mcg_per100g: null
+  },
+  {
+    species: "Steelhead Trout", farm: "Caleta Bay", portion_oz: 6, source: "Edacious", n_tests: 4,
+    handle: "caleta-bay-steelhead",
+    per100g: { epa: 262.0, dha: 589.0, ala: 1330.0 },
+    tests: [
+      { code: "E-CLB", lab: "Edacious", assay: "Full Panel", epa: 262.0, dha: 589.0, ala: 1330.0, note: "Published avg" },
+      { code: "21156", lab: "Light Labs", assay: "Fatty Acids", epa: 295.0, dha: 660.0, ala: 1230.0 },
+      { code: "21164", lab: "Light Labs", assay: "Fatty Acids", epa: 289.0, dha: 659.0, ala: 1219.5 }
+    ],
+    hg_ppb: 0, hg_loq: true, hg_source: 'Light Labs', hg_test: '21142', hg_note: '< 10 ppb LOQ', se_mcg_per100g: 22.1, protein_g_per100g: 20.8,
+    mp_tested: false,
+    omega6_g_per100g: 2.46, omega_6_3_ratio: 1.03, vitd_mcg_per100g: 9.01, vitb12_mcg_per100g: 2.18
+  },
+  {
+    species: "Branzino", farm: "Esteros Lubimar", portion_oz: 6, source: "Edacious", n_tests: 8,
+    handle: "esteros-lubimar-branzino",
+    per100g: { epa: 304.0, dha: 598.0, ala: 880.0 },
+    tests: [
+      { code: "E-BRZ", lab: "Edacious", assay: "Full Panel", epa: 304.0, dha: 598.0, ala: 880.0, note: "Published avg · samples: X7JKU, XLQVW, US8EG, 6MNW9, 7JB6N, N3R8P" },
+      { code: "21132", lab: "Light Labs", epa: 340.0, dha: 650.0, ala: 0 },
+      { code: "24237", lab: "Light Labs", epa: 248.6, dha: 656.3, ala: 498.5 }
+    ],
+    hg_ppb: 100, hg_loq: false, hg_source: 'Light Labs', hg_test: '21126', se_mcg_per100g: 18.1, protein_g_per100g: 21.1,
+    mp_tested: true, mp_test: '21525', mp_result: 'ND',
+    omega6_g_per100g: 1.75, omega_6_3_ratio: 0.921, vitd_mcg_per100g: 4.36, vitb12_mcg_per100g: null
+  },
+  {
+    species: "Sea Bream", farm: "Esteros Lubimar", portion_oz: 6, source: "Edacious", n_tests: 8,
+    handle: "esteros-lubimar-sea-bream",
+    per100g: { epa: 221.0, dha: 567.0, ala: 643.0 },
+    tests: [
+      { code: "E-BRE", lab: "Edacious", assay: "Full Panel", epa: 221.0, dha: 567.0, ala: 643.0, note: "Published avg · samples: T5ZA9, VBTTQ, QY119, CAZIS, E1JBA, LLZKQ" },
+      { code: "21140", lab: "Light Labs", epa: 210.0, dha: 560.0, ala: 0 },
+      { code: "24239", lab: "Light Labs", epa: 214.9, dha: 655.1, ala: 556.8 }
+    ],
+    hg_ppb: 60, hg_loq: false, hg_source: 'Light Labs', hg_test: '21134', se_mcg_per100g: 18.9, protein_g_per100g: 21.1,
+    mp_tested: true, mp_test: '21526', mp_result: 'ND',
+    omega6_g_per100g: 1.75, omega_6_3_ratio: 1.09, vitd_mcg_per100g: 15.0, vitb12_mcg_per100g: null
+  },
+  {
+    species: "Salmon Roe Caviar", farm: "Yarra Valley", portion_oz: 1, source: "Light Labs + Edacious", n_tests: 2,
+    handle: "yarra-valley-salmon-roe",
+    per100g: { epa: 513.8, dha: 2292.4, ala: 142.4 },
+    tests: [{ code: "E-YRV", lab: "Edacious", assay: "Full Panel", epa: 513.8, dha: 2292.4, ala: 142.4, note: "Published avg (verified)" }, { code: "22491", lab: "Light Labs", epa: 513.8, dha: 2292.4, ala: 142.4 }],
+    note: "Roe is an omega-3 powerhouse — extraordinarily high DHA per oz.",
+    hg_ppb: 0, hg_loq: true, hg_source: 'Light Labs', hg_test: '21549', hg_note: '< 10 ppb LOQ', se_mcg_per100g: 99.1, protein_g_per100g: 26.1,
+    mp_tested: true, mp_test: '21527', mp_result: 'ND',
+    omega6_g_per100g: null, omega_6_3_ratio: null, vitd_mcg_per100g: 2.0, vitb12_mcg_per100g: null
+    // Vitamin D3 per COA Test #22493: 0.02 mcg/g = 2.0 mcg/100g. Vitamin D2: ND (Test #22492).
+  },
+  {
+    species: "King Salmon", farm: "Regal", portion_oz: 7.5, source: "Light Labs", n_tests: 1,
+    handle: "regal-king-salmon",
+    per100g: { epa: 275.8, dha: 750.1, ala: 999.0 },
+    tests: [{ code: "16691", lab: "Light Labs", epa: 275.8, dha: 750.1, ala: 999.0 }],
+    hg_ppb: 26.87, hg_loq: false, hg_source: 'Light Labs', hg_test: '16689', se_mcg_per100g: 36.68, protein_g_per100g: 20.77,
+    mp_tested: true, mp_test: '21524', mp_result: 'ND',
+    omega6_g_per100g: 2.73, omega_6_3_ratio: 1.332, vitd_mcg_per100g: 25.9, vitb12_mcg_per100g: null
+  },
+  {
+    species: "Osetra Caviar", farm: "Marshallberg", portion_oz: 1, source: "Light Labs", n_tests: 1,
+    handle: "marshallberg-osetra",
+    per100g: { epa: 497.8, dha: 1250.7, ala: 161.7 },
+    tests: [{ code: "9769", lab: "Light Labs", epa: 497.8, dha: 1250.7, ala: 161.7 }],
+    hg_ppb: 4.94, hg_loq: false, hg_source: 'Light Labs', hg_test: '9767', se_mcg_per100g: 63.30, protein_g_per100g: 26.11,
+    mp_tested: true, mp_test: '22503', mp_result: 'ND',
+    omega6_g_per100g: 2.79, omega_6_3_ratio: 1.446, vitd_mcg_per100g: 0, vitb12_mcg_per100g: null
+  },
+  {
+    species: "Rainbow Trout", farm: "McFarland Springs", portion_oz: 6, source: "Edacious", n_tests: 2,
+    handle: "mcfarland-springs-rainbow-trout",
+    per100g: { epa: 272.0, dha: 668.0, ala: 1270.0 },
+    tests: [
+      { code: "E-MFS", lab: "Edacious", assay: "Full Panel", epa: 272.0, dha: 668.0, ala: 1270.0, note: "Published avg (verified)" },
+      { code: "10851", lab: "Light Labs", epa: 144.5, dha: 497.7, ala: 576.9 }
+    ],
+    hg_ppb: 9.41, hg_loq: false, hg_source: 'Light Labs', hg_test: '10845', se_mcg_per100g: 32.9, protein_g_per100g: 22.0,
+    mp_tested: true, mp_test: '22135', mp_result: 'ND',
+    omega6_g_per100g: 1.39, omega_6_3_ratio: 0.582, vitd_mcg_per100g: 18.2, vitb12_mcg_per100g: null
+  },
+  {
+    species: "Yellowtail", farm: "The Kingfish Company", portion_oz: 6, source: "Edacious", n_tests: 2,
+    handle: "kingfish-yellowtail",
+    per100g: { epa: 187.0, dha: 546.0, ala: 156.0 },
+    tests: [
+      { code: "E-KFY", lab: "Edacious", assay: "Full Panel", epa: 187.0, dha: 546.0, ala: 156.0, note: "Published avg (verified)" },
+      { code: "3958", lab: "Light Labs", epa: 251.0, dha: 735.0, ala: 105.0 }
+    ],
+    hg_ppb: 60.26, hg_loq: false, hg_source: 'Light Labs', hg_test: '4076', se_mcg_per100g: 21.5, protein_g_per100g: 23.4,
+    mp_tested: true, mp_test: '21520', mp_result: 'ND',
+    omega6_g_per100g: 0.557, omega_6_3_ratio: 0.537, vitd_mcg_per100g: 2.19, vitb12_mcg_per100g: null
+  },
+  {
+    species: "Rainbow Trout", farm: "Smoke in Chimneys", portion_oz: 6, source: "Light Labs", n_tests: 1,
+    handle: "smoke-in-chimneys-rainbow-trout",
+    per100g: { epa: 86.0, dha: 404.0, ala: 33.0 },
+    tests: [{ code: "3954", lab: "Light Labs", epa: 86.0, dha: 404.0, ala: 33.0 }],
+    hg_ppb: 9.74, hg_loq: false, hg_source: 'Light Labs', hg_test: '4075', se_mcg_per100g: 17.15, protein_g_per100g: 18.2,
+    mp_tested: true, mp_test: '21519', mp_result: 'ND',
+    omega6_g_per100g: 0.32, omega_6_3_ratio: 0.615, vitd_mcg_per100g: 16.0, vitb12_mcg_per100g: null
+  },
+  {
+    species: "Barramundi", farm: "Australis", portion_oz: 6, source: "Edacious", n_tests: 2,
+    handle: "australis-barramundi",
+    per100g: { epa: 31.0, dha: 92.0, ala: 33.0 },
+    tests: [
+      { code: "E-AUS", lab: "Edacious", assay: "Full Panel", epa: 31.0, dha: 92.0, ala: 33.0, note: "Published avg" },
+      { code: "3934", lab: "Light Labs", epa: 42.0, dha: 178.0, ala: 27.0 }
+    ],
+    hg_ppb: 27.89, hg_loq: false, hg_source: 'Light Labs', hg_test: '4070', se_mcg_per100g: 23.0, protein_g_per100g: 21.0,
+    mp_tested: true, mp_test: '21514', mp_result: 'ND',
+    omega6_g_per100g: 0.502, omega_6_3_ratio: 2.68, vitd_mcg_per100g: 0, vitb12_mcg_per100g: null
+  },
+  {
+    species: "Whiteleg Shrimp", farm: "Taprobane", portion_oz: 4, source: "Light Labs", n_tests: 1,
+    handle: "taprobane-shrimp",
+    per100g: { epa: 69.6, dha: 81.9, ala: 6.8 },
+    tests: [{ code: "9776", lab: "Light Labs", epa: 69.6, dha: 81.9, ala: 6.8 }],
+    hg_ppb: 9.53, hg_loq: false, hg_source: 'Light Labs', hg_test: '9774', se_mcg_per100g: 30.43, protein_g_per100g: 19.22,
+    mp_tested: true, mp_test: '21522', mp_result: 'ND',
+    omega6_g_per100g: 0.14, omega_6_3_ratio: 0.875, vitd_mcg_per100g: 0, vitb12_mcg_per100g: null
+  },
+  {
+    species: "White Leg Shrimp", farm: "Ecuador", portion_oz: 4, source: "Light Labs", n_tests: 1,
+    handle: "ecuador-shrimp",
+    per100g: { epa: 48.9, dha: 53.0, ala: 3.8 },
+    tests: [{ code: "7341", lab: "Light Labs", epa: 48.9, dha: 53.0, ala: 3.8 }],
+    hg_ppb: 9.18, hg_loq: false, hg_source: 'Light Labs', hg_test: '7339', se_mcg_per100g: 17.76, protein_g_per100g: 19.65,
+    mp_tested: false,
+    omega6_g_per100g: 0.09, omega_6_3_ratio: 0.9, vitd_mcg_per100g: 0, vitb12_mcg_per100g: null
+  },
+  {
+    species: "Black Tiger Shrimp", farm: "Tarakan", portion_oz: 4, source: "Edacious", n_tests: 2,
+    handle: "tarakan-black-tiger-shrimp",
+    per100g: { epa: 15.0, dha: 17.0, ala: 7.0 },
+    tests: [
+      { code: "E-TBT", lab: "Edacious", assay: "Full Panel", epa: 15.0, dha: 17.0, ala: 7.0, note: "Published avg (verified)" },
+      { code: "9762", lab: "Light Labs", epa: 48.4, dha: 47.1, ala: 8.5 }
+    ],
+    hg_ppb: 17.93, hg_loq: false, hg_source: 'Light Labs', hg_test: '9760', se_mcg_per100g: 13.5, protein_g_per100g: 18.0,
+    mp_tested: false,
+    omega6_g_per100g: 0.051, omega_6_3_ratio: 1.22, vitd_mcg_per100g: 0, vitb12_mcg_per100g: null
+  },
+  {
+    species: "White Leg Shrimp", farm: "Santa Priscila", portion_oz: 4, source: "Light Labs", n_tests: 1,
+    handle: "santa-priscila-shrimp",
+    per100g: { epa: 23.1, dha: 24.5, ala: 1.9 },
+    tests: [{ code: "11343", lab: "Light Labs", epa: 23.1, dha: 24.5, ala: 1.9 }],
+    hg_ppb: 9.2, hg_loq: false, hg_source: 'Light Labs', hg_test: '11341', se_mcg_per100g: 16.73, protein_g_per100g: 20.15,
+    mp_tested: false,
+    omega6_g_per100g: 0.05, omega_6_3_ratio: 1.25, vitd_mcg_per100g: 0, vitb12_mcg_per100g: null
+  },
+  {
+    species: "Barramundi", farm: "Desert Springs", portion_oz: 6, source: "Light Labs", n_tests: 1,
+    handle: "desert-springs-barramundi",
+    per100g: { epa: 20.0, dha: 20.0, ala: 10.0 },
+    tests: [{ code: "10412", lab: "Light Labs", epa: 20.0, dha: 20.0, ala: 10.0 }],
+    hg_ppb: 9.94, hg_loq: false, hg_source: 'Light Labs', hg_test: '10410', se_mcg_per100g: 20.81, protein_g_per100g: 18.4,
+    mp_tested: false,
+    omega6_g_per100g: 0.12, omega_6_3_ratio: 2.4, vitd_mcg_per100g: 3.0, vitb12_mcg_per100g: null
+  },
+  {
+    species: "Peruvian Scallops", farm: "Seacorp", portion_oz: 4, source: "Edacious", n_tests: 2,
+    handle: "seacorp-peruvian-scallops",
+    per100g: { epa: 51.0, dha: 35.0, ala: 3.0 },
+    tests: [
+      { code: "E-SPS", lab: "Edacious", assay: "Full Panel", epa: 51.0, dha: 35.0, ala: 3.0, note: "Published avg (verified)" },
+      { code: "11337", lab: "Light Labs", epa: 20.5, dha: 18.0, ala: 0 }
+    ],
+    note: "Second test (21156) returned 'Below LOQ' for EPA & DHA.",
+    hg_ppb: 10, hg_loq: false, hg_source: 'Light Labs', hg_test: '21548', se_mcg_per100g: 11.1, protein_g_per100g: 14.4,
+    mp_tested: true, mp_test: '21523', mp_result: 'ND',
+    omega6_g_per100g: 0.034, omega_6_3_ratio: 0.337, vitd_mcg_per100g: 0, vitb12_mcg_per100g: 0.57
+  }
+];
+
+const USDA_BENCHMARKS = {
+  "Farmed Atlantic Salmon": { omega3_mg_per6oz: 2648, protein_g_per100g: 20.4, hg_ppb: 22, vitd_mcg_per100g: 11.0, source: "USDA SR28 #15236" },
+  "Wild Sockeye Salmon": { omega3_mg_per6oz: 1774, protein_g_per100g: 21.3, hg_ppb: 22, vitd_mcg_per100g: 14.1, source: "USDA SR28 #15086" },
+  "Farmed Rainbow Trout": { omega3_mg_per6oz: 1570, protein_g_per100g: 19.9, hg_ppb: 71, vitd_mcg_per100g: 3.9, source: "USDA SR28 #15240" },
+  "Wild Shrimp": { omega3_mg_per6oz: 540, protein_g_per100g: 20.1, hg_ppb: 9, vitd_mcg_per100g: 0, source: "USDA SR28 #15152" },
+  "Farmed Sea Bass": { omega3_mg_per6oz: 1190, protein_g_per100g: 18.4, hg_ppb: 152, vitd_mcg_per100g: 4.7, source: "USDA SR28 #15225" },
+  "Standard Fish Oil Capsule": { omega3_mg: 300, epa_mg: 180, dha_mg: 120, form: "Ethyl Ester", bioavailability: "Low (33%)", source: "Typical 1000mg capsule" }
+};
+
+const CONSTANTS = {
+  OMEGA_DV: 2000,
+  PROTEIN_DV: 50,
+  SELENIUM_RDI: 55,
+  FDA_HG_LIMIT: 1000,
+  VITD_DV_IU: 600,
+  VITB12_DV: 2.4,
+  FISH_OIL_CAPSULE_MG: 300
+};
+
+const TARGETS = {
+  general: { omega3: 2000, label: "General Wellness", desc: "2,000 mg total omega-3/day" },
+  heart: { omega3: 1000, label: "Heart Health (AHA)", desc: "1,000 mg EPA+DHA/day for cardiac patients" },
+  prenatal: { omega3: 300, label: "Prenatal (DHA focus)", desc: "≥300 mg DHA/day for fetal brain development" },
+  antiinflammatory: { omega3: 3000, label: "Anti-Inflammatory", desc: "3,000 mg EPA+DHA/day therapeutic dose" }
+};
+
+let sortDirection = {};
+let mealPlannerData = { mon: [], tue: [], wed: [], thu: [], fri: [], sat: [], sun: [] };
+let boxBuilderCart = [];
+
+// ==================== HELPER FUNCTIONS ====================
+function dvRing(percent, size, strokeWidth, color) {
+  const r = (size - strokeWidth) / 2;
+  const c = 2 * Math.PI * r;
+  const offset = c - (Math.min(percent, 100) / 100) * c;
+  const fillColor = percent >= 100 ? '#7BC950' : (percent >= 50 ? '#4B7991' : '#7BC3F3');
+  return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" style="transform:rotate(-90deg)">
+    <circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="rgba(51,85,102,0.08)" stroke-width="${strokeWidth}"/>
+    <circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${color || fillColor}" stroke-width="${strokeWidth}"
+      stroke-dasharray="${c}" stroke-dashoffset="${offset}" stroke-linecap="round"/>
+    </svg>`;
+}
+
+// Seatopia Omega Standard: compute per-serving from per-100g canonical values
+const OZ_TO_G = 28.3495;
+const STANDARD_SERVING_OZ = 6;
+
+// ── Microplastics panel (EMSL via Light Labs) ────────────────────────────
+// All 17 Seatopia MP tests cover the same 6-polymer panel with detection
+// limit = 1 microparticle. "ND" means zero microparticles detected, not
+// "below an unknown threshold". This panel is what every mp_test result refers to.
+const MP_PANEL = {
+  lod: 1,                       // microparticles per sample
+  unit: 'microparticles',
+  lab: 'EMSL Analytical (via Light Labs)',
+  method: 'FTIR/optical microscopy',
+  polymers: [
+    { abbr: 'HDPE', name: 'High-Density Polyethylene',  source: 'milk jugs, bottle caps' },
+    { abbr: 'LDPE', name: 'Low-Density Polyethylene',   source: 'plastic bags, films' },
+    { abbr: 'PET',  name: 'Polyethylene Terephthalate', source: 'water bottles, fishing line' },
+    { abbr: 'PP',   name: 'Polypropylene',              source: 'caps, ropes, fishing nets' },
+    { abbr: 'PS',   name: 'Polystyrene',                source: 'foam packaging, fish-pen floats' },
+    { abbr: 'PVC',  name: 'Polyvinyl Chloride',         source: 'pipes, pen liners' }
+  ]
+};
+// Helper: every MP-screened Seatopia product currently has 0/6 polymers detected
+function mpSummary(product) {
+  if (!product.mp_tested) return null;
+  return {
+    detected: 0,
+    total: MP_PANEL.polymers.length,
+    lod: MP_PANEL.lod,
+    unit: MP_PANEL.unit,
+    headline: '0 microparticles',
+    sub: '0 of ' + MP_PANEL.polymers.length + ' polymers detected · LOD ' + MP_PANEL.lod + ' ' + MP_PANEL.unit,
+    polymers: MP_PANEL.polymers.map(p => ({ ...p, result: 'ND', lod: MP_PANEL.lod }))
+  };
+}
+let currentServingBasis = 'standard'; // 'standard' = recommended serving, '100g' = per 100g edible portion
+
+function getServingOz(product) {
+  return currentServingBasis === '100g' ? null : product.portion_oz;
+}
+
+function getServingData(product) {
+  if (currentServingBasis === '100g') {
+    const p = product.per100g;
+    return {
+      epa: Math.round(p.epa), dha: Math.round(p.dha), ala: Math.round(p.ala),
+      epa_dha: Math.round(p.epa + p.dha),
+      total: Math.round(p.epa + p.dha + p.ala)
+    };
+  }
+  const servOz = product.portion_oz;
+  const factor = (servOz * OZ_TO_G) / 100;
+  const p = product.per100g;
+  const epa = Math.round(p.epa * factor);
+  const dha = Math.round(p.dha * factor);
+  const ala = Math.round(p.ala * factor);
+  return {
+    epa, dha, ala,
+    epa_dha: epa + dha,
+    total: epa + dha + ala
+  };
+}
+
+function calcDV(value, dv) {
+  return Math.round((value / dv) * 100);
+}
+
+function formatNum(n) {
+  return Math.round(n).toLocaleString();
+}
+
+// COA reference mapping — links test codes to COA filenames for full traceability
+const COA_MAP = {
+  // Yarra Valley Salmon Roe Caviar
+  'E-YRV': { type: 'url', url: 'https://eat.edacious.com/brand/seatopia/salmon-roe-caviar', source: 'Edacious Certified Lab Analysis', assay: 'Full Panel (Fatty Acids, Protein, Vitamins, Minerals, Contaminants)' },
+  // Yarra Valley Salmon Roe Caviar — Lot PO-00512 (Light Labs PDFs)
+  '22491': { type: 'pdf', coa: 'Yarra Valley Salmon Roe - Lot PO-00512 - Fatty Acids COA.pdf', lot: 'PO-00512', assay: 'Fatty Acids' },
+  '22489': { type: 'pdf', coa: 'Yarra Valley Salmon Roe - Lot PO-00512 - Protein COA.pdf', lot: 'PO-00512', assay: 'Protein %' },
+  '22490': { type: 'pdf', coa: 'Yarra Valley Salmon Roe - Lot PO-00512 - Trace Minerals COA.pdf', lot: 'PO-00512', assay: 'Trace Minerals' },
+  '22492': { type: 'pdf', coa: 'Yarra Valley Salmon Roe - Lot PO-00512 - Vitamin D2 COA.pdf', lot: 'PO-00512', assay: 'Vitamin D2' },
+  '22493': { type: 'pdf', coa: 'Yarra Valley Salmon Roe - Lot PO-00512 - Vitamin D3 COA.pdf', lot: 'PO-00512', assay: 'Vitamin D3' },
+  // Ora King Salmon
+  'E-OKS': { type: 'url', url: 'https://edacious.com', source: 'Edacious Certified Lab Analysis', assay: 'Full Panel' },
+  '3950':  { type: 'pdf', coa: 'Ora King - Lot PO-00391 - Fatty Acids COA.pdf', lot: 'PO-00391', assay: 'Fatty Acids' },
+  '3951':  { type: 'pdf', coa: 'Ora King - Lot PO-00391 - Vitamin D COA.pdf', lot: 'PO-00391', assay: 'Vitamin D (D2+D3)' },
+  // Caleta Bay Steelhead
+  'E-CLB': { type: 'url', url: 'https://eat.edacious.com/brand/seatopia/caleta-bay-steelhead-trout-loin', source: 'Edacious Certified Lab Analysis', assay: 'Full Panel (Fatty Acids, Protein, Vitamins, Minerals, Contaminants)' },
+  // Hudson Valley Steelhead
+  'E-HVF': { type: 'url', url: 'https://eat.edacious.com/brand/seatopia/hudson-valley-steelhead-trout-fillet', source: 'Edacious Certified Lab Analysis', assay: 'Full Panel (Fatty Acids, Protein, Vitamins, Minerals, Contaminants)' },
+  // Bakkafrost Atlantic Salmon
+  'E-BAK': { type: 'url', url: 'https://eat.edacious.com/brand/seatopia/bakkafrost-atlantic-salmon-fillet', source: 'Edacious Certified Lab Analysis', assay: 'Full Panel (Fatty Acids, Protein, Vitamins, Minerals, Contaminants)' },
+  // Superior Fresh Atlantic Salmon
+  'E-SUP': { type: 'url', url: 'https://app.edacious.com/app/products/9d41bbbc-00be-4016-b1ae-84905cda9028/preview', source: 'Edacious (Private — not sold by Seatopia)', assay: 'Full Panel (Fatty Acids, Protein, Vitamins, Minerals, Contaminants)' },
+  // Mt Cook King Salmon
+  'E-MCS': { type: 'url', url: 'https://eat.edacious.com/brand/seatopia/mt-cook-king-salmon', source: 'Edacious Certified Lab Analysis', assay: 'Full Panel (Fatty Acids, Protein, Vitamins, Minerals, Contaminants)' },
+  // Branzino
+  'E-BRZ': { type: 'url', url: 'https://eat.edacious.com/brand/seatopia/esteros-lubimar-branzino-fillet', source: 'Edacious Certified Lab Analysis', assay: 'Full Panel (Fatty Acids, Protein, Vitamins, Minerals, Contaminants)' },
+  // Sea Bream
+  'E-BRE': { type: 'url', url: 'https://eat.edacious.com/brand/seatopia/esteros-lubimar-sea-bream-fillet', source: 'Edacious Certified Lab Analysis', assay: 'Full Panel (Fatty Acids, Protein, Vitamins, Minerals, Contaminants)' },
+  // Big Glory Bay
+  'E-BGB': { type: 'url', url: 'https://eat.edacious.com/brand/seatopia/big-glory-bay-king-salmon', source: 'Edacious Certified Lab Analysis', assay: 'Full Panel (Fatty Acids, Protein, Vitamins, Minerals, Contaminants)' },
+  // Australis Barramundi
+  'E-AUS': { type: 'url', url: 'https://eat.edacious.com/brand/seatopia/barramundi', source: 'Edacious Certified Lab Analysis', assay: 'Full Panel (Fatty Acids, Protein, Vitamins, Minerals, Contaminants)' },
+  // Tarakan Black Tiger Shrimp
+  'E-TBT': { type: 'url', url: 'https://eat.edacious.com/brand/seatopia/mangrove-black-tiger-shrimp', source: 'Edacious Certified Lab Analysis', assay: 'Full Panel (Fatty Acids, Protein, Vitamins, Minerals, Contaminants)' },
+  // Kingfish Yellowtail
+  'E-KFY': { type: 'url', url: 'https://eat.edacious.com/brand/seatopia/yellowtail-sashimi-loin', source: 'Edacious Certified Lab Analysis', assay: 'Full Panel (Fatty Acids, Protein, Vitamins, Minerals, Contaminants)' },
+  // McFarland Springs Rainbow Trout
+  'E-MFS': { type: 'url', url: 'https://eat.edacious.com/brand/seatopia/mcfarland-springs-rainbow-trout', source: 'Edacious Certified Lab Analysis', assay: 'Full Panel (Fatty Acids, Protein, Vitamins, Minerals, Contaminants)' },
+  // Seacorp Peruvian Scallops
+  'E-SPS': { type: 'url', url: 'https://eat.edacious.com/brand/seatopia/half-shell-scallops', source: 'Edacious Certified Lab Analysis', assay: 'Full Panel (Fatty Acids, Protein, Vitamins, Minerals, Contaminants)' },
+  // Regal King Salmon — Lot PO-00580
+  '16689': { type: 'pdf', coa: 'Regal King Salmon - Lot PO-00580 - Heavy Metals COA.pdf', lot: 'PO-00580', assay: 'Heavy Metals' },
+  '16690': { type: 'pdf', coa: 'Regal King Salmon - Lot PO-00580 - Protein COA.pdf', lot: 'PO-00580', assay: 'Protein %' },
+  '16691': { type: 'pdf', coa: 'Regal King Salmon - Lot PO-00580 - Fatty Acids COA.pdf', lot: 'PO-00580', assay: 'Fatty Acids' },
+  '16692': { type: 'pdf', coa: 'Regal King Salmon - Lot PO-00580 - Trace Minerals COA.pdf', lot: 'PO-00580', assay: 'Trace Minerals' },
+  '16693': { type: 'pdf', coa: 'Regal King Salmon - Lot PO-00580 - Vitamin D2 COA.pdf', lot: 'PO-00580', assay: 'Vitamin D2' },
+  '16694': { type: 'pdf', coa: 'Regal King Salmon - Lot PO-00580 - Vitamin D3 COA.pdf', lot: 'PO-00580', assay: 'Vitamin D3 (Cholecalciferol)' },
+  // Marshallberg Osetra — Lot PO-00509
+  '9767': { type: 'pdf', coa: 'Marshallberg Osetra - Lot PO-00509 - Heavy Metals COA.pdf', lot: 'PO-00509', assay: 'Heavy Metals' },
+  '9768': { type: 'pdf', coa: 'Marshallberg Osetra - Lot PO-00509 - Protein COA.pdf', lot: 'PO-00509', assay: 'Protein %' },
+  '9769': { type: 'pdf', coa: 'Marshallberg Osetra - Lot PO-00509 - Fatty Acids COA.pdf', lot: 'PO-00509', assay: 'Fatty Acids' },
+  '9770': { type: 'pdf', coa: 'Marshallberg Osetra - Lot PO-00509 - Trace Minerals COA.pdf', lot: 'PO-00509', assay: 'Trace Minerals' },
+  '9771': { type: 'pdf', coa: 'Marshallberg Osetra - Lot PO-00509 - Vitamin D2 COA.pdf', lot: 'PO-00509', assay: 'Vitamin D2' },
+  '9772': { type: 'pdf', coa: 'Marshallberg Osetra - Lot PO-00509 - Vitamin D3 COA.pdf', lot: 'PO-00509', assay: 'Vitamin D3 (Cholecalciferol)' },
+  // Smoke in Chimneys Rainbow Trout — Lot PO-00261
+  '3954': { type: 'pdf', coa: 'Smoke in Chimneys - Lot PO-00261 - Fatty Acids COA.pdf', lot: 'PO-00261', assay: 'Fatty Acids' },
+  '3955': { type: 'pdf', coa: 'Smoke in Chimneys - Lot PO-00261 - Vitamin D COA.pdf', lot: 'PO-00261', assay: 'Vitamin D (D2+D3)' },
+  '3956': { type: 'pdf', coa: 'Smoke in Chimneys - Lot PO-00261 - Trace Minerals COA.pdf', lot: 'PO-00261', assay: 'Trace Minerals' },
+  '3957': { type: 'pdf', coa: 'Smoke in Chimneys - Lot PO-00261 - Protein COA.pdf', lot: 'PO-00261', assay: 'Protein %' },
+  // Desert Springs Barramundi — Lot PO-00514
+  '10410': { type: 'pdf', coa: 'Desert Springs Barramundi - Lot PO-00514 - Heavy Metals COA.pdf', lot: 'PO-00514', assay: 'Heavy Metals' },
+  '10411': { type: 'pdf', coa: 'Desert Springs Barramundi - Lot PO-00514 - Protein COA.pdf', lot: 'PO-00514', assay: 'Protein %' },
+  '10412': { type: 'pdf', coa: 'Desert Springs Barramundi - Lot PO-00514 - Fatty Acids COA.pdf', lot: 'PO-00514', assay: 'Fatty Acids' },
+  '10413': { type: 'pdf', coa: 'Desert Springs Barramundi - Lot PO-00514 - Trace Minerals COA.pdf', lot: 'PO-00514', assay: 'Trace Minerals' },
+  '10414': { type: 'pdf', coa: 'Desert Springs Barramundi - Lot PO-00514 - Vitamin D2 COA.pdf', lot: 'PO-00514', assay: 'Vitamin D2' },
+  '10415': { type: 'pdf', coa: 'Desert Springs Barramundi - Lot PO-00514 - Vitamin D3 COA.pdf', lot: 'PO-00514', assay: 'Vitamin D3 (Cholecalciferol)' },
+  // Taprobane Whiteleg Shrimp — Lot PO-00082
+  '9774': { type: 'pdf', coa: 'Taprobane Whiteleg Shrimp - Lot PO-00082 - Heavy Metals COA.pdf', lot: 'PO-00082', assay: 'Heavy Metals' },
+  '9775': { type: 'pdf', coa: 'Taprobane Whiteleg Shrimp - Lot PO-00082 - Protein COA.pdf', lot: 'PO-00082', assay: 'Protein %' },
+  '9776': { type: 'pdf', coa: 'Taprobane Whiteleg Shrimp - Lot PO-00082 - Fatty Acids COA.pdf', lot: 'PO-00082', assay: 'Fatty Acids' },
+  '9777': { type: 'pdf', coa: 'Taprobane Whiteleg Shrimp - Lot PO-00082 - Trace Minerals COA.pdf', lot: 'PO-00082', assay: 'Trace Minerals' },
+  '9778': { type: 'pdf', coa: 'Taprobane Whiteleg Shrimp - Lot PO-00082 - Vitamin D2 COA.pdf', lot: 'PO-00082', assay: 'Vitamin D2' },
+  '9779': { type: 'pdf', coa: 'Taprobane Whiteleg Shrimp - Lot PO-00082 - Vitamin D3 COA.pdf', lot: 'PO-00082', assay: 'Vitamin D3' },
+  // Ecuador Whiteleg Shrimp — Lot 088204-25
+  '7339': { type: 'pdf', coa: 'Ecuador Shrimp - Lot 088204-25 - Heavy Metals COA.pdf', lot: '088204-25', assay: 'Heavy Metals' },
+  '7340': { type: 'pdf', coa: 'Ecuador Shrimp - Lot 088204-25 - Protein COA.pdf', lot: '088204-25', assay: 'Protein %' },
+  '7341': { type: 'pdf', coa: 'Ecuador Shrimp - Lot 088204-25 - Fatty Acids COA.pdf', lot: '088204-25', assay: 'Fatty Acids' },
+  '7342': { type: 'pdf', coa: 'Ecuador Shrimp - Lot 088204-25 - Trace Minerals COA.pdf', lot: '088204-25', assay: 'Trace Minerals' },
+  '7343': { type: 'pdf', coa: 'Ecuador Shrimp - Lot 088204-25 - Vitamin D2 COA.pdf', lot: '088204-25', assay: 'Vitamin D2' },
+  // Santa Priscila Whiteleg Shrimp — Lot 04825-H6C1
+  '11341': { type: 'pdf', coa: 'Santa Priscila Shrimp - Lot 04825-H6C1 - Heavy Metals COA.pdf', lot: '04825-H6C1', assay: 'Heavy Metals' },
+  '11342': { type: 'pdf', coa: 'Santa Priscila Shrimp - Lot 04825-H6C1 - Protein COA.pdf', lot: '04825-H6C1', assay: 'Protein %' },
+  '11343': { type: 'pdf', coa: 'Santa Priscila Shrimp - Lot 04825-H6C1 - Fatty Acids COA.pdf', lot: '04825-H6C1', assay: 'Fatty Acids' },
+  '11344': { type: 'pdf', coa: 'Santa Priscila Shrimp - Lot 04825-H6C1 - Trace Minerals COA.pdf', lot: '04825-H6C1', assay: 'Trace Minerals' },
+  '11346': { type: 'pdf', coa: 'Santa Priscila Shrimp - Lot 04825-H6C1 - Vitamin D2 COA.pdf', lot: '04825-H6C1', assay: 'Vitamin D2' },
+  // ── Microplastics (EMSL Analytical via Light Labs) ──
+  // 17 unique tests · 6 polymers each = 102 individual analyte results, all ND.
+  // LOD = 1 microparticle per sample → "ND" means literally zero microparticles found.
+  // Polymer panel = the 6 most common consumer plastics (HDPE, LDPE, PET, PP, PS, PVC).
+  '21514': { type: 'pdf', coa: 'Australis Barramundi - Lot 83142422204 - Microplastics (EMSL) COA.pdf', lot: '83142422204', assay: 'Microplastics (EMSL)' },
+  '21515': { type: 'pdf', coa: 'Big Glory Bay King Salmon - Lot BGB1007 - Microplastics (EMSL) COA.pdf', lot: 'BGB1007', assay: 'Microplastics (EMSL)' },
+  '21516': { type: 'pdf', coa: 'Hudson Valley Steelhead - Lot 2352361 - Microplastics (EMSL) COA.pdf', lot: '2352361', assay: 'Microplastics (EMSL)' },
+  '21517': { type: 'pdf', coa: 'Mt Cook King Salmon - Lot 730924 - Microplastics (EMSL) COA.pdf', lot: '730924', assay: 'Microplastics (EMSL)' },
+  '21518': { type: 'pdf', coa: 'Ora King Salmon - Lot 5668 - Microplastics (EMSL) COA.pdf', lot: '5668', assay: 'Microplastics (EMSL)' },
+  '21519': { type: 'pdf', coa: 'Smoke in Chimneys Rainbow Trout - Lot RBT0001 - Microplastics (EMSL) COA.pdf', lot: 'RBT0001', assay: 'Microplastics (EMSL)' },
+  '21520': { type: 'pdf', coa: 'Kingfish Co Yellowtail - Lot 3089.943 - Microplastics (EMSL) COA.pdf', lot: '3089.943', assay: 'Microplastics (EMSL)' },
+  '21521': { type: 'pdf', coa: 'Bakkafrost Atlantic Salmon - Lot 4467 - Microplastics (EMSL) COA.pdf', lot: '4467', assay: 'Microplastics (EMSL)' },
+  '21522': { type: 'pdf', coa: 'Taprobane Whiteleg Shrimp - Lot LB002 - Microplastics (EMSL) COA.pdf', lot: 'LB002', assay: 'Microplastics (EMSL)' },
+  '21523': { type: 'pdf', coa: 'Seacorp Peruvian Scallops - Lot 935 - Microplastics (EMSL) COA.pdf', lot: '935', assay: 'Microplastics (EMSL)' },
+  '21524': { type: 'pdf', coa: 'Regal King Salmon - Microplastics (EMSL) COA.pdf', lot: '', assay: 'Microplastics (EMSL)' },
+  '21525': { type: 'pdf', coa: 'Esteros Lubimar Branzino - Lot BZ-EST-0001 - Microplastics (EMSL) COA.pdf', lot: 'BZ-EST-0001', assay: 'Microplastics (EMSL)' },
+  '21526': { type: 'pdf', coa: 'Esteros Lubimar Bream - Lot BR-0001 - Microplastics (EMSL) COA.pdf', lot: 'BR-0001', assay: 'Microplastics (EMSL)' },
+  '21527': { type: 'pdf', coa: 'Yarra Valley Salmon Roe - Lot 1965 - Microplastics (EMSL) COA.pdf', lot: '1965', assay: 'Microplastics (EMSL)' },
+  '21528': { type: 'pdf', coa: 'Kingfish Co Yellowtail - Lot 412120 - Microplastics (EMSL) COA.pdf', lot: '412120', assay: 'Microplastics (EMSL)' },
+  '22135': { type: 'pdf', coa: 'McFarland Springs Rainbow Trout - Microplastics (EMSL) COA.pdf', lot: '', assay: 'Microplastics (EMSL)' },
+  '22503': { type: 'pdf', coa: 'Marshallberg Osetra Caviar - Microplastics (EMSL) COA.pdf', lot: '', assay: 'Microplastics (EMSL)' }
+};
+
+function isVerified(product) {
+  return product.tests && product.tests.some(t => COA_MAP[t.code]);
+}
+function isPreviewOnly(product) {
+  if (!product.tests) return false;
+  const coaEntries = product.tests.map(t => COA_MAP[t.code]).filter(Boolean);
+  if (coaEntries.length === 0) return false;
+  return coaEntries.every(c => c.type === 'url' && c.url && c.url.includes('/preview'));
+}
+function verificationBadge(product, size) {
+  const verified = isVerified(product);
+  if (!verified) return '';
+  const preview = isPreviewOnly(product);
+  const color = preview ? '#e67e22' : '#2e8b57';
+  const bg = preview ? 'rgba(230,126,34,0.1)' : 'rgba(46,139,87,0.1)';
+  const border = preview ? 'rgba(230,126,34,0.25)' : 'rgba(46,139,87,0.25)';
+  const label = preview ? '⏳ Preview' : '✓ Lab Verified';
+  const shortLabel = preview ? '⏳' : '✓';
+  const fullLabel = preview ? '⏳ 3rd Party Lab Preview' : '✓ 3rd Party Lab Verified';
+  if (size === 'small') return ` <span style="font-size:9px;font-weight:600;color:${color};background:${bg};border:1px solid ${border};border-radius:3px;padding:1px 4px;margin-left:4px;vertical-align:middle;">${shortLabel}</span>`;
+  if (size === 'large') return ` <span style="font-size:12px;font-weight:600;color:${color};background:${bg};border:1px solid ${border};border-radius:5px;padding:2px 8px;margin-left:8px;vertical-align:middle;letter-spacing:0.3px;">${fullLabel}</span>`;
+  return ` <span style="display:inline-block;font-size:10px;font-weight:600;color:${color};background:${bg};border:1px solid ${border};border-radius:4px;padding:1px 6px;margin-left:6px;vertical-align:middle;letter-spacing:0.3px;">${label}</span>`;
+}
+
+function coaRank(cell) {
+  const txt = cell.innerText.toLowerCase();
+  if (txt.includes('coa pending')) return 0;
+  if (txt.includes('preview')) return 1;
+  if (txt.includes('verified')) return 2;
+  return -1;
+}
+
+function sortTable(col) {
+  const tbody = document.querySelector('#data-tbody');
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+  sortDirection[col] = sortDirection[col] === 'asc' ? 'desc' : 'asc';
+  const dir = sortDirection[col] === 'asc' ? 1 : -1;
+
+  rows.sort((a, b) => {
+    const aCell = a.children[col];
+    const bCell = b.children[col];
+    const aText = aCell.innerText.trim();
+    const bText = bCell.innerText.trim();
+
+    // COA column (col 5) — sort by verification status
+    if (col === 5) {
+      return (coaRank(aCell) - coaRank(bCell)) * dir;
+    }
+
+    // Numeric columns
+    const aNum = parseFloat(aText.replace(/,/g, ''));
+    const bNum = parseFloat(bText.replace(/,/g, ''));
+    if (!isNaN(aNum) && !isNaN(bNum)) {
+      return (aNum - bNum) * dir;
+    }
+
+    // String columns
+    return aText.localeCompare(bText) * dir;
+  });
+
+  rows.forEach(row => tbody.appendChild(row));
+}
+
+// ==================== TAB SWITCHING ====================
+document.querySelectorAll('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', e => {
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+    e.target.classList.add('active');
+    const tabId = e.target.dataset.tab;
+    document.getElementById(tabId).classList.add('active');
+
+    if (tabId === 'mercury') renderMercuryTab();
+    if (tabId === 'protein') renderProteinTab();
+    if (tabId === 'microplastics') renderMicroplasticsTab();
+    if (tabId === 'benchmarks') renderBenchmarksTab();
+    if (tabId === 'visuals') renderVisuals();
+  });
+});
+
+// ==================== TAB 1: OMEGA-3 MAP ====================
+let currentOmegaSort = 'epa_dha';
+
+function setOmegaMapSort(mode) {
+  currentOmegaSort = mode;
+  renderOmegaMap(mode);
+  // Update active button styling
+  ['epa_dha', 'total', 'epa', 'dha'].forEach(m => {
+    const btn = document.getElementById('sort-' + m.replace('_', '-'));
+    if (btn) {
+      btn.style.background = m === mode ? 'var(--charcoal-blue)' : '';
+      btn.style.color = m === mode ? '#fff' : '';
+      btn.style.fontWeight = m === mode ? '700' : '';
+    }
+  });
+}
+
+function setServingBasis(basis) {
+  currentServingBasis = basis;
+  renderOmegaMap();
+  // Update active button styling
+  ['standard', '100g'].forEach(b => {
+    const btn = document.getElementById('basis-' + (b === '100g' ? 'actual' : b));
+    if (btn) {
+      btn.style.background = b === basis ? 'var(--charcoal-blue)' : '';
+      btn.style.color = b === basis ? '#fff' : '';
+      btn.style.fontWeight = b === basis ? '700' : '';
+    }
+  });
+}
+
+function renderOmegaMap(sortMode) {
+  sortMode = sortMode || currentOmegaSort;
+  const sortKey = sortMode === 'total' ? 'total' : sortMode === 'epa' ? 'epa' : sortMode === 'dha' ? 'dha' : 'epa_dha';
+  const sortLabels = { epa_dha: 'EPA + DHA', total: 'Total Omega-3', epa: 'EPA', dha: 'DHA' };
+  const sorted = [...PRODUCTS].sort((a, b) => {
+    const da = getServingData(a), db = getServingData(b);
+    return (sortKey === 'epa_dha' ? db.epa + db.dha : db[sortKey]) - (sortKey === 'epa_dha' ? da.epa + da.dha : da[sortKey]);
+  });
+  // Find the max sort value to scale bars proportionally
+  const maxSortVal = sorted.reduce((max, p) => {
+    const d = getServingData(p);
+    const v = sortKey === 'epa_dha' ? d.epa + d.dha : d[sortKey];
+    return Math.max(max, v);
+  }, 1);
+
+  let html = '';
+
+  sorted.forEach((p, i) => {
+    const data = getServingData(p);
+    const primaryVal = sortKey === 'epa_dha' ? data.epa + data.dha : data[sortKey];
+    // Scale bar container width: #1 product = 100%, others proportional
+    const barPct = Math.max((primaryVal / maxSortVal) * 100, 2);
+
+    // Only show bar segments relevant to the sort metric
+    let segments = '';
+    if (sortMode === 'epa') {
+      segments = data.epa > 0 ? `<div class="bar-segment epa" style="flex-grow:1" title="EPA ${formatNum(data.epa)} mg">EPA ${formatNum(data.epa)} mg</div>` : '';
+    } else if (sortMode === 'dha') {
+      segments = data.dha > 0 ? `<div class="bar-segment dha" style="flex-grow:1" title="DHA ${formatNum(data.dha)} mg">DHA ${formatNum(data.dha)} mg</div>` : '';
+    } else if (sortMode === 'epa_dha') {
+      segments = (data.epa > 0 ? `<div class="bar-segment epa" style="flex-grow:${data.epa}" title="EPA ${formatNum(data.epa)} mg">EPA</div>` : '')
+        + (data.dha > 0 ? `<div class="bar-segment dha" style="flex-grow:${data.dha}" title="DHA ${formatNum(data.dha)} mg">DHA</div>` : '');
+    } else {
+      segments = (data.epa > 0 ? `<div class="bar-segment epa" style="flex-grow:${data.epa}" title="EPA ${formatNum(data.epa)} mg">EPA</div>` : '')
+        + (data.dha > 0 ? `<div class="bar-segment dha" style="flex-grow:${data.dha}" title="DHA ${formatNum(data.dha)} mg">DHA</div>` : '')
+        + (data.ala > 0 ? `<div class="bar-segment ala" style="flex-grow:${data.ala};opacity:0.5" title="ALA ${formatNum(data.ala)} mg">ALA</div>` : '');
+    }
+
+    // Secondary stat
+    let secondaryStat = '';
+    if (sortMode === 'epa_dha') secondaryStat = `<span style="font-size:10px;color:#999">${formatNum(data.total)} total ω-3</span>`;
+    else if (sortMode === 'total') secondaryStat = `<span style="font-size:10px;color:#999">${formatNum(data.epa_dha)} EPA+DHA</span>`;
+    else secondaryStat = `<span style="font-size:10px;color:#999">${formatNum(data.epa_dha)} EPA+DHA · ${formatNum(data.total)} total</span>`;
+
+    // Nutrient pills: Protein, Selenium, Mercury (per basis)
+    const servOz = currentServingBasis === '100g' ? null : p.portion_oz;
+    const servG = currentServingBasis === '100g' ? 100 : (servOz * OZ_TO_G);
+    const proServ = p.protein_g_per100g != null ? (p.protein_g_per100g * servG / 100).toFixed(1) : null;
+    const seServ = p.se_mcg_per100g != null ? (p.se_mcg_per100g * servG / 100).toFixed(1) : null;
+    const hgServ = p.hg_ppb != null ? ((p.hg_ppb / 10) * servG / 100).toFixed(2) : null;
+    // Se:Hg molar ratio (simplified: Se mcg / Hg mcg, since molar masses ~similar enough for display)
+    const seHgRatio = (seServ && hgServ && parseFloat(hgServ) > 0) ? (parseFloat(seServ) / parseFloat(hgServ)).toFixed(0) : null;
+
+    // Mercury badge color: green if <0.5mcg, yellow if 0.5-2, red if >2
+    const hgVal = parseFloat(hgServ);
+    const hgColor = hgVal <= 0 ? '#2e8b57' : hgVal < 0.5 ? '#2e8b57' : hgVal < 2 ? '#e67e22' : '#c0392b';
+    const hgDisplay = (p.hg_ppb === 0 || p.hg_loq) ? '< LOQ' : `${hgServ} mcg`;
+    const hgSrcLabel = p.hg_source ? ` <span style="opacity:0.5;font-size:8px">${p.hg_source}</span>` : '';
+    const mpBadge = p.mp_tested && p.mp_result === 'ND' ? `<span style="font-size:9px;background:rgba(46,139,87,0.08);color:#2e8b57;padding:2px 6px;border-radius:3px;white-space:nowrap" title="Microplastics: Not Detected (6 polymer types tested by EMSL via Light Labs)">MP: <strong>ND</strong></span>` : '';
+
+    const nutrientPills = `<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">
+      ${proServ != null ? `<span style="font-size:9px;background:rgba(75,121,145,0.08);color:var(--charcoal-blue);padding:2px 6px;border-radius:3px;white-space:nowrap" title="Protein per serving"><strong>${proServ}g</strong> protein</span>` : ''}
+      ${seServ != null ? `<span style="font-size:9px;background:rgba(46,139,87,0.08);color:#2e8b57;padding:2px 6px;border-radius:3px;white-space:nowrap" title="Selenium per serving · Se:Hg ${seHgRatio || '∞'}"><strong>${seServ} mcg</strong> Se${seHgRatio ? ` <span style="opacity:0.6">(${seHgRatio}:1)</span>` : ''}</span>` : ''}
+      <span style="font-size:9px;background:rgba(0,0,0,0.04);color:${hgColor};padding:2px 6px;border-radius:3px;white-space:nowrap" title="Mercury per serving · Source: ${p.hg_source || 'Edacious'}"><strong>${hgDisplay}</strong> Hg${hgSrcLabel}</span>
+      ${mpBadge}
+    </div>`;
+
+    html += `
+      <div class="bar-row" style="flex-wrap:wrap">
+        <div class="bar-label"><span style="color:#aaa;font-size:11px;margin-right:4px">${i + 1}.</span>${p.species}${verificationBadge(p)}<br><small style="color: var(--cerulean); font-weight: 400;">${p.farm} · ${currentServingBasis === '100g' ? 'per 100g' : servOz + ' oz serving'}</small></div>
+        <div style="flex:1;display:flex;align-items:center">
+          <div class="bar-container" style="width:${barPct.toFixed(1)}%;flex:none">
+            ${segments}
+          </div>
+        </div>
+        <div class="bar-value">
+          <strong>${formatNum(primaryVal)} mg</strong>
+          <span style="font-size:11px;color:var(--cerulean);display:block">${sortLabels[sortMode]}</span>
+          ${secondaryStat}
+        </div>
+        <div style="width:100%;padding-left:0;margin-top:-8px;margin-bottom:-4px">
+          ${nutrientPills}
+        </div>
+      </div>
+    `;
+  });
+
+  document.getElementById('omega-map-chart').innerHTML = html;
+
+  // Seafood vs Supplements — always by EPA+DHA
+  const top5 = [...PRODUCTS].sort((a, b) => getServingData(b).epa_dha - getServingData(a).epa_dha).slice(0, 5);
+  let svsHtml = '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">';
+
+  top5.forEach(p => {
+    const data = getServingData(p);
+    const epadha = data.epa + data.dha;
+    const capsules = Math.ceil(epadha / CONSTANTS.FISH_OIL_CAPSULE_MG);
+
+    svsHtml += `
+      <div style="background: var(--white); padding: 20px; border-radius: 8px; border-left: 4px solid var(--maya-blue);">
+        <h4>${p.species}${verificationBadge(p, 'small')}</h4>
+        <p style="font-size: 13px; color: var(--cerulean); margin-bottom: 12px;">${p.farm}</p>
+        <div style="font-family: 'EB Garamond', serif; font-size: 28px; font-weight: 700; color: var(--charcoal-blue);">${formatNum(epadha)} mg</div>
+        <p style="font-size: 12px; color: var(--cerulean); margin-top: 8px;">EPA + DHA per serving</p>
+        <div style="background: rgba(123,201,243,0.1); padding: 12px; border-radius: 6px; margin-top: 12px; text-align: center; border-left: 3px solid var(--maya-blue);">
+          <div style="font-size: 14px; font-weight: 600; color: var(--charcoal-blue);">💊 ${capsules} capsules</div>
+          <p style="font-size: 11px; color: var(--cerulean); margin-top: 4px;">by milligram equivalent</p>
+        </div>
+      </div>
+    `;
+  });
+
+  svsHtml += '</div>';
+  document.getElementById('seafood-vs-supplements').innerHTML = svsHtml;
+}
+
+renderOmegaMap('epa_dha');
+// Set initial active button state
+setOmegaMapSort('epa_dha');
+setServingBasis('standard');
+
+// ==================== TAB 2: PRODUCT PAGES ====================
+function renderProductGrid() {
+  const sorted = [...PRODUCTS].sort((a, b) => getServingData(b).epa_dha - getServingData(a).epa_dha);
+  let html = '';
+
+  sorted.forEach(p => {
+    const data = getServingData(p);
+    const dv = calcDV(data.total, CONSTANTS.OMEGA_DV);
+    const epadha = data.epa + data.dha;
+    const capsules = Math.ceil(epadha / CONSTANTS.FISH_OIL_CAPSULE_MG);
+    const hgPercent = Math.round((p.hg_ppb / CONSTANTS.FDA_HG_LIMIT) * 100);
+    const sePercent = Math.round((p.se_mcg_per100g / CONSTANTS.SELENIUM_RDI) * 100);
+
+    html += `
+      <div class="product-card" onclick="openModal('${p.handle}')">
+        <div class="product-header">
+          <div>
+            <div class="product-name">${p.species}${verificationBadge(p, 'small')}</div>
+            <div class="product-farm">${p.farm}</div>
+          </div>
+          <div class="product-portion">${p.portion_oz}oz</div>
+        </div>
+
+        <div class="product-stats">
+          <div class="stat-item">
+            <div class="stat-value">${formatNum(data.epa)}</div>
+            <div class="stat-label">EPA (mg)</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">${formatNum(data.dha)}</div>
+            <div class="stat-label">DHA (mg)</div>
+          </div>
+        </div>
+
+        <div style="text-align: center;">
+          ${dvRing(dv, 60, 4, '#7BC3F3')}
+          <div style="font-family: 'EB Garamond', serif; font-size: 22px; font-weight: 700; margin-top: 10px;">${formatNum(epadha)} mg</div>
+          <div style="font-size: 12px; color: var(--charcoal-blue); font-weight: 600;">EPA + DHA per serving</div>
+          <div style="font-size: 11px; color: var(--cerulean); margin-top: 6px;">${formatNum(data.total)} mg total omega-3 (incl. ALA)</div>
+          <div style="font-size: 10px; color: #999; margin-top: 2px; font-style: italic;">Based on third-party lab averages</div>
+        </div>
+
+        <div class="capsule-equiv">💊 <strong>= ${capsules} fish oil capsules</strong> (by EPA+DHA)</div>
+
+        <div style="background: rgba(212,90,60,0.08); padding: 12px; border-radius: 6px; margin: 12px 0;">
+          <div style="font-size: 12px; margin-bottom: 4px;"><strong>Mercury:</strong> ${p.hg_ppb} ppb (${hgPercent}% of limit)</div>
+          <div style="font-size: 12px;"><strong>Selenium:</strong> ${p.se_mcg_per100g} mcg (${sePercent}% RDI)</div>
+        </div>
+
+        ${p.omega_6_3_ratio ? `
+          <div style="background: rgba(123,201,243,0.1); padding: 8px; border-radius: 6px; font-size: 12px; text-align: center;">
+            <strong>Omega 6:3 Ratio: ${p.omega_6_3_ratio.toFixed(2)}</strong>
+          </div>
+        ` : ''}
+      </div>
+    `;
+  });
+
+  document.getElementById('product-grid').innerHTML = html;
+}
+
+renderProductGrid();
+
+function openModal(handle) {
+  const product = PRODUCTS.find(p => p.handle === handle);
+  if (!product) return;
+
+  const data = getServingData(product);
+  const dv = calcDV(data.total, CONSTANTS.OMEGA_DV);
+  const epadha = data.epa + data.dha;
+  const capsules = Math.ceil(epadha / CONSTANTS.FISH_OIL_CAPSULE_MG);
+  const hgPercent = Math.round((product.hg_ppb / CONSTANTS.FDA_HG_LIMIT) * 100);
+  const sePercent = Math.round((product.se_mcg_per100g / CONSTANTS.SELENIUM_RDI) * 100);
+  const proteinDv = Math.round((product.protein_g_per100g / CONSTANTS.PROTEIN_DV) * 100);
+
+  const servingGrams = product.portion_oz * OZ_TO_G / 100;
+  const vitDPerServing = product.vitd_mcg_per100g ? Math.round((product.vitd_mcg_per100g * servingGrams / 100) * 40) : null;
+  const vitDDv = vitDPerServing ? Math.round((vitDPerServing / CONSTANTS.VITD_DV_IU) * 100) : 0;
+  const vitB12PerServing = product.vitb12_mcg_per100g ? (product.vitb12_mcg_per100g * servingGrams / 100).toFixed(2) : null;
+  const vitB12Dv = vitB12PerServing ? Math.round((vitB12PerServing / CONSTANTS.VITB12_DV) * 100) : 0;
+
+  let html = `
+    <h2>${product.species}${verificationBadge(product, 'large')}</h2>
+    <p style="color: var(--cerulean); margin-bottom: 20px; font-size: 14px;">${product.farm} · ${product.portion_oz}oz serving · ${product.n_tests} test${product.n_tests > 1 ? 's' : ''}</p>
+
+    <div style="text-align: center; margin: 30px 0;">
+      ${dvRing(dv, 80, 5, '#7BC3F3')}
+      <div style="font-family: 'EB Garamond', serif; font-size: 32px; font-weight: 700; margin-top: 16px;">${formatNum(data.epa_dha)}</div>
+      <div style="font-size: 14px; color: var(--charcoal-blue); font-weight: 600; margin-top: 8px;">mg EPA + DHA per serving</div>
+      <div style="font-size: 12px; color: var(--cerulean); margin-top: 4px;">${formatNum(data.total)} mg total omega-3 (incl. ALA)</div>
+      <div style="font-size: 10px; color: #999; margin-top: 4px; font-style: italic;">Based on third-party lab averages</div>
+    </div>
+
+    <div class="capsule-equiv">💊 <strong>${capsules} fish oil capsules</strong><br><small>by EPA+DHA content (not by bioavailability)</small></div>
+
+    <div class="nutrition-facts">
+    <div class="nutrition-facts-title">MARINE OMEGA DOSE</div>
+    <div style="border-top: 1px solid var(--charcoal-blue); padding-top: 8px;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 11px;">
+        <strong>EPA</strong> <span>${formatNum(data.epa)} mg</span>
+        <strong>DHA</strong> <span>${formatNum(data.dha)} mg</span>
+        <strong style="color:var(--charcoal-blue)">Marine Omega (EPA+DHA)</strong> <span style="font-weight:700">${formatNum(data.epa_dha)} mg</span>
+        <strong style="color:#999">ALA</strong> <span style="color:#999">${formatNum(data.ala)} mg</span>
+        <strong>Total Omega-3</strong> <span>${formatNum(data.total)} mg</span>
+        <strong>Protein</strong> <span>${(product.protein_g_per100g * servingGrams / 100).toFixed(1)}g (${proteinDv}% DV)</span>
+        <strong>Selenium</strong> <span>${(product.se_mcg_per100g * servingGrams / 100).toFixed(1)} mcg (${sePercent}% RDI)</span>
+        <strong>Mercury</strong> <span>${product.hg_ppb} ppb (${hgPercent}% FDA limit)</span>
+        ${vitDPerServing ? `<strong>Vitamin D</strong> <span>${vitDPerServing} IU (${vitDDv}% DV)</span>` : ''}
+        ${vitB12PerServing ? `<strong>Vitamin B12</strong> <span>${vitB12PerServing} mcg (${vitB12Dv}% DV)</span>` : ''}
+        ${product.omega_6_3_ratio ? `<strong>Omega 6:3 Ratio</strong> <span>${product.omega_6_3_ratio.toFixed(2)}</span>` : ''}
+      </div>
+    </div>
+    </div>
+
+    <p style="background: rgba(123,201,243,0.1); padding: 12px; border-radius: 6px; font-size: 12px; margin: 20px 0;">
+      <strong>Bioavailability:</strong> Omega-3 from whole fish is absorbed 2-3× more effectively than supplement form.
+    </p>
+  `;
+
+  // ── Test History: fatty-acid tests + microplastics test (if performed) ──
+  const hasMultipleFA = product.tests && product.tests.length > 1;
+  const hasMP = product.mp_tested;
+  if (hasMultipleFA || hasMP) {
+    html += '<h4 style="margin-top: 30px;">Test History — All Assays</h4>';
+    html += '<p style="font-size:11px;color:#888;margin:4px 0 12px">Every lab test performed on this product, across all assay types.</p>';
+    html += '<div style="font-size: 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px;">';
+    (product.tests || []).forEach(t => {
+      const testTotal = t.epa + t.dha + t.ala;
+      html += `
+        <div style="background: rgba(51,85,102,0.05); padding: 10px; border-radius: 6px; border-left:3px solid var(--cerulean);">
+          <div style="font-weight: 600; color: var(--charcoal-blue);">${t.code}</div>
+          <div style="font-size:9px;color:#4B7991;letter-spacing:0.5px;text-transform:uppercase;margin-top:2px">Fatty Acids</div>
+          <div style="color: var(--cerulean); font-size: 11px; margin-top: 4px;">Total ω3: ${formatNum(testTotal)} mg/100g</div>
+          <div style="color: var(--cerulean); font-size: 10px; margin-top: 2px;">${t.lab || 'Lab: N/A'}</div>
+        </div>
+      `;
+    });
+    if (hasMP) {
+      const summary = mpSummary(product);
+      const allClean = summary.detected === 0;
+      const headlineColor = allClean ? '#2e8b57' : '#d45a3c';
+      const polymerRows = summary.polymers.map(p => `
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0;border-bottom:1px dotted rgba(99,102,241,0.15);font-size:10px">
+          <span style="color:#333" title="Common source: ${p.source}"><strong style="color:#4338ca">${p.abbr}</strong> ${p.name}</span>
+          <span style="color:${p.result === 'ND' ? '#2e8b57' : '#d45a3c'};font-weight:700">${p.result}</span>
+        </div>
+      `).join('');
+      html += `
+        <div style="background: rgba(99,102,241,0.06); padding: 12px; border-radius: 6px; border-left:3px solid #6366f1; grid-column: 1 / -1;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+            <div>
+              <div style="font-weight: 600; color: #4338ca;">Test #${product.mp_test || '—'}</div>
+              <div style="font-size:9px;color:#6366f1;letter-spacing:0.5px;text-transform:uppercase;margin-top:2px">Microplastics (EMSL) · ${MP_PANEL.lab}</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-size:18px;font-weight:800;color:${headlineColor};line-height:1">${summary.headline}</div>
+              <div style="font-size:10px;color:#666;margin-top:2px">${summary.sub}</div>
+            </div>
+          </div>
+          <div style="margin-top:10px;padding-top:8px;border-top:1px solid rgba(99,102,241,0.15)">
+            <div style="font-size:10px;color:#666;margin-bottom:4px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase">6-Polymer Panel · per analyte result</div>
+            ${polymerRows}
+          </div>
+          <div style="margin-top:8px;font-size:9px;color:#888;line-height:1.4">
+            <strong>Method:</strong> ${MP_PANEL.method}. <strong>"ND" interpretation:</strong> zero microparticles detected at the lab's detection limit of ${MP_PANEL.lod} microparticle per sample — not "below an unknown threshold."
+          </div>
+        </div>
+      `;
+    }
+    html += '</div>';
+    if (!hasMP) {
+      html += `<p style="font-size:10px;color:#aaa;margin-top:8px;font-style:italic">Microplastics (EMSL) 6-polymer panel pending — not yet in Seatopia test queue for this farm.</p>`;
+    }
+  }
+
+  if (product.note) {
+    html += `<div class="note">${product.note}</div>`;
+  }
+
+  document.getElementById('modal-body').innerHTML = html;
+  document.getElementById('product-modal').classList.add('active');
+}
+
+function closeModal() {
+  document.getElementById('product-modal').classList.remove('active');
+}
+
+document.getElementById('product-modal').addEventListener('click', e => {
+  if (e.target.id === 'product-modal') closeModal();
+});
+
+// ==================== TAB 3: MEAL PLANNER ====================
+function renderMealPlanner() {
+  const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+  const dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+  let html = '';
+  days.forEach((day, i) => {
+    html += `
+      <div class="day-column">
+        <div class="day-header">${dayNames[i]}</div>
+        <div id="meals-${day}">`;
+
+        mealPlannerData[day].forEach((productHandle, idx) => {
+          const p = PRODUCTS.find(x => x.handle === productHandle);
+          html += `
+            <div class="meal-item">
+              <div class="meal-item-text">
+                <div class="meal-item-species">${p.species}</div>
+                <div class="meal-item-farm">${p.farm}</div>
+              </div>
+              <button class="meal-remove" onclick="removeMeal('${day}', ${idx})">×</button>
+            </div>
+          `;
+        });
+
+        html += `</div>
+        <button class="add-btn" onclick="showProductDropdown('${day}')">+ Add</button>
+      </div>
+    `;
+  });
+
+  document.getElementById('meal-planner-grid').innerHTML = html;
+  updateMealNutrition();
+}
+
+function showProductDropdown(day) {
+  // Remove any existing picker
+  const old = document.getElementById('meal-picker-overlay');
+  if (old) old.remove();
+
+  const overlay = document.createElement('div');
+  overlay.id = 'meal-picker-overlay';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(26,51,68,0.5);z-index:999;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(3px)';
+
+  let listHtml = '';
+  // Sort by total omega-3 descending for easy picking
+  const sorted = [...PRODUCTS].sort((a,b) => getServingData(b).total - getServingData(a).total);
+  sorted.forEach(p => {
+    const data = getServingData(p);
+    const dvPct = Math.round(data.total / CONSTANTS.OMEGA_DV * 100);
+    listHtml += `<div class="picker-item" onclick="addMealFromPicker('${day}','${p.handle}')" style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;cursor:pointer;border-bottom:1px solid rgba(51,85,102,0.06);transition:background 0.15s">
+      <div>
+        <div style="font-weight:600;font-size:14px;color:#335566">${p.species}</div>
+        <div style="font-size:12px;color:#4B7991">${p.farm} · ${p.portion_oz} oz</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-family:'EB Garamond',serif;font-size:18px;font-weight:700;color:#335566">${data.total.toLocaleString()} mg</div>
+        <div style="font-size:11px;color:${dvPct >= 100 ? '#7BC950' : '#4B7991'}">${dvPct}% DV</div>
+      </div>
+    </div>`;
+  });
+
+  overlay.innerHTML = `
+    <div style="background:white;border-radius:16px;width:420px;max-width:90vw;max-height:80vh;overflow:hidden;box-shadow:0 24px 48px rgba(26,51,68,0.25)">
+      <div style="padding:20px 24px;border-bottom:1px solid rgba(51,85,102,0.08);display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-family:'EB Garamond',serif;font-size:20px;font-weight:600;color:#335566">Add to ${day.charAt(0).toUpperCase() + day.slice(1)}day</div>
+          <div style="font-size:12px;color:#4B7991;margin-top:2px">Select a product to add</div>
+        </div>
+        <button onclick="document.getElementById('meal-picker-overlay').remove()" style="width:32px;height:32px;border:none;background:#F7EFE6;border-radius:50%;cursor:pointer;font-size:18px;color:#4B7991;display:flex;align-items:center;justify-content:center">×</button>
+      </div>
+      <div style="overflow-y:auto;max-height:60vh">${listHtml}</div>
+    </div>`;
+
+  overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
+  document.body.appendChild(overlay);
+
+  // Add hover effect via event delegation
+  overlay.querySelectorAll('.picker-item').forEach(item => {
+    item.addEventListener('mouseenter', () => item.style.background = 'rgba(123,195,243,0.08)');
+    item.addEventListener('mouseleave', () => item.style.background = 'transparent');
+  });
+}
+
+function addMealFromPicker(day, handle) {
+  mealPlannerData[day].push(handle);
+  const overlay = document.getElementById('meal-picker-overlay');
+  if (overlay) overlay.remove();
+  renderMealPlanner();
+}
+
+function removeMeal(day, idx) {
+  mealPlannerData[day].splice(idx, 1);
+  renderMealPlanner();
+}
+
+function updateMealNutrition() {
+  const target = document.querySelector('input[name="target"]:checked').value;
+  const targetOmega3 = TARGETS[target].omega3 * 7;
+
+  let totalOmega3 = 0, totalProteinepa = 0, totalHg = 0, totalVitD = 0;
+  let numDinners = 0;
+
+  const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+  days.forEach(day => {
+    mealPlannerData[day].forEach(handle => {
+      const p = PRODUCTS.find(x => x.handle === handle);
+      const data = getServingData(p);
+      totalOmega3 += data.epa + data.dha;
+      totalProteinepa += p.protein_g_per100g * p.portion_oz * OZ_TO_G / 100 / 100;
+      totalHg += p.hg_ppb;
+      if (p.vitd_mcg_per100g) totalVitD += p.vitd_mcg_per100g * p.portion_oz * OZ_TO_G / 100 / 100 * 40;
+      numDinners++;
+    });
+  });
+
+  const avgOmega3 = numDinners > 0 ? Math.round(totalOmega3 / 7) : 0;
+  const capsules = Math.ceil(totalOmega3 / CONSTANTS.FISH_OIL_CAPSULE_MG);
+  const avgHg = numDinners > 0 ? (totalHg / numDinners).toFixed(1) : 0;
+  const omega3Pct = calcDV(totalOmega3, targetOmega3);
+  const dailyTarget = TARGETS[target].omega3;
+  const dailyPct = avgOmega3 > 0 ? Math.round(avgOmega3 / dailyTarget * 100) : 0;
+  const selectedLabel = TARGETS[target].label;
+  const selectedDesc = TARGETS[target].desc;
+
+  const html = `
+    <h3>Weekly Nutrition Dashboard</h3>
+    <div style="text-align:center;margin-bottom:16px;padding:10px 16px;background:rgba(123,201,80,0.08);border-radius:8px;font-size:13px;color:var(--charcoal-blue)">
+      <strong>Target: ${selectedLabel}</strong> — ${selectedDesc}
+    </div>
+    <div class="dashboard-grid">
+      <div class="dashboard-item">
+        <div style="text-align: center;">
+          ${dvRing(omega3Pct, 60, 4)}
+          <div class="dashboard-big-number" style="margin-top: 12px;">${formatNum(totalOmega3)}</div>
+        </div>
+        <div class="dashboard-label">Weekly EPA+DHA (mg)</div>
+        <div style="font-size: 11px; color: var(--cerulean); margin-top: 8px;">${omega3Pct}% of ${formatNum(targetOmega3)} mg target</div>
+      </div>
+
+      <div class="dashboard-item">
+        <div style="text-align: center;">
+          ${dvRing(dailyPct, 48, 3)}
+          <div class="dashboard-big-number" style="margin-top: 8px;">${formatNum(avgOmega3)}</div>
+        </div>
+        <div class="dashboard-label">Daily Average (mg)</div>
+        <div style="font-size: 11px; color: var(--cerulean); margin-top: 8px;">${dailyPct}% of ${formatNum(dailyTarget)} mg/day</div>
+      </div>
+
+      <div class="dashboard-item">
+        <div class="dashboard-big-number">${totalProteinepa.toFixed(0)}</div>
+        <div class="dashboard-label">Total Protein (g)</div>
+      </div>
+
+      <div class="dashboard-item">
+        <div class="dashboard-big-number">${avgHg}</div>
+        <div class="dashboard-label">Avg Mercury (ppb)</div>
+      </div>
+
+      <div class="dashboard-item">
+        <div class="dashboard-big-number">${capsules}</div>
+        <div class="dashboard-label">Replaces Capsules</div>
+      </div>
+
+      <div class="dashboard-item">
+        <div class="dashboard-big-number">${numDinners}</div>
+        <div class="dashboard-label">Dinners Planned</div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('meal-nutrition-dashboard').innerHTML = html;
+}
+
+document.getElementById('target-selector').addEventListener('change', () => updateMealNutrition());
+
+renderMealPlanner();
+
+// ==================== TAB 7: MERCURY & SELENIUM (PART 1) ====================
+function renderMercuryTab() {
+  const sorted = [...PRODUCTS].sort((a, b) => b.hg_ppb - a.hg_ppb);
+  let html = '';
+
+  sorted.forEach(p => {
+    const percent = Math.round((p.hg_ppb / CONSTANTS.FDA_HG_LIMIT) * 100);
+    const hgLabel = (p.hg_ppb === 0 && p.hg_loq) ? '< LOQ' : `${p.hg_ppb.toFixed(1)} ppb`;
+    const srcTag = p.hg_source ? `<span style="font-size:10px;color:#888;margin-left:4px">(${p.hg_source})</span>` : '';
+    html += `
+      <div class="bar-row">
+        <div class="bar-label bar-label-small">${p.species} <br><small>${p.farm}</small></div>
+        <div class="bar-container" style="flex: 1;">
+          <div style="flex-grow: ${Math.max(p.hg_ppb, 1)}; background: ${p.hg_ppb > 500 ? '#EE1C25' : p.hg_ppb > 200 ? '#EE7B30' : p.hg_ppb > 50 ? '#e67e22' : '#7BC950'}; border-radius: 4px;"></div>
+        </div>
+        <div class="bar-value">
+          <strong>${hgLabel}</strong> ${srcTag}<br><span style="font-size: 11px; color: var(--cerulean);">${percent}% of FDA limit</span>
+        </div>
+      </div>
+    `;
+  });
+
+  document.getElementById('mercury-chart').innerHTML = html;
+
+  // Selenium
+  const seSort = [...PRODUCTS].sort((a, b) => b.se_mcg_per100g - a.se_mcg_per100g);
+  let seHtml = '';
+
+  seSort.forEach(p => {
+    const sePercent = Math.round((p.se_mcg_per100g / CONSTANTS.SELENIUM_RDI) * 100);
+    const servingGrams = p.portion_oz * OZ_TO_G / 100;
+    const sePerServing = p.se_mcg_per100g * servingGrams / 100;
+
+    seHtml += `
+      <div class="bar-row">
+        <div class="bar-label bar-label-small">${p.species}<br><small>${p.farm}</small></div>
+        <div class="bar-container">
+          <div style="flex-grow: ${sePerServing}; background: var(--moss-green);"></div>
+        </div>
+        <div class="bar-value">
+          <strong>${sePerServing.toFixed(1)} mcg</strong> <span style="font-size: 12px; color: var(--cerulean);">${sePercent}% RDI</span>
+        </div>
+      </div>
+    `;
+  });
+
+  document.getElementById('selenium-chart').innerHTML = seHtml;
+
+  // Se:Hg Ratio (molar: Se in mol / Hg in mol)
+  const calcSeHgMolar = (p) => {
+    if (!p.hg_ppb || p.hg_ppb === 0) return Infinity;
+    return (p.se_mcg_per100g / 78.96) / ((p.hg_ppb / 10) / 200.59);
+  };
+  const ratioSort = [...PRODUCTS].filter(p => p.hg_ppb > 0).sort((a, b) => calcSeHgMolar(b) - calcSeHgMolar(a));
+
+  let ratioHtml = '';
+  ratioSort.forEach(p => {
+    const ratio = calcSeHgMolar(p);
+    const srcTag = p.hg_source ? `<span style="font-size:10px;color:#888">(Hg: ${p.hg_source})</span>` : '';
+    ratioHtml += `
+      <div class="bar-row">
+        <div class="bar-label bar-label-small">${p.species}<br><small>${p.farm}</small></div>
+        <div style="flex: 1; display: flex; align-items: center; font-weight: 600; color: var(--charcoal-blue);">Se:Hg = ${ratio.toFixed(1)} ${srcTag}</div>
+      </div>
+    `;
+  });
+
+  document.getElementById('se-hg-ratio-chart').innerHTML = ratioHtml;
+}
+
+// ==================== TAB: MICROPLASTICS ====================
+function renderMicroplasticsTab() {
+  const tested = PRODUCTS.filter(p => p.mp_tested);
+  const untested = PRODUCTS.filter(p => !p.mp_tested);
+  const totalAnalyteResults = tested.length * MP_PANEL.polymers.length;
+  const totalDetected = 0; // 0 of (tested.length × 6) — every analyte returned ND
+  const polymerAbbrs = MP_PANEL.polymers.map(p => p.abbr);
+
+  let html = `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:24px">
+    <div style="background:#e8f5e9;padding:16px 20px;border-radius:8px;border-left:4px solid #2e8b57">
+      <div style="font-size:28px;font-weight:700;color:#2e8b57;font-family:'EB Garamond',serif">${totalDetected}</div>
+      <div style="font-size:12px;color:#333;line-height:1.4">Microparticles detected across <strong>${totalAnalyteResults}</strong> individual analyte results (${tested.length} products × ${MP_PANEL.polymers.length} polymers)</div>
+    </div>
+    <div style="background:#e8f5e9;padding:16px 20px;border-radius:8px;border-left:4px solid #2e8b57">
+      <div style="font-size:28px;font-weight:700;color:#2e8b57;font-family:'EB Garamond',serif">${tested.length} / ${PRODUCTS.length}</div>
+      <div style="font-size:12px;color:#333">Products screened on the EMSL ${MP_PANEL.polymers.length}-polymer panel</div>
+    </div>
+    <div style="background:rgba(75,121,145,0.06);padding:16px 20px;border-radius:8px;border-left:4px solid var(--cerulean)">
+      <div style="font-size:28px;font-weight:700;color:var(--charcoal-blue);font-family:'EB Garamond',serif">${MP_PANEL.lod} <small style="font-size:13px;font-weight:500;color:#666">${MP_PANEL.unit}</small></div>
+      <div style="font-size:12px;color:#333">Lab detection limit · "ND" = literally zero, not "below an unknown threshold"</div>
+    </div>
+    <div style="background:rgba(99,102,241,0.06);padding:16px 20px;border-radius:8px;border-left:4px solid #6366f1">
+      <div style="font-size:14px;font-weight:700;color:#4338ca;font-family:'EB Garamond',serif;line-height:1.3">${MP_PANEL.lab}</div>
+      <div style="font-size:11px;color:#333;margin-top:4px">${MP_PANEL.method}</div>
+    </div>
+  </div>
+
+  <div style="background:rgba(99,102,241,0.04);padding:14px 18px;border-radius:8px;border-left:3px solid #6366f1;margin-bottom:24px;font-size:12px;line-height:1.6;color:#333">
+    <strong style="color:#4338ca">The 6-polymer panel covers the most common consumer plastics:</strong><br>
+    ${MP_PANEL.polymers.map(p => `<span style="display:inline-block;margin:4px 8px 0 0;padding:3px 8px;background:white;border-radius:4px;font-size:11px"><strong style="color:#4338ca">${p.abbr}</strong> ${p.name} <span style="color:#888">— ${p.source}</span></span>`).join('')}
+  </div>`;
+
+  // Tested products table
+  const verifiedSvg = `<svg style="width:11px;height:11px;vertical-align:-1px;margin-right:2px" viewBox="0 0 24 24" fill="none" stroke="#2e8b57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`;
+
+  html += `<h3 style="margin-bottom:12px">Tested Products</h3>`;
+  html += `<div style="overflow-x:auto;border:1px solid #dde3e8;border-radius:8px"><table class="data-table" style="font-size:12px;margin:0">
+    <thead><tr>
+      <th>Product</th><th>Farm</th><th>COA</th>
+      ${polymerAbbrs.map(p => `<th style="text-align:center">${p}</th>`).join('')}
+    </tr></thead><tbody>`;
+
+  tested.forEach(p => {
+    const coaRef = COA_MAP[p.mp_test];
+    let coaCell = '';
+    if (coaRef) {
+      coaCell = `<span style="font-size:10px">${verifiedSvg}<strong style="color:#2e8b57">Verified</strong><br><span style="color:var(--cerulean);font-size:10px" title="${coaRef.coa}">Test #${p.mp_test}${coaRef.lot ? ' · Lot ' + coaRef.lot : ''}</span></span>`;
+    } else {
+      coaCell = `<span style="font-family:monospace;font-size:11px">${p.mp_test}</span>`;
+    }
+    html += `<tr>
+      <td style="font-weight:600">${p.species}</td>
+      <td style="color:var(--cerulean)">${p.farm}</td>
+      <td style="white-space:nowrap">${coaCell}</td>
+      ${polymerAbbrs.map(() => `<td style="text-align:center;color:#2e8b57;font-weight:700">ND</td>`).join('')}
+    </tr>`;
+  });
+
+  html += '</tbody></table></div>';
+
+  // Untested products
+  if (untested.length > 0) {
+    html += `<h3 style="margin-top:32px;margin-bottom:12px">Not Yet Tested</h3>`;
+    html += `<div style="display:grid;gap:8px">`;
+    untested.forEach(p => {
+      html += `<div style="display:flex;align-items:center;gap:12px;padding:10px 16px;background:rgba(0,0,0,0.02);border-radius:6px;border-left:3px solid #e0e0e0">
+        <span style="font-weight:600;font-size:13px">${p.species}</span>
+        <span style="color:var(--cerulean);font-size:12px">${p.farm}</span>
+        <span style="margin-left:auto;font-size:11px;color:#999;background:rgba(0,0,0,0.04);padding:2px 8px;border-radius:3px">COA pending</span>
+      </div>`;
+    });
+    html += '</div>';
+  }
+
+  document.getElementById('microplastics-chart').innerHTML = html;
+}
+
+// ==================== TAB 8: PROTEIN & VITAMINS ====================
+function renderProteinTab() {
+  const sorted = [...PRODUCTS].sort((a, b) => b.protein_g_per100g - a.protein_g_per100g);
+  let html = '';
+
+  sorted.forEach(p => {
+    const servingGrams = p.portion_oz * OZ_TO_G / 100;
+    const proteinPerServing = p.protein_g_per100g * servingGrams / 100;
+    const dv = calcDV(proteinPerServing, CONSTANTS.PROTEIN_DV);
+
+    html += `
+      <div class="bar-row">
+        <div class="bar-label bar-label-small">${p.species}<br><small>${p.farm}</small></div>
+        <div class="bar-container">
+          <div style="flex-grow: ${proteinPerServing}; background: var(--cerulean);"></div>
+        </div>
+        <div class="bar-value">
+          <strong>${proteinPerServing.toFixed(1)}g</strong> <span class="dv-badge ${dv >= 100 ? '' : dv >= 50 ? 'medium' : 'low'}">${dv}% DV</span>
+        </div>
+      </div>
+    `;
+  });
+
+  document.getElementById('protein-chart').innerHTML = html;
+
+  // Vitamin D (filter products with data)
+  const vitDProducts = PRODUCTS.filter(p => p.vitd_mcg_per100g).sort((a, b) => b.vitd_mcg_per100g - a.vitd_mcg_per100g);
+  let vitDHtml = '';
+
+  vitDProducts.forEach(p => {
+    const servingGrams = p.portion_oz * OZ_TO_G / 100;
+    const vitDIU = Math.round(p.vitd_mcg_per100g * servingGrams / 100 * 40);
+    const dv = calcDV(vitDIU, CONSTANTS.VITD_DV_IU);
+
+    vitDHtml += `
+      <div class="bar-row">
+        <div class="bar-label bar-label-small">${p.species}<br><small>${p.farm}</small></div>
+        <div class="bar-container">
+          <div style="flex-grow: ${Math.min(vitDIU, 1000)}; background: var(--cerulean);"></div>
+        </div>
+        <div class="bar-value">
+          <strong>${vitDIU} IU</strong> <span class="dv-badge ${dv >= 100 ? '' : dv >= 50 ? 'medium' : 'low'}">${dv}% DV</span>
+        </div>
+      </div>
+    `;
+  });
+
+  document.getElementById('vitamin-d-chart').innerHTML = vitDHtml;
+
+  // Vitamin B12
+  const vitB12Products = PRODUCTS.filter(p => p.vitb12_mcg_per100g).sort((a, b) => b.vitb12_mcg_per100g - a.vitb12_mcg_per100g);
+  let vitB12Html = '';
+
+  vitB12Products.forEach(p => {
+    const servingGrams = p.portion_oz * OZ_TO_G / 100;
+    const vitB12 = (p.vitb12_mcg_per100g * servingGrams / 100).toFixed(2);
+    const dv = calcDV(vitB12, CONSTANTS.VITB12_DV);
+
+    vitB12Html += `
+      <div class="bar-row">
+        <div class="bar-label bar-label-small">${p.species}<br><small>${p.farm}</small></div>
+        <div class="bar-container">
+          <div style="flex-grow: ${vitB12 * 100}; background: var(--moss-green);"></div>
+        </div>
+        <div class="bar-value">
+          <strong>${vitB12} mcg</strong> <span class="dv-badge ${dv >= 100 ? '' : dv >= 50 ? 'medium' : 'low'}">${dv}% DV</span>
+        </div>
+      </div>
+    `;
+  });
+
+  document.getElementById('vitamin-b12-chart').innerHTML = vitB12Html || '<p style="color: var(--cerulean);">Limited B12 data available</p>';
+}
+
+// ==================== TAB 6: RAW DATA ====================
+// COA_MAP is defined above (near isVerified) — shared by all tabs
+
+const SKU_MAP = {
+  "mt-cook-king-salmon": [
+    { sku: "SF-MCA-KGS-SHP-001", label: "Mt. Cook, Alpine Salmon (7oz)", pkg_oz: 7.0, serv_oz: 7.0 }
+  ],
+  "ora-king-king-salmon": [
+    { sku: "SF-OKS-KGS-SHP-001", label: "Ora King, King Salmon (8.5oz)", pkg_oz: 8.5, serv_oz: 8.5 }
+  ],
+  "big-glory-bay-king-salmon": [
+    { sku: "SF-BGB-KGS-SHP-001", label: "Big Glory Bay, King Salmon (8oz)", pkg_oz: 8.0, serv_oz: 8.0 }
+  ],
+  "bakkafrost-atlantic-salmon": [
+    { sku: "SF-BAK-ATS-SHP-002", label: "Bakkafrost, Atlantic Salmon (6oz)", pkg_oz: 6.0, serv_oz: 6.0 }
+  ],
+  "superior-fresh-atlantic-salmon": [
+    { sku: "SF-SPF-ATS-SHP-001", label: "Superior Fresh, Atlantic Salmon (6oz)", pkg_oz: 6.0, serv_oz: 6.0 }
+  ],
+  "caleta-bay-steelhead": [
+    { sku: "SF-CLB-STT-SHP-002", label: "A&I Steelhead Loin (12oz)", pkg_oz: 12.0, serv_oz: 6.0 },
+    { sku: "SF-CLB-STT-SHP-001", label: "Cold Smoked Steelhead (4oz)", pkg_oz: 4.0, serv_oz: 4.0 },
+    { sku: "SF-CLB-STT-SHP-009", label: "Steelhead (6oz)", pkg_oz: 6.0, serv_oz: 6.0 }
+  ],
+  "tarakan-black-tiger-shrimp": [
+    { sku: "SF-TAR-BTS-SHP-001", label: "Black Tiger Shrimp (16oz)", pkg_oz: 16.0, serv_oz: 4.0 }
+  ],
+  "esteros-lubimar-branzino": [
+    { sku: "SF-EST-BRZ-SHP-001", label: "Branzino (6oz)", pkg_oz: 6.0, serv_oz: 6.0 }
+  ],
+  "esteros-lubimar-sea-bream": [
+    { sku: "SF-EST-BRE-SHP-001", label: "Bream (6oz)", pkg_oz: 6.0, serv_oz: 6.0 }
+  ],
+  "australis-barramundi": [
+    { sku: "SF-AUS-BRM-SHP-001", label: "Barramundi (6oz)", pkg_oz: 6.0, serv_oz: 6.0 },
+    { sku: "SF-AUS-BRM-SHP-005", label: "Barramundi (7-9oz filet)", pkg_oz: 8.0, serv_oz: 8.0 },
+    { sku: "SF-AUS-BRM-SHP-009", label: "Barramundi (3-5 filet bulk)", pkg_oz: 4.0, serv_oz: 4.0 }
+  ],
+  "hudson-valley-steelhead": [
+    { sku: "SF-HVF-STT-BLK-003", label: "Pastrami Smoked (4oz)", pkg_oz: 4.0, serv_oz: 4.0 },
+    { sku: "SF-HVF-STT-SHP-001", label: "Steelhead (6oz)", pkg_oz: 6.0, serv_oz: 6.0 }
+  ],
+  "mcfarland-springs-rainbow-trout": [
+    { sku: "SF-MCF-RBT-BLK-001", label: "Trout Dogs (12.8oz)", pkg_oz: 12.8, serv_oz: 3.2 }
+  ],
+  "seacorp-peruvian-scallops": [
+    { sku: "SF-SEC-SCL-SHP-001", label: "Half Shell Scallops (16oz)", pkg_oz: 7.0, serv_oz: 3.5 },
+    { sku: "SF-SEC-SCL-SHP-009", label: "Scallop Meat (16oz)", pkg_oz: 16.0, serv_oz: 4.0 }
+  ],
+  "smoke-in-chimneys-rainbow-trout": [
+    { sku: "SF-SIC-RBT-BLK-001", label: "Whole Trout (12oz)", pkg_oz: 12.0, serv_oz: 6.0 },
+    { sku: "SF-SIC-RBT-BLK-006", label: "Smoked Trout Filet (5.5oz)", pkg_oz: 5.5, serv_oz: 5.5 },
+    { sku: "SF-SIC-RBT-BLK-005", label: "Smoked Trout Fillet (5.5oz)", pkg_oz: 5.5, serv_oz: 5.5 }
+  ],
+  "kingfish-yellowtail": [
+    { sku: "SF-KFC-YLT-SHP-001", label: "Yellowtail Split Loins (8oz)", pkg_oz: 8.0, serv_oz: 8.0 }
+  ],
+  "marshallberg-osetra": [
+    { sku: "SF-MAR-OST-BLK-001", label: "Classic Osetra Caviar (1oz)", pkg_oz: 1.0, serv_oz: 0.2 }
+  ],
+  "yarra-valley-salmon-roe": [
+    { sku: "SF-YRV-SLC-BLK-001", label: "Salmon Caviar (30g)", pkg_oz: 1.0, serv_oz: 0.2 }
+  ]
+};
+
+function renderDataTab() {
+  // ── Build grouped rows: products → SKUs → tests ──
+  const scale = (val100g, oz) => val100g == null ? null : val100g * (oz * OZ_TO_G) / 100;
+  const hgScale = (ppb, oz) => ppb == null ? null : (ppb / 10) * (oz * OZ_TO_G) / 100;
+  const fmt = (v, d) => v == null ? '—' : d === 0 ? formatNum(Math.round(v)) : v.toFixed(d || 1);
+
+  // Collect groups: each group = one product+SKU combo, containing 1+ test rows
+  let groups = [];
+
+  PRODUCTS.forEach(p => {
+    const skus = SKU_MAP[p.handle] || [{ sku: '—', label: p.species, pkg_oz: p.portion_oz, serv_oz: p.portion_oz }];
+
+    skus.forEach(sku => {
+      let testRows = [];
+      p.tests.forEach(t => {
+        let coaRef = COA_MAP[t.code];
+        if (!coaRef) {
+          const edaciousTest = p.tests.find(tt => COA_MAP[tt.code] && COA_MAP[tt.code].type === 'url');
+          if (edaciousTest) coaRef = COA_MAP[edaciousTest.code];
+        }
+        const epa100 = t.epa, dha100 = t.dha, ala100 = t.ala;
+        const total100 = epa100 + dha100 + ala100;
+        const hg100 = p.hg_ppb || 0;
+        const se100 = p.se_mcg_per100g;
+        const pro100 = p.protein_g_per100g;
+        const omega6_100 = p.omega6_g_per100g != null ? p.omega6_g_per100g * 1000 : null; // convert g→mg
+        const o63ratio = p.omega_6_3_ratio;
+        const vitd100 = p.vitd_mcg_per100g;
+        const vitb12_100 = p.vitb12_mcg_per100g;
+        const servOz = sku.serv_oz;
+        const pkgOz = sku.pkg_oz;
+
+        // Determine if this test is the PRIMARY source (matches per100g values)
+        const isPrimary = (Math.abs(t.epa - p.per100g.epa) < 1 && Math.abs(t.dha - p.per100g.dha) < 1);
+
+        testRows.push({
+          code: t.code, handle: p.handle, species: p.species, farm: p.farm,
+          lab: coaRef ? (coaRef.type === 'url' ? 'Edacious' : 'Light Labs') : (t.lab || p.source), coaRef,
+          sku: sku.sku, skuLabel: sku.label,
+          isPrimary,
+          epa100, dha100, ala100, total100, hg100, se100, pro100,
+          omega6_100, o63ratio, vitd100, vitb12_100,
+          servOz,
+          epaServ: scale(epa100, servOz), dhaServ: scale(dha100, servOz),
+          alaServ: scale(ala100, servOz), totalServ: scale(total100, servOz),
+          hgServ: hgScale(hg100, servOz), seServ: scale(se100, servOz),
+          proServ: scale(pro100, servOz),
+          omega6Serv: scale(omega6_100, servOz), vitdServ: scale(vitd100, servOz),
+          vitb12Serv: scale(vitb12_100, servOz),
+          pkgOz,
+          epaPkg: scale(epa100, pkgOz), dhaPkg: scale(dha100, pkgOz),
+          alaPkg: scale(ala100, pkgOz), totalPkg: scale(total100, pkgOz),
+          hgPkg: hgScale(hg100, pkgOz), sePkg: scale(se100, pkgOz),
+          proPkg: scale(pro100, pkgOz),
+          omega6Pkg: scale(omega6_100, pkgOz), vitdPkg: scale(vitd100, pkgOz),
+          vitb12Pkg: scale(vitb12_100, pkgOz)
+        });
+      });
+      // Sort: primary source first, then others
+      testRows.sort((a, b) => (b.isPrimary ? 1 : 0) - (a.isPrimary ? 1 : 0));
+
+      // ── Append microplastics test row (if product was tested by EMSL via Light Labs) ──
+      // MP is a different assay than fatty acids — not part of Edacious panel.
+      // We surface it here so the raw data view shows EVERY test performed, not just FA.
+      if (p.mp_tested) {
+        const coaRef = COA_MAP[p.mp_test];
+        const summary = mpSummary(p);
+        testRows.push({
+          code: p.mp_test || '—',
+          handle: p.handle,
+          species: p.species,
+          farm: p.farm,
+          lab: 'Light Labs',
+          coaRef,
+          sku: sku.sku,
+          skuLabel: sku.label,
+          isPrimary: false,
+          isMP: true,
+          assay: 'Microplastics (EMSL) · 6-polymer panel',
+          mpResult: p.mp_result || 'ND',
+          mpDetected: summary ? summary.detected : 0,
+          mpTotal: summary ? summary.total : MP_PANEL.polymers.length,
+          mpPolymers: summary ? summary.polymers : null,
+          servOz: sku.serv_oz,
+          pkgOz: sku.pkg_oz
+        });
+      }
+      groups.push({ handle: p.handle, farm: p.farm, sku: sku.sku, rows: testRows });
+    });
+  });
+
+  const verifiedSvg = `<svg style="width:11px;height:11px;vertical-align:-1px;margin-right:2px" viewBox="0 0 24 24" fill="none" stroke="#2e8b57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`;
+  const starSvg = `<svg style="width:10px;height:10px;vertical-align:-1px;margin-right:2px" viewBox="0 0 24 24" fill="#2e8b57" stroke="none"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>`;
+
+  let html = '';
+  groups.forEach((g, gi) => {
+    const groupBorder = `border-top:2px solid #ccd8e0`;
+    const nRows = g.rows.length;
+    const hasMultiple = nRows > 1;
+
+    g.rows.forEach((r, ri) => {
+      // ── Microplastics row: render with full polymer-by-polymer breakdown ──
+      if (r.isMP) {
+        const isFirst = ri === 0;
+        const topBdr = isFirst ? groupBorder : '';
+        const detected = r.mpDetected || 0;
+        const total = r.mpTotal || MP_PANEL.polymers.length;
+        const allClean = detected === 0;
+        const mpColor = allClean ? '#2e8b57' : '#d45a3c';
+        // Headline: "0 microparticles" (much stronger than "ND")
+        const mpHeadline = allClean
+          ? `<span style="display:inline-block;background:${mpColor};color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:3px;letter-spacing:0.3px">0 microparticles</span>`
+          : `<span style="display:inline-block;background:${mpColor};color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:3px;letter-spacing:0.3px">${detected} detected</span>`;
+        // Per-polymer chips
+        const polymerChips = (r.mpPolymers || MP_PANEL.polymers).map(p => {
+          const result = p.result || 'ND';
+          const isClean = result === 'ND';
+          const bg = isClean ? 'rgba(46,139,87,0.08)' : 'rgba(212,90,60,0.12)';
+          const fg = isClean ? '#2e8b57' : '#d45a3c';
+          return `<span title="${p.name} — common source: ${p.source}" style="display:inline-block;background:${bg};color:${fg};font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;margin:1px 2px;font-family:'Karla',sans-serif">${p.abbr}: ${result}</span>`;
+        }).join('');
+        let mpCoaCell;
+        if (r.coaRef) {
+          mpCoaCell = `<span style="font-size:10px">${verifiedSvg}<strong style="color:#2e8b57">Verified</strong><br><small style="color:var(--cerulean)" title="${r.coaRef.coa}">Test #${r.code}${r.coaRef.lot ? ' · Lot ' + r.coaRef.lot : ''}</small></span>`;
+        } else {
+          mpCoaCell = `<span style="color:#aaa;font-size:10px">COA pending</span>`;
+        }
+        const mpSpeciesCell = (ri > 0 && hasMultiple) ? `<span style="color:#999">↳</span> ${r.species}` : r.species;
+        const mpFarmCell = (ri > 0 && hasMultiple) ? `<span style="opacity:0.5">${r.farm}</span>` : r.farm;
+        const assayBadge = `<span style="display:inline-block;background:rgba(99,102,241,0.12);color:#4338ca;font-size:8px;font-weight:700;padding:1px 5px;border-radius:3px;margin-left:4px;vertical-align:1px;letter-spacing:0.3px">MP ASSAY</span>`;
+
+        html += `<tr data-mp="1" data-mp-result="${r.mpResult}" data-mp-detected="${detected}/${total}" data-mp-lod="LOD ${MP_PANEL.lod} ${MP_PANEL.unit}" data-mp-code="${r.code}" data-species="${r.species}" data-farm="${r.farm}" data-sku="${r.sku}" style="${topBdr};background:rgba(99,102,241,0.03)">
+        <td style="position:sticky;left:0;background:rgba(247,243,252,1);z-index:1;font-family:monospace;font-size:10px">${r.code}</td>
+        <td style="font-size:9px;font-family:monospace;white-space:nowrap"><span style="color:#ccc">″</span></td>
+        <td>${mpSpeciesCell}</td>
+        <td>${mpFarmCell}</td>
+        <td style="white-space:nowrap">${r.lab}${assayBadge}</td>
+        <td style="white-space:nowrap">${mpCoaCell}</td>
+        <td colspan="11" style="background:rgba(99,102,241,0.05);font-size:11px;color:#4338ca;padding:6px 10px">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span style="font-weight:700">Microplastics (EMSL)</span>
+            ${mpHeadline}
+            <span style="font-size:10px;color:#666">${detected} of ${total} polymers detected · LOD ${MP_PANEL.lod} ${MP_PANEL.unit} · ${MP_PANEL.method}</span>
+          </div>
+          <div style="margin-top:4px;line-height:1.6">${polymerChips}</div>
+        </td>
+        <td colspan="8" style="background:rgba(46,139,87,0.03);text-align:center;font-size:10px;color:#888;font-style:italic">qualitative — particle count assay</td>
+        <td colspan="8" style="background:rgba(99,102,241,0.03);text-align:center;font-size:10px;color:#888;font-style:italic">qualitative — particle count assay</td>
+      </tr>`;
+        return;
+      }
+
+      let coaCell;
+      if (r.coaRef) {
+        if (r.coaRef.type === 'url') {
+          const isPrev = r.coaRef.url && r.coaRef.url.includes('/preview');
+          const bLabel = isPrev ? 'Preview' : 'Verified';
+          const bColor = isPrev ? '#e67e22' : '#2e8b57';
+          const bSvg = isPrev
+            ? `<svg style="width:11px;height:11px;vertical-align:-1px;margin-right:2px" viewBox="0 0 24 24" fill="none" stroke="#e67e22" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`
+            : verifiedSvg;
+          coaCell = `<span style="font-size:10px">${bSvg}<strong style="color:${bColor}">${bLabel}</strong><br><a href="${r.coaRef.url}" target="_blank" rel="noopener" style="color:var(--cerulean);text-decoration:none;font-size:10px" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">${r.coaRef.source}</a></span>`;
+        } else {
+          coaCell = `<span style="font-size:10px">${verifiedSvg}<strong style="color:#2e8b57">Verified</strong><br><small style="color:var(--cerulean)" title="${r.coaRef.coa}">${r.coaRef.lot} · ${r.coaRef.coa.substring(0, 30)}…</small></span>`;
+        }
+      } else {
+        coaCell = `<span style="color:#aaa;font-size:10px">COA pending</span>`;
+      }
+
+      const seHgServ = r.hgServ > 0 ? (r.seServ / r.hgServ).toFixed(1) : '∞';
+      const seHgPkg = r.hgPkg > 0 ? (r.sePkg / r.hgPkg).toFixed(1) : '∞';
+      const hgServStr = r.hgServ != null ? (r.hgServ < 0.01 ? '&lt;0.01' : r.hgServ.toFixed(2)) : '—';
+      const hgPkgStr = r.hgPkg != null ? (r.hgPkg < 0.01 ? '&lt;0.01' : r.hgPkg.toFixed(2)) : '—';
+
+      // Styling: primary row gets white bg + ★ PUBLIC badge; secondary rows get muted
+      const isFirst = ri === 0;
+      const topBdr = isFirst ? groupBorder : '';
+      const rowBg = r.isPrimary ? '#fff' : 'rgba(0,0,0,0.018)';
+      const txtOpacity = r.isPrimary ? '1' : '0.55';
+      const stickyBg = r.isPrimary ? '#fff' : '#f7f7f6';
+
+      // Source badge
+      const srcBadge = r.isPrimary
+        ? `<span style="display:inline-block;background:#2e8b57;color:#fff;font-size:8px;font-weight:700;padding:1px 5px;border-radius:3px;margin-left:4px;vertical-align:1px;letter-spacing:0.5px">★ PUBLIC</span>`
+        : hasMultiple
+          ? `<span style="display:inline-block;background:#aaa;color:#fff;font-size:8px;font-weight:600;padding:1px 4px;border-radius:3px;margin-left:4px;vertical-align:1px;letter-spacing:0.3px">REF</span>`
+          : '';
+
+      // For secondary rows in a multi-test group, show "↳" indent on species
+      const speciesCell = (ri > 0 && hasMultiple) ? `<span style="color:#999">↳</span> ${r.species}` : r.species;
+      const farmCell = (ri > 0 && hasMultiple) ? `<span style="opacity:0.5">${r.farm}</span>` : r.farm;
+
+      const epaDhaServ = (r.epaServ != null && r.dhaServ != null) ? r.epaServ + r.dhaServ : null;
+      const epaDhaPkg = (r.epaPkg != null && r.dhaPkg != null) ? r.epaPkg + r.dhaPkg : null;
+
+      html += `<tr style="${topBdr};background:${rowBg};opacity:${txtOpacity}">
+      <td style="position:sticky;left:0;background:${stickyBg};z-index:1;font-family:monospace;font-size:10px">${r.code}</td>
+      <td style="font-size:9px;font-family:monospace;white-space:nowrap" title="${r.skuLabel}">${isFirst ? r.sku : '<span style="color:#ccc">″</span>'}</td>
+      <td>${speciesCell}</td>
+      <td>${farmCell}</td>
+      <td style="white-space:nowrap">${r.lab}${srcBadge}</td>
+      <td style="white-space:nowrap">${coaCell}</td>
+      <!-- Per 100g -->
+      <td style="background:rgba(75,121,145,0.03)">${fmt(r.epa100, 0)}</td>
+      <td style="background:rgba(75,121,145,0.03)">${fmt(r.dha100, 0)}</td>
+      <td style="background:rgba(75,121,145,0.03)">${fmt(r.ala100, 0)}</td>
+      <td style="background:rgba(75,121,145,0.03)"><strong>${fmt(r.total100, 0)}</strong></td>
+      <td style="background:rgba(75,121,145,0.03)" title="Se:Hg ${r.hg100 > 0 ? ((r.se100||0)/(r.hg100/10)).toFixed(1) : '∞'}">${r.hg100 || '&lt;LOQ'}</td>
+      <td style="background:rgba(75,121,145,0.03)">${fmt(r.se100, 1)}</td>
+      <td style="background:rgba(75,121,145,0.03)">${fmt(r.pro100, 1)}</td>
+      <td style="background:rgba(75,121,145,0.03)">${fmt(r.omega6_100, 0)}</td>
+      <td style="background:rgba(75,121,145,0.03)">${r.o63ratio != null ? r.o63ratio.toFixed(2) : '—'}</td>
+      <td style="background:rgba(75,121,145,0.03)">${fmt(r.vitd100, 1)}</td>
+      <td style="background:rgba(75,121,145,0.03)">${fmt(r.vitb12_100, 2)}</td>
+      <!-- Per Seatopia Recommended Serving -->
+      <td style="background:rgba(46,139,87,0.03);font-weight:600">${r.servOz}</td>
+      <td style="background:rgba(46,139,87,0.03)"><strong>${fmt(epaDhaServ, 0)}</strong></td>
+      <td style="background:rgba(46,139,87,0.03)">${fmt(r.totalServ, 0)}</td>
+      <td style="background:rgba(46,139,87,0.03)">${fmt(r.seServ, 1)}</td>
+      <td style="background:rgba(46,139,87,0.03)">${fmt(r.proServ, 1)}</td>
+      <td style="background:rgba(46,139,87,0.03)">${fmt(r.omega6Serv, 0)}</td>
+      <td style="background:rgba(46,139,87,0.03)">${fmt(r.vitdServ, 1)}</td>
+      <td style="background:rgba(46,139,87,0.03)">${fmt(r.vitb12Serv, 2)}</td>
+      <!-- Per Package -->
+      <td style="background:rgba(99,102,241,0.03);font-weight:600">${r.pkgOz}</td>
+      <td style="background:rgba(99,102,241,0.03)"><strong>${fmt(epaDhaPkg, 0)}</strong></td>
+      <td style="background:rgba(99,102,241,0.03)">${fmt(r.totalPkg, 0)}</td>
+      <td style="background:rgba(99,102,241,0.03)">${fmt(r.sePkg, 1)}</td>
+      <td style="background:rgba(99,102,241,0.03)">${fmt(r.proPkg, 1)}</td>
+      <td style="background:rgba(99,102,241,0.03)">${fmt(r.omega6Pkg, 0)}</td>
+      <td style="background:rgba(99,102,241,0.03)">${fmt(r.vitdPkg, 1)}</td>
+      <td style="background:rgba(99,102,241,0.03)">${fmt(r.vitb12Pkg, 2)}</td>
+    </tr>`;
+    });
+  });
+
+  document.getElementById('data-tbody').innerHTML = html;
+}
+
+function filterDataTable() {
+  const q = (document.getElementById('data-search').value || '').toLowerCase();
+  const rows = document.querySelectorAll('#data-tbody tr');
+  rows.forEach(tr => {
+    tr.style.display = !q || tr.textContent.toLowerCase().includes(q) ? '' : 'none';
+  });
+}
+
+function exportCSV() {
+  const headers = ['Test Code','SKU','Species','Farm','Lab','Source','Assay','MP Result','EPA/100g','DHA/100g','ALA/100g','Total ω3/100g','Hg ppb','Se mcg/100g','Protein g/100g','ω6 mg/100g','ω6:3 Ratio','Vit D mcg/100g','B12 mcg/100g','Serv oz','EPA+DHA/serv','Total ω3/serv','Se mcg/serv','Protein g/serv','ω6 mg/serv','Vit D mcg/serv','B12 mcg/serv','Pkg oz','EPA+DHA/pkg','Total ω3/pkg','Se mcg/pkg','Protein g/pkg','ω6 mg/pkg','Vit D mcg/pkg','B12 mcg/pkg'];
+  const esc = v => {
+    v = (v == null ? '' : String(v)).replace(/[★↳]/g, '').trim();
+    return (v.includes(',') || v.includes('"') || v.includes('\n')) ? '"' + v.replace(/"/g, '""') + '"' : v;
+  };
+  const rows = [];
+  document.querySelectorAll('#data-tbody tr').forEach(tr => {
+    if (tr.style.display === 'none') return;
+    if (tr.getAttribute('data-mp') === '1') {
+      // Microplastics row — emit a clean, separate record
+      const mpCode = tr.getAttribute('data-mp-code') || '';
+      const mpResult = tr.getAttribute('data-mp-result') || '';
+      const species = tr.getAttribute('data-species') || '';
+      const farm = tr.getAttribute('data-farm') || '';
+      const sku = tr.getAttribute('data-sku') || '';
+      const mpDetected = tr.getAttribute('data-mp-detected') || '0/6';
+      const mpLod = tr.getAttribute('data-mp-lod') || 'LOD 1 microparticles';
+      const mpRow = [mpCode, sku, species, farm, 'Light Labs (EMSL)', 'EMSL COA', 'Microplastics (EMSL) · 6-polymer panel · ' + mpLod, mpDetected + ' polymers detected · result: ' + mpResult];
+      // Pad remaining FA columns with empty values
+      while (mpRow.length < headers.length) mpRow.push('');
+      rows.push(mpRow.map(esc).join(','));
+      return;
+    }
+    const cells = tr.querySelectorAll('td');
+    const raw = Array.from(cells).map(td => td.innerText.replace(/[★↳]/g, '').trim());
+    // Insert Assay="Fatty Acids" and MP Result="" after the Source column (index 5)
+    raw.splice(6, 0, 'Fatty Acids', '');
+    rows.push(raw.map(esc).join(','));
+  });
+  const csv = headers.join(',') + '\n' + rows.join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'seatopia_raw_test_data.csv';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+renderDataTab();
+
+// ==================== TAB 9: BENCHMARKS ====================
+function renderBenchmarksTab() {
+  // Omega 6:3 ratio chart
+  const ratioProducts = PRODUCTS.filter(p => p.omega_6_3_ratio).sort((a, b) => a.omega_6_3_ratio - b.omega_6_3_ratio);
+  let ratioHtml = '<div style="display: grid; gap: 16px;">';
+
+  ratioProducts.forEach(p => {
+    const ratio = p.omega_6_3_ratio;
+    const omega6Part = ratio;
+    const omega3Part = 1;
+    const totalWidth = omega6Part + omega3Part;
+
+    let color = omega6Part <= 1 ? '#7BC950' : omega6Part <= 2 ? '#EE7B30' : '#EE1C25';
+
+    ratioHtml += `
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <div style="flex-shrink: 0; width: 160px; font-size: 13px; font-weight: 500; color: var(--charcoal-blue);">${p.species} - ${p.farm}</div>
+        <div class="ratio-bar" style="flex: 1;">
+          <div class="ratio-omega6" style="width: ${(omega6Part / totalWidth) * 100}%;"></div>
+          <div class="ratio-omega3" style="width: ${(omega3Part / totalWidth) * 100}%;"></div>
+        </div>
+        <div style="flex-shrink: 0; width: 60px; text-align: right; font-weight: 600; color: ${color};">${ratio.toFixed(2)}</div>
+      </div>
+    `;
+  });
+
+  ratioHtml += '<div style="margin-top: 20px; padding: 12px; background: rgba(212,90,60,0.08); border-radius: 6px; font-size: 12px;"><strong>Western Diet Average: 17:1</strong> (much higher omega-6)</div></div>';
+
+  document.getElementById('ratio-chart').innerHTML = ratioHtml;
+
+  // Top EPA & DHA
+  const sortByEpa = [...PRODUCTS].sort((a, b) => {
+    const aepa = getServingData(a).epa;
+    const bepa = getServingData(b).epa;
+    return bepa - aepa;
+  });
+
+  const sortByDha = [...PRODUCTS].sort((a, b) => {
+    const adha = getServingData(a).dha;
+    const bdha = getServingData(b).dha;
+    return bdha - adha;
+  });
+
+  const topEpa = sortByEpa.slice(0, 3).map(p => `${p.species} (${formatNum(getServingData(p).epa)} mg)`).join(', ');
+  const topDha = sortByDha.slice(0, 3).map(p => `${p.species} (${formatNum(getServingData(p).dha)} mg)`).join(', ');
+
+  document.getElementById('top-epa').innerText = topEpa;
+  document.getElementById('top-dha').innerText = topDha;
+
+  // Benchmarks chart
+  let benchHtml = '<div style="display: grid; gap: 20px;">';
+
+  // King Salmon vs Farmed Atlantic
+  const kingProduct = PRODUCTS.find(p => p.farm === 'Ora King');
+  const kingData = getServingData(kingProduct);
+  const kingAvg = kingData.epa_dha;
+  const kingPortion = kingProduct.portion_oz;
+  benchHtml += `
+    <div style="background: var(--white); padding: 20px; border-radius: 8px; border-left: 4px solid var(--maya-blue);">
+      <h4>King Salmon (Ora King) vs USDA Farmed Atlantic</h4>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 16px;">
+        <div>
+          <div style="font-family: 'EB Garamond', serif; font-size: 24px; font-weight: 700; color: var(--charcoal-blue);">${formatNum(kingAvg)}</div>
+          <div style="font-size: 12px; color: var(--cerulean);">Seatopia (${kingPortion}oz)</div>
+        </div>
+        <div>
+          <div style="font-family: 'EB Garamond', serif; font-size: 24px; font-weight: 700; color: #999;">${USDA_BENCHMARKS['Farmed Atlantic Salmon'].omega3_mg_per6oz}</div>
+          <div style="font-size: 12px; color: var(--cerulean);">USDA Reference (6oz)</div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  benchHtml += '</div>';
+  document.getElementById('benchmark-chart').innerHTML = benchHtml;
+}
+
+// ==================== TAB 5: DATA QUALITY ====================
+// ==================== TAB 4: BOX BUILDER ====================
+function renderBoxBuilder() {
+  // Catalog
+  const sorted = [...PRODUCTS].sort((a, b) => getServingData(b).total - getServingData(a).total);
+  let catalogHtml = '<h3>Product Catalog</h3><div style="display: grid; gap: 12px;">';
+
+  sorted.forEach(p => {
+    const data = getServingData(p);
+    catalogHtml += `
+      <div style="background: var(--white); padding: 12px; border-radius: 6px; border-left: 3px solid var(--maya-blue); display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: 600; font-size: 13px;">${p.species}</div>
+          <div style="font-size: 12px; color: var(--cerulean);">${p.farm}</div>
+          <div style="font-size: 11px; color: var(--cerulean); margin-top: 2px;">${formatNum(data.total)} mg omega-3</div>
+        </div>
+        <button onclick="addToBoxCart('${p.handle}')" style="background: var(--maya-blue); color: var(--white); border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-weight: 600; font-size: 12px;">Add</button>
+      </div>
+    `;
+  });
+
+  catalogHtml += '</div>';
+  document.getElementById('box-catalog').innerHTML = catalogHtml;
+
+  renderBoxSidebar();
+}
+
+function addToBoxCart(handle) {
+  const item = boxBuilderCart.find(x => x.handle === handle);
+  if (item) {
+    item.qty++;
+  } else {
+    boxBuilderCart.push({ handle, qty: 1 });
+  }
+  renderBoxSidebar();
+}
+
+function removeFromBoxCart(handle) {
+  boxBuilderCart = boxBuilderCart.filter(x => x.handle !== handle);
+  renderBoxSidebar();
+}
+
+function renderBoxSidebar() {
+  let totalOmega3 = 0, totalProtein = 0, totalHg = 0;
+  let html = '<h3 style="position: sticky; top: 100px;">Your Box</h3>';
+
+  html += '<div style="display: grid; gap: 12px;">';
+
+  boxBuilderCart.forEach(item => {
+    const p = PRODUCTS.find(x => x.handle === item.handle);
+    const data = getServingData(p);
+
+    totalOmega3 += (data.epa + data.dha) * item.qty;
+    totalProtein += p.protein_g_per100g * p.portion_oz * OZ_TO_G / 100 / 100 * item.qty;
+    totalHg += p.hg_ppb * item.qty;
+
+    html += `
+      <div style="background: rgba(123,201,243,0.1); padding: 12px; border-radius: 6px; border-left: 3px solid var(--maya-blue);">
+        <div style="display: flex; justify-content: space-between; align-items: start; gap: 8px;">
+          <div style="flex: 1;">
+            <div style="font-weight: 600; font-size: 13px;">${p.species}</div>
+            <div style="font-size: 11px; color: var(--cerulean);">${p.farm}</div>
+          </div>
+          <button onclick="removeFromBoxCart('${p.handle}')" style="background: none; border: none; color: var(--fiery-terracotta); cursor: pointer; font-weight: 600;">×</button>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px; margin-top: 8px;">
+          <button onclick="boxBuilderChangeQty('${p.handle}', -1)" style="width: 24px; height: 24px; border: 1px solid var(--cerulean); background: transparent; cursor: pointer; border-radius: 3px;">−</button>
+          <span style="min-width: 20px; text-align: center; font-weight: 600;">${item.qty}</span>
+          <button onclick="boxBuilderChangeQty('${p.handle}', 1)" style="width: 24px; height: 24px; border: 1px solid var(--cerulean); background: transparent; cursor: pointer; border-radius: 3px;">+</button>
+        </div>
+      </div>
+    `;
+  });
+
+  html += '</div>';
+
+  if (boxBuilderCart.length > 0) {
+    const capsules = Math.ceil(totalOmega3 / CONSTANTS.FISH_OIL_CAPSULE_MG);
+    const omega3Dv = calcDV(totalOmega3, CONSTANTS.OMEGA_DV);
+
+    html += `
+      <div class="nutrition-dashboard" style="position: sticky; bottom: 20px; margin-top: 24px;">
+        <h4 style="margin-bottom: 16px;">Box Summary</h4>
+        <div class="dashboard-grid">
+          <div class="dashboard-item">
+            <div style="text-align: center;">
+              ${dvRing(omega3Dv, 56, 4, '#7BC3F3')}
+              <div style="font-size: 16px; font-weight: 700; margin-top: 10px;">${formatNum(totalOmega3)}</div>
+            </div>
+            <div class="dashboard-label">Total Omega-3</div>
+          </div>
+          <div class="dashboard-item">
+            <div class="dashboard-big-number" style="font-size: 24px;">${capsules}</div>
+            <div class="dashboard-label">= Capsules</div>
+          </div>
+          <div class="dashboard-item">
+            <div class="dashboard-big-number" style="font-size: 24px;">${totalProtein.toFixed(0)}</div>
+            <div class="dashboard-label">Protein (g)</div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  document.getElementById('box-sidebar').innerHTML = html;
+}
+
+function boxBuilderChangeQty(handle, delta) {
+  const item = boxBuilderCart.find(x => x.handle === handle);
+  if (item) {
+    item.qty = Math.max(0, item.qty + delta);
+    if (item.qty === 0) removeFromBoxCart(handle);
+    else renderBoxSidebar();
+  }
+}
+
+// Initial render
+renderBoxBuilder();
+
+// ==================== TAB 10: VISUALIZATIONS ====================
+let visualBg = '#F7EFE6';
+
+function setVisualBg(btn, color) {
+  visualBg = color;
+  document.querySelectorAll('#visuals .toggle-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderVisuals();
+}
+
+function renderVisuals() {
+  const sorted = [...PRODUCTS].sort((a,b) => getServingData(b).total - getServingData(a).total);
+  const top5 = sorted.slice(0, 5);
+  const isDark = visualBg === '#335566';
+  const textColor = isDark ? '#F7EFE6' : '#335566';
+  const subColor = isDark ? 'rgba(247,239,230,0.6)' : '#4B7991';
+  const cardBg = isDark ? '#2a4a5a' : (visualBg === '#ffffff' ? '#f8f6f3' : '#ffffff');
+  const statBg = isDark ? 'rgba(123,195,243,0.1)' : 'rgba(51,85,102,0.04)';
+  const borderCol = isDark ? 'rgba(123,195,243,0.15)' : 'rgba(51,85,102,0.08)';
+  const ctaBg = isDark ? '#7BC3F3' : '#335566';
+  const ctaColor = isDark ? '#1a3344' : '#ffffff';
+  const pillBg = isDark ? 'rgba(123,195,243,0.15)' : 'rgba(75,121,145,0.08)';
+
+  let html = '';
+
+  // ── CARD 1: Top 5 Omega-3 Ranking ──
+  html += `<div class="vis-card" style="background:${visualBg};color:${textColor}">
+    <div class="vis-logo" style="color:${subColor}">Seatopia</div>
+    <div class="vis-h1">Our Highest Omega-3 Seafood</div>
+    <div class="vis-sub" style="color:${subColor}">Lab-tested EPA + DHA + ALA per serving. Every product independently verified.</div>`;
+  top5.forEach((p, i) => {
+    const d = getServingData(p);
+    const dv = calcDV(d.total, CONSTANTS.OMEGA_DV);
+    const maxTotal = getServingData(top5[0]).total;
+    html += `<div class="vis-product-row" style="border-color:${borderCol}">
+      <div class="vis-rank" style="background:${i < 3 ? '#7BC3F3' : statBg};color:${i < 3 ? '#1a3344' : textColor}">${i+1}</div>
+      <div style="flex:1">
+        <div style="font-weight:600;font-size:14px">${p.species}</div>
+        <div style="font-size:12px;color:${subColor}">${p.farm} · ${p.portion_oz} oz</div>
+      </div>
+      <div style="width:160px">
+        <div class="vis-bar-mini" style="background:${statBg}">
+          <div style="background:var(--charcoal-blue);width:${d.epa/maxTotal*100}%;flex-shrink:0"></div>
+          <div style="background:var(--cerulean);width:${d.dha/maxTotal*100}%;flex-shrink:0"></div>
+          <div style="background:var(--maya-blue);width:${d.ala/maxTotal*100}%;flex-shrink:0"></div>
+        </div>
+      </div>
+      <div style="text-align:right;min-width:80px">
+        <div style="font-family:'EB Garamond',serif;font-size:18px;font-weight:700">${formatNum(d.total)} mg</div>
+        <div style="font-size:11px;color:${dv >= 100 ? '#7BC950' : subColor}">${dv}% DV</div>
+      </div>
+    </div>`;
+  });
+  html += `<div class="vis-footer" style="color:${subColor}">seatopia.fish · Lab-tested nutrition · Data being validated</div></div>`;
+
+  // ── CARD 2: Single Product Spotlight (Ora King) ──
+  const spotlight = sorted.find(p => p.handle === 'ora-king-king-salmon') || sorted[0];
+  const spD = getServingData(spotlight);
+  const spDv = calcDV(spD.total, CONSTANTS.OMEGA_DV);
+  const spCapsules = Math.ceil((spD.epa + spD.dha) / CONSTANTS.FISH_OIL_CAPSULE_MG);
+  const spProtein = (spotlight.protein_g_per100g * 1.70097).toFixed(0);
+  const spVitD = spotlight.vitd_mcg_per100g ? Math.round(spotlight.vitd_mcg_per100g * 1.70097 * 40) : null;
+
+  html += `<div class="vis-card" style="background:${visualBg};color:${textColor}">
+    <div class="vis-logo" style="color:${subColor}">Seatopia</div>
+    <div class="vis-h1">${spotlight.species}, ${spotlight.farm}</div>
+    <div class="vis-sub" style="color:${subColor}">One ${spotlight.portion_oz} oz serving, independently tested by ${spotlight.source}. ${spotlight.n_tests} test${spotlight.n_tests > 1 ? 's' : ''} on record.</div>
+    <div class="vis-stat-row">
+      <div class="vis-stat" style="background:${statBg}">
+        <div class="vis-stat-num" style="color:${textColor}">${formatNum(spD.total)}</div>
+        <div class="vis-stat-label" style="color:${subColor}">mg Omega-3</div>
+        <div class="vis-stat-sub" style="color:${subColor}">${spDv}% Daily Value</div>
+      </div>
+      <div class="vis-stat" style="background:${statBg}">
+        <div class="vis-stat-num" style="color:${textColor}">${spProtein}g</div>
+        <div class="vis-stat-label" style="color:${subColor}">Protein</div>
+        <div class="vis-stat-sub" style="color:${subColor}">${Math.round(spProtein/50*100)}% DV</div>
+      </div>
+      ${spVitD ? `<div class="vis-stat" style="background:${statBg}">
+        <div class="vis-stat-num" style="color:${textColor}">${formatNum(spVitD)}</div>
+        <div class="vis-stat-label" style="color:${subColor}">IU Vitamin D</div>
+        <div class="vis-stat-sub" style="color:${subColor}">${Math.round(spVitD/600*100)}% DV</div>
+      </div>` : ''}
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+      <div class="vis-pill" style="background:var(--charcoal-blue);color:white">EPA ${formatNum(spD.epa)} mg</div>
+      <div class="vis-pill" style="background:var(--cerulean);color:white">DHA ${formatNum(spD.dha)} mg</div>
+      <div class="vis-pill" style="background:var(--maya-blue);color:#1a3344">ALA ${formatNum(spD.ala)} mg</div>
+    </div>
+    <div class="vis-divider" style="background:${borderCol}"></div>
+    <div style="text-align:center;padding:16px 0">
+      <div style="font-size:14px;color:${subColor}">One serving replaces</div>
+      <div style="font-family:'EB Garamond',serif;font-size:48px;font-weight:700;margin:8px 0">${spCapsules}</div>
+      <div style="font-size:14px;color:${subColor}">fish oil capsules (by EPA+DHA content)</div>
+    </div>
+    <div class="vis-footer" style="color:${subColor}">seatopia.fish · Third-party lab verified</div>
+  </div>`;
+
+  // ── CARD 3: Why EPA + DHA Matter (email-style) ──
+  html += `<div class="vis-card" style="background:${visualBg};color:${textColor}">
+    <div class="vis-logo" style="color:${subColor}">Seatopia</div>
+    <div class="vis-h1">Why EPA and DHA Matter</div>
+    <div class="vis-sub" style="color:${subColor}">Marine omega-3s are part of how your body supports every system — from brain to heart to recovery.</div>
+    <div style="display:grid;gap:20px;margin-bottom:24px">
+      <div style="padding:20px;background:${cardBg};border-radius:12px;border-left:4px solid var(--charcoal-blue)">
+        <div style="font-weight:700;margin-bottom:6px">Brain clarity and mood balance</div>
+        <div style="font-size:14px;color:${subColor};line-height:1.6">DHA is a structural fat in the brain. Omega-3 intake is associated with cognitive and emotional well-being.</div>
+      </div>
+      <div style="padding:20px;background:${cardBg};border-radius:12px;border-left:4px solid var(--cerulean)">
+        <div style="font-weight:700;margin-bottom:6px">Cellular energy and recovery</div>
+        <div style="font-size:14px;color:${subColor};line-height:1.6">EPA and DHA help support healthy inflammatory response and recovery as you move more, train more, and spend more time outside.</div>
+      </div>
+      <div style="padding:20px;background:${cardBg};border-radius:12px;border-left:4px solid var(--maya-blue)">
+        <div style="font-weight:700;margin-bottom:6px">Heart and metabolic health</div>
+        <div style="font-size:14px;color:${subColor};line-height:1.6">The American Heart Association recommends omega-3 rich fish at least twice per week for cardiovascular benefit.</div>
+      </div>
+    </div>
+    <div style="text-align:center;font-size:15px;line-height:1.7;color:${subColor};font-style:italic;padding:0 16px">
+      A few high-omega seafood meals each week can make a meaningful difference.<br>
+      Seatopia helps you build that rhythm with third-party lab-verified seafood.
+    </div>
+    <div class="vis-footer" style="color:${subColor}">seatopia.fish · Raised clean. Delivered clean.</div>
+  </div>`;
+
+  // ── CARD 4: Mercury Safety Story ──
+  const safeCount = PRODUCTS.filter(p => p.hg_ppb < 100).length;
+  const maxHg = Math.max(...PRODUCTS.map(p => p.hg_ppb));
+  html += `<div class="vis-card" style="background:${visualBg};color:${textColor}">
+    <div class="vis-logo" style="color:${subColor}">Seatopia</div>
+    <div class="vis-h1">Mercury-Safe by the Numbers</div>
+    <div class="vis-sub" style="color:${subColor}">Every Seatopia product is tested for mercury. The FDA action level is 1,000 ppb. Here's how we compare.</div>
+    <div class="vis-stat-row">
+      <div class="vis-stat" style="background:${statBg}">
+        <div class="vis-stat-num" style="color:#7BC950">${safeCount}/${PRODUCTS.length}</div>
+        <div class="vis-stat-label" style="color:${subColor}">Products < 100 ppb</div>
+      </div>
+      <div class="vis-stat" style="background:${statBg}">
+        <div class="vis-stat-num" style="color:#7BC950">${(maxHg/1000*100).toFixed(1)}%</div>
+        <div class="vis-stat-label" style="color:${subColor}">Highest = ${maxHg} ppb</div>
+        <div class="vis-stat-sub" style="color:${subColor}">of FDA action level</div>
+      </div>
+    </div>
+    <div style="background:${cardBg};border-radius:12px;padding:20px;margin-bottom:16px">
+      <div style="font-size:13px;color:${subColor};margin-bottom:8px;font-weight:600">FDA Action Level: 1,000 ppb</div>
+      <div style="height:12px;background:linear-gradient(90deg, #7BC950, #c8e6a0, #ffd480, #EE1C25);border-radius:6px;position:relative">
+        <div style="position:absolute;left:${maxHg/1000*100}%;top:-6px;width:24px;height:24px;border-radius:50%;background:white;border:3px solid #7BC950;box-shadow:0 2px 6px rgba(0,0,0,0.15);transform:translateX(-50%)"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:${subColor};margin-top:6px">
+        <span>0 ppb</span>
+        <span>Seatopia max: ${maxHg} ppb</span>
+        <span>FDA: 1,000 ppb</span>
+      </div>
+    </div>
+    <div style="text-align:center;color:${subColor};font-size:14px;line-height:1.6">
+      All Seatopia products contain protective selenium levels, further reducing mercury risk through Se:Hg molar ratios well above 1:1.
+    </div>
+    <div class="vis-footer" style="color:${subColor}">seatopia.fish · Lab-tested safety standards</div>
+  </div>`;
+
+  // ── CARD 5: Omega 6:3 Ratio Story ──
+  const ratioProducts = PRODUCTS.filter(p => p.omega_6_3_ratio != null);
+  html += `<div class="vis-card" style="background:${visualBg};color:${textColor}">
+    <div class="vis-logo" style="color:${subColor}">Seatopia</div>
+    <div class="vis-h1">The Omega Ratio Advantage</div>
+    <div class="vis-sub" style="color:${subColor}">The modern Western diet averages a 17:1 omega-6 to omega-3 ratio — promoting inflammation. The ideal is under 4:1.</div>
+    <div class="vis-stat-row">
+      <div class="vis-stat" style="background:${statBg}">
+        <div class="vis-stat-num" style="color:#7BC950">< 1.1 : 1</div>
+        <div class="vis-stat-label" style="color:${subColor}">All Seatopia Products</div>
+        <div class="vis-stat-sub" style="color:${subColor}">More omega-3 than omega-6</div>
+      </div>
+      <div class="vis-stat" style="background:rgba(238,28,37,0.06)">
+        <div class="vis-stat-num" style="color:#EE1C25">17 : 1</div>
+        <div class="vis-stat-label" style="color:${subColor}">Western Diet Avg</div>
+        <div class="vis-stat-sub" style="color:${subColor}">Pro-inflammatory</div>
+      </div>
+    </div>`;
+  ratioProducts.forEach(p => {
+    const r = p.omega_6_3_ratio;
+    const o3Pct = (1 / (1 + r)) * 100;
+    const o6Pct = 100 - o3Pct;
+    html += `<div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+      <div style="width:160px;font-size:13px;font-weight:600;text-align:right">${p.species}</div>
+      <div style="flex:1;height:20px;border-radius:10px;display:flex;overflow:hidden">
+        <div style="background:#7BC950;width:${o3Pct}%;display:flex;align-items:center;justify-content:center;font-size:10px;color:white;font-weight:600">${r < 1 ? 'More Omega-3' : ''}</div>
+        <div style="background:var(--pumpkin-spice);width:${o6Pct}%"></div>
+      </div>
+      <div style="width:50px;font-size:12px;font-weight:600;color:${subColor}">${r.toFixed(2)}</div>
+    </div>`;
+  });
+  html += `<div class="vis-footer" style="color:${subColor}">seatopia.fish · Omega-rich by design</div></div>`;
+
+  // ── CARD 6: Complete Nutrition One-Pager (best for screenshots) ──
+  const topPick = sorted[0];
+  const tD = getServingData(topPick);
+  const tProt = (topPick.protein_g_per100g * 1.70097).toFixed(0);
+  const tSe = (topPick.se_mcg_per100g * 1.70097).toFixed(0);
+  const tVitD = topPick.vitd_mcg_per100g ? Math.round(topPick.vitd_mcg_per100g * 1.70097 * 40) : null;
+  const tCaps = Math.ceil((tD.epa + tD.dha) / CONSTANTS.FISH_OIL_CAPSULE_MG);
+
+  html += `<div class="vis-card" style="background:${visualBg};color:${textColor}">
+    <div class="vis-logo" style="color:${subColor}">Seatopia · Lab-Tested Nutrition</div>
+    <div class="vis-h1">What's in One Serving?</div>
+    <div class="vis-sub" style="color:${subColor}">${topPick.species}, ${topPick.farm} · ${topPick.portion_oz} oz serving · Tested by ${topPick.source}</div>
+    <div class="vis-stat-row">
+      <div class="vis-stat" style="background:${statBg}">
+        <div class="vis-stat-num" style="color:${textColor}">${formatNum(tD.total)}</div>
+        <div class="vis-stat-label" style="color:${subColor}">mg Omega-3</div>
+      </div>
+      <div class="vis-stat" style="background:${statBg}">
+        <div class="vis-stat-num" style="color:${textColor}">${tProt}g</div>
+        <div class="vis-stat-label" style="color:${subColor}">Protein</div>
+      </div>
+      <div class="vis-stat" style="background:${statBg}">
+        <div class="vis-stat-num" style="color:#7BC950">${topPick.hg_ppb === 0 ? 'ND' : topPick.hg_ppb}</div>
+        <div class="vis-stat-label" style="color:${subColor}">ppb Mercury</div>
+      </div>
+    </div>
+    <div class="vis-stat-row">
+      <div class="vis-stat" style="background:${statBg}">
+        <div class="vis-stat-num" style="color:${textColor}">${tSe}</div>
+        <div class="vis-stat-label" style="color:${subColor}">mcg Selenium</div>
+      </div>
+      ${tVitD ? `<div class="vis-stat" style="background:${statBg}">
+        <div class="vis-stat-num" style="color:${textColor}">${formatNum(tVitD)}</div>
+        <div class="vis-stat-label" style="color:${subColor}">IU Vitamin D</div>
+      </div>` : ''}
+      <div class="vis-stat" style="background:${statBg}">
+        <div class="vis-stat-num" style="color:${textColor}">${tCaps}</div>
+        <div class="vis-stat-label" style="color:${subColor}">= Capsules</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <div class="vis-pill" style="background:var(--charcoal-blue);color:white">EPA ${formatNum(tD.epa)} mg</div>
+      <div class="vis-pill" style="background:var(--cerulean);color:white">DHA ${formatNum(tD.dha)} mg</div>
+      <div class="vis-pill" style="background:var(--maya-blue);color:#1a3344">ALA ${formatNum(tD.ala)} mg</div>
+    </div>
+    <div class="vis-footer" style="color:${subColor}">seatopia.fish · Third-party lab verified · ${topPick.n_tests} independent test${topPick.n_tests > 1 ? 's' : ''}</div>
+  </div>`;
+
+  // ── CARD 7: Spring Picks / Seasonal Feature (email-style product grid) ──
+  const pickData = [
+    { handle: 'yarra-valley-salmon-roe', title: 'Salmon Roe Caviar', desc: 'Plump, briny pearls bursting with oceanic flavor. Adorn sushi and sashimi with these gourmet gems.', img: 'https://seatopia.fish/cdn/shop/files/yarra-valley-first-harvest-salmon-caviar-30g-330834.png?v=1762445405&width=1000' },
+    { handle: 'ora-king-king-salmon', title: 'Ora King, King Salmon', desc: 'Unapologetically rich and velvety — Ora King salmon, the gold standard for celebratory seafood.', img: 'https://seatopia.fish/cdn/shop/files/king-salmon-skin-on-sushi-grade-85oz-portions-9943955.jpg?v=1761679982&width=1200' },
+    { handle: 'esteros-lubimar-branzino', title: 'Esteros Lubimar, Branzino', desc: 'Pristine and flaky with a subtle ocean sweetness — the quintessential Mediterranean whitefish.', img: 'https://seatopia.fish/cdn/shop/files/fish-shell-variety-box-482096.jpg?v=1772138103&width=1000' },
+    { handle: 'australis-barramundi', title: 'Australis, Barramundi', desc: 'Mild, succulent — exceptional when pan seared with a crispy skin.', img: 'https://seatopia.fish/cdn/shop/files/fish-shell-variety-box-752110.jpg?v=1772138103&width=1000' }
+  ];
+
+  html += `<div class="vis-card" style="background:${visualBg};color:${textColor};max-width:720px">
+    <div class="vis-logo" style="color:${subColor}">Seatopia</div>
+    <div class="vis-h1">Our Picks for Your Spring Table</div>
+    <div class="vis-sub" style="color:${subColor}">Marine omega-3s are part of how your body supports this seasonal shift. Here's what we'd reach for.</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px">`;
+
+  pickData.forEach(pick => {
+    const p = PRODUCTS.find(x => x.handle === pick.handle);
+    if (!p) return;
+    const d = getServingData(p);
+    html += `<div style="background:${cardBg};border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(51,85,102,0.06)">
+      <div style="height:220px;background:url('${pick.img}') center/cover no-repeat;position:relative">
+      </div>
+      <div style="padding:20px 20px 24px">
+        <div style="font-family:'EB Garamond',serif;font-size:18px;font-weight:600;color:#1a1a1a;margin-bottom:8px;text-decoration:underline;text-decoration-color:rgba(51,85,102,0.2);text-underline-offset:4px">${pick.title}</div>
+        <div style="font-size:13px;color:#444;line-height:1.55;margin-bottom:14px">${pick.desc}</div>
+        <div style="font-family:'EB Garamond',serif;font-size:24px;font-weight:700;color:#1a1a1a;margin-bottom:4px">${formatNum(d.total)} mg omega-3</div>
+        <div style="font-size:11px;color:#555;margin-bottom:10px">per ${p.portion_oz} oz serving · <span style="font-weight:700;${calcDV(d.total, CONSTANTS.OMEGA_DV) >= 100 ? 'color:#2e8b57;' : 'color:#555;'}">${calcDV(d.total, CONSTANTS.OMEGA_DV)}% DV</span></div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <span style="font-size:10px;padding:3px 8px;border-radius:10px;background:${pillBg};color:#444;font-weight:600">EPA ${formatNum(d.epa)} mg</span>
+          <span style="font-size:10px;padding:3px 8px;border-radius:10px;background:${pillBg};color:#444;font-weight:600">DHA ${formatNum(d.dha)} mg</span>
+        </div>
+      </div>
+    </div>`;
+  });
+
+  html += `</div>
+    <div style="text-align:center;margin-bottom:24px">
+      <a class="vis-cta" style="background:${ctaBg};color:${ctaColor};display:inline-block" href="#">Explore All Seafood</a>
+    </div>
+    <div style="text-align:center;font-size:15px;line-height:1.7;color:${subColor}">
+      The ocean renews herself every spring.<br>Consuming high-quality seafood can help you do the same.
+    </div>
+    <div class="vis-divider" style="background:${borderCol}"></div>
+    <div style="text-align:center;font-size:14px;color:${subColor};line-height:1.7">
+      Raised clean. Delivered clean.<br>This is what it looks like to eat in sync with the season's tides.
+    </div>
+    <div class="vis-footer" style="color:${subColor}">seatopia.fish · Regenerative seafood, lab-verified nutrition</div>
+  </div>`;
+
+  document.getElementById('visual-cards-container').innerHTML = html;
+}
+
+
+</script>
+
+</body>
+</html>
